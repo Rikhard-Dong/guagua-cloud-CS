@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="guaguacloudCS:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="guagua-cloud-CS.war">
+      <element id="artifact" artifact-name="guaguacloudCS:war exploded" />
+    </root>
+  </artifact>
+</component>
