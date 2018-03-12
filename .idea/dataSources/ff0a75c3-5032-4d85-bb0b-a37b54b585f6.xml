@@ -906,52 +906,113 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="229" parent="3" name="t_user">
+    <table id="229" parent="3" name="t_phone_validate_code">
+      <Comment>存储手机号和短信验证码</Comment>
       <Engine>InnoDB</Engine>
     </table>
-    <column id="230" parent="229" name="id">
+    <table id="230" parent="3" name="t_user">
+      <Engine>InnoDB</Engine>
+    </table>
+    <column id="231" parent="229" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="231" parent="229" name="username">
+    <column id="232" parent="229" name="phone">
       <Position>2</Position>
       <DataType>varchar(32)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="232" parent="229" name="password">
+    <column id="233" parent="229" name="code">
+      <Position>3</Position>
+      <DataType>varchar(6)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="234" parent="229" name="send_time">
+      <Position>4</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="235" parent="229" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="236" parent="230" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="237" parent="230" name="username">
+      <Position>2</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="238" parent="230" name="password">
       <Position>3</Position>
       <DataType>varchar(32)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="233" parent="229" name="phone">
+    <column id="239" parent="230" name="phone">
       <Position>4</Position>
       <DataType>varchar(32)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="234" parent="229" name="t_user_username_uindex">
+    <column id="240" parent="230" name="create_time">
+      <Position>5</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="241" parent="230" name="head_image">
+      <Position>6</Position>
+      <DataType>varchar(128)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;http://p5etjjbs6.bkt.clouddn.com/img/head/default.jpg&apos;</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="242" parent="230" name="salt">
+      <Position>7</Position>
+      <DataType>varchar(32)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="243" parent="230" name="type">
+      <Position>8</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="244" parent="230" name="t_user_username_uindex">
       <ColNames>username</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="235" parent="229" name="t_user_phone_uindex">
+    <index id="245" parent="230" name="t_user_phone_uindex">
       <ColNames>phone</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="236" parent="229" name="PRIMARY">
+    <key id="246" parent="230" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="237" parent="229" name="t_user_username_uindex">
+    <key id="247" parent="230" name="t_user_username_uindex">
       <ColNames>username</ColNames>
       <UnderlyingIndexName>t_user_username_uindex</UnderlyingIndexName>
     </key>
-    <key id="238" parent="229" name="t_user_phone_uindex">
+    <key id="248" parent="230" name="t_user_phone_uindex">
       <ColNames>phone</ColNames>
       <UnderlyingIndexName>t_user_phone_uindex</UnderlyingIndexName>
     </key>

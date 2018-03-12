@@ -3,4 +3,39 @@
 
 <mapper namespace="com.guagua.dao.common.UserDao">
 
+    <insert id="insertUser">
+        INSERT INTO t_user (username, password, phone, salt, create_time, type) VALUES
+            (#{username}, #{password}, #{phone}, #{salt}, #{createTime}, #{type})
+    </insert>
+
+    <delete id="deleteById">
+        DELETE FROM t_user
+        WHERE id = #{id}
+    </delete>
+
+    <select id="validateAccount" resultType="com.guagua.bean.entity.common.User">
+        SELECT *
+        FROM t_user
+        WHERE phone = #{account} AND `password` = #{password}
+        LIMIT 1
+    </select>
+
+    <select id="findById" resultType="com.guagua.bean.entity.common.User">
+        SELECT *
+        FROM t_user
+        WHERE id = #{id}
+        LIMIT 1
+    </select>
+
+    <select id="findByPhone" resultType="com.guagua.bean.entity.common.User">
+        SELECT *
+        FROM t_user
+        WHERE phone = #{phone}
+        LIMIT 1
+    </select>
+
+    <select id="findMaxId" resultType="java.lang.Integer">
+        SELECT max(id)
+        FROM t_user;
+    </select>
 </mapper>

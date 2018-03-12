@@ -10,5 +10,19 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <!--
+            消息转换器
+            防止@ResponseBody注解返回的json数据中中文是问号的情况
+        -->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value="text/html;charset=UTF-8"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+    <!-- 全局异常处理器 -->
+    <bean class="com.guagua.exception.resolver.CustomExceptionResolver"/>
 </beans>
