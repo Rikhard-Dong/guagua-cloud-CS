@@ -25,4 +25,5 @@
 
     <!-- 全局异常处理器 -->
     <bean class="com.guagua.exception.resolver.CustomExceptionResolver"/>
+
 </beans>

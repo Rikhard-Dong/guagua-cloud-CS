@@ -8,6 +8,12 @@
             (#{username}, #{password}, #{phone}, #{salt}, #{createTime}, #{type})
     </insert>
 
+    <update id="updatePassword">
+        UPDATE t_user
+        SET `password` = #{password}
+        WHERE phone = #{phone}
+    </update>
+
     <delete id="deleteById">
         DELETE FROM t_user
         WHERE id = #{id}

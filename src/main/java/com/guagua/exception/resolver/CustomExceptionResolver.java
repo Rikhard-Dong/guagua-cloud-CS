@@ -37,13 +37,14 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
 
             PrintWriter out = httpServletResponse.getWriter();
 
-
             CustomException customException;
 
             // 自定义异常
             if (e instanceof CustomException) {
                 customException = (CustomException) e;
             } else { // 未知异常
+                e.printStackTrace();
+
                 customException = new CustomException(DataDictionary.UNKNOWN_ERROR);
             }
 
@@ -51,6 +52,8 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
 
             out.print(JacksonUtils.toJSon(resultDto));
             out.flush();
+
+            out.close();
         } catch (IOException e1) {
             logger.error("error");
             e1.printStackTrace();

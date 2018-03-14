@@ -39,4 +39,26 @@ public interface UserService {
      * @throws CustomException 异常
      */
     ResultDto register(User user, String code) throws CustomException;
+
+
+    /**
+     * 用户登录功能
+     *
+     * @param account  账号
+     * @param password 密码
+     * @param loginIp  登录ip
+     * @return 用户登录, 返回token信息
+     */
+    ResultDto login(String account, String password, String loginIp);
+
+    /**
+     * 重置密码 在用户忘记密码的情况下无法登录, 通过手机发送验证码重置密码
+     *
+     * @param phone      手机号
+     * @param code       验证码
+     * @param password   新密码
+     * @param repassword 确认密码
+     * @return 操作结果
+     */
+    ResultDto resetPassword(String phone, String code, String password, String repassword);
 }

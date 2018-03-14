@@ -20,6 +20,15 @@ public interface UserDao {
      * update
      *************************************************/
 
+    /**
+     * 更新密码
+     *
+     * @param phone    手机号
+     * @param password 密码
+     * @return 更新行数
+     */
+    Integer updatePassword(@Param("phone") String phone, @Param("password") String password);
+
     /* ************************************************
      * delete
      *************************************************/

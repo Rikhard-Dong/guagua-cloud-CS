@@ -13,4 +13,9 @@ public class RegExpUtils {
         return phone.matches(regExp);
     }
 
+
+    public static boolean isEmailLegal(String email) {
+        String regExp = "^[0-9a-zA-Z]+(?:[\\_\\.\\-][a-z0-9\\-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+$";
+        return email.matches(regExp);
+    }
 }

@@ -2,7 +2,9 @@
   <dictionary name="ride">
     <words>
       <w>aliyun</w>
+      <w>cors</w>
       <w>guagua</w>
+      <w>repassword</w>
     </words>
   </dictionary>
 </component>

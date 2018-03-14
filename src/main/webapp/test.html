@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+
+<script>
+    $(function () {
+        console.log("in function.....");
+
+        $.ajax({
+            url: 'http://localhost:8080/test/page',
+            method: 'get',
+            dataType: 'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            success: function (result) {
+                console.log("success");
+                console.log(result);
+
+            }
+        });
+    })
+</script>
+</body>
+</html>

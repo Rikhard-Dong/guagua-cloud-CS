@@ -31,6 +31,16 @@ public class ResultDto {
         this.data = new HashMap<String, Object>();
     }
 
+    public ResultDto addData(String key, Object value) {
+        this.data.put(key, value);
+        return this;
+    }
+
+    public void setCodeAndMsg(DataDictionary dataDictionary) {
+        this.code = dataDictionary.getCode();
+        this.msg = dataDictionary.getMsg();
+    }
+
     public Integer getCode() {
         return code;
     }
