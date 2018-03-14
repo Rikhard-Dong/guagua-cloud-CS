@@ -1,5 +1,7 @@
 package com.guagua.bean.entity.common;
 
+import com.guagua.enums.RoleConstant;
+
 /**
  * @author ride
  * @date 18-3-14 上午11:04
@@ -16,6 +18,11 @@ public class UserRole {
     public UserRole(Integer userId, Integer roleId) {
         this.userId = userId;
         this.roleId = roleId;
+    }
+
+    public UserRole(Integer userId, RoleConstant role) {
+        this.userId = userId;
+        this.roleId = role.getCode();
     }
 
     public Integer getId() {

@@ -5,7 +5,7 @@
     <artifactId>guagua-cloud-CS</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>guagua-cloud-CS Maven Webapp</name>
+    <username>guagua-cloud-CS Maven Webapp</username>
     <url>http://maven.apache.org</url>
     <properties>
         <!-- spring版本号 -->

@@ -4,6 +4,7 @@ package com.guagua.filter;
 import com.guagua.bean.dto.ResultDto;
 import com.guagua.enums.DataDictionary;
 import com.guagua.exception.common.CustomException;
+import com.guagua.filter.utils.PermissionUtils;
 import com.guagua.utils.JWTUtils;
 import com.guagua.utils.JacksonUtils;
 import org.slf4j.Logger;
@@ -53,7 +54,7 @@ public class PermissionFilter implements Filter {
             PrintWriter out = response.getWriter();
 
             // 令牌解析失败
-            resultDto.setCodeAndMsg(DataDictionary.INVALID_TOKEN);
+            resultDto.setCodeAndMsg(DataDictionary.AUTHORIZATION_FAIL);
             out.print(JacksonUtils.toJSon(resultDto));
             out.flush();
             out.close();
@@ -65,10 +66,31 @@ public class PermissionFilter implements Filter {
             PrintWriter out = response.getWriter();
 
             // 无效令牌
-            resultDto.setCodeAndMsg(DataDictionary.INVALID_TOKEN);
+            resultDto.setCodeAndMsg(DataDictionary.AUTHORIZATION_FAIL);
             out.print(JacksonUtils.toJSon(resultDto));
             out.flush();
             out.close();
+            return;
+        }
+
+        // 获取请求的url和请求方法
+        // String url = request.getRequestURL().toString();
+        // 只获取url部分
+        String url = request.getServletPath();
+        String method = request.getMethod();
+        // 组合成数据库中要求的格式
+        String permissionUrl = method.toLowerCase() + ":" + url.toLowerCase();
+        logger.info("######### url =====> {} ##############", permissionUrl);
+
+        // 判断当前用户是否以后权限访问该url
+        if (!PermissionUtils.judge(userId, permissionUrl)) {
+            // 权限不足
+            PrintWriter out = response.getWriter();
+            resultDto.setCodeAndMsg(DataDictionary.NO_PERMISSION);
+            out.print(JacksonUtils.toJSon(resultDto));
+            out.flush();
+            out.close();
+
             return;
         }
 

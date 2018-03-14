@@ -1,13 +1,18 @@
 package com.guagua.service.common.impl;
 
 import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.common.SimpleUserDTO;
+import com.guagua.bean.dto.common.UserDTO;
 import com.guagua.bean.entity.common.PhoneValidateCode;
 import com.guagua.bean.entity.common.User;
 import com.guagua.bean.entity.common.UserLoginLog;
+import com.guagua.bean.entity.common.UserRole;
 import com.guagua.dao.common.PhoneValidateCodeDao;
 import com.guagua.dao.common.UserDao;
 import com.guagua.dao.common.UserLoginLogDao;
+import com.guagua.dao.common.UserRoleDao;
 import com.guagua.enums.DataDictionary;
+import com.guagua.enums.RoleConstant;
 import com.guagua.exception.common.CustomException;
 import com.guagua.service.BaseService;
 import com.guagua.service.common.UserService;
@@ -38,11 +43,14 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     private final UserLoginLogDao loginLogDao;
 
+    private final UserRoleDao userRoleDao;
+
     @Autowired
-    public UserServiceImpl(PhoneValidateCodeDao codeDao, UserDao userDao, UserLoginLogDao loginLogDao) {
+    public UserServiceImpl(PhoneValidateCodeDao codeDao, UserDao userDao, UserLoginLogDao loginLogDao, UserRoleDao userRoleDao) {
         this.codeDao = codeDao;
         this.userDao = userDao;
         this.loginLogDao = loginLogDao;
+        this.userRoleDao = userRoleDao;
     }
 
 
@@ -86,6 +94,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     // 用户注册
+    @Transactional
     public ResultDto register(User user, String code) throws CustomException {
         boolean flag = !RegExpUtils.isPhoneLegal(user.getPhone());
         if (flag) {
@@ -124,6 +133,15 @@ public class UserServiceImpl extends BaseService implements UserService {
         if (var2 != null) {
             codeDao.deleteById(var2.getId());
         }
+
+        // 插入后返回插入的结果的自增id, 然后赋予对应的角色
+        logger.info("######### user id =====> {} #######", user.getId());
+        if (user.getId() == null) {
+            throw new CustomException(DataDictionary.GET_AUTO_INC_ID_FAIL);
+        }
+        UserRole var6 = new UserRole(user.getId(), RoleConstant.BASE_USER);
+        logger.info("###########user role =====> {} #####################", var6);
+        userRoleDao.insertUserRole(var6);
 
         return new ResultDto(DataDictionary.REGISTER_SUCCESS);
     }
@@ -187,5 +205,26 @@ public class UserServiceImpl extends BaseService implements UserService {
         }
 
         return new ResultDto(DataDictionary.UPDTE_PASSWORD_SUCCESS);
+    }
+
+    // 获取用户简单信息
+    public ResultDto getSimpleUserInfo(Integer userId) {
+        User user = userDao.findById(userId);
+        if (user == null) {
+            // 抛出用户不存在异常
+            throw new CustomException(DataDictionary.USER_NOT_EXISTS);
+        }
+
+        SimpleUserDTO var1 = new SimpleUserDTO(user);
+
+        return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("info", var1);
+    }
+
+    // 获取用户基本信息
+    public ResultDto getUserInfo(Integer userId) {
+        User user = isUserExists(userId);
+
+        UserDTO var1 = new UserDTO(user);
+        return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("info", var1);
     }
 }

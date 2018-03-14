@@ -40,7 +40,7 @@ public class UserDaoTest {
 
     @Test
     public void findById() {
-        User user = userDao.findById(1);
+        User user = userDao.findById(15);
         System.out.println(user);
     }
 

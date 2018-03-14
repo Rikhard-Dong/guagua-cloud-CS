@@ -4,6 +4,7 @@ import com.guagua.utils.CryptographyUtils;
 import com.guagua.utils.UUIDUtils;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private Integer id;             // 用户id, 自增长
@@ -14,6 +15,8 @@ public class User {
     private Date createTime;        // 用户创建时间
     private String headImage;       // 用户头像
     private Integer type;           // 用户类型: 主要有三类: 0. 平台用户 1. 企业用户 2. 客服用户
+
+    private List<Role> roles;       // 该用户拥有的角色
 
     /**
      * 无参构造函数
@@ -112,6 +115,14 @@ public class User {
     }
 
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     public Integer getType() {
         return type;
     }
@@ -130,6 +141,8 @@ public class User {
                 ", salt='" + salt + '\'' +
                 ", createTime=" + createTime +
                 ", headImage='" + headImage + '\'' +
+                ", type=" + type +
+                ", roles=" + roles +
                 '}';
     }
 }

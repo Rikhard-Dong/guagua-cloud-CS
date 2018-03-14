@@ -3,7 +3,7 @@
 
 <mapper namespace="com.guagua.dao.common.UserDao">
 
-    <insert id="insertUser">
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.guagua.bean.entity.common.User">
         INSERT INTO t_user (username, password, phone, salt, create_time, type) VALUES
             (#{username}, #{password}, #{phone}, #{salt}, #{createTime}, #{type})
     </insert>

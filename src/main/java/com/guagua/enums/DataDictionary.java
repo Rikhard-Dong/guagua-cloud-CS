@@ -7,9 +7,20 @@ package com.guagua.enums;
  * 数据字典
  */
 public enum DataDictionary {
+    // 增删查改成功与失败
+    INSERT_SUCCESS(1, "插入成功"),
+    INSERT_FAIL(2, "插入失败"),
+    UPDATE_SUCCESS(3, "更新成功"),
+    UPDATE_FAIL(4, "更新失败"),
+    DELETE_SUCCESS(5, "删除成功"),
+    DELETE_FAIL(6, "删除失败"),
+    QUERY_SUCCESS(7, "查询成功"),
+    QUERY_FAIL(8, "查询失败"),
+
     // 登录方面
     LOGIN_SUCCESS(101, "登录成功"),
     ACCOUNT_OR_PASSWORD_ERROR(102, "用户名或者密码不正确"),
+    USER_NOT_EXISTS(103, "用户不存在"),
 
     // 注册方面
     REGISTER_SUCCESS(111, "注册成功"),
@@ -33,7 +44,10 @@ public enum DataDictionary {
 
     // 错误方面
     UNKNOWN_ERROR(-1, "未知错误"),
-    SQL_OPERATION_EXCEPTION(-2, "数据库操作异常");
+    SQL_OPERATION_EXCEPTION(-2, "数据库操作异常"),
+    GET_AUTO_INC_ID_FAIL(-3, "数据库错误, 获取自增Id失败"),
+    AUTHORIZATION_FAIL(-4, "认证失败, 请重新登录"),
+    NO_PERMISSION(-5, "权限不足");
 
     private Integer code;       // 状态码
     private String msg;         // 描述信息

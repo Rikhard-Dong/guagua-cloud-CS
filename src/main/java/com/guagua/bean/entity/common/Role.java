@@ -1,5 +1,7 @@
 package com.guagua.bean.entity.common;
 
+import java.util.List;
+
 /**
  * @author ride
  * @date 18-3-14 上午11:02
@@ -12,11 +14,19 @@ public class Role {
     private String roleName;        // 角色名称
     private String description;     // 角色描述
 
+    private List<Permission> permissions;       // 拥有的权限集合
+
     public Role() {
 
     }
 
     public Role(String roleName, String description) {
+        this.roleName = roleName;
+        this.description = description;
+    }
+
+    public Role(Integer id, String roleName, String description) {
+        this.id = id;
         this.roleName = roleName;
         this.description = description;
     }
@@ -43,6 +53,14 @@ public class Role {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
     }
 
     @Override

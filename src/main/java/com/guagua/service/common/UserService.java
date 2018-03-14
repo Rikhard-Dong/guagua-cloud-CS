@@ -5,6 +5,7 @@ import com.guagua.bean.dto.ResultDto;
 import com.guagua.bean.entity.common.User;
 import com.guagua.exception.common.CustomException;
 
+
 /**
  * @author ride
  * @date 18-3-12 下午2:35
@@ -61,4 +62,20 @@ public interface UserService {
      * @return 操作结果
      */
     ResultDto resetPassword(String phone, String code, String password, String repassword);
+
+    /**
+     * 获取用户的基本信息, 比如用户头像和用户昵称
+     *
+     * @param userId 查询用户id
+     * @return 用户基本信息
+     */
+    ResultDto getSimpleUserInfo(Integer userId);
+
+    /**
+     * 获取用户的详细信息
+     *
+     * @param userId 用户id
+     * @return result
+     */
+    ResultDto getUserInfo(Integer userId);
 }

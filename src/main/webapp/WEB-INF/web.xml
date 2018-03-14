@@ -13,7 +13,7 @@
 
     <!--    &lt;!&ndash; Log4j 配置文件 &ndash;&gt;
         <context-param>
-            <param-name>log4jConfigLocation</param-name>
+            <param-username>log4jConfigLocation</param-username>
             <param-value>classpath:log4j.properties</param-value>
         </context-param>-->
 
