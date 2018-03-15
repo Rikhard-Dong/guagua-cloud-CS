@@ -12,7 +12,7 @@
         WHERE id = #{id}
     </delete>
 
-    <select id="listAll" resultType="com.guagua.bean.entity.common.PhoneValidateCode">
+    <select id="findAll" resultType="com.guagua.bean.entity.common.PhoneValidateCode">
         SELECT *
         FROM t_phone_validate_code;
     </select>

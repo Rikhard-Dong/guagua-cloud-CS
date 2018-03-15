@@ -29,9 +29,9 @@ public class MyListener implements ServletContextListener {
                 .getBean(TimerTaskService.class);
 
         Timer timer = new Timer();
-        // 定时器一秒钟后启动, 然后每五分钟执行一次
+        // 定时器一秒钟后启动, 然后每五分钟执行一次清空手机过期验证码, 每十五分钟清楚一次邮箱验证码
         timer.schedule(new ClearPhoneValidateCodeTimerTask(), 1000, 5 * 60 * 1000);
-
+        timer.schedule(new ClearEmailValidateCodeTimerTask(), 1000, 15 * 60 * 1000);
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
@@ -46,6 +46,16 @@ public class MyListener implements ServletContextListener {
 
         public void run() {
             timerTaskService.clearTablePhoneValidateCodeData();
+        }
+    }
+
+    /**
+     * 定时清除t_email_validate_code中的无效数据
+     */
+    class ClearEmailValidateCodeTimerTask extends TimerTask {
+
+        public void run() {
+            timerTaskService.clearTableMailValidateCodeData();
         }
     }
 

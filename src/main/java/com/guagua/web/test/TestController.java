@@ -2,6 +2,7 @@ package com.guagua.web.test;
 
 import com.guagua.enums.DataDictionary;
 import com.guagua.exception.common.CustomException;
+import com.guagua.utils.MailUtils;
 import com.guagua.web.BaseController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,5 +28,9 @@ public class TestController extends BaseController {
         }
         return "this is exception test page, 测试";
 
+    }
+
+    public static void main(String[] args) {
+        new Thread(new MailUtils("157@163.com", "111","this is test")).run();
     }
 }

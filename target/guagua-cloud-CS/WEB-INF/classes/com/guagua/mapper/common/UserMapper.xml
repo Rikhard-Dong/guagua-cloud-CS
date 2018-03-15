@@ -14,6 +14,60 @@
         WHERE phone = #{phone}
     </update>
 
+    <update id="updateHeadImageByUserId">
+        UPDATE t_user
+        SET `head_image` = #{headImage}
+        WHERE id = #{userId}
+    </update>
+
+    <update id="updateUsernameByUserId">
+        UPDATE t_user
+        SET `username` = #{username}
+        WHERE id = #{userId}
+    </update>
+
+    <update id="updateSexByUserId">
+        UPDATE t_user
+        SET `sex` = #{sex}
+        WHERE id = #{userId}
+    </update>
+
+    <update id="updateQQByUserId">
+        UPDATE t_user
+        SET `qq` = #{qq}
+        WHERE id = #{userId}
+    </update>
+
+    <update id="updateWechatByUserId">
+        UPDATE t_user
+        SET `wechat` = #{wechat}
+        WHERE id = #{userId}
+    </update>
+
+    <update id="updateAddressByUserId">
+        UPDATE t_user
+        SET `address` = #{address}
+        WHERE id = #{userId}
+    </update>
+
+    <update id="updateDescriptionByUserId">
+        UPDATE t_user
+        SET `description` = #{description}
+        WHERE id = #{userId}
+    </update>
+
+    <update id="updateEducationalByUserId">
+        UPDATE t_user
+        SET `educational_experience` = #{educational}
+        WHERE id = #{userId}
+    </update>
+
+    <update id="updateEmail">
+        UPDATE t_user
+        SET `email` = #{email}
+        WHERE id = #{userId}
+    </update>
+
     <delete id="deleteById">
         DELETE FROM t_user
         WHERE id = #{id}
@@ -43,5 +97,12 @@
     <select id="findMaxId" resultType="java.lang.Integer">
         SELECT max(id)
         FROM t_user;
+    </select>
+
+    <select id="findByEmail" resultType="com.guagua.bean.entity.common.User">
+        SELECT *
+        FROM t_user
+        WHERE email = #{email}
+        LIMIT 1
     </select>
 </mapper>

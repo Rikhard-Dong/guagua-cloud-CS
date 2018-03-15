@@ -13,4 +13,9 @@ public interface TimerTaskService {
      */
     void clearTablePhoneValidateCodeData();
 
+    /**
+     * 清空他t_mail_validate_code表中的无效数据
+     */
+    void clearTableMailValidateCodeData();
+
 }

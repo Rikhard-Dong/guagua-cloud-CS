@@ -4,6 +4,9 @@ package com.guagua.service.common;
 import com.guagua.bean.dto.ResultDto;
 import com.guagua.bean.entity.common.User;
 import com.guagua.exception.common.CustomException;
+import com.qiniu.common.QiniuException;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -78,4 +81,78 @@ public interface UserService {
      * @return result
      */
     ResultDto getUserInfo(Integer userId);
+
+    /**
+     * 更新密码
+     *
+     * @param userId      用户id
+     * @param oldPassword 旧密码
+     * @param password    新密码
+     * @param repassword  确认密码
+     * @return 结果
+     */
+    ResultDto updatePassword(Integer userId, String oldPassword, String password, String repassword);
+
+    /**
+     * 更新用户头像
+     *
+     * @param userId    用户id
+     * @param imgBase64 图片base64编码
+     * @return 更新结果
+     */
+    ResultDto updateHeadImage(Integer userId, String imgBase64);
+
+    /**
+     * 更新用户名
+     *
+     * @param userId
+     * @param username
+     * @return
+     */
+    ResultDto updateUsername(Integer userId, String username);
+
+    /**
+     * 更新用户性别
+     *
+     * @param userId
+     * @param sex
+     * @return
+     */
+    ResultDto updateSex(Integer userId, Integer sex);
+
+    /**
+     * 更新用户qq
+     *
+     * @param userId
+     * @param qq
+     * @return
+     */
+    ResultDto updateQQ(Integer userId, String qq);
+
+    /**
+     * 更新用户微信
+     *
+     * @param userId
+     * @param wechat
+     * @return
+     */
+    ResultDto updateWechat(Integer userId, String wechat);
+
+    /**
+     * 更新用户描述
+     *
+     * @param userId
+     * @param description
+     * @return
+     */
+    ResultDto updateDescription(Integer userId, String description);
+
+    /**
+     * 更新用户教育经历
+     *
+     * @param userId
+     * @param educational
+     * @return
+     */
+    ResultDto updateEducational(Integer userId, String educational);
 }

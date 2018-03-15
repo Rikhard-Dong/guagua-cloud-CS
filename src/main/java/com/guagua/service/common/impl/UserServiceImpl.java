@@ -16,10 +16,8 @@ import com.guagua.enums.RoleConstant;
 import com.guagua.exception.common.CustomException;
 import com.guagua.service.BaseService;
 import com.guagua.service.common.UserService;
-import com.guagua.utils.CryptographyUtils;
-import com.guagua.utils.JWTUtils;
-import com.guagua.utils.RegExpUtils;
-import com.guagua.utils.SMSCodeUtils;
+import com.guagua.utils.*;
+import com.qiniu.common.QiniuException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -204,7 +202,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             return new ResultDto(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
 
-        return new ResultDto(DataDictionary.UPDTE_PASSWORD_SUCCESS);
+        return new ResultDto(DataDictionary.UPDATE_PASSWORD_SUCCESS);
     }
 
     // 获取用户简单信息
@@ -226,5 +224,159 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         UserDTO var1 = new UserDTO(user);
         return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("info", var1);
+    }
+
+    // 主动更新用户密码
+    public ResultDto updatePassword(Integer userId, String oldPassword, String password, String repassword) {
+        User user = isUserExists(userId);
+
+        // 对旧密码进行加密
+        String var1 = CryptographyUtils.md5(oldPassword, user.getSalt());
+        if (!StringUtils.equals(var1, user.getPassword())) {
+            // 旧密码不匹配
+            return new ResultDto(DataDictionary.OLD_PASSWORD_NOT_MATCH);
+        }
+
+        if (!StringUtils.equals(password, repassword)) {
+            // 两次密码不匹配
+            return new ResultDto(DataDictionary.TOW_PASSWORD_NOT_MATCH);
+        }
+
+        // 加密新密码
+        String var2 = CryptographyUtils.md5(password, user.getSalt());
+
+        // 更新用户密码
+        Integer var3 = userDao.updatePassword(user.getPhone(), var2);
+
+        if (var3 == 0) {
+            return new ResultDto(DataDictionary.SQL_OPERATION_EXCEPTION);
+        }
+
+        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+    }
+
+    // 更新用户头像
+    @Transactional
+    public ResultDto updateHeadImage(Integer userId, String imgBase64) {
+        User user = userDao.findById(userId);
+        if (user == null) {
+            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+        }
+
+        // 旧头像
+        String oldImgUrl = user.getHeadImage();
+
+        // 上传文件名
+        String filename = "img/head/" + user.getPhone() + ".jpg";
+        // TODO 无法知道七牛云是否上传成功
+        try {
+            QiniuUtils.uploadByBase64(imgBase64, filename);
+        } catch (Exception e) {
+            throw new CustomException(DataDictionary.IMG_UPLOAD_FAIL);
+        }
+
+        filename = "http://p5etjjbs6.bkt.clouddn.com/" + filename;
+        Integer var1 = userDao.updateHeadImageByUserId(userId, filename);
+
+        if (var1 == 0) {
+            // 数据库更新用户头像失败
+            try {
+                QiniuUtils.deleteImg(filename);
+            } catch (QiniuException e) {
+                logger.error("更新用户头像失败");
+
+                throw new CustomException(DataDictionary.IMG_DELETE_FAIL);
+            }
+        }
+
+        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+    }
+
+    // 更新用户名
+    public ResultDto updateUsername(Integer userId, String username) {
+        User user = userDao.findById(userId);
+        if (user == null) {
+            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+        }
+
+        Integer var1 = userDao.updateUsernameByUserId(userId, username);
+        if (var1 == 0) {
+            return new ResultDto(DataDictionary.UPDATE_FAIL);
+        }
+        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+    }
+
+    // 更新性别
+    public ResultDto updateSex(Integer userId, Integer sex) {
+        User user = userDao.findById(userId);
+        if (user == null) {
+            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+        }
+
+        Integer var1 = userDao.updateSexByUserId(userId, sex);
+
+        if (var1 == 0) {
+            return new ResultDto(DataDictionary.UPDATE_FAIL);
+        }
+        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+    }
+
+    // 更新qq
+    public ResultDto updateQQ(Integer userId, String qq) {
+        User user = userDao.findById(userId);
+        if (user == null) {
+            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+        }
+
+        Integer var1 = userDao.updateQQByUserId(userId, qq);
+
+        if (var1 == 0) {
+            return new ResultDto(DataDictionary.UPDATE_FAIL);
+        }
+        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+    }
+
+    // 更新微信
+    public ResultDto updateWechat(Integer userId, String wechat) {
+        User user = userDao.findById(userId);
+        if (user == null) {
+            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+        }
+
+        Integer var1 = userDao.updateWechatByUserId(userId, wechat);
+
+        if (var1 == 0) {
+            return new ResultDto(DataDictionary.UPDATE_FAIL);
+        }
+        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+    }
+
+    // 更新描述
+    public ResultDto updateDescription(Integer userId, String description) {
+        User user = userDao.findById(userId);
+        if (user == null) {
+            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+        }
+        Integer var1 = userDao.updateDescriptionByUserId(userId, description);
+
+        if (var1 == 0) {
+            return new ResultDto(DataDictionary.UPDATE_FAIL);
+        }
+        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+    }
+
+    // 更新教育经历
+    public ResultDto updateEducational(Integer userId, String educational) {
+        User user = userDao.findById(userId);
+        if (user == null) {
+            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+        }
+
+        Integer var1 = userDao.updateEducationalByUserId(userId, educational);
+
+        if (var1 == 0) {
+            return new ResultDto(DataDictionary.UPDATE_FAIL);
+        }
+        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
     }
 }

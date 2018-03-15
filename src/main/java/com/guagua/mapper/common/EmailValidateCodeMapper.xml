@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.common.EmailValidateCodeDao">
+
+    <insert id="insertEmailValidateCode">
+        INSERT INTO t_email_validate_code (user_id, email, code) VALUES (#{userId}, #{email}, #{code})
+    </insert>
+
+    <delete id="deleteEmailValidateCodeById">
+        DELETE FROM t_email_validate_code
+        WHERE id = #{id}
+    </delete>
+
+    <select id="findLatestEmailValidateCodeByEmail"
+            resultType="com.guagua.bean.entity.common.EmailValidateCode">
+        SELECT *
+        FROM t_email_validate_code
+        WHERE email = #{email}
+        ORDER BY send_time DESC
+        LIMIT 1
+    </select>
+
+    <select id="findAll" resultType="com.guagua.bean.entity.common.EmailValidateCode">
+        SELECT *
+        FROM t_email_validate_code;
+    </select>
+</mapper>

@@ -24,8 +24,6 @@ import java.util.Map;
  * <p>
  * 进行权限过滤
  */
-@WebFilter(filterName = "permissionFilter",
-        value = {"/manager/*", "/member/*", "/enterprise", "/token/*", "/user/profile/*"})
 public class PermissionFilter implements Filter {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

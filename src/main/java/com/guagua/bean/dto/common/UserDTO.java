@@ -14,7 +14,14 @@ public class UserDTO {
     private String phone;       // 用户手机号
     private String headImage;   // 用户头像
     private String type;        // 用户类型
+    private String email;       // 用户邮箱
     private String createTime;  // 用户创建时间
+    private String sex;         // 性别, 0代表男性
+    private String qq;          // qq
+    private String wechat;      // 微信
+    private String address;     // 地址
+    private String description; // 描述
+    private String educationalExperience;       // 教育经历
 
 
     public UserDTO() {
@@ -37,8 +44,14 @@ public class UserDTO {
             default:
                 type = "非法用户";
         }
-
+        this.email = user.getEmail() == null ? "未绑定邮箱" : user.getEmail();
         this.createTime = DateUtils.date2StrCN(user.getCreateTime());
+        this.sex = user.getSex() == 1 ? "男" : "女";
+        this.qq = user.getQq();
+        this.wechat = user.getWechat();
+        this.address = user.getAddress();
+        this.description = user.getDescription();
+        this.educationalExperience = user.getEducationalExperience();
     }
 
     public String getUsername() {
@@ -81,6 +94,62 @@ public class UserDTO {
         this.createTime = createTime;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getEducationalExperience() {
+        return educationalExperience;
+    }
+
+    public void setEducationalExperience(String educationalExperience) {
+        this.educationalExperience = educationalExperience;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -88,7 +157,14 @@ public class UserDTO {
                 ", phone='" + phone + '\'' +
                 ", headImage='" + headImage + '\'' +
                 ", type='" + type + '\'' +
+                ", email='" + email + '\'' +
                 ", createTime='" + createTime + '\'' +
+                ", sex='" + sex + '\'' +
+                ", qq='" + qq + '\'' +
+                ", wechat='" + wechat + '\'' +
+                ", address='" + address + '\'' +
+                ", description='" + description + '\'' +
+                ", educationalExperience='" + educationalExperience + '\'' +
                 '}';
     }
 }

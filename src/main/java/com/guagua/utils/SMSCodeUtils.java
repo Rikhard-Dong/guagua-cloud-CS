@@ -25,7 +25,9 @@ public class SMSCodeUtils {
         final String accessKeySecret = "mDgnnQpthQ8fJHUN5sDDUu3yzD1BEN";//你的accessKeySecret，参考本文档步骤2
         //初始化ascClient,暂时不支持多region（请勿修改）
 
-        code = RandomNumber();
+        // 生成随机验证码
+        code = RandomCodeUtils.randomCode();
+
         IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId,
                 accessKeySecret);
         try {
@@ -60,14 +62,5 @@ public class SMSCodeUtils {
 
         }
         return code;
-    }
-
-    private static String RandomNumber() {
-        StringBuilder number = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < 6; i++) {
-            number.append(random.nextInt(10));
-        }
-        return number.toString();
     }
 }

@@ -14,7 +14,14 @@ public class User {
     private String salt;            // 盐值加密, 规则: 创建时间加上随机uuid, 32为长度
     private Date createTime;        // 用户创建时间
     private String headImage;       // 用户头像
+    private String email;           // 用户邮箱
     private Integer type;           // 用户类型: 主要有三类: 0. 平台用户 1. 企业用户 2. 客服用户
+    private Integer sex;            // 用户性别
+    private String qq;              // qq号
+    private String wechat;          // 微信号
+    private String address;         // 地址
+    private String description;     // 个人简介
+    private String educationalExperience;   // 教育经历
 
     private List<Role> roles;       // 该用户拥有的角色
 
@@ -114,7 +121,6 @@ public class User {
         this.headImage = headImage;
     }
 
-
     public List<Role> getRoles() {
         return roles;
     }
@@ -131,6 +137,63 @@ public class User {
         this.type = type;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getEducationalExperience() {
+        return educationalExperience;
+    }
+
+    public void setEducationalExperience(String educationalExperience) {
+        this.educationalExperience = educationalExperience;
+    }
+
+
     @Override
     public String toString() {
         return "User{" +
@@ -141,7 +204,14 @@ public class User {
                 ", salt='" + salt + '\'' +
                 ", createTime=" + createTime +
                 ", headImage='" + headImage + '\'' +
+                ", email='" + email + '\'' +
                 ", type=" + type +
+                ", sex=" + sex +
+                ", qq='" + qq + '\'' +
+                ", wechat='" + wechat + '\'' +
+                ", address='" + address + '\'' +
+                ", description='" + description + '\'' +
+                ", educationalExperience='" + educationalExperience + '\'' +
                 ", roles=" + roles +
                 '}';
     }

@@ -47,7 +47,7 @@ public interface PhoneValidateCodeDao {
      *
      * @return 结果集
      */
-    List<PhoneValidateCode> listAll();
+    List<PhoneValidateCode> findAll();
 
     /**
      * 根据phone查询最近的手机验证码信息

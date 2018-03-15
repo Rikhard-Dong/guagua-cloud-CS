@@ -235,6 +235,19 @@
 
         <!-- JWT end -->
 
+        <!-- JavaMail相关依赖 开始 -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <!-- JavaMail相关依赖 结束 -->
+
     </dependencies>
     <build>
         <finalName>guagua-cloud-CS</finalName>

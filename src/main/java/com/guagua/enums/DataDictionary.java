@@ -28,13 +28,21 @@ public enum DataDictionary {
     USER_REGISTER_TYPE_ERROR(113, "用户注册类型错误"),
     VALIDATE_CODE_NOT_MATCH(114, "验证码错误"),
 
+    UPDATE_PASSWORD_SUCCESS(115, "密码更新成功"),
+    OLD_PASSWORD_NOT_MATCH(116, "旧密码不匹配"),
+
     ALREADY_SEND_CODE(120, "验证码已发送"),
     UNREGISTER_PHONE(121, "未注册手机号"),
     LEGAL_PHONE(122, "手机号未注册"),
     ALREADY_REGISTER_PHONE(123, "手机号已经注册"),
     VERIFYING_CODE_REQUEST_FREQUENT(124, "验证码请求过于频繁"),
-
-    UPDTE_PASSWORD_SUCCESS(130, "密码更新成功"),
+    EMAIL_IS_EXISTS(125, "邮箱已经存在"),
+    SEND_EMAIL_CODE_SUCCESS(126, "发送邮件验证码成功"),
+    SEND_EMAIL_CODE_FAIL(127, "发送邮件验证码失败"),
+    SEND_EMAIL_USER_NOT_MATCH(128, "发送和验证邮件验证码的用户不一致"),
+    BIND_EMAIL_SUCCESS(129, "绑定验证码成功"),
+    BIND_EMAIL_FAIL(130, "绑定验证码失败"),
+    VALIDATE_CODE_EXPIRE(131, "验证码过期"),
 
     // token方面
     REFRESH_TOKEN_SUCCESS(140, "令牌刷新成功"),
@@ -42,12 +50,18 @@ public enum DataDictionary {
     TOKEN_EXPIRE(142, "令牌已过期"),
     INVALID_TOKEN(143, "无效令牌"),
 
+    // 图片资源方面
+    IMG_UPLOAD_SUCCESS(150, "图片上传成功"),
+    IMG_UPLOAD_FAIL(151, "图片上传失败"),
+    IMG_DELETE_SUCCESS(152, "图片删除成功"),
+    IMG_DELETE_FAIL(153, "图片删除失败"),
+
     // 错误方面
     UNKNOWN_ERROR(-1, "未知错误"),
     SQL_OPERATION_EXCEPTION(-2, "数据库操作异常"),
     GET_AUTO_INC_ID_FAIL(-3, "数据库错误, 获取自增Id失败"),
     AUTHORIZATION_FAIL(-4, "认证失败, 请重新登录"),
-    NO_PERMISSION(-5, "权限不足");
+    NO_PERMISSION(-5, "权限不足"),;
 
     private Integer code;       // 状态码
     private String msg;         // 描述信息
