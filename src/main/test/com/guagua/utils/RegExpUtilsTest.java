@@ -24,4 +24,10 @@ public class RegExpUtilsTest {
         assertFalse(RegExpUtils.isEmailLegal("_70458214@qq.com"));
         assertTrue(RegExpUtils.isEmailLegal("127045_8214@qq.com"));
     }
+
+    @Test
+    public void isPermissionLegal() {
+
+        System.out.println(RegExpUtils.isPermissionLegal("get:/user/*", "get:/use1r/123"));
+    }
 }

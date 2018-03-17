@@ -12,5 +12,7 @@ public class QiniuUtilsTest {
 
     @Test
     public void uploadByBase64() {
+
+
     }
 }

@@ -162,4 +162,9 @@ public class UserProfileController extends BaseController {
         return userService.updateEducational(getUserId(request), educational);
     }
 
+    @PutMapping("/address")
+    public ResultDto updateAddress(HttpServletRequest request, String address) {
+        return userService.updateAddress(getUserId(request), address);
+    }
+
 }

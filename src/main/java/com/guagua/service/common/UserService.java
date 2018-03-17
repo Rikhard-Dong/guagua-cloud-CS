@@ -155,4 +155,13 @@ public interface UserService {
      * @return
      */
     ResultDto updateEducational(Integer userId, String educational);
+
+    /**
+     * 更新用户地址
+     *
+     * @param userId
+     * @param address
+     * @return
+     */
+    ResultDto updateAddress(Integer userId, String address);
 }

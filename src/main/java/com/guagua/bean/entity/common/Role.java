@@ -12,6 +12,7 @@ public class Role {
 
     private Integer id;             // 主键
     private String roleName;        // 角色名称
+    private String name;            // 中文名
     private String description;     // 角色描述
 
     private List<Permission> permissions;       // 拥有的权限集合
@@ -20,14 +21,16 @@ public class Role {
 
     }
 
-    public Role(String roleName, String description) {
+    public Role(String roleName, String name, String description) {
         this.roleName = roleName;
+        this.name = name;
         this.description = description;
     }
 
-    public Role(Integer id, String roleName, String description) {
+    public Role(Integer id, String roleName, String name, String description) {
         this.id = id;
         this.roleName = roleName;
+        this.name = name;
         this.description = description;
     }
 
@@ -63,12 +66,22 @@ public class Role {
         this.permissions = permissions;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
                 ", roleName='" + roleName + '\'' +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", permissions=" + permissions +
                 '}';
     }
 }

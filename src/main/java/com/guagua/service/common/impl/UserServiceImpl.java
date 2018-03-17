@@ -52,7 +52,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
 
-    // 判断手机哈偶是否存在
+    // 判断手机号是否存在
     public ResultDto isPhoneExists(String phone) {
         User user = userDao.findByPhone(phone);
         return user == null ? new ResultDto(DataDictionary.LEGAL_PHONE) :
@@ -106,7 +106,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         }
         if (user.getType() != 1 && user.getType() != 2) {
             // 注册用户类型不正确 1. 企业用户  2. 会员用户
-            throw new CustomException(DataDictionary.USER_REGISTER_TYPE_ERROR);
+            throw new CustomException(DataDictionary.USER_TYPE_ERROR);
         }
 
         PhoneValidateCode var2 = codeDao.findLatestPhoneValidateCodeByPhone(user.getPhone());
@@ -140,6 +140,22 @@ public class UserServiceImpl extends BaseService implements UserService {
         UserRole var6 = new UserRole(user.getId(), RoleConstant.BASE_USER);
         logger.info("###########user role =====> {} #####################", var6);
         userRoleDao.insertUserRole(var6);
+
+        if (user.getType() == 1) {
+            // 绑定企业用户关系
+            UserRole var7 = new UserRole(user.getId(), RoleConstant.UNCERTIFIED_ENTERPRISE);
+            Integer var8 = userRoleDao.insertUserRole(var7);
+            if (var8 == 0) {
+                throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+            }
+        } else if (user.getType() == 2) {
+            // 绑定会员用户关系
+            UserRole var9 = new UserRole(user.getId(), RoleConstant.UNCERTIFIED_MEMBER);
+            Integer var10 = userRoleDao.insertUserRole(var9);
+            if (var10 == 0) {
+                throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+            }
+        }
 
         return new ResultDto(DataDictionary.REGISTER_SUCCESS);
     }
@@ -227,7 +243,9 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     // 主动更新用户密码
+    @Transactional
     public ResultDto updatePassword(Integer userId, String oldPassword, String password, String repassword) {
+        logger.info(">>>>>>>>>>>>>> 更新密码 <<<<<<<<<<<<<<<<<");
         User user = isUserExists(userId);
 
         // 对旧密码进行加密
@@ -267,7 +285,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         String oldImgUrl = user.getHeadImage();
 
         // 上传文件名
-        String filename = "img/head/" + user.getPhone() + ".jpg";
+        String filename = "img/head/" + UUIDUtils.getUUID() + ".jpg";
         // TODO 无法知道七牛云是否上传成功
         try {
             QiniuUtils.uploadByBase64(imgBase64, filename);
@@ -286,6 +304,18 @@ public class UserServiceImpl extends BaseService implements UserService {
                 logger.error("更新用户头像失败");
 
                 throw new CustomException(DataDictionary.IMG_DELETE_FAIL);
+            }
+        }
+
+
+        oldImgUrl = StringUtils.removeAll(oldImgUrl, "http://p5etjjbs6.bkt.clouddn.com/");
+
+        if (StringUtils.indexOf(oldImgUrl, "default") == -1) {
+            try {
+                QiniuUtils.deleteImg(oldImgUrl);
+            } catch (QiniuException e) {
+                logger.info(">>>>>>>>>>>>>>>>>>>删除图片 ===> {} 失败<<<<<<<<<<<<<<<<<<<<<<<<<", oldImgUrl);
+                return new ResultDto(DataDictionary.QINIU_OPERATION_FAIL);
             }
         }
 
@@ -312,6 +342,11 @@ public class UserServiceImpl extends BaseService implements UserService {
         if (user == null) {
             return new ResultDto(DataDictionary.USER_NOT_EXISTS);
         }
+        // 性别必须是0或1 分别表示女和男
+        if (sex != 0 && sex != 1) {
+            throw new CustomException(DataDictionary.SEX_ILLEGAL);
+
+        }
 
         Integer var1 = userDao.updateSexByUserId(userId, sex);
 
@@ -328,6 +363,11 @@ public class UserServiceImpl extends BaseService implements UserService {
             return new ResultDto(DataDictionary.USER_NOT_EXISTS);
         }
 
+        // qq号不合法
+        if (!RegExpUtils.isQQLegal(qq)) {
+            throw new CustomException(DataDictionary.QQ_ILLEGAL);
+        }
+
         Integer var1 = userDao.updateQQByUserId(userId, qq);
 
         if (var1 == 0) {
@@ -341,6 +381,11 @@ public class UserServiceImpl extends BaseService implements UserService {
         User user = userDao.findById(userId);
         if (user == null) {
             return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+        }
+
+        // 微信号不合法
+        if (!RegExpUtils.isWecahtLegal(wechat)) {
+            throw new CustomException(DataDictionary.WECHAT_ILLEGAL);
         }
 
         Integer var1 = userDao.updateWechatByUserId(userId, wechat);
@@ -373,6 +418,20 @@ public class UserServiceImpl extends BaseService implements UserService {
         }
 
         Integer var1 = userDao.updateEducationalByUserId(userId, educational);
+
+        if (var1 == 0) {
+            return new ResultDto(DataDictionary.UPDATE_FAIL);
+        }
+        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+    }
+
+    public ResultDto updateAddress(Integer userId, String address) {
+        User user = userDao.findById(userId);
+        if (user == null) {
+            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+        }
+
+        Integer var1 = userDao.updateAddressByUserId(userId, address);
 
         if (var1 == 0) {
             return new ResultDto(DataDictionary.UPDATE_FAIL);

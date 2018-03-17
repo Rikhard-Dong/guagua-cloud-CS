@@ -24,8 +24,8 @@ public class RoleDaoTest {
 
     @Test
     public void insertRole() {
-        Role role = new Role("base", "基础用户角色, 拥有通用的权限, 比如维护个人信息, 更新头像密码等等");
-        Integer var1 = roleDao.insertRole(role);
-        System.out.println("##################" + var1);
+//        Role role = new Role("base", "基础用户角色, 拥有通用的权限, 比如维护个人信息, 更新头像密码等等");
+//        Integer var1 = roleDao.insertRole(role);
+//        System.out.println("##################" + var1);
     }
 }

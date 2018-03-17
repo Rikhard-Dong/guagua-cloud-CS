@@ -25,11 +25,14 @@ public enum DataDictionary {
     // 注册方面
     REGISTER_SUCCESS(111, "注册成功"),
     TOW_PASSWORD_NOT_MATCH(112, "密码不一致"),
-    USER_REGISTER_TYPE_ERROR(113, "用户注册类型错误"),
+    USER_TYPE_ERROR(113, "用户注册类型错误"),
     VALIDATE_CODE_NOT_MATCH(114, "验证码错误"),
 
     UPDATE_PASSWORD_SUCCESS(115, "密码更新成功"),
     OLD_PASSWORD_NOT_MATCH(116, "旧密码不匹配"),
+    SEX_ILLEGAL(117, "非法性别"),
+    QQ_ILLEGAL(118, "非法qq号"),
+    WECHAT_ILLEGAL(119, "非法微信号"),
 
     ALREADY_SEND_CODE(120, "验证码已发送"),
     UNREGISTER_PHONE(121, "未注册手机号"),
@@ -43,6 +46,8 @@ public enum DataDictionary {
     BIND_EMAIL_SUCCESS(129, "绑定验证码成功"),
     BIND_EMAIL_FAIL(130, "绑定验证码失败"),
     VALIDATE_CODE_EXPIRE(131, "验证码过期"),
+    QINIU_OPERATION_SUCCESS(132, "七牛云操作成功"),
+    QINIU_OPERATION_FAIL(133, "七牛云操作失败"),
 
     // token方面
     REFRESH_TOKEN_SUCCESS(140, "令牌刷新成功"),
@@ -55,6 +60,16 @@ public enum DataDictionary {
     IMG_UPLOAD_FAIL(151, "图片上传失败"),
     IMG_DELETE_SUCCESS(152, "图片删除成功"),
     IMG_DELETE_FAIL(153, "图片删除失败"),
+
+    // 认证方面
+    AUTHENTICATION_SUCCESS(160, "认证成功"),
+    AUTHENTICATION_FAIL(161, "认证失败"),
+    HAS_AUTHENTICATION(162, "已认证, 不论成功与否"),
+    QUERY_AUTHENTICATION_SUCCESS(163, "查询认证信息成功"),
+    QUERY_AUTHENTICATION_FAIL(164, "查询认证信息失败"),
+    AUTHENTICATION_APPLY_SUCCESS(165, "认证申请成功"),
+    AUTHENTICATION_APPLY_FAIL(166, "认证申请失败"),
+    AUTHENTICATION_STATUS_ERROR(167, "认证状态错误"),
 
     // 错误方面
     UNKNOWN_ERROR(-1, "未知错误"),

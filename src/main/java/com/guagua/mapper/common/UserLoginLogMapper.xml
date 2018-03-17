@@ -7,4 +7,9 @@
         INSERT INTO t_user_login_log (user_id, login_ip) VALUES (#{userId}, #{loginIp})
     </insert>
 
+    <select id="findAll" resultType="com.guagua.bean.entity.common.UserLoginLog">
+        SELECT *
+        FROM t_user_login_log
+    </select>
+
 </mapper>

@@ -71,6 +71,17 @@ public class PermissionFilter implements Filter {
             return;
         }
 
+        if (!PermissionUtils.isUserExists(userId)) {
+            PrintWriter out = response.getWriter();
+
+            // 用户不存在
+            resultDto.setCodeAndMsg(DataDictionary.USER_NOT_EXISTS);
+            out.print(JacksonUtils.toJSon(resultDto));
+            out.flush();
+            out.close();
+            return;
+        }
+
         // 获取请求的url和请求方法
         // String url = request.getRequestURL().toString();
         // 只获取url部分

@@ -11,9 +11,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class QiniuUtils {
     private static final String ACCESS_KEY = "ngX8DY8MVF76Ht-tepHc2a8TUIk_0f6-Nfm_vQGp";
     private static final String SECRET_KEY = "qXRLvlU3JJ7utTasYTBkSG32tx9xX_eeLz6JALy1";
@@ -37,6 +34,10 @@ public class QiniuUtils {
      * @throws Exception 异常
      */
     public static void uploadByBase64(String imgbyte, String filename) throws Exception {
+        // 去掉头部信息
+        String[] var1 = imgbyte.split(",");
+        imgbyte = var1.length == 1 ? var1[0] : var1[1];
+
         String url = "http://upload.qiniu.com/putb64/" + getSize(imgbyte) + "/key/" + UrlSafeBase64.encodeToString(filename);
         //非华东空间需要根据注意事项 1 修改上传域名
         RequestBody rb = RequestBody.create(null, imgbyte);
@@ -58,30 +59,12 @@ public class QiniuUtils {
      * @return 图片大小
      */
     private static Integer getSize(String imgbyte) {
-        String copeimgbyte = imgbyte;
-        copeimgbyte = replaceBlank(copeimgbyte);
-        Integer equalIndex = copeimgbyte.indexOf("=");//2.找到等号，把等号也去掉
-        if (copeimgbyte.indexOf("=") > 0) {
-            copeimgbyte = copeimgbyte.substring(0, equalIndex);
+        Integer equalIndex = imgbyte.indexOf("=");//2.找到等号，把等号也去掉
+        if (imgbyte.indexOf("=") > 0) {
+            imgbyte = imgbyte.substring(0, equalIndex);
         }
-        Integer strLength = copeimgbyte.length();//3.原来的字符流大小，单位为字节
+        Integer strLength = imgbyte.length();//3.原来的字符流大小，单位为字节
         return strLength - (strLength / 8) * 2 - 1;
-    }
-
-    /**
-     * 去除换行符
-     *
-     * @param str base64
-     * @return 处理后的字符串
-     */
-    private static String replaceBlank(String str) {
-        String dest = "";
-        if (str != null) {
-            Pattern p = Pattern.compile("\\s*|\t|\r|\n");
-            Matcher m = p.matcher(str);
-            dest = m.replaceAll("");
-        }
-        return dest;
     }
 
     /**

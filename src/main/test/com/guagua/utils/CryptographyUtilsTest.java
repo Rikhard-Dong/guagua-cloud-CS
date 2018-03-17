@@ -11,6 +11,6 @@ public class CryptographyUtilsTest {
     @Test
     public void md5() {
         System.out.println(new Date().toString());
-        System.out.println(CryptographyUtils.md5("admin","aaaa"));
+        System.out.println(CryptographyUtils.md5("admin","1234567890"));
     }
 }

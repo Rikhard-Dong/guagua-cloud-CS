@@ -2,8 +2,11 @@ package com.guagua.filter.utils;
 
 import com.guagua.bean.entity.common.Permission;
 import com.guagua.bean.entity.common.Role;
+import com.guagua.bean.entity.common.User;
 import com.guagua.dao.common.RolePermissionDao;
+import com.guagua.dao.common.UserDao;
 import com.guagua.dao.common.UserRoleDao;
+import com.guagua.utils.RegExpUtils;
 import com.guagua.utils.SpringContextUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -24,13 +27,27 @@ public class PermissionUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(PermissionUtils.class);
 
+    private static UserDao userDao;
+
     private static UserRoleDao userRoleDao;
 
     private static RolePermissionDao rolePermissionDao;
 
     static {
+        userDao = (UserDao) SpringContextUtils.getContext().getBean("userDao");
         userRoleDao = (UserRoleDao) SpringContextUtils.getContext().getBean("userRoleDao");
         rolePermissionDao = (RolePermissionDao) SpringContextUtils.getContext().getBean("rolePermissionDao");
+    }
+
+    /**
+     * 判断当前用户是否存在
+     *
+     * @param userId
+     * @return
+     */
+    public static boolean isUserExists(Integer userId) {
+        User user = userDao.findById(userId);
+        return user != null;
     }
 
     /**
@@ -46,9 +63,16 @@ public class PermissionUtils {
         logger.info("##### roles ====> {} ######", roles);
         for (Role role : roles) {
             List<Permission> permissions = rolePermissionDao.findAllPermissionByRoleId(role.getId());
+            if (permissions == null || permissions.size() == 0) {
+                // 当前角色未分配权限的情况下, 就可能造成空指针异常情况
+                continue;
+            }
             for (Permission permission : permissions) {
-                // TODO 需要考虑到资源问题, 比如删除用户的url为delete:/manager/user/delete/*, *号代表可以匹配的
-                if (StringUtils.equalsIgnoreCase(permissionUrl, permission.getUrl())) {
+                if (permission == null) {
+                    continue;
+                }
+                // TODO 需要考虑到资源问题, 比如删除用户的url为delete:/admin/user/delete/*, *号代表可以匹配的
+                if (RegExpUtils.isPermissionLegal(permission.getUrl(), permissionUrl)) {
                     return true;
                 }
             }

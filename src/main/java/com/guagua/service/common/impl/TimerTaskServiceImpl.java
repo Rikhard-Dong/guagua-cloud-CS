@@ -36,7 +36,7 @@ public class TimerTaskServiceImpl extends BaseService implements TimerTaskServic
     // 清除短信验证码
     @Transactional
     public void clearTablePhoneValidateCodeData() {
-        logger.info("#################clear table t_phone_validate_code data####################");
+//        logger.info("#################clear table t_phone_validate_code data####################");
 
         List<PhoneValidateCode> codes = phoneCodeDao.findAll();
 
@@ -54,7 +54,7 @@ public class TimerTaskServiceImpl extends BaseService implements TimerTaskServic
     // 清除手机验证码
     @Transactional
     public void clearTableMailValidateCodeData() {
-        logger.info("#################clear table t_email_validate_code data####################");
+//        logger.info("#################clear table t_email_validate_code data####################");
 
         List<EmailValidateCode> codes = mailCodeDao.findAll();
         for (EmailValidateCode code : codes) {

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.member.MemberAuthenticationDao">
+
+    <insert id="insertOne">
+        INSERT INTO t_real_name_authentication_of_member (user_id, real_name, id_number, certificates_positive, certificates_negative)
+        VALUES (#{userId}, #{realName}, #{idNumber}, #{certificatesPositive}, #{certificatesNegative})
+    </insert>
+
+    <update id="updateById">
+        UPDATE t_real_name_authentication_of_member
+        SET
+            real_name             = #{realName},
+            id_number             = #{id_number},
+            certificates_positive = #{certificatesPositive},
+            certificates_negative = #{certificatesNegative},
+            `status`              = #{status}
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="findAll" resultType="com.guagua.bean.entity.member.MemberAuthentication">
+        SELECT *
+        FROM t_real_name_authentication_of_member
+        ORDER BY apply_time DESC
+    </select>
+
+    <select id="findAllUnaudited" resultType="com.guagua.bean.entity.member.MemberAuthentication">
+        SELECT *
+        FROM t_real_name_authentication_of_member
+        WHERE status = 0
+        ORDER BY apply_time DESC
+    </select>
+
+    <select id="findAllPass" resultType="com.guagua.bean.entity.member.MemberAuthentication">
+        SELECT *
+        FROM t_real_name_authentication_of_member
+        WHERE status = 1
+        ORDER BY apply_time DESC
+    </select>
+
+    <select id="findAllFailPass" resultType="com.guagua.bean.entity.member.MemberAuthentication">
+        SELECT *
+        FROM t_real_name_authentication_of_member
+        WHERE status = 2
+        ORDER BY apply_time DESC
+    </select>
+
+    <select id="findByUserId" resultType="com.guagua.bean.entity.member.MemberAuthentication">
+        SELECT *
+        FROM t_real_name_authentication_of_member
+        WHERE user_id = #{userId}
+        LIMIT 1
+    </select>
+
+</mapper>

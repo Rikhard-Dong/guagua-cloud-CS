@@ -1,5 +1,7 @@
 package com.guagua.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author ride
  * @date 18-3-12 下午5:40
@@ -53,5 +55,16 @@ public class RegExpUtils {
         return wechat.matches(regExp);
     }
 
+    /**
+     * 判断权限是否合法, 比如get:/user/*是权限, 可以匹配get:/user/1 之类
+     *
+     * @param var1 数据库的权限表示
+     * @param var2 具体的权限显示
+     * @return  结果
+     */
+    public static boolean isPermissionLegal(String var1, String var2) {
+        var1 = StringUtils.removeAll(var1, "\\*");
 
+        return StringUtils.indexOf(var2, var1) != -1;
+    }
 }

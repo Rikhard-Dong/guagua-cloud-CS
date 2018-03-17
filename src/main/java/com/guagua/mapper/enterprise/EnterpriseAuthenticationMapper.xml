@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.enterprise.EnterpriseAuthenticationDao">
+
+    <insert id="insertOne">
+        INSERT INTO
+            t_real_name_authentication_of_enterprise (user_id,
+                                                      real_name,
+                                                      id_number,
+                                                      enterprise_name,
+                                                      business_license,
+                                                      licensed_residence,
+                                                      postal_address,
+                                                      legal_person,
+                                                      office_phone,
+                                                      enterprise_description,
+                                                      business_license_img,
+                                                      positive_img,
+                                                      negative_img)
+
+        VALUES (#{userId},
+            #{realName},
+            #{idNumber},
+            #{enterpriseName},
+            #{businessLicense},
+            #{licensedResidence},
+            #{postalAddress},
+            #{legalPerson},
+            #{officePhone},
+            #{enterpriseDescription},
+            #{businessLicenseImg},
+                #{positiveImg},
+                #{negativeImg})
+
+
+    </insert>
+
+    <update id="updateByUserId">
+        UPDATE t_real_name_authentication_of_enterprise
+        SET
+            real_name              = #{realName},
+            id_number              = #{idNumber},
+            enterprise_name        = #{enterpriseName},
+            business_license       = #{businessLicense},
+            licensed_residence     = #{licensedResidence},
+            postal_address         = #{postalAddress},
+            legal_person           = #{legalPerson},
+            office_phone           = #{officePhone},
+            enterprise_description = #{enterpriseDescription},
+            business_license_img   = #{businessLicenseImg},
+            positive_img           = #{positiveImg},
+            negative_img           = #{negativeImg}
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="findAll" resultType="com.guagua.bean.entity.enterprise.EnterpriseAuthentication">
+        SELECT *
+        FROM t_real_name_authentication_of_enterprise
+    </select>
+
+    <select id="findAllUnaudited" resultType="com.guagua.bean.entity.enterprise.EnterpriseAuthentication">
+        SELECT *
+        FROM t_real_name_authentication_of_enterprise
+        WHERE `status` = 0
+
+    </select>
+
+    <select id="findAllPass" resultType="com.guagua.bean.entity.enterprise.EnterpriseAuthentication">
+        SELECT *
+        FROM t_real_name_authentication_of_enterprise
+        WHERE `status` = 1
+    </select>
+
+    <select id="findAllFailPass" resultType="com.guagua.bean.entity.enterprise.EnterpriseAuthentication">
+        SELECT *
+        FROM t_real_name_authentication_of_enterprise
+        WHERE `status` = 2
+    </select>
+
+    <select id="findByUserId" resultType="com.guagua.bean.entity.enterprise.EnterpriseAuthentication">
+        SELECT *
+        FROM t_real_name_authentication_of_enterprise
+        WHERE `user_id` = #{userId}
+        LIMIT 1
+    </select>
+
+
+</mapper>
