@@ -1,6 +1,6 @@
 package com.guagua.web.test;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.enums.DataDictionary;
 import com.guagua.exception.common.CustomException;
 import com.guagua.utils.MailUtils;
@@ -35,7 +35,7 @@ public class TestController extends BaseController {
 
 
     @PostMapping("/upload/img")
-    public ResultDto uploadImg(String base64) {
+    public ResultDTO uploadImg(String base64) {
         String key = "img/aaa.jpg";
         try {
             QiniuUtils.uploadByBase64(base64, key);
@@ -43,7 +43,7 @@ public class TestController extends BaseController {
             e.printStackTrace();
         }
 
-        return new ResultDto(DataDictionary.QUERY_SUCCESS);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS);
     }
 
     public static void main(String[] args) {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.common.RolePermissionDao">
+
+    <insert id="insertRolePermission">
+        INSERT INTO t_role_permission (role_id, permission_id) VALUES (#{roleId}, #{permissionId})
+    </insert>
+
+    <select id="findAllPermissionByRoleId" resultType="com.guagua.bean.entity.common.Permission">
+        SELECT p.*
+        FROM (t_role r LEFT JOIN t_role_permission rp ON r.id = rp.role_id) LEFT JOIN t_permission p
+                ON rp.permission_id = p.id
+        WHERE r.id = #{roleId}
+    </select>
+
+</mapper>

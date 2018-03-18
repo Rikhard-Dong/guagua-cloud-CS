@@ -2,7 +2,7 @@ package com.guagua.service.member.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.bean.dto.member.MemberAuthenticationDTO;
 import com.guagua.bean.entity.common.User;
 import com.guagua.bean.entity.member.MemberAuthentication;
@@ -46,14 +46,14 @@ public class MemberAuthenticationServiceImpl
     }
 
     // 查询用户认证信息
-    public ResultDto getInfo(Integer userId) {
+    public ResultDTO getInfo(Integer userId) {
         // 首先判断用户是否存在且用户类型是2
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
         if (user.getType() != 2) {
-            return new ResultDto(DataDictionary.USER_TYPE_ERROR);
+            return new ResultDTO(DataDictionary.USER_TYPE_ERROR);
         }
 
         MemberAuthentication authentication = authenticationDao.findByUserId(user.getId());
@@ -65,26 +65,26 @@ public class MemberAuthenticationServiceImpl
             dto.setUsername(user.getUsername());
         }
 
-        return new ResultDto(DataDictionary.QUERY_AUTHENTICATION_SUCCESS).addData("info", dto);
+        return new ResultDTO(DataDictionary.QUERY_AUTHENTICATION_SUCCESS).addData("info", dto);
     }
 
     // 申请
     @Transactional
-    public ResultDto apply(Integer userId, String realName, String idNumber,
+    public ResultDTO apply(Integer userId, String realName, String idNumber,
                            String positiveBase64, String negativeBase64) {
         // 首先判断用户是否存在且用户类型是2
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
         if (user.getType() != 2) {
-            return new ResultDto(DataDictionary.USER_TYPE_ERROR);
+            return new ResultDTO(DataDictionary.USER_TYPE_ERROR);
         }
 
         MemberAuthentication authentication = authenticationDao.findByUserId(user.getId());
         if (authentication != null) {
             // 已经有认证信息, 认证失败
-            return new ResultDto(DataDictionary.HAS_AUTHENTICATION);
+            return new ResultDTO(DataDictionary.HAS_AUTHENTICATION);
         }
 
         String positiveFilename = "img/authentication/member/" + UUIDUtils.getUUID() + ".jpg";
@@ -108,30 +108,30 @@ public class MemberAuthenticationServiceImpl
         if (var2 == 0) {
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
-        return new ResultDto(DataDictionary.AUTHENTICATION_APPLY_SUCCESS);
+        return new ResultDTO(DataDictionary.AUTHENTICATION_APPLY_SUCCESS);
     }
 
     // 重新申请
     @Transactional
-    public ResultDto reapply(Integer userId, String realName, String idNumber,
+    public ResultDTO reapply(Integer userId, String realName, String idNumber,
                              String positiveBase64, String negativeBase64) {
         // 首先判断用户是否存在且用户类型是2
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
         if (user.getType() != 2) {
-            return new ResultDto(DataDictionary.USER_TYPE_ERROR);
+            return new ResultDTO(DataDictionary.USER_TYPE_ERROR);
         }
         // 应该要查询出一条结果
         MemberAuthentication authentication = authenticationDao.findByUserId(user.getId());
         if (authentication == null) {
-            return new ResultDto(DataDictionary.QUERY_AUTHENTICATION_FAIL);
+            return new ResultDTO(DataDictionary.QUERY_AUTHENTICATION_FAIL);
         }
 
         // 认证状态应该为2, 审核失败才能重新提交审核
         if (authentication.getStatus() != 2) {
-            return new ResultDto(DataDictionary.AUTHENTICATION_STATUS_ERROR);
+            return new ResultDTO(DataDictionary.AUTHENTICATION_STATUS_ERROR);
         }
 
         String positiveFilename = "img/authentication/member/" + UUIDUtils.getUUID() + ".jpg";
@@ -176,59 +176,59 @@ public class MemberAuthenticationServiceImpl
             throw new CustomException(DataDictionary.QINIU_OPERATION_FAIL);
         }
 
-        return new ResultDto(DataDictionary.AUTHENTICATION_APPLY_SUCCESS);
+        return new ResultDTO(DataDictionary.AUTHENTICATION_APPLY_SUCCESS);
     }
 
     // 查询会员用户所有认证信息
-    public ResultDto getAllAuthentication(Integer page, Integer size) {
+    public ResultDTO getAllAuthentication(Integer page, Integer size) {
         PageHelper.startPage(page, size);
         List<MemberAuthentication> var = authenticationDao.findAll();
         if (var != null) {
             List<MemberAuthenticationDTO> var2 = getDtos(var);
             PageInfo<MemberAuthenticationDTO> info = new PageInfo<MemberAuthenticationDTO>(var2);
-            return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
+            return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
         }
 
-        return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
     }
 
     // 查询所有审核通过
-    public ResultDto getAllPassAuthentication(Integer page, Integer size) {
+    public ResultDTO getAllPassAuthentication(Integer page, Integer size) {
         PageHelper.startPage(page, size);
         List<MemberAuthentication> var = authenticationDao.findAllPass();
         if (var != null) {
             List<MemberAuthenticationDTO> var2 = getDtos(var);
             PageInfo<MemberAuthenticationDTO> info = new PageInfo<MemberAuthenticationDTO>(var2);
-            return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
+            return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
         }
 
-        return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
     }
 
     // 查询所有审核不通过的
-    public ResultDto getAllUnauditedAuthentication(Integer page, Integer size) {
+    public ResultDTO getAllUnauditedAuthentication(Integer page, Integer size) {
         PageHelper.startPage(page, size);
         List<MemberAuthentication> var = authenticationDao.findAllUnaudited();
         if (var != null) {
             List<MemberAuthenticationDTO> var2 = getDtos(var);
             PageInfo<MemberAuthenticationDTO> info = new PageInfo<MemberAuthenticationDTO>(var2);
-            return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
+            return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
         }
 
-        return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
     }
 
     // 查询所有审核不通过的
-    public ResultDto getAllFailPassAuthentication(Integer page, Integer size) {
+    public ResultDTO getAllFailPassAuthentication(Integer page, Integer size) {
         PageHelper.startPage(page, size);
         List<MemberAuthentication> var = authenticationDao.findAllFailPass();
         if (var != null) {
             List<MemberAuthenticationDTO> var2 = getDtos(var);
             PageInfo<MemberAuthenticationDTO> info = new PageInfo<MemberAuthenticationDTO>(var2);
-            return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
+            return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
         }
 
-        return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.guagua.web.enterprise;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.service.enterprise.EnterpriseAuthenticationService;
 import com.guagua.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class EnterpriseAuthenticationController extends BaseController {
      * @return result
      */
     @GetMapping("/info")
-    public ResultDto getInfo(HttpServletRequest request) {
+    public ResultDTO getInfo(HttpServletRequest request) {
         return authenticationService.getInfo(getUserId(request));
     }
 
@@ -59,7 +59,7 @@ public class EnterpriseAuthenticationController extends BaseController {
      * @return
      */
     @PostMapping("/apply")
-    public ResultDto apply(HttpServletRequest request,
+    public ResultDTO apply(HttpServletRequest request,
                            String realName, String idNumber,
                            String enterpriseName, String businessLicense,
                            String licensedResidence, String postalAddress,
@@ -93,7 +93,7 @@ public class EnterpriseAuthenticationController extends BaseController {
      * @return
      */
     @GetMapping("/reapply")
-    public ResultDto reapply(HttpServletRequest request,
+    public ResultDTO reapply(HttpServletRequest request,
                              String realName, String idNumber,
                              String enterpriseName, String businessLicense,
                              String licensedResidence, String postalAddress,

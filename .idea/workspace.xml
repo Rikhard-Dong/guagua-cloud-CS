@@ -7,56 +7,343 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef0801e1-d548-4a7b-910c-b96532435d10" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/enterprise/EnterpriseAuthenticationDTO.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/member/MemberAuthenticationDTO.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleEnterpriseAuthentication.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleMemberAuthentication.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/enterprise/EnterpriseAuthentication.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/member/MemberAuthentication.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleEnterpriseAuthenticationDao.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleMemberAuthenticationDao.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/enterprise/EnterpriseAuthenticationDao.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/member/MemberAuthenticationDao.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/admin/HandleEnterpriseAuthenticationMapper.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/admin/HandleMemberAuthenticationMapper.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/enterprise/EnterpriseAuthenticationMapper.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/member/MemberAuthenticationMapper.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/enterprise/EnterpriseAuthenticationService.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/enterprise/impl/EnterpriseAuthenticationServiceImpl.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/member/MemberAuthenticationService.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/member/impl/MemberAuthenticationServiceImpl.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingEnterpriseController.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingMemberController.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/enterprise/EnterpriseAuthenticationController.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/member/MemberAuthenticationController.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/common/KnowledgeBaseDTO.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/common/KnowledgeBaseItemDTO.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/common/MessageDTO.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/common/KnowledgeBase.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/common/KnowledgeBaseItem.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/common/Message.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/KnowledgeBaseDao.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/KnowledgeBaseItemDao.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/MessageDao.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/KnowledgeBaseItemMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/KnowledgeBaseMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/MessageMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/admin/HandleEnterpriseAuthenticationService.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/admin/HandleMemberAuthenticationService.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/admin/impl/HandleEnterpriseAuthenticationServiceImpl.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/admin/impl/HandleMemberAuthenticationServiceImpl.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/KnowledgeBaseService.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/MessageService.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/KnowledgeBaseServiceImpl.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/MessageServiceImpl.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/utils/ImageBase64Utils.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/utils/RoleUtils.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/utils/UrlUtils.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/common/KnowledgeBaseController.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/common/MessageController.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/test/com/guagua/dao/common/MessageDaoTest.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/test/com/guagua/utils/UrlUtilsTest.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/dto/common/KnowledgeBaseDTO.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/dto/common/MessageDTO.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/dto/common/SimpleUserDTO.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/dto/common/UserDTO.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/dto/enterprise/EnterpriseAuthenticationDTO.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/dto/member/MemberAuthenticationDTO.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/TestEntiry.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/admin/HandleEnterpriseAuthentication.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/admin/HandleMemberAuthentication.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/common/EmailValidateCode.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/common/KnowledgeBase.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/common/KnowledgeBaseItem.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/common/Menu.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/common/Message.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/common/Permission.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/common/PhoneValidateCode.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/common/Role.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/common/RolePermission.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/common/UserLoginLog.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/common/UserRole.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/enterprise/EnterpriseAuthentication.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/bean/entity/member/MemberAuthentication.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/TestDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/admin/HandleEnterpriseAuthenticationDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/admin/HandleMemberAuthenticationDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/common/EmailValidateCodeDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/common/KnowledgeBaseDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/common/MenuDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/common/MessageDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/common/PermissionDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/common/PhoneValidateCodeDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/common/RoleDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/common/RolePermissionDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/common/UserLoginLogDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/common/UserRoleDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/enterprise/EnterpriseAuthenticationDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/dao/member/MemberAuthenticationDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/enums/DataDictionary.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/enums/RoleConstant.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/exception/common/CustomException.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/exception/resolver/CustomExceptionResolver.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/filter/HeaderFilter.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/filter/PermissionFilter.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/filter/utils/PermissionUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/listener/MyListener$ClearEmailValidateCodeTimerTask.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/listener/MyListener$ClearPhoneValidateCodeTimerTask.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/listener/MyListener.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/TestMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/admin/HandleEnterpriseAuthenticationMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/admin/HandleMemberAuthenticationMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/common/EmailValidateCodeMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/common/KnowledgeBaseMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/common/MenuMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/common/MessageMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/common/PermissionMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/common/PhoneValidateCodeDao.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/common/RoleMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/common/RolePermissionMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/common/UserLoginLogMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/common/UserRoleMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/enterprise/EnterpriseAuthenticationMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/mapper/member/MemberAuthenticationMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/BaseService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/admin/HandleEnterpriseAuthenticationService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/admin/HandleMemberAuthenticationService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/admin/impl/HandleEnterpriseAuthenticationServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/admin/impl/HandleMemberAuthenticationServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/common/KnowledgeBaseService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/common/MailService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/common/MessageService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/common/TimerTaskService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/common/TokenService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/common/UserService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/common/impl/KnowledgeBaseServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/common/impl/MailServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/common/impl/MessageServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/common/impl/TimerTaskServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/common/impl/TokenServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/common/impl/UserServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/enterprise/EnterpriseAuthenticationService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/enterprise/impl/EnterpriseAuthenticationServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/member/MemberAuthenticationService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/service/member/impl/MemberAuthenticationServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/CusAccessObjectUtil.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/DateUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/ImageBase64Utils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/JWTUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/JacksonUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/MailUtils$1.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/MailUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/QiniuUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/RandomCodeUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/RegExpUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/RoleUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/SMSCodeUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/SpringContextUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/utils/UUIDUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/web/BaseController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/web/admin/AuditingEnterpriseController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/web/admin/AuditingMemberController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/web/common/KnowledgeBaseController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/web/common/MailController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/web/common/MessageController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/web/common/TokenController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/web/common/UserController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/web/common/UserProfileController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/web/enterprise/EnterpriseAuthenticationController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/guagua/web/member/MemberAuthenticationController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/logback.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/dto/common/KnowledgeBaseDTO.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/dto/common/MessageDTO.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/dto/common/SimpleUserDTO.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/dto/common/UserDTO.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/dto/enterprise/EnterpriseAuthenticationDTO.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/dto/member/MemberAuthenticationDTO.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/TestEntiry.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/admin/HandleEnterpriseAuthentication.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/admin/HandleMemberAuthentication.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/common/EmailValidateCode.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/common/KnowledgeBase.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/common/KnowledgeBaseItem.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/common/Menu.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/common/Message.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/common/Permission.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/common/PhoneValidateCode.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/common/Role.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/common/RolePermission.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/common/UserLoginLog.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/common/UserRole.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/enterprise/EnterpriseAuthentication.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/bean/entity/member/MemberAuthentication.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/TestDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/admin/HandleEnterpriseAuthenticationDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/admin/HandleMemberAuthenticationDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/common/EmailValidateCodeDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/common/KnowledgeBaseDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/common/MenuDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/common/MessageDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/common/PermissionDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/common/PhoneValidateCodeDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/common/RoleDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/common/RolePermissionDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/common/UserLoginLogDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/common/UserRoleDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/enterprise/EnterpriseAuthenticationDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/dao/member/MemberAuthenticationDao.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/enums/DataDictionary.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/enums/RoleConstant.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/exception/common/CustomException.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/exception/resolver/CustomExceptionResolver.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/filter/HeaderFilter.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/filter/PermissionFilter.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/filter/utils/PermissionUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/listener/MyListener$ClearEmailValidateCodeTimerTask.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/listener/MyListener$ClearPhoneValidateCodeTimerTask.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/listener/MyListener.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/TestMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/admin/HandleEnterpriseAuthenticationMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/admin/HandleMemberAuthenticationMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/common/EmailValidateCodeMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/common/KnowledgeBaseMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/common/MenuMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/common/MessageMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/common/PermissionMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/common/PhoneValidateCodeDao.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/common/RoleMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/common/RolePermissionMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/common/UserLoginLogMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/common/UserRoleMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/enterprise/EnterpriseAuthenticationMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/mapper/member/MemberAuthenticationMapper.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/BaseService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/admin/HandleEnterpriseAuthenticationService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/admin/HandleMemberAuthenticationService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/admin/impl/HandleEnterpriseAuthenticationServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/admin/impl/HandleMemberAuthenticationServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/common/KnowledgeBaseService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/common/MailService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/common/MessageService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/common/TimerTaskService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/common/TokenService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/common/UserService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/common/impl/KnowledgeBaseServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/common/impl/MailServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/common/impl/MessageServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/common/impl/TimerTaskServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/common/impl/TokenServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/common/impl/UserServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/enterprise/EnterpriseAuthenticationService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/enterprise/impl/EnterpriseAuthenticationServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/member/MemberAuthenticationService.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/service/member/impl/MemberAuthenticationServiceImpl.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/CryptographyUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/CusAccessObjectUtil.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/DateUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/ImageBase64Utils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/JWTUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/JacksonUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/MailUtils$1.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/MailUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/QiniuUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/RandomCodeUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/RegExpUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/RoleUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/SMSCodeUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/SpringContextUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/utils/UUIDUtils.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/web/BaseController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/web/admin/AuditingEnterpriseController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/web/admin/AuditingMemberController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/web/common/KnowledgeBaseController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/web/common/MailController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/web/common/MessageController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/web/common/TokenController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/web/common/UserController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/web/common/UserProfileController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/web/enterprise/EnterpriseAuthenticationController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/web/member/MemberAuthenticationController.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/logback.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/activation-1.1.1.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/aliyun-java-sdk-cms-5.0.4.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/aliyun-java-sdk-core-3.2.6.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/aliyun-java-sdk-dysmsapi-1.0.0.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/aliyun-sdk-mns-1.1.8.4.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/bcprov-jdk15on-1.55.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/commons-codec-1.10.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/commons-lang3-3.7.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/commons-logging-1.1.3.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/fastjson-1.2.28.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/gson-2.8.0.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/happy-dns-java-0.1.4.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/httpasyncclient-4.1.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/httpclient-4.5.5.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/httpcore-4.4.9.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/httpcore-nio-4.4.1.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/java-jwt-3.2.0.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/javax.servlet-api-3.1.0.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/jjwt-0.7.0.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/jms-1.1.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/log4j-1.2.17.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/logback-classic-1.1.1.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/logback-core-1.1.1.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/mail-1.4.7.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/okhttp-3.3.1.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/okio-1.8.0.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/qiniu-java-sdk-7.2.6.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/lib/slf4j-api-1.7.6.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/test.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/MyTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/dao/TestDaoTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/dao/common/MenuDaoTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/dao/common/MessageDaoTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/dao/common/PermissionDaoTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/dao/common/RoleDaoTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/dao/common/RolePermissionDaoTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/dao/common/UserDaoTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/dao/common/UserLoginLogDaoTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/dao/common/UserRoleDaoTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/utils/JWTUtilsTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/utils/JacksonUtilsTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/utils/MailUtilsTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/utils/QiniuUtilsTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/utils/RandomCodeUtilsTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/utils/RegExpUtilsTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/utils/SMSCodeUtilsTest.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/utils/UUIDUtilsTest.class" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/ff0a75c3-5032-4d85-bb0b-a37b54b585f6.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/ff0a75c3-5032-4d85-bb0b-a37b54b585f6.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ride.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/ride.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/common/Role.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/common/Role.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/UserLoginLogDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/UserLoginLogDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/ResultDto.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/ResultDTO.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleEnterpriseAuthentication.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleEnterpriseAuthentication.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleMemberAuthentication.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleMemberAuthentication.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleEnterpriseAuthenticationDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleEnterpriseAuthenticationDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleMemberAuthenticationDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleMemberAuthenticationDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/MenuDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/MenuDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/UserRoleDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/UserRoleDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/dao/enterprise/EnterpriseAuthenticationDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/enterprise/EnterpriseAuthenticationDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/dao/member/MemberAuthenticationDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/dao/member/MemberAuthenticationDao.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/enums/DataDictionary.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/enums/DataDictionary.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/enums/RoleConstant.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/enums/RoleConstant.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/exception/resolver/CustomExceptionResolver.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/exception/resolver/CustomExceptionResolver.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/filter/PermissionFilter.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/filter/PermissionFilter.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/filter/utils/PermissionUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/filter/utils/PermissionUtils.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/RoleMapper.xml" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/RoleMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/UserLoginLogMapper.xml" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/UserLoginLogMapper.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/admin/HandleEnterpriseAuthenticationMapper.xml" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/admin/HandleEnterpriseAuthenticationMapper.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/UserRoleMapper.xml" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/UserRoleMapper.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/enterprise/EnterpriseAuthenticationMapper.xml" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/enterprise/EnterpriseAuthenticationMapper.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/member/MemberAuthenticationMapper.xml" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/mapper/member/MemberAuthenticationMapper.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/MailService.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/MailService.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/TokenService.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/TokenService.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/UserService.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/TimerTaskServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/TimerTaskServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/MailServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/MailServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/TokenServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/TokenServiceImpl.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/UserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/UserServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/service/enterprise/EnterpriseAuthenticationService.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/enterprise/EnterpriseAuthenticationService.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/service/enterprise/impl/EnterpriseAuthenticationServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/enterprise/impl/EnterpriseAuthenticationServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/service/member/MemberAuthenticationService.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/member/MemberAuthenticationService.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/service/member/impl/MemberAuthenticationServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/service/member/impl/MemberAuthenticationServiceImpl.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/utils/QiniuUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/utils/QiniuUtils.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/utils/RegExpUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/utils/RegExpUtils.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingEnterpriseController.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingEnterpriseController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingMemberController.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingMemberController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/web/common/MailController.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/common/MailController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/web/common/TokenController.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/common/TokenController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/web/common/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/common/UserController.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/web/common/UserProfileController.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/common/UserProfileController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/web/enterprise/EnterpriseAuthenticationController.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/enterprise/EnterpriseAuthenticationController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/web/member/MemberAuthenticationController.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/member/MemberAuthenticationController.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/guagua/web/test/TestController.java" afterPath="$PROJECT_DIR$/src/main/java/com/guagua/web/test/TestController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/com/guagua/dao/common/RoleDaoTest.java" afterPath="$PROJECT_DIR$/src/main/test/com/guagua/dao/common/RoleDaoTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/com/guagua/dao/common/UserLoginLogDaoTest.java" afterPath="$PROJECT_DIR$/src/main/test/com/guagua/dao/common/UserLoginLogDaoTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/com/guagua/utils/CryptographyUtilsTest.java" afterPath="$PROJECT_DIR$/src/main/test/com/guagua/utils/CryptographyUtilsTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/com/guagua/utils/QiniuUtilsTest.java" afterPath="$PROJECT_DIR$/src/main/test/com/guagua/utils/QiniuUtilsTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/com/guagua/utils/RegExpUtilsTest.java" afterPath="$PROJECT_DIR$/src/main/test/com/guagua/utils/RegExpUtilsTest.java" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/guagua/web/test/TestController.class" afterPath="$PROJECT_DIR$/target/classes/com/guagua/web/test/TestController.class" />
       <change beforePath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/web/test/TestController.class" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/classes/com/guagua/web/test/TestController.class" />
       <change beforePath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/target/guagua-cloud-CS/WEB-INF/web.xml" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/guagua/utils/CryptographyUtilsTest.class" afterPath="$PROJECT_DIR$/target/test-classes/com/guagua/utils/CryptographyUtilsTest.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -97,96 +384,157 @@
         <item name="db_guagua@47.100.113.55" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="db_guagua: schema" type="c314c289:MysqlImplModel$Schema" />
-        <item name="t_handle_member_authentication: table" type="98d5ac3d:MysqlImplModel$Table" />
+        <item name="t_knowledge_base: table" type="98d5ac3d:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="db_guagua@47.100.113.55" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="db_guagua: schema" type="c314c289:MysqlImplModel$Schema" />
+        <item name="t_knowledge_base_item: table" type="98d5ac3d:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AuditingMemberController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingMemberController.java">
+      <file leaf-file-name="KnowledgeBaseController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/common/KnowledgeBaseController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="438">
-              <caret line="62" column="7" lean-forward="true" selection-start-line="62" selection-start-column="7" selection-end-line="62" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MemberAuthenticationServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/member/impl/MemberAuthenticationServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="223" column="76" lean-forward="false" selection-start-line="223" selection-start-column="76" selection-end-line="223" selection-end-column="76" />
+            <state relative-caret-position="-1809">
+              <caret line="51" column="29" lean-forward="false" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="29" />
               <folding>
-                <element signature="e#7281#7306#0" expanded="true" />
-                <element signature="e#7871#7896#0" expanded="true" />
-                <element signature="e#8473#8498#0" expanded="true" />
-                <element signature="e#9073#9098#0" expanded="true" />
-                <element signature="e#9537#9562#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuditingEnterpriseController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingEnterpriseController.java">
+      <file leaf-file-name="KnowledgeBaseServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/KnowledgeBaseServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="68" column="44" lean-forward="true" selection-start-line="68" selection-start-column="44" selection-end-line="68" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EnterpriseAuthenticationService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/enterprise/EnterpriseAuthenticationService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="889">
-              <caret line="96" column="22" lean-forward="false" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EnterpriseAuthenticationServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/enterprise/impl/EnterpriseAuthenticationServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="243" column="81" lean-forward="false" selection-start-line="243" selection-start-column="81" selection-end-line="243" selection-end-column="81" />
+            <state relative-caret-position="642">
+              <caret line="157" column="79" lean-forward="false" selection-start-line="157" selection-start-column="79" selection-end-line="157" selection-end-column="79" />
               <folding>
-                <element signature="e#9651#9680#0" expanded="true" />
-                <element signature="e#10266#10295#0" expanded="true" />
-                <element signature="e#10872#10901#0" expanded="true" />
-                <element signature="e#11488#11517#0" expanded="true" />
-                <element signature="e#11887#11916#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#2799#2817#0" expanded="true" />
+                <element signature="e#5853#5875#0" expanded="true" />
+                <element signature="e#6335#6353#0" expanded="true" />
+                <element signature="e#6888#6906#0" expanded="true" />
+                <element signature="e#7650#7672#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="t_handle_member_authentication" pinned="false" current-in-tab="false">
-        <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_handle_member_authentication">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HandleEnterpriseAuthentication.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleEnterpriseAuthentication.java">
+      <file leaf-file-name="KnowledgeBaseItemDTO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/common/KnowledgeBaseItemDTO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="152">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+              <caret line="41" column="69" lean-forward="false" selection-start-line="41" selection-start-column="69" selection-end-line="41" selection-end-column="69" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1310#1311#0" expanded="true" />
+                <element signature="e#1335#1336#0" expanded="true" />
+                <element signature="e#1372#1373#0" expanded="true" />
+                <element signature="e#1400#1401#0" expanded="true" />
+                <element signature="e#1443#1444#0" expanded="true" />
+                <element signature="e#1481#1482#0" expanded="true" />
+                <element signature="e#1544#1545#0" expanded="true" />
+                <element signature="e#1598#1599#0" expanded="true" />
+                <element signature="e#1642#1643#0" expanded="true" />
+                <element signature="e#1682#1683#0" expanded="true" />
+                <element signature="e#1748#1749#0" expanded="true" />
+                <element signature="e#1806#1807#0" expanded="true" />
+                <element signature="e#1841#1842#0" expanded="true" />
+                <element signature="e#1872#1873#0" expanded="true" />
+                <element signature="e#1920#1921#0" expanded="true" />
+                <element signature="e#1960#1961#0" expanded="true" />
+                <element signature="e#1993#1994#0" expanded="true" />
+                <element signature="e#2022#2023#0" expanded="true" />
+                <element signature="e#2066#2067#0" expanded="true" />
+                <element signature="e#2102#2103#0" expanded="true" />
+                <element signature="e#2145#2146#0" expanded="true" />
+                <element signature="e#2184#2185#0" expanded="true" />
+                <element signature="e#2248#2249#0" expanded="true" />
+                <element signature="e#2304#2305#0" expanded="true" />
+                <element signature="e#2347#2348#0" expanded="true" />
+                <element signature="e#2386#2387#0" expanded="true" />
+                <element signature="e#2450#2451#0" expanded="true" />
+                <element signature="e#2506#2507#0" expanded="true" />
+                <element signature="e#2549#2550#0" expanded="true" />
+                <element signature="e#2588#2589#0" expanded="true" />
+                <element signature="e#2652#2653#0" expanded="true" />
+                <element signature="e#2708#2709#0" expanded="true" />
+                <element signature="e#2751#2752#0" expanded="true" />
+                <element signature="e#2790#2791#0" expanded="true" />
+                <element signature="e#2854#2855#0" expanded="true" />
+                <element signature="e#2910#2911#0" expanded="true" />
+                <element signature="e#2953#2954#0" expanded="true" />
+                <element signature="e#2992#2993#0" expanded="true" />
+                <element signature="e#3056#3057#0" expanded="true" />
+                <element signature="e#3112#3113#0" expanded="true" />
+                <element signature="e#3149#3150#0" expanded="true" />
+                <element signature="e#3182#3183#0" expanded="true" />
+                <element signature="e#3234#3235#0" expanded="true" />
+                <element signature="e#3278#3279#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HandleEnterpriseAuthenticationDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleEnterpriseAuthenticationDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="t_handle_enterprise_authentication" pinned="false" current-in-tab="false">
-        <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_handle_enterprise_authentication">
+      <file leaf-file-name="MessageServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/MessageServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="179">
+              <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HandleMemberAuthenticationDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleMemberAuthenticationDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="KnowledgeBaseItem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/common/KnowledgeBaseItem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="20" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="KnowledgeBase.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/common/KnowledgeBase.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="15" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="t_permission" pinned="false" current-in-tab="false">
+        <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_permission">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
               <filtering enabled="true" />
@@ -194,27 +542,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MemberAuthenticationDTO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/member/MemberAuthenticationDTO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1193">
-              <caret line="124" column="50" lean-forward="true" selection-start-line="124" selection-start-column="50" selection-end-line="124" selection-end-column="50" />
-              <folding>
-                <element signature="e#1549#1550#0" expanded="true" />
-                <element signature="e#1574#1575#0" expanded="true" />
-                <element signature="e#1611#1612#0" expanded="true" />
-                <element signature="e#1639#1640#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HandleMemberAuthentication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleMemberAuthentication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding />
+      <file leaf-file-name="t_role_permission" pinned="false" current-in-tab="true">
+        <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_role_permission">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -233,9 +565,9 @@
         <option value="logback-simple" />
         <option value="HTML File" />
         <option value="FxmlFile" />
-        <option value="JUnit4 Test Class" />
-        <option value="mybatis-mapper" />
         <option value="Interface" />
+        <option value="mybatis-mapper" />
+        <option value="JUnit4 Test Class" />
         <option value="Class" />
       </list>
     </option>
@@ -244,9 +576,11 @@
     <findStrings>
       <find>gson</find>
       <find>update</find>
+      <find>HandleMemberAuthentication</find>
     </findStrings>
     <replaceStrings>
       <replace />
+      <replace>HandleEnterpriseAuthentication</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -260,57 +594,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/test/com/guagua/utils/QiniuUtilsTest.java" />
-        <option value="$PROJECT_DIR$/src/main/test/com/guagua/utils/CryptographyUtilsTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/member/MemberRealNameAuthentication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/enums/RoleConstant.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/member/MemberRealNameAuthenticationService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/member/MemberRealNameAuthenticationController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/member/MemberRealNameAuthentication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/member/MemberRealNameAuthenticationDTO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/test/TestController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/manager/HandleMemberAuthentication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/manager/HandleMemgberAuthenticationDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/enterprise/HandleEnterpriseAuthentication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/manager/HandleMemberAuthenticationDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/mapper/manager/HandleMemberAuthenticationMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/member/MemberRealNameAuthenticationDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/mapper/member/MemberRealNameAuthenticationMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/member/impl/MemberRealNameAuthenticationServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/utils/QiniuUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/manager/AuditorController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/manager/AuditingController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/utils/RegExpUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/test/com/guagua/utils/RegExpUtilsTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/enums/DataDictionary.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/manager/AuditingEnterpriseController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/manager/HandleEnterpriseAuthentication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/member/MemberAuthenticationDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/enterprise/EnterpriseAutehnication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/common/UserProfileController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/common/UserService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/UserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/mapper/manager/HandleEnterpriseAuthenticationMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/manager/HandleEnterpriseAuthenticationDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/enterprise/EnterpriseAuthenticationDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/mapper/enterprise/EnterpriseAuthenticationMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/enterprise/EnterpriseAuthenticationServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/enterprise/EnterpriseAuthenticationDTO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/enterprise/EnterpriseAuthenticationController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/UserLoginLogDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/UserLoginLogMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/test/com/guagua/dao/common/UserLoginLogDaoTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/filter/PermissionFilter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/manager/AuditingMemberController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/filter/utils/PermissionUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingMemberController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/member/MemberAuthenticationService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingEnterpriseController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/enterprise/EnterpriseAuthenticationService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/member/MemberAuthenticationDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/member/impl/MemberAuthenticationServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/enterprise/impl/EnterpriseAuthenticationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/utils/RoleUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/member/MemberAuthenticationService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingMemberController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/admin/HandleMemberAuthenticationService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleMemberAuthentication.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleEnterpriseAuthentication.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/member/MemberAuthenticationDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/common/MessageDto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/MenuDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/enums/DataDictionary.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingEnterpriseController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/admin/HandleEnterpriseAuthenticationService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/mapper/enterprise/EnterpriseAuthenticationMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/enterprise/EnterpriseAuthenticationDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/mapper/member/MemberAuthenticationMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleMemberAuthenticationDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleEnterpriseAuthenticationDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/mapper/admin/HandleEnterpriseAuthenticationMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/enums/RoleConstant.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/UserRoleDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/UserRoleMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/admin/impl/HandleMemberAuthenticationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/admin/impl/HandleEnterpriseAuthenticationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/test/com/guagua/dao/common/MessageDaoTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/common/Message.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/MessageDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/MessageMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/common/MessageDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/common/MessageService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/MessageServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/common/MessageController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/utils/ImageBase64Utils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/utils/QiniuUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/common/KnowledgeBase.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/common/KnowledgeBaseDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/KnowledgeBaseMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/utils/UrlUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/test/com/guagua/utils/UrlUtilsTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/filter/utils/PermissionUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/KnowledgeBaseDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/common/KnowledgeBaseItem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/dao/common/KnowledgeBaseItemDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/KnowledgeBaseItemMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/common/KnowledgeBaseService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/web/common/KnowledgeBaseController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/common/KnowledgeBaseItemDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/KnowledgeBaseServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -560,28 +894,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="guagua" type="462c0819:PsiDirectoryNode" />
-              <item name="bean" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-              <item name="enterprise" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="guaguacloudCS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="guaguacloudCS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="guagua" type="462c0819:PsiDirectoryNode" />
-              <item name="bean" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-              <item name="member" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="guaguacloudCS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="guaguacloudCS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="guagua" type="462c0819:PsiDirectoryNode" />
               <item name="dao" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -641,26 +953,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="guagua" type="462c0819:PsiDirectoryNode" />
               <item name="exception" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="guaguacloudCS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="guaguacloudCS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="guagua" type="462c0819:PsiDirectoryNode" />
-              <item name="exception" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="guaguacloudCS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="guaguacloudCS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="guagua" type="462c0819:PsiDirectoryNode" />
-              <item name="exception" type="462c0819:PsiDirectoryNode" />
-              <item name="resolver" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="guaguacloudCS" type="b2602c69:ProjectViewProjectNode" />
@@ -747,6 +1039,27 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="guagua" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="guaguacloudCS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="guaguacloudCS" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="guagua" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="guaguacloudCS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="guaguacloudCS" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="guagua" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="guaguacloudCS" type="b2602c69:ProjectViewProjectNode" />
@@ -915,40 +1228,6 @@
               <item name="guaguacloudCS" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="guaguacloudCS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="guaguacloudCS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="guagua" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="guaguacloudCS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="guaguacloudCS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="guagua" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="guaguacloudCS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="guaguacloudCS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="guagua" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="guaguacloudCS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="guaguacloudCS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -976,7 +1255,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="head&#9;FILE&#9;file:///home/ride/source/Github project/guaguacloudCS/src/main/java/com/guagua/filter/HeaderFilter.java&#10;data&#9;FILE&#9;file:///home/ride/source/Github project/guaguacloudCS/src/main/java/com/guagua/enums/DataDictionary.java&#10;clean&#9;ACTION&#9;CodeCleanup" />
+    <property name="SearchEverywhereHistoryKey" value="data&#9;PSI&#9;JAVA://com.guagua.enums.DataDictionary&#10;head&#9;FILE&#9;file:///home/ride/source/Github project/guaguacloudCS/src/main/java/com/guagua/filter/HeaderFilter.java&#10;clean&#9;ACTION&#9;CodeCleanup" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -988,8 +1267,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="com.guagua.dao.common" />
       <recent name="com.guagua.utils" />
+      <recent name="com.guagua.dao.common" />
       <recent name="com.guagua.dao" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -1018,25 +1297,6 @@
       <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <module />
-    </configuration>
-    <configuration name="TestController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.guagua.web.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="com.guagua.web.test.TestController" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="guaguacloudCS" />
-      <envs />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -1077,19 +1337,19 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="QiniuUtilsTest.uploadByBase64" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MessageDaoTest.findAllByUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="com.guagua.utils.*" />
+          <option name="PATTERN" value="com.guagua.dao.common.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <module name="guaguacloudCS" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.guagua.utils" />
-      <option name="MAIN_CLASS_NAME" value="com.guagua.utils.QiniuUtilsTest" />
-      <option name="METHOD_NAME" value="uploadByBase64" />
+      <option name="PACKAGE_NAME" value="com.guagua.dao.common" />
+      <option name="MAIN_CLASS_NAME" value="com.guagua.dao.common.MessageDaoTest" />
+      <option name="METHOD_NAME" value="findAllByUserId" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -1140,6 +1400,31 @@
       <option name="PACKAGE_NAME" value="com.guagua.utils" />
       <option name="MAIN_CLASS_NAME" value="com.guagua.utils.RegExpUtilsTest" />
       <option name="METHOD_NAME" value="isPhoneLegal" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="UrlUtilsTest.match" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.guagua.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="guaguacloudCS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.guagua.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.guagua.utils.UrlUtilsTest" />
+      <option name="METHOD_NAME" value="match" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -1313,19 +1598,19 @@
     <list size="7">
       <item index="0" class="java.lang.String" itemvalue="JUnit.RegExpUtilsTest.isPhoneLegal" />
       <item index="1" class="java.lang.String" itemvalue="Tomcat Server.Tomcat8" />
-      <item index="2" class="java.lang.String" itemvalue="Application.TestController" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.QiniuUtilsTest.uploadByBase64" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.CryptographyUtilsTest.md5" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.RegExpUtilsTest.isPermissionLegal" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.UserLoginLogDaoTest.findAll" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.CryptographyUtilsTest.md5" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.RegExpUtilsTest.isPermissionLegal" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.UserLoginLogDaoTest.findAll" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.MessageDaoTest.findAllByUserId" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.UrlUtilsTest.match" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.UserLoginLogDaoTest.findAll" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.RegExpUtilsTest.isPermissionLegal" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.CryptographyUtilsTest.md5" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.QiniuUtilsTest.uploadByBase64" />
-        <item index="4" class="java.lang.String" itemvalue="Application.TestController" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.UrlUtilsTest.match" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.MessageDaoTest.findAllByUserId" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.UserLoginLogDaoTest.findAll" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.RegExpUtilsTest.isPermissionLegal" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.CryptographyUtilsTest.md5" />
       </list>
     </recent_temporary>
   </component>
@@ -1351,7 +1636,7 @@
       <workItem from="1520821147217" duration="9668000" />
       <workItem from="1520833998869" duration="12042000" />
       <workItem from="1520849840123" duration="158922000" />
-      <workItem from="1521266175923" duration="17836000" />
+      <workItem from="1521266175923" duration="56730000" />
     </task>
     <task id="LOCAL-00001" summary="完成用户注册功能">
       <created>1520862473318</created>
@@ -1381,43 +1666,50 @@
       <option name="project" value="LOCAL" />
       <updated>1521125730327</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="完成企业和用户的实名认证申请部分">
+      <created>1521294821473</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1521294821473</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="RegExpUtilsTest_isPermissionLegal - 2018.03.17 at 13h 07m 46s.xml">
-      <configuration name="RegExpUtilsTest.isPermissionLegal" configurationId="JUnit" />
+    <history-entry file="MessageDaoTest_findAllByUserId - 2018.03.18 at 15h 03m 44s.xml">
+      <configuration name="MessageDaoTest.findAllByUserId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RegExpUtilsTest_isPermissionLegal - 2018.03.17 at 13h 08m 02s.xml">
-      <configuration name="RegExpUtilsTest.isPermissionLegal" configurationId="JUnit" />
+    <history-entry file="MessageDaoTest_findAllByUserId - 2018.03.18 at 15h 04m 36s.xml">
+      <configuration name="MessageDaoTest.findAllByUserId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RegExpUtilsTest_isPermissionLegal - 2018.03.17 at 13h 09m 21s.xml">
-      <configuration name="RegExpUtilsTest.isPermissionLegal" configurationId="JUnit" />
+    <history-entry file="MessageDaoTest_findAllByUserId - 2018.03.18 at 15h 53m 05s.xml">
+      <configuration name="MessageDaoTest.findAllByUserId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RegExpUtilsTest_isPermissionLegal - 2018.03.17 at 13h 09m 34s.xml">
-      <configuration name="RegExpUtilsTest.isPermissionLegal" configurationId="JUnit" />
+    <history-entry file="UrlUtilsTest_match - 2018.03.18 at 21h 40m 55s.xml">
+      <configuration name="UrlUtilsTest.match" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RegExpUtilsTest_isPermissionLegal - 2018.03.17 at 13h 09m 48s.xml">
-      <configuration name="RegExpUtilsTest.isPermissionLegal" configurationId="JUnit" />
+    <history-entry file="UrlUtilsTest_match - 2018.03.18 at 21h 41m 33s.xml">
+      <configuration name="UrlUtilsTest.match" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserLoginLogDaoTest_findAll - 2018.03.17 at 19h 36m 36s.xml">
-      <configuration name="UserLoginLogDaoTest.findAll" configurationId="JUnit" />
+    <history-entry file="UrlUtilsTest_match - 2018.03.18 at 21h 42m 06s.xml">
+      <configuration name="UrlUtilsTest.match" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserLoginLogDaoTest_findAll - 2018.03.17 at 19h 38m 32s.xml">
-      <configuration name="UserLoginLogDaoTest.findAll" configurationId="JUnit" />
+    <history-entry file="UrlUtilsTest_match - 2018.03.18 at 21h 42m 28s.xml">
+      <configuration name="UrlUtilsTest.match" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserLoginLogDaoTest_findAll - 2018.03.17 at 19h 41m 43s.xml">
-      <configuration name="UserLoginLogDaoTest.findAll" configurationId="JUnit" />
+    <history-entry file="UrlUtilsTest_match - 2018.03.18 at 21h 42m 52s.xml">
+      <configuration name="UrlUtilsTest.match" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserLoginLogDaoTest_findAll - 2018.03.17 at 19h 42m 29s.xml">
-      <configuration name="UserLoginLogDaoTest.findAll" configurationId="JUnit" />
+    <history-entry file="UrlUtilsTest_match - 2018.03.18 at 21h 44m 50s.xml">
+      <configuration name="UrlUtilsTest.match" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserLoginLogDaoTest_findAll - 2018.03.17 at 19h 43m 02s.xml">
-      <configuration name="UserLoginLogDaoTest.findAll" configurationId="JUnit" />
+    <history-entry file="UrlUtilsTest_match - 2018.03.18 at 21h 45m 01s.xml">
+      <configuration name="UrlUtilsTest.match" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="211501000" />
+    <option name="totallyTimeSpent" value="250395000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1430,36 +1722,35 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-6" width="1920" height="1086" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908705" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908705" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5260916" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5260916" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19263607" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5559105" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4771033" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4771033" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.66134185" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33013844" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20437567" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4259851" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33013844" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24546425" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="BPMNPalette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1471,35 +1762,35 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908705" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908705" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5260916" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15421557" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5260916" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19263607" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5250266" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5559105" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.56443024" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4771033" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34717786" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33013844" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21077909" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.69222575" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33013844" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24546425" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="BPMNPalette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1513,27 +1804,12 @@
     <MESSAGE value="用户登录以及重置密码" />
     <MESSAGE value="完成基本权限控制" />
     <MESSAGE value="用户基本信息维护" />
-    <option name="LAST_COMMIT_MESSAGE" value="用户基本信息维护" />
+    <MESSAGE value="完成企业和用户的实名认证申请部分" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成企业和用户的实名认证申请部分" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/TokenServiceImpl.java</url>
-          <line>33</line>
-          <properties class="com.guagua.service.common.impl.TokenServiceImpl" method="refresh">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/guagua/filter/utils/PermissionUtils.java</url>
-          <line>69</line>
-          <properties />
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="16" />
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1542,202 +1818,68 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/mapper/admin/HandleEnterpriseAuthenticationMapper.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/enums/DataDictionary.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="60" lean-forward="false" selection-start-line="3" selection-start-column="60" selection-end-line="3" selection-end-column="60" />
+        <state relative-caret-position="475">
+          <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleEnterpriseAuthenticationDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/member/MemberAuthenticationDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="718">
-          <caret line="74" column="54" lean-forward="true" selection-start-line="40" selection-start-column="4" selection-end-line="74" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/mapper/enterprise/EnterpriseAuthenticationMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="723">
-          <caret line="85" column="15" lean-forward="false" selection-start-line="85" selection-start-column="15" selection-end-line="85" selection-end-column="15" />
-          <folding>
-            <marker date="1521269463078" expanded="true" signature="262:1577" ph="INSERT INTO t_real_name_authentication_of_enterprise... " />
-            <marker date="1521269463078" expanded="true" signature="1636:1760" ph="UPDATE t_real_name_authentication_of_enterprise " />
-            <marker date="1521269463078" expanded="true" signature="1636:1987" ph="UPDATE t_real_name_authentication_of_enterprise " />
-            <marker date="1521269463078" expanded="true" signature="1636:2047" ph="UPDATE t_real_name_authentication_of_enterprise " />
-            <marker date="1521269463078" expanded="true" signature="1636:2356" ph="UPDATE t_real_name_authentication_of_enterprise " />
-            <marker date="1521269463078" expanded="true" signature="1636:2381" ph="UPDATE t_real_name_authentication_of_enterprise... " />
-            <marker date="1521269463078" expanded="true" signature="2504:2566" ph="SELECT * FRO... t_real_name_authentication_of_enterprise" />
-            <marker date="1521269463078" expanded="true" signature="2697:2786" ph="SELECT * FRO... t_real_name_authentication_of_enterprise" />
-            <marker date="1521269463078" expanded="true" signature="2913:3002" ph="SELECT * FRO... t_real_name_authentication_of_enterprise" />
-            <marker date="1521269463078" expanded="true" signature="3132:3221" ph="SELECT * FRO... t_real_name_authentication_of_enterprise" />
-            <marker date="1521269463078" expanded="true" signature="3348:3462" ph="SELECT * FRO... t_real_name_authentication_of_enterprise" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/BaseController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="17" column="22" lean-forward="false" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/ResultDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/common/SimpleUserDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/TimerTaskServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/enterprise/EnterpriseAuthenticationDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1007">
-          <caret line="53" column="19" lean-forward="true" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2369#2370#0" expanded="false" />
-            <element signature="e#2398#2399#0" expanded="false" />
-            <element signature="e#2443#2444#0" expanded="false" />
-            <element signature="e#2479#2480#0" expanded="false" />
-            <element signature="e#2514#2515#0" expanded="false" />
-            <element signature="e#2545#2546#0" expanded="false" />
-            <element signature="e#2593#2594#0" expanded="false" />
-            <element signature="e#2633#2634#0" expanded="false" />
-            <element signature="e#2668#2669#0" expanded="false" />
-            <element signature="e#2699#2700#0" expanded="false" />
-            <element signature="e#2747#2748#0" expanded="false" />
-            <element signature="e#2787#2788#0" expanded="false" />
-            <element signature="e#2822#2823#0" expanded="false" />
-            <element signature="e#2853#2854#0" expanded="false" />
-            <element signature="e#2901#2902#0" expanded="false" />
-            <element signature="e#2941#2942#0" expanded="false" />
-            <element signature="e#2982#2983#0" expanded="false" />
-            <element signature="e#3019#3020#0" expanded="false" />
-            <element signature="e#3079#3080#0" expanded="false" />
-            <element signature="e#3131#3132#0" expanded="false" />
-            <element signature="e#3173#3174#0" expanded="false" />
-            <element signature="e#3211#3212#0" expanded="false" />
-            <element signature="e#3273#3274#0" expanded="false" />
-            <element signature="e#3327#3328#0" expanded="false" />
-            <element signature="e#3371#3372#0" expanded="false" />
-            <element signature="e#3411#3412#0" expanded="false" />
-            <element signature="e#3477#3478#0" expanded="false" />
-            <element signature="e#3535#3536#0" expanded="false" />
-            <element signature="e#3575#3576#0" expanded="false" />
-            <element signature="e#3611#3612#0" expanded="false" />
-            <element signature="e#3669#3670#0" expanded="false" />
-            <element signature="e#3719#3720#0" expanded="false" />
-            <element signature="e#3757#3758#0" expanded="false" />
-            <element signature="e#3791#3792#0" expanded="false" />
-            <element signature="e#3845#3846#0" expanded="false" />
-            <element signature="e#3891#3892#0" expanded="false" />
-            <element signature="e#3929#3930#0" expanded="false" />
-            <element signature="e#3963#3964#0" expanded="false" />
-            <element signature="e#4017#4018#0" expanded="false" />
-            <element signature="e#4063#4064#0" expanded="false" />
-            <element signature="e#4111#4112#0" expanded="false" />
-            <element signature="e#4155#4156#0" expanded="false" />
-            <element signature="e#4340#4341#0" expanded="false" />
-            <element signature="e#4381#4382#0" expanded="false" />
-            <element signature="e#4449#4450#0" expanded="false" />
-            <element signature="e#4509#4510#0" expanded="false" />
-            <element signature="e#4547#4548#0" expanded="false" />
-            <element signature="e#4581#4582#0" expanded="false" />
-            <element signature="e#4635#4636#0" expanded="false" />
-            <element signature="e#4681#4682#0" expanded="false" />
-            <element signature="e#4719#4720#0" expanded="false" />
-            <element signature="e#4753#4754#0" expanded="false" />
-            <element signature="e#4807#4808#0" expanded="false" />
-            <element signature="e#4853#4854#0" expanded="false" />
-            <element signature="e#4889#4890#0" expanded="false" />
-            <element signature="e#4921#4922#0" expanded="false" />
-            <element signature="e#4971#4972#0" expanded="false" />
-            <element signature="e#5013#5014#0" expanded="false" />
-            <element signature="e#5046#5047#0" expanded="false" />
-            <element signature="e#5075#5076#0" expanded="false" />
-            <element signature="e#5119#5120#0" expanded="false" />
-            <element signature="e#5155#5156#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/enterprise/EnterpriseAuthentication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="38" lean-forward="true" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_real_name_authentication_of_member">
+    <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_menu">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/common/KnowledgeBaseDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-247">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#815#816#0" expanded="false" />
+            <element signature="e#840#841#0" expanded="false" />
+            <element signature="e#877#878#0" expanded="false" />
+            <element signature="e#905#906#0" expanded="false" />
+            <element signature="e#936#937#0" expanded="false" />
+            <element signature="e#963#964#0" expanded="false" />
+            <element signature="e#1003#1004#0" expanded="false" />
+            <element signature="e#1035#1036#0" expanded="false" />
+            <element signature="e#1073#1074#0" expanded="false" />
+            <element signature="e#1107#1108#0" expanded="false" />
+            <element signature="e#1161#1162#0" expanded="false" />
+            <element signature="e#1207#1208#0" expanded="false" />
+            <element signature="e#1241#1242#0" expanded="false" />
+            <element signature="e#1271#1272#0" expanded="false" />
+            <element signature="e#1317#1318#0" expanded="false" />
+            <element signature="e#1355#1356#0" expanded="false" />
+            <element signature="e#1392#1393#0" expanded="false" />
+            <element signature="e#1425#1426#0" expanded="false" />
+            <element signature="e#1477#1478#0" expanded="false" />
+            <element signature="e#1521#1522#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/common/MailController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/common/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_user">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_email_validate_code">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/utils/QiniuUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="55" column="13" lean-forward="true" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/common/UserProfileController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="166" column="37" lean-forward="false" selection-start-line="166" selection-start-column="37" selection-end-line="166" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_user_login_log">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -1751,132 +1893,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/enterprise/EnterpriseAuthenticationDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="75" column="7" lean-forward="true" selection-start-line="75" selection-start-column="7" selection-end-line="75" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+    <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_user_role">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleMemberAuthenticationDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/admin/impl/HandleMemberAuthenticationServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="39" selection-end-column="55" />
+        <state relative-caret-position="1">
+          <caret line="101" column="28" lean-forward="false" selection-start-line="101" selection-start-column="28" selection-end-line="101" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/common/UserDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/TokenServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="8" selection-end-column="55" />
+        <state relative-caret-position="361">
+          <caret line="32" column="16" lean-forward="false" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/UserLoginLogMapper.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/common/MessageService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="9" lean-forward="true" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-          <folding>
-            <marker date="1521286532413" expanded="true" signature="255:334" ph="INSERT INTO t_user_login_log... " />
-            <marker date="1521286532413" expanded="true" signature="440:478" ph="SELECT * FRO... t_user_login_log" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/utils/RegExpUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        <state relative-caret-position="304">
+          <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/common/UserLoginLogDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/common/MessageController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="6" lean-forward="true" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2413">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/test/com/guagua/dao/common/RoleDaoTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/test/com/guagua/dao/common/UserLoginLogDaoTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-222">
-          <caret line="15" column="3" lean-forward="true" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1336#1350#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-mvc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-513">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/mybatis-conf.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/enterprise/EnterpriseAuthenticationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="77" column="20" lean-forward="false" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/test/TestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/member/MemberAuthenticationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        <state relative-caret-position="749">
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1888,41 +1939,373 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_menu">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_phone_validate_code">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/utils/ImageBase64Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="101" column="27" lean-forward="false" selection-start-line="101" selection-start-column="27" selection-end-line="101" selection-end-column="27" />
+        <state relative-caret-position="684">
+          <caret line="40" column="58" lean-forward="false" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/filter/PermissionFilter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/utils/RandomCodeUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
-          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+        <state relative-caret-position="190">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/utils/UrlUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="21" lean-forward="false" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/test/com/guagua/utils/UrlUtilsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="21" column="1" lean-forward="false" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/filter/utils/PermissionUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="71" column="29" lean-forward="false" selection-start-line="71" selection-start-column="29" selection-end-line="71" selection-end-column="29" />
+        <state relative-caret-position="722">
+          <caret line="75" column="78" lean-forward="false" selection-start-line="75" selection-start-column="78" selection-end-line="75" selection-end-column="78" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingMemberController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_knowledge_base">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_user_login_log">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true">
+            <filter text="user_id = 15" />
+            <filter text="user_id = 12" />
+            <filter text="user_id = 1" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/KnowledgeBaseMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="32" column="21" lean-forward="false" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
+          <folding>
+            <marker date="1521378185386" expanded="true" signature="247:376" ph="INSERT INTO t_knowledge_base... " />
+            <marker date="1521378185386" expanded="true" signature="428:463" ph="UPDATE t_knowledge_base... " />
+            <marker date="1521378185386" expanded="true" signature="428:657" ph="UPDATE t_knowledge_base... " />
+            <marker date="1521378185386" expanded="true" signature="428:678" ph="UPDATE t_knowledge_base... " />
+            <marker date="1521378185386" expanded="true" signature="731:784" ph="DELETE FROM t_knowledge_base... " />
+            <marker date="1521378185386" expanded="true" signature="899:977" ph="SELECT * FRO... t_knowledge_base" />
+            <marker date="1521378185386" expanded="true" signature="1085:1164" ph="SELECT * FRO... t_knowledge_base" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/common/KnowledgeBaseDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="25" column="43" lean-forward="false" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_knowledge_base_item">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/common/EmailValidateCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/mapper/common/KnowledgeBaseItemMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="58" column="24" lean-forward="true" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="24" />
+          <folding>
+            <marker date="1521383717722" expanded="true" signature="251:285" ph="INSERT into t_knowledge_base_item... " />
+            <marker date="1521383717722" expanded="true" signature="251:909" ph="INSERT into t_knowledge_base_item... " />
+            <marker date="1521383717722" expanded="true" signature="1628:1660" ph="update t_knowledge_base_item... " />
+            <marker date="1521383717722" expanded="true" signature="1628:2470" ph="update t_knowledge_base_item... " />
+            <marker date="1521383717722" expanded="true" signature="2522:2580" ph="DELETE FROM t_knowledge_base_item... " />
+            <marker date="1521383717722" expanded="true" signature="2703:2799" ph="SELECT * FRO... t_knowledge_base_item" />
+            <marker date="1521383717722" expanded="true" signature="2915:2983" ph="SELECT * FRO... t_knowledge_base_item" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/common/KnowledgeBaseItemDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="718">
+          <caret line="71" column="26" lean-forward="true" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/common/MenuDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/enterprise/EnterpriseAuthenticationDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/ResultDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="33" column="48" lean-forward="false" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/member/MemberAuthenticationDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleEnterpriseAuthentication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleMemberAuthentication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/member/MemberAuthenticationDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/TestDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/filter/PermissionFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/filter/HeaderFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/mapper/enterprise/EnterpriseAuthenticationMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1521351289387" expanded="true" signature="262:1577" ph="INSERT INTO t_real_name_authentication_of_enterprise" />
+            <marker date="1521351289387" expanded="true" signature="1636:2381" ph="UPDATE t_real_name_authentication_of_enterprise... " />
+            <marker date="1521351289387" expanded="true" signature="2440:2545" ph="UPDATE t_real_name_authentication_of_enterprise... " />
+            <marker date="1521351289387" expanded="true" signature="2668:2730" ph="SELECT * FRO... t_real_name_authentication_of_enterprise" />
+            <marker date="1521351289387" expanded="true" signature="2861:2950" ph="SELECT * FRO... t_real_name_authentication_of_enterprise" />
+            <marker date="1521351289387" expanded="true" signature="3077:3166" ph="SELECT * FRO... t_real_name_authentication_of_enterprise" />
+            <marker date="1521351289387" expanded="true" signature="3296:3385" ph="SELECT * FRO... t_real_name_authentication_of_enterprise" />
+            <marker date="1521351289387" expanded="true" signature="3512:3626" ph="SELECT * FRO... t_real_name_authentication_of_enterprise" />
+            <marker date="1521351289387" expanded="true" signature="3749:3852" ph="SELECT * FRO... t_real_name_authentication_of_enterprise" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6972">
+          <caret line="35" column="13" lean-forward="false" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/common/KnowledgeBaseService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="647">
+          <caret line="97" column="18" lean-forward="true" selection-start-line="97" selection-start-column="18" selection-end-line="97" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/common/MessageDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/common/KnowledgeBaseItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="20" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/common/KnowledgeBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="15" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/common/KnowledgeBaseItemDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="41" column="69" lean-forward="false" selection-start-line="41" selection-start-column="69" selection-end-line="41" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1310#1311#0" expanded="true" />
+            <element signature="e#1335#1336#0" expanded="true" />
+            <element signature="e#1372#1373#0" expanded="true" />
+            <element signature="e#1400#1401#0" expanded="true" />
+            <element signature="e#1443#1444#0" expanded="true" />
+            <element signature="e#1481#1482#0" expanded="true" />
+            <element signature="e#1544#1545#0" expanded="true" />
+            <element signature="e#1598#1599#0" expanded="true" />
+            <element signature="e#1642#1643#0" expanded="true" />
+            <element signature="e#1682#1683#0" expanded="true" />
+            <element signature="e#1748#1749#0" expanded="true" />
+            <element signature="e#1806#1807#0" expanded="true" />
+            <element signature="e#1841#1842#0" expanded="true" />
+            <element signature="e#1872#1873#0" expanded="true" />
+            <element signature="e#1920#1921#0" expanded="true" />
+            <element signature="e#1960#1961#0" expanded="true" />
+            <element signature="e#1993#1994#0" expanded="true" />
+            <element signature="e#2022#2023#0" expanded="true" />
+            <element signature="e#2066#2067#0" expanded="true" />
+            <element signature="e#2102#2103#0" expanded="true" />
+            <element signature="e#2145#2146#0" expanded="true" />
+            <element signature="e#2184#2185#0" expanded="true" />
+            <element signature="e#2248#2249#0" expanded="true" />
+            <element signature="e#2304#2305#0" expanded="true" />
+            <element signature="e#2347#2348#0" expanded="true" />
+            <element signature="e#2386#2387#0" expanded="true" />
+            <element signature="e#2450#2451#0" expanded="true" />
+            <element signature="e#2506#2507#0" expanded="true" />
+            <element signature="e#2549#2550#0" expanded="true" />
+            <element signature="e#2588#2589#0" expanded="true" />
+            <element signature="e#2652#2653#0" expanded="true" />
+            <element signature="e#2708#2709#0" expanded="true" />
+            <element signature="e#2751#2752#0" expanded="true" />
+            <element signature="e#2790#2791#0" expanded="true" />
+            <element signature="e#2854#2855#0" expanded="true" />
+            <element signature="e#2910#2911#0" expanded="true" />
+            <element signature="e#2953#2954#0" expanded="true" />
+            <element signature="e#2992#2993#0" expanded="true" />
+            <element signature="e#3056#3057#0" expanded="true" />
+            <element signature="e#3112#3113#0" expanded="true" />
+            <element signature="e#3149#3150#0" expanded="true" />
+            <element signature="e#3182#3183#0" expanded="true" />
+            <element signature="e#3234#3235#0" expanded="true" />
+            <element signature="e#3278#3279#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleMemberAuthenticationDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/dao/admin/HandleEnterpriseAuthenticationDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/MessageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/common/impl/KnowledgeBaseServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="642">
+          <caret line="157" column="79" lean-forward="false" selection-start-line="157" selection-start-column="79" selection-end-line="157" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2799#2817#0" expanded="true" />
+            <element signature="e#5853#5875#0" expanded="true" />
+            <element signature="e#6335#6353#0" expanded="true" />
+            <element signature="e#6888#6906#0" expanded="true" />
+            <element signature="e#7650#7672#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/common/KnowledgeBaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1809">
+          <caret line="51" column="29" lean-forward="false" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1937,109 +2320,6 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/member/MemberAuthenticationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1406">
-          <caret line="80" column="21" lean-forward="false" selection-start-line="80" selection-start-column="21" selection-end-line="80" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingMemberController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="62" column="7" lean-forward="true" selection-start-line="62" selection-start-column="7" selection-end-line="62" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/web/admin/AuditingEnterpriseController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="68" column="44" lean-forward="true" selection-start-line="68" selection-start-column="44" selection-end-line="68" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/enterprise/EnterpriseAuthenticationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="889">
-          <caret line="96" column="22" lean-forward="false" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/member/impl/MemberAuthenticationServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="223" column="76" lean-forward="false" selection-start-line="223" selection-start-column="76" selection-end-line="223" selection-end-column="76" />
-          <folding>
-            <element signature="e#7281#7306#0" expanded="true" />
-            <element signature="e#7871#7896#0" expanded="true" />
-            <element signature="e#8473#8498#0" expanded="true" />
-            <element signature="e#9073#9098#0" expanded="true" />
-            <element signature="e#9537#9562#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/service/enterprise/impl/EnterpriseAuthenticationServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="243" column="81" lean-forward="false" selection-start-line="243" selection-start-column="81" selection-end-line="243" selection-end-column="81" />
-          <folding>
-            <element signature="e#9651#9680#0" expanded="true" />
-            <element signature="e#10266#10295#0" expanded="true" />
-            <element signature="e#10872#10901#0" expanded="true" />
-            <element signature="e#11488#11517#0" expanded="true" />
-            <element signature="e#11887#11916#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_handle_enterprise_authentication">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/dto/member/MemberAuthenticationDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1193">
-          <caret line="124" column="50" lean-forward="true" selection-start-line="124" selection-start-column="50" selection-end-line="124" selection-end-column="50" />
-          <folding>
-            <element signature="e#1549#1550#0" expanded="true" />
-            <element signature="e#1574#1575#0" expanded="true" />
-            <element signature="e#1611#1612#0" expanded="true" />
-            <element signature="e#1639#1640#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleMemberAuthentication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/17bff4b0/ff0a75c3-5032-4d85-bb0b-a37b54b585f6/db_guagua.t_handle_member_authentication">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/guagua/bean/entity/admin/HandleEnterpriseAuthentication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>

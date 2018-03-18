@@ -1,5 +1,7 @@
 package com.guagua.bean.entity.admin;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.Date;
 
 /**
@@ -14,7 +16,7 @@ public class HandleMemberAuthentication {
     private Integer applyId;        // 对应会员用户认证表id
     private Integer applyUserId;    // 申请人id, 对应用户表
     private Integer handleUserId;   // 处理人id, 对应用户表
-    private Integer result;         // 处理结果, 0 申请认证同意,  1 申请认证不同意
+    private Boolean result;         // 处理结果, 0 申请认证同意,  1 申请认证不同意
     private String comment;         // 批注
     private Date handleTime;        // 处理时间
 
@@ -22,7 +24,7 @@ public class HandleMemberAuthentication {
     }
 
     public HandleMemberAuthentication(Integer applyId, Integer applyUserId,
-                                      Integer handleUserId, Integer result, String comment) {
+                                      Integer handleUserId, Boolean result, String comment) {
         this.applyId = applyId;
         this.applyUserId = applyUserId;
         this.handleUserId = handleUserId;
@@ -62,11 +64,11 @@ public class HandleMemberAuthentication {
         this.handleUserId = handleUserId;
     }
 
-    public Integer getResult() {
+    public Boolean getResult() {
         return result;
     }
 
-    public void setResult(Integer result) {
+    public void setResult(Boolean result) {
         this.result = result;
     }
 

@@ -2,7 +2,7 @@ package com.guagua.service.enterprise.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.bean.dto.enterprise.EnterpriseAuthenticationDTO;
 import com.guagua.bean.entity.common.User;
 import com.guagua.bean.entity.enterprise.EnterpriseAuthentication;
@@ -49,14 +49,14 @@ public class EnterpriseAuthenticationServiceImpl
     }
 
     // 查询认证信息
-    public ResultDto getInfo(Integer userId) {
+    public ResultDTO getInfo(Integer userId) {
         // 判断用户是否存在且用户类型为1, 企业类型
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
         if (user.getType() != 1) {
-            return new ResultDto(DataDictionary.USER_TYPE_ERROR);
+            return new ResultDTO(DataDictionary.USER_TYPE_ERROR);
 
         }
 
@@ -68,11 +68,11 @@ public class EnterpriseAuthenticationServiceImpl
             dto.setUsername(user.getUsername());
         }
 
-        return new ResultDto(DataDictionary.QUERY_AUTHENTICATION_SUCCESS).addData("info", dto);
+        return new ResultDTO(DataDictionary.QUERY_AUTHENTICATION_SUCCESS).addData("info", dto);
     }
 
     // 申请认证
-    public ResultDto apply(Integer userId, String realName, String idNumber, String enterpriseName,
+    public ResultDTO apply(Integer userId, String realName, String idNumber, String enterpriseName,
                            String businessLicense, String licensedResidence, String postalAddress,
                            String legalPerson, String officePhone, String enterpriseDescription,
                            String businessLicenseImgBase64, String positiveImgBase64,
@@ -80,16 +80,16 @@ public class EnterpriseAuthenticationServiceImpl
         // 判断用户是否存在且用户类型为1, 企业类型
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
         if (user.getType() != 1) {
-            return new ResultDto(DataDictionary.USER_TYPE_ERROR);
+            return new ResultDTO(DataDictionary.USER_TYPE_ERROR);
         }
 
         EnterpriseAuthentication authentication = authenticationDao.findByUserId(user.getId());
         if (authentication != null) {
             // 已经有认证信息, 不能重新认证
-            return new ResultDto(DataDictionary.HAS_AUTHENTICATION);
+            return new ResultDTO(DataDictionary.HAS_AUTHENTICATION);
         }
 
         // 上传的文件信息
@@ -132,11 +132,11 @@ public class EnterpriseAuthenticationServiceImpl
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
 
-        return new ResultDto(DataDictionary.AUTHENTICATION_APPLY_SUCCESS);
+        return new ResultDTO(DataDictionary.AUTHENTICATION_APPLY_SUCCESS);
     }
 
     // 申请重新认证
-    public ResultDto reapply(Integer userId, String realName, String idNumber, String enterpriseName,
+    public ResultDTO reapply(Integer userId, String realName, String idNumber, String enterpriseName,
                              String businessLicense, String licensedResidence, String postalAddress,
                              String legalPerson, String officePhone, String enterpriseDescription,
                              String businessLicenseImgBase64, String positiveImgBase64,
@@ -144,19 +144,19 @@ public class EnterpriseAuthenticationServiceImpl
         // 判断用户是否存在且用户类型为1, 企业类型
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
         if (user.getType() != 1) {
-            return new ResultDto(DataDictionary.USER_TYPE_ERROR);
+            return new ResultDTO(DataDictionary.USER_TYPE_ERROR);
         }
 
         // 应当查询出一条数据来, 且状态应该为2, 审核不通过的状态
         EnterpriseAuthentication authentication = authenticationDao.findByUserId(user.getId());
         if (authentication == null) {
-            return new ResultDto(DataDictionary.QUERY_AUTHENTICATION_FAIL);
+            return new ResultDTO(DataDictionary.QUERY_AUTHENTICATION_FAIL);
         }
         if (authentication.getStatus() != 2) {
-            return new ResultDto(DataDictionary.AUTHENTICATION_STATUS_ERROR);
+            return new ResultDTO(DataDictionary.AUTHENTICATION_STATUS_ERROR);
         }
 
         // 上传的文件信息
@@ -220,67 +220,67 @@ public class EnterpriseAuthenticationServiceImpl
             throw new CustomException(DataDictionary.QINIU_OPERATION_FAIL);
         }
 
-        return new ResultDto(DataDictionary.AUTHENTICATION_APPLY_SUCCESS);
+        return new ResultDTO(DataDictionary.AUTHENTICATION_APPLY_SUCCESS);
     }
 
     // 获取所有
-    public ResultDto getAllAuthentication(Integer page, Integer size) {
+    public ResultDTO getAllAuthentication(Integer page, Integer size) {
         PageHelper.startPage(page, size);
         List<EnterpriseAuthentication> var = authenticationDao.findAll();
 
         if (var != null) {
             List<EnterpriseAuthenticationDTO> var2 = getDtos(var);
             PageInfo<EnterpriseAuthenticationDTO> info = new PageInfo<EnterpriseAuthenticationDTO>(var2);
-            return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
+            return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
 
         }
 
-        return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
     }
 
     // 获取未审核
-    public ResultDto getAllUnauditedAuthentication(Integer page, Integer size) {
+    public ResultDTO getAllUnauditedAuthentication(Integer page, Integer size) {
         PageHelper.startPage(page, size);
         List<EnterpriseAuthentication> var = authenticationDao.findAllUnaudited();
 
         if (var != null) {
             List<EnterpriseAuthenticationDTO> var2 = getDtos(var);
             PageInfo<EnterpriseAuthenticationDTO> info = new PageInfo<EnterpriseAuthenticationDTO>(var2);
-            return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
+            return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
 
         }
 
-        return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
     }
 
     // 获取审核通过
-    public ResultDto getAllPassAuthentication(Integer page, Integer size) {
+    public ResultDTO getAllPassAuthentication(Integer page, Integer size) {
         PageHelper.startPage(page, size);
         List<EnterpriseAuthentication> var = authenticationDao.findAllPass();
 
         if (var != null) {
             List<EnterpriseAuthenticationDTO> var2 = getDtos(var);
             PageInfo<EnterpriseAuthenticationDTO> info = new PageInfo<EnterpriseAuthenticationDTO>(var2);
-            return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
+            return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
 
         }
 
-        return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
     }
 
     // 获取所有审核失败
-    public ResultDto getAllFailPassAuthentication(Integer page, Integer size) {
+    public ResultDTO getAllFailPassAuthentication(Integer page, Integer size) {
         PageHelper.startPage(page, size);
         List<EnterpriseAuthentication> var = authenticationDao.findAllFailPass();
 
         if (var != null) {
             List<EnterpriseAuthenticationDTO> var2 = getDtos(var);
             PageInfo<EnterpriseAuthenticationDTO> info = new PageInfo<EnterpriseAuthenticationDTO>(var2);
-            return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
+            return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", info);
 
         }
 
-        return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("pageInfo", null);
     }
 
     private List<EnterpriseAuthenticationDTO> getDtos(List<EnterpriseAuthentication> lists) {

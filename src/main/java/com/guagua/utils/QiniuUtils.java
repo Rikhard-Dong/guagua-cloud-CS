@@ -38,6 +38,8 @@ public class QiniuUtils {
         String[] var1 = imgbyte.split(",");
         imgbyte = var1.length == 1 ? var1[0] : var1[1];
 
+        ImageBase64Utils.base64ToImageFile(imgbyte, "/home/ride/" + UUIDUtils.getUUID() + ".jpg");
+
         String url = "http://upload.qiniu.com/putb64/" + getSize(imgbyte) + "/key/" + UrlSafeBase64.encodeToString(filename);
         //非华东空间需要根据注意事项 1 修改上传域名
         RequestBody rb = RequestBody.create(null, imgbyte);

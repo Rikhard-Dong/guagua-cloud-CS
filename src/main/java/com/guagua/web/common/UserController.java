@@ -1,6 +1,6 @@
 package com.guagua.web.common;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.bean.entity.common.User;
 import com.guagua.enums.DataDictionary;
 import com.guagua.exception.common.CustomException;
@@ -36,7 +36,7 @@ public class UserController extends BaseController {
      * @return 结果
      */
     @GetMapping("/exists/{phone}")
-    public ResultDto isPhoneExists(@PathVariable("phone") String phone) {
+    public ResultDTO isPhoneExists(@PathVariable("phone") String phone) {
         logger.info("#######phone ====> {} ###########", phone);
         return userService.isPhoneExists(phone);
     }
@@ -48,7 +48,7 @@ public class UserController extends BaseController {
      * @return 结果
      */
     @PostMapping("/code")
-    public ResultDto sendCode(String phone) {
+    public ResultDTO sendCode(String phone) {
         logger.info("phone ====> {}", phone);
 
         return userService.sendSMSCode(phone);
@@ -66,7 +66,7 @@ public class UserController extends BaseController {
      * @return 结果
      */
     @PostMapping("/register")
-    public ResultDto register(String phone, String code, String password,
+    public ResultDTO register(String phone, String code, String password,
                               String repassword, Integer type) {
         logger.info("\nphone ===> {}\ncode ===> {}\npassword ===> {}\npassword2 ===> {}\ntype ===> {}",
                 phone, code, password, repassword, type);
@@ -90,7 +90,7 @@ public class UserController extends BaseController {
      * @return 登录结果, 登录结果返回token令牌
      */
     @PostMapping("/login")
-    public ResultDto login(String account, String password, HttpServletRequest request) {
+    public ResultDTO login(String account, String password, HttpServletRequest request) {
         // 获取用户的登录ip
         String loginIp = CusAccessObjectUtil.getIpAddress(request);
 
@@ -110,7 +110,7 @@ public class UserController extends BaseController {
      * @return 结果
      */
     @PostMapping("/reset/password")
-    public ResultDto resetPassword(String phone, String code, String password, String repassword) {
+    public ResultDTO resetPassword(String phone, String code, String password, String repassword) {
         logger.info("phone ===> {} 重置密码", phone);
         return userService.resetPassword(phone, code, password, repassword);
     }

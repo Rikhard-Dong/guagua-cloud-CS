@@ -70,6 +70,8 @@ public enum DataDictionary {
     AUTHENTICATION_APPLY_SUCCESS(165, "认证申请成功"),
     AUTHENTICATION_APPLY_FAIL(166, "认证申请失败"),
     AUTHENTICATION_STATUS_ERROR(167, "认证状态错误"),
+    AUTH_NOT_FOUND(168, "认证信息没有发现"),
+    HANDLE_AUTH_SUCCESS(169, "处理认证信息成功"),
 
     // 错误方面
     UNKNOWN_ERROR(-1, "未知错误"),

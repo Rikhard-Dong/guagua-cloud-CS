@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.common.MenuDao">
+
+    <insert id="insertMenu">
+        INSERT into t_menu
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="menu.id != null">id,</if>
+            <if test="menu.username != null">`username`,</if>
+            <if test="menu.description != null">description,</if>
+            <if test="menu.parentId != null">parent_id,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="menu.id != null">#{menu.id},</if>
+            <if test="menu.username != null">#{menu.username},</if>
+            <if test="menu.description != null">#{menu.description},</if>
+            <if test="menu.parentId != null">#{menu.parentId},</if>
+        </trim>
+    </insert>
+</mapper>

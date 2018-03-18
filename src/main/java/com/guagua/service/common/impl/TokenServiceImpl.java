@@ -1,6 +1,6 @@
 package com.guagua.service.common.impl;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.bean.entity.common.User;
 import com.guagua.dao.common.UserDao;
 import com.guagua.enums.DataDictionary;
@@ -31,12 +31,12 @@ public class TokenServiceImpl extends BaseService implements TokenService {
 
 
     // 刷新token请求
-    public ResultDto refresh(Integer userId) {
+    public ResultDTO refresh(Integer userId) {
 
         User user = userDao.findById(userId);
         if (user == null) {
             // 更新失败
-            return new ResultDto(DataDictionary.REFRESH_TOKEN_FAIL);
+            return new ResultDTO(DataDictionary.REFRESH_TOKEN_FAIL);
         }
 
         logger.info("##########user ====> {} ##########", user);
@@ -46,6 +46,6 @@ public class TokenServiceImpl extends BaseService implements TokenService {
         newClaims.put("phone", user.getPhone());
 
         String token = JWTUtils.createToken(newClaims);
-        return new ResultDto(DataDictionary.REFRESH_TOKEN_SUCCESS).addData("token", token);
+        return new ResultDTO(DataDictionary.REFRESH_TOKEN_SUCCESS).addData("token", token);
     }
 }

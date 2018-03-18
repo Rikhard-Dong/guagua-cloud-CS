@@ -1,6 +1,6 @@
 package com.guagua.service.common.impl;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.bean.entity.common.EmailValidateCode;
 import com.guagua.bean.entity.common.User;
 import com.guagua.dao.common.EmailValidateCodeDao;
@@ -37,17 +37,17 @@ public class MailServiceImpl extends BaseService implements MailService {
     }
 
     // 发送一封含验证码的激活邮件
-    public ResultDto sendEmailCode(Integer userId, String email) {
+    public ResultDTO sendEmailCode(Integer userId, String email) {
         User user = userDao.findById(userId);
         if (user == null) {
             // 用户不存在
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
 
         User var1 = userDao.findByEmail(email);
         if (var1 != null) {
             // 邮箱已经存在, 不能继续绑定
-            return new ResultDto(DataDictionary.EMAIL_IS_EXISTS);
+            return new ResultDTO(DataDictionary.EMAIL_IS_EXISTS);
         }
 
         // 生成随机验证码
@@ -56,7 +56,7 @@ public class MailServiceImpl extends BaseService implements MailService {
         Integer var3 = emailDao.insertEmailValidateCode(var2);
         // 插入数据失败
         if (var3 == 0) {
-            return new ResultDto(DataDictionary.SQL_OPERATION_EXCEPTION);
+            return new ResultDTO(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
 
         String subject = "[丁丁云客服众包平台] 验证码";
@@ -65,36 +65,36 @@ public class MailServiceImpl extends BaseService implements MailService {
                 "十五分钟内有效";
         new Thread(new MailUtils(email, subject, content)).run();
 
-        return new ResultDto(DataDictionary.SEND_EMAIL_CODE_SUCCESS);
+        return new ResultDTO(DataDictionary.SEND_EMAIL_CODE_SUCCESS);
     }
 
     @Transactional
-    public ResultDto updateMail(Integer userId, String email, String code) {
+    public ResultDTO updateMail(Integer userId, String email, String code) {
         User user = userDao.findById(userId);
         if (user == null) {
             // 用户不存在
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
 
         User var1 = userDao.findByEmail(email);
         if (var1 != null) {
             // 邮箱已经存在, 不能继续绑定
-            return new ResultDto(DataDictionary.EMAIL_IS_EXISTS);
+            return new ResultDTO(DataDictionary.EMAIL_IS_EXISTS);
         }
 
         EmailValidateCode var2 = emailDao.findLatestEmailValidateCodeByEmail(email);
 
         if (var2 == null) {
             // 验证码已经过期或者不存在
-            return new ResultDto(DataDictionary.VALIDATE_CODE_EXPIRE);
+            return new ResultDTO(DataDictionary.VALIDATE_CODE_EXPIRE);
         }
         if (!var2.getUserId().equals(user.getId())) {
             // 发送验证码的用户和提交验证码的用户不是同一个
-            return new ResultDto(DataDictionary.SEND_EMAIL_USER_NOT_MATCH);
+            return new ResultDTO(DataDictionary.SEND_EMAIL_USER_NOT_MATCH);
         }
         if (!StringUtils.equals(code, var2.getCode())) {
             // 验证码不一致
-            return new ResultDto(DataDictionary.VALIDATE_CODE_NOT_MATCH);
+            return new ResultDTO(DataDictionary.VALIDATE_CODE_NOT_MATCH);
         }
 
         Integer var3 = userDao.updateEmail(userId, email);
@@ -102,6 +102,6 @@ public class MailServiceImpl extends BaseService implements MailService {
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
 
-        return new ResultDto(DataDictionary.BIND_EMAIL_SUCCESS);
+        return new ResultDTO(DataDictionary.BIND_EMAIL_SUCCESS);
     }
 }

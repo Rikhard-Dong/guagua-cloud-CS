@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.admin.HandleMemberAuthenticationDao">
+
+    <insert id="insertOne">
+        INSERT INTO t_handle_member_authentication (apply_id, apply_user_id, handle_user_id, result, `comment`) VALUES
+            (#{applyId}, #{applyUserId}, #{handleUserId}, #{result}, #{comment})
+    </insert>
+
+    <update id="updateOne">
+
+    </update>
+
+    <select id="findAll" resultType="com.guagua.bean.entity.admin.HandleMemberAuthentication">
+        SELECT *
+        FROM t_handle_member_authentication
+    </select>
+
+    <select id="findByApplyId" resultType="com.guagua.bean.entity.admin.HandleMemberAuthentication">
+        SELECT *
+        FROM t_handle_member_authentication
+        WHERE apply_id = #{apply_id}
+    </select>
+
+    <select id="findByApplyUserId" resultType="com.guagua.bean.entity.admin.HandleMemberAuthentication">
+        SELECT *
+        FROM t_handle_member_authentication
+        WHERE apply_user_id = #{applyUserId}
+    </select>
+
+    <select id="findByHandleUserId" resultType="com.guagua.bean.entity.admin.HandleMemberAuthentication">
+        SELECT *
+        FROM t_handle_member_authentication
+        WHERE handle_user_id = #{handleUserId}
+    </select>
+</mapper>

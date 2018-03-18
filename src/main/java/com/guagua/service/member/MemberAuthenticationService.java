@@ -1,6 +1,6 @@
 package com.guagua.service.member;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 
 /**
  * @author ride
@@ -16,7 +16,7 @@ public interface MemberAuthenticationService {
      * @param userId 用户id
      * @return 结果
      */
-    ResultDto getInfo(Integer userId);
+    ResultDTO getInfo(Integer userId);
 
     /**
      * 申请会员认证
@@ -28,7 +28,7 @@ public interface MemberAuthenticationService {
      * @param negativeBase64 证件反面base64编码
      * @return 结果
      */
-    ResultDto apply(Integer userId, String realName, String idNumber, String positiveBase64,
+    ResultDTO apply(Integer userId, String realName, String idNumber, String positiveBase64,
                     String negativeBase64);
 
 
@@ -42,7 +42,7 @@ public interface MemberAuthenticationService {
      * @param negativeBase64 证件反面base64编码
      * @return 结果
      */
-    ResultDto reapply(Integer userId, String realName, String idNumber, String positiveBase64,
+    ResultDTO reapply(Integer userId, String realName, String idNumber, String positiveBase64,
                       String negativeBase64);
 
 
@@ -53,7 +53,7 @@ public interface MemberAuthenticationService {
      * @param size 每页多少数据
      * @return result
      */
-    ResultDto getAllAuthentication(Integer page, Integer size);
+    ResultDTO getAllAuthentication(Integer page, Integer size);
 
     /**
      * 得到所有审核通过的用户认证申请
@@ -62,7 +62,7 @@ public interface MemberAuthenticationService {
      * @param size 每页多少数据
      * @return result
      */
-    ResultDto getAllPassAuthentication(Integer page, Integer size);
+    ResultDTO getAllPassAuthentication(Integer page, Integer size);
 
     /**
      * 得到所有未审核的用户认证申请
@@ -71,7 +71,7 @@ public interface MemberAuthenticationService {
      * @param size 每条多少页数
      * @return result
      */
-    ResultDto getAllUnauditedAuthentication(Integer page, Integer size);
+    ResultDTO getAllUnauditedAuthentication(Integer page, Integer size);
 
     /**
      * 获取所有审核不通过的认证信息
@@ -80,5 +80,6 @@ public interface MemberAuthenticationService {
      * @param size 每条多少页
      * @return result
      */
-    ResultDto getAllFailPassAuthentication(Integer page, Integer size);
+    ResultDTO getAllFailPassAuthentication(Integer page, Integer size);
+
 }

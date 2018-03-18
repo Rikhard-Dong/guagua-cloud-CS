@@ -1,8 +1,6 @@
 package com.guagua.service.common;
 
-import com.guagua.bean.dto.ResultDto;
-import com.guagua.dao.common.UserDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.guagua.bean.dto.ResultDTO;
 
 /**
  * @author ride
@@ -19,6 +17,6 @@ public interface TokenService {
      * @param userId 需要更新的用户id
      * @return 结果
      */
-    ResultDto refresh(Integer userId);
+    ResultDTO refresh(Integer userId);
 
 }

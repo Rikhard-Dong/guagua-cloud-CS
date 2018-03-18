@@ -1,12 +1,9 @@
 package com.guagua.service.common;
 
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.bean.entity.common.User;
 import com.guagua.exception.common.CustomException;
-import com.qiniu.common.QiniuException;
-
-import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -23,7 +20,7 @@ public interface UserService {
      * @param phone phone
      * @return 返回结果
      */
-    ResultDto isPhoneExists(String phone);
+    ResultDTO isPhoneExists(String phone);
 
     /**
      * 发送验证码,
@@ -32,7 +29,7 @@ public interface UserService {
      * @return 返回结果
      * @throws CustomException 异常
      */
-    ResultDto sendSMSCode(String phone) throws CustomException;
+    ResultDTO sendSMSCode(String phone) throws CustomException;
 
     /**
      * 用户注册
@@ -42,7 +39,7 @@ public interface UserService {
      * @return 结果
      * @throws CustomException 异常
      */
-    ResultDto register(User user, String code) throws CustomException;
+    ResultDTO register(User user, String code) throws CustomException;
 
 
     /**
@@ -53,7 +50,7 @@ public interface UserService {
      * @param loginIp  登录ip
      * @return 用户登录, 返回token信息
      */
-    ResultDto login(String account, String password, String loginIp);
+    ResultDTO login(String account, String password, String loginIp);
 
     /**
      * 重置密码 在用户忘记密码的情况下无法登录, 通过手机发送验证码重置密码
@@ -64,7 +61,7 @@ public interface UserService {
      * @param repassword 确认密码
      * @return 操作结果
      */
-    ResultDto resetPassword(String phone, String code, String password, String repassword);
+    ResultDTO resetPassword(String phone, String code, String password, String repassword);
 
     /**
      * 获取用户的基本信息, 比如用户头像和用户昵称
@@ -72,7 +69,7 @@ public interface UserService {
      * @param userId 查询用户id
      * @return 用户基本信息
      */
-    ResultDto getSimpleUserInfo(Integer userId);
+    ResultDTO getSimpleUserInfo(Integer userId);
 
     /**
      * 获取用户的详细信息
@@ -80,7 +77,7 @@ public interface UserService {
      * @param userId 用户id
      * @return result
      */
-    ResultDto getUserInfo(Integer userId);
+    ResultDTO getUserInfo(Integer userId);
 
     /**
      * 更新密码
@@ -91,7 +88,7 @@ public interface UserService {
      * @param repassword  确认密码
      * @return 结果
      */
-    ResultDto updatePassword(Integer userId, String oldPassword, String password, String repassword);
+    ResultDTO updatePassword(Integer userId, String oldPassword, String password, String repassword);
 
     /**
      * 更新用户头像
@@ -100,7 +97,7 @@ public interface UserService {
      * @param imgBase64 图片base64编码
      * @return 更新结果
      */
-    ResultDto updateHeadImage(Integer userId, String imgBase64);
+    ResultDTO updateHeadImage(Integer userId, String imgBase64);
 
     /**
      * 更新用户名
@@ -109,7 +106,7 @@ public interface UserService {
      * @param username
      * @return
      */
-    ResultDto updateUsername(Integer userId, String username);
+    ResultDTO updateUsername(Integer userId, String username);
 
     /**
      * 更新用户性别
@@ -118,7 +115,7 @@ public interface UserService {
      * @param sex
      * @return
      */
-    ResultDto updateSex(Integer userId, Integer sex);
+    ResultDTO updateSex(Integer userId, Integer sex);
 
     /**
      * 更新用户qq
@@ -127,7 +124,7 @@ public interface UserService {
      * @param qq
      * @return
      */
-    ResultDto updateQQ(Integer userId, String qq);
+    ResultDTO updateQQ(Integer userId, String qq);
 
     /**
      * 更新用户微信
@@ -136,7 +133,7 @@ public interface UserService {
      * @param wechat
      * @return
      */
-    ResultDto updateWechat(Integer userId, String wechat);
+    ResultDTO updateWechat(Integer userId, String wechat);
 
     /**
      * 更新用户描述
@@ -145,7 +142,7 @@ public interface UserService {
      * @param description
      * @return
      */
-    ResultDto updateDescription(Integer userId, String description);
+    ResultDTO updateDescription(Integer userId, String description);
 
     /**
      * 更新用户教育经历
@@ -154,7 +151,7 @@ public interface UserService {
      * @param educational
      * @return
      */
-    ResultDto updateEducational(Integer userId, String educational);
+    ResultDTO updateEducational(Integer userId, String educational);
 
     /**
      * 更新用户地址
@@ -163,5 +160,5 @@ public interface UserService {
      * @param address
      * @return
      */
-    ResultDto updateAddress(Integer userId, String address);
+    ResultDTO updateAddress(Integer userId, String address);
 }

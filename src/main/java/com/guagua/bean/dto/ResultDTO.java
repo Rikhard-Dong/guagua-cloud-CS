@@ -9,29 +9,29 @@ import java.util.Map;
  * @author ride
  * @date 18-3-12 下午1:38
  */
-public class ResultDto {
+public class ResultDTO {
     private Integer code;
     private String msg;
 
     private Map<String, Object> data;
 
-    public ResultDto() {
+    public ResultDTO() {
         this.data = new HashMap<String, Object>();
     }
 
-    public ResultDto(DataDictionary dataDictionary) {
+    public ResultDTO(DataDictionary dataDictionary) {
         this.code = dataDictionary.getCode();
         this.msg = dataDictionary.getMsg();
         this.data = new HashMap<String, Object>();
     }
 
-    public ResultDto(Integer code, String msg) {
+    public ResultDTO(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
         this.data = new HashMap<String, Object>();
     }
 
-    public ResultDto addData(String key, Object value) {
+    public ResultDTO addData(String key, Object value) {
         this.data.put(key, value);
         return this;
     }
@@ -67,7 +67,7 @@ public class ResultDto {
 
     @Override
     public String toString() {
-        return "ResultDto{" +
+        return "ResultDTO{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
                 ", data=" + data +

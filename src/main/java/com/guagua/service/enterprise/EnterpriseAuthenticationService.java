@@ -1,6 +1,6 @@
 package com.guagua.service.enterprise;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 
 /**
  * @author ride
@@ -14,7 +14,7 @@ public interface EnterpriseAuthenticationService {
      * @param userId 用户id
      * @return result
      */
-    ResultDto getInfo(Integer userId);
+    ResultDTO getInfo(Integer userId);
 
 
     /**
@@ -35,7 +35,7 @@ public interface EnterpriseAuthenticationService {
      * @param negativeImgBase64
      * @return
      */
-    ResultDto apply(Integer userId, String realName, String idNumber, String enterpriseName,
+    ResultDTO apply(Integer userId, String realName, String idNumber, String enterpriseName,
                     String businessLicense, String licensedResidence, String postalAddress,
                     String legalPerson, String officePhone, String enterpriseDescription,
                     String businessLicenseImgBase64, String positiveImgBase64,
@@ -59,7 +59,7 @@ public interface EnterpriseAuthenticationService {
      * @param negativeImgBase64
      * @return
      */
-    ResultDto reapply(Integer userId, String realName, String idNumber, String enterpriseName,
+    ResultDTO reapply(Integer userId, String realName, String idNumber, String enterpriseName,
                       String businessLicense, String licensedResidence, String postalAddress,
                       String legalPerson, String officePhone, String enterpriseDescription,
                       String businessLicenseImgBase64, String positiveImgBase64,
@@ -73,7 +73,7 @@ public interface EnterpriseAuthenticationService {
      * @param size
      * @return
      */
-    ResultDto getAllAuthentication(Integer page, Integer size);
+    ResultDTO getAllAuthentication(Integer page, Integer size);
 
     /**
      * 获取所有的审核中的企业用户认证信息
@@ -82,7 +82,7 @@ public interface EnterpriseAuthenticationService {
      * @param size
      * @return
      */
-    ResultDto getAllUnauditedAuthentication(Integer page, Integer size);
+    ResultDTO getAllUnauditedAuthentication(Integer page, Integer size);
 
     /**
      * 获取所有的通过的企业用户认证信息
@@ -91,7 +91,7 @@ public interface EnterpriseAuthenticationService {
      * @param size
      * @return
      */
-    ResultDto getAllPassAuthentication(Integer page, Integer size);
+    ResultDTO getAllPassAuthentication(Integer page, Integer size);
 
     /**
      * 获取所有的没有通过企业用户信息
@@ -100,5 +100,5 @@ public interface EnterpriseAuthenticationService {
      * @param size
      * @return
      */
-    ResultDto getAllFailPassAuthentication(Integer page, Integer size);
+    ResultDTO getAllFailPassAuthentication(Integer page, Integer size);
 }

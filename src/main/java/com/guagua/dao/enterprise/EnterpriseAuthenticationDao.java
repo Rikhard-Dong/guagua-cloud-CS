@@ -1,7 +1,9 @@
 package com.guagua.dao.enterprise;
 
 import com.guagua.bean.entity.enterprise.EnterpriseAuthentication;
+import org.apache.ibatis.annotations.Param;
 
+import javax.xml.ws.Endpoint;
 import java.util.List;
 
 /**
@@ -35,6 +37,17 @@ public interface EnterpriseAuthenticationDao {
      * @return result
      */
     Integer updateByUserId(EnterpriseAuthentication authentication);
+
+
+    /**
+     * 更新认证信息状态
+     *
+     * @param applyId 认证申请的id
+     * @param status  结果
+     * @return result
+     */
+    Integer updateStatusById(@Param("id") Integer applyId,
+                             @Param("status") int status);
 
 
     /* ************************************************
@@ -80,4 +93,13 @@ public interface EnterpriseAuthenticationDao {
      * @return 结果
      */
     EnterpriseAuthentication findByUserId(Integer userId);
+
+    /**
+     * 根据申请认证的id查找
+     *
+     * @param applyId id
+     * @return result
+     */
+    EnterpriseAuthentication findById(Integer applyId);
+
 }

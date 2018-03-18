@@ -1,6 +1,6 @@
 package com.guagua.web.common;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.service.common.UserService;
 import com.guagua.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class UserProfileController extends BaseController {
      * @return 结果
      */
     @GetMapping("/info/simple")
-    public ResultDto getSimpleUserInfo(HttpServletRequest request) {
+    public ResultDTO getSimpleUserInfo(HttpServletRequest request) {
 
         return userService.getSimpleUserInfo(getUserId(request));
     }
@@ -44,7 +44,7 @@ public class UserProfileController extends BaseController {
      * @return 结果
      */
     @GetMapping("/info")
-    public ResultDto getUserInfo(HttpServletRequest request) {
+    public ResultDTO getUserInfo(HttpServletRequest request) {
         return userService.getUserInfo(getUserId(request));
 
     }
@@ -57,7 +57,7 @@ public class UserProfileController extends BaseController {
      * @return 结果
      */
     @PutMapping("/head")
-    public ResultDto updateHeadImage(HttpServletRequest request, String imgBase64) {
+    public ResultDTO updateHeadImage(HttpServletRequest request, String imgBase64) {
 
         return userService.updateHeadImage(getUserId(request), imgBase64);
     }
@@ -72,7 +72,7 @@ public class UserProfileController extends BaseController {
      * @return 结果
      */
     @PutMapping("/password")
-    public ResultDto updatePassword(
+    public ResultDTO updatePassword(
             HttpServletRequest request,
             String oldPassword,
             String password,
@@ -92,7 +92,7 @@ public class UserProfileController extends BaseController {
      * @return 结果
      */
     @PutMapping("/username")
-    public ResultDto updateUsername(HttpServletRequest request, String username) {
+    public ResultDTO updateUsername(HttpServletRequest request, String username) {
 
         return userService.updateUsername(getUserId(request), username);
     }
@@ -105,7 +105,7 @@ public class UserProfileController extends BaseController {
      * @return result
      */
     @PutMapping("/sex")
-    public ResultDto updateSex(HttpServletRequest request, Integer sex) {
+    public ResultDTO updateSex(HttpServletRequest request, Integer sex) {
 
         return userService.updateSex(getUserId(request), sex);
     }
@@ -118,7 +118,7 @@ public class UserProfileController extends BaseController {
      * @return result
      */
     @PutMapping("/qq")
-    public ResultDto updateQQ(HttpServletRequest request, String qq) {
+    public ResultDTO updateQQ(HttpServletRequest request, String qq) {
 
         return userService.updateQQ(getUserId(request), qq);
     }
@@ -131,7 +131,7 @@ public class UserProfileController extends BaseController {
      * @return result
      */
     @PutMapping("/wechat")
-    public ResultDto updateWechat(HttpServletRequest request, String wechat) {
+    public ResultDTO updateWechat(HttpServletRequest request, String wechat) {
 
         return userService.updateWechat(getUserId(request), wechat);
     }
@@ -144,7 +144,7 @@ public class UserProfileController extends BaseController {
      * @return result
      */
     @PutMapping("/description")
-    public ResultDto updateDescription(HttpServletRequest request, String description) {
+    public ResultDTO updateDescription(HttpServletRequest request, String description) {
 
         return userService.updateDescription(getUserId(request), description);
     }
@@ -157,13 +157,13 @@ public class UserProfileController extends BaseController {
      * @return result
      */
     @PutMapping("/educational")
-    public ResultDto updateEducational(HttpServletRequest request, String educational) {
+    public ResultDTO updateEducational(HttpServletRequest request, String educational) {
 
         return userService.updateEducational(getUserId(request), educational);
     }
 
     @PutMapping("/address")
-    public ResultDto updateAddress(HttpServletRequest request, String address) {
+    public ResultDTO updateAddress(HttpServletRequest request, String address) {
         return userService.updateAddress(getUserId(request), address);
     }
 

@@ -8,6 +8,7 @@ import com.guagua.dao.common.UserDao;
 import com.guagua.dao.common.UserRoleDao;
 import com.guagua.utils.RegExpUtils;
 import com.guagua.utils.SpringContextUtils;
+import com.guagua.utils.UrlUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +73,7 @@ public class PermissionUtils {
                     continue;
                 }
                 // TODO 需要考虑到资源问题, 比如删除用户的url为delete:/admin/user/delete/*, *号代表可以匹配的
-                if (RegExpUtils.isPermissionLegal(permission.getUrl(), permissionUrl)) {
+                if (UrlUtils.match(permission.getUrl(), permissionUrl, 0, 0)) {
                     return true;
                 }
             }

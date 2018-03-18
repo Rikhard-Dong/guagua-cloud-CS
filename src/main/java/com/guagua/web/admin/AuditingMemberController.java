@@ -1,13 +1,13 @@
 package com.guagua.web.admin;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
+import com.guagua.service.admin.HandleMemberAuthenticationService;
 import com.guagua.service.member.MemberAuthenticationService;
 import com.guagua.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author ride
@@ -22,9 +22,12 @@ public class AuditingMemberController extends BaseController {
 
     private final MemberAuthenticationService authenticationService;
 
+    private final HandleMemberAuthenticationService handleService;
+
     @Autowired
-    public AuditingMemberController(MemberAuthenticationService authenticationService) {
+    public AuditingMemberController(MemberAuthenticationService authenticationService, HandleMemberAuthenticationService handleService) {
         this.authenticationService = authenticationService;
+        this.handleService = handleService;
     }
 
     /**
@@ -35,7 +38,7 @@ public class AuditingMemberController extends BaseController {
      * @return result
      */
     @GetMapping("/authentication/all")
-    public ResultDto getAllAuthentication(@RequestParam(value = "page", defaultValue = "1") Integer page,
+    public ResultDTO getAllAuthentication(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                           @RequestParam(value = "size", defaultValue = "10") Integer size) {
 
         return authenticationService.getAllAuthentication(page, size);
@@ -49,7 +52,7 @@ public class AuditingMemberController extends BaseController {
      * @return
      */
     @GetMapping("/authentication/unaudited")
-    public ResultDto getAllUnauditedAuthentication(@RequestParam(value = "page", defaultValue = "1") Integer page,
+    public ResultDTO getAllUnauditedAuthentication(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                                    @RequestParam(value = "size", defaultValue = "10") Integer size) {
         return authenticationService.getAllUnauditedAuthentication(page, size);
     }
@@ -62,7 +65,7 @@ public class AuditingMemberController extends BaseController {
      * @return
      */
     @GetMapping("/authentication/pass")
-    public ResultDto getAllPassAuthentication(@RequestParam(value = "page", defaultValue = "1") Integer page,
+    public ResultDTO getAllPassAuthentication(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                               @RequestParam(value = "size", defaultValue = "10") Integer size) {
 
         return authenticationService.getAllPassAuthentication(page, size);
@@ -76,9 +79,26 @@ public class AuditingMemberController extends BaseController {
      * @return
      */
     @GetMapping("/authentication/fail_pass")
-    public ResultDto getAllFailPassAuthentication(@RequestParam(value = "page", defaultValue = "1") Integer page,
+    public ResultDTO getAllFailPassAuthentication(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                                   @RequestParam(value = "size", defaultValue = "10") Integer size) {
 
         return authenticationService.getAllFailPassAuthentication(page, size);
+    }
+
+    /**
+     * 进行审核认证, 返回审核结果
+     *
+     * @param applyId 对应会员用户申请的认证
+     * @param result  审核记过, true审核通过, false 审核失败
+     * @param comment 批注
+     * @return result
+     */
+    @PostMapping("/verify/{id}")
+    public ResultDTO verifyAuthenticationInfo(@PathVariable("id") Integer applyId,
+                                              @RequestParam("result") boolean result,
+                                              @RequestParam("comment") String comment,
+                                              HttpServletRequest request) {
+
+        return handleService.handleAuthentication(getUserId(request), applyId, result, comment);
     }
 }

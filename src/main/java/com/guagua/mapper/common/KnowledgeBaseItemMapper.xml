@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.common.KnowledgeBaseItemDao">
+
+    <insert id="insertOne">
+        INSERT into t_knowledge_base_item
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="item.knowledgeBaseId != null">knowledge_base_id,</if>
+            <if test="item.question != null">question,</if>
+            <if test="item.answer != null">answer,</if>
+            <if test="item.similarQuestion1">similar_question1,</if>
+            <if test="item.similarQuestion2">similar_question2,</if>
+            <if test="item.similarQuestion3">similar_question3,</if>
+            <if test="item.similarQuestion4">similar_question4,</if>
+            <if test="item.similarQuestion5">similar_question5,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="item.knowledgeBaseId != null">#{item.knowledgeBaseId},</if>
+            <if test="item.question != null">#{item.question},</if>
+            <if test="item.answer != null">#{item.answer},</if>
+            <if test="item.similarQuestion1">#{item.similarQuestion1},</if>
+            <if test="item.similarQuestion2">#{item.similarQuestion2},</if>
+            <if test="item.similarQuestion3">#{item.similarQuestion3},</if>
+            <if test="item.similarQuestion4">#{item.similarQuestion4},</if>
+            <if test="item.similarQuestion5">#{item.similarQuestion5},</if>
+        </trim>
+    </insert>
+
+    <update id="updateOne">
+        update t_knowledge_base_item SET
+        <trim suffixOverrides=",">
+            <if test="item.knowledgeBaseId != null">knowledge_base_id = #{item.knowledgeBaseId},</if>
+            <if test="item.question != null">question = #{item.question},</if>
+            <if test="item.answer != null">answer = #{answer},</if>
+            <if test="item.similarQuestion1">similar_question1 = #{item.similarQuestion1},</if>
+            <if test="item.similarQuestion2">similar_question2 = #{item.similarQuestion2},</if>
+            <if test="item.similarQuestion3">similar_question3 = #{item.similarQuestion3},</if>
+            <if test="item.similarQuestion4">similar_question4 = #{item.similarQuestion4},</if>
+            <if test="item.similarQuestion5">similar_question5 = #{item.similarQuestion5},</if>
+        </trim>
+        where id = #{item.id}
+    </update>
+
+    <delete id="deleteOne">
+        DELETE FROM t_knowledge_base_item
+        WHERE id = #{id}
+    </delete>
+
+    <select id="findByKnowledgeBase" resultType="com.guagua.bean.entity.common.KnowledgeBaseItem">
+        SELECT *
+        FROM t_knowledge_base_item
+        WHERE knowledge_base_id = #{knowledgeBaseId}
+    </select>
+
+    <select id="findByItemId" resultType="com.guagua.bean.entity.common.KnowledgeBaseItem">
+        SELECT *
+        FROM t_knowledge_base_item
+        WHERE id = #{id}
+    </select>
+</mapper>

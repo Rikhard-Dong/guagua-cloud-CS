@@ -1,6 +1,6 @@
 package com.guagua.exception.resolver;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.enums.DataDictionary;
 import com.guagua.exception.common.CustomException;
 import com.guagua.utils.JacksonUtils;
@@ -48,7 +48,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
                 customException = new CustomException(DataDictionary.UNKNOWN_ERROR);
             }
 
-            ResultDto resultDto = new ResultDto(customException.getMsg());
+            ResultDTO resultDto = new ResultDTO(customException.getMsg());
 
             out.print(JacksonUtils.toJSon(resultDto));
             out.flush();

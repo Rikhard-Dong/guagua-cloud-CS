@@ -29,6 +29,12 @@ public interface HandleMemberAuthenticationDao {
      * update
      *************************************************/
 
+    /**
+     * 更新一条处理结果
+     *
+     * @param authentication
+     * @return
+     */
     Integer updateOne(HandleMemberAuthentication authentication);
 
     /* ************************************************

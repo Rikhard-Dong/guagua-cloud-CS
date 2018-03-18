@@ -1,6 +1,6 @@
 package com.guagua.web.member;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.service.member.MemberAuthenticationService;
 import com.guagua.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class MemberAuthenticationController extends BaseController {
      * @return 请求结果
      */
     @GetMapping("/info")
-    public ResultDto getInfo(HttpServletRequest request) {
+    public ResultDTO getInfo(HttpServletRequest request) {
         return authenticationService.getInfo(getUserId(request));
     }
 
@@ -49,7 +49,7 @@ public class MemberAuthenticationController extends BaseController {
      * @return 结果
      */
     @PostMapping("/apply")
-    public ResultDto apply(String realName, String idNumber,
+    public ResultDTO apply(String realName, String idNumber,
                            String positiveBase64, String negativeBase64,
                            HttpServletRequest request) {
         return authenticationService.apply(getUserId(request),
@@ -67,7 +67,7 @@ public class MemberAuthenticationController extends BaseController {
      * @return 结果
      */
     @PutMapping("/reapply")
-    public ResultDto reapply(String realName, String idNumber,
+    public ResultDTO reapply(String realName, String idNumber,
                              String positiveBase64, String negativeBase64,
                              HttpServletRequest request) {
 

@@ -102,6 +102,16 @@
         <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
 
+    <filter-mapping>
+        <filter-name>permissionFilter</filter-name>
+        <url-pattern>/message/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>permissionFilter</filter-name>
+        <url-pattern>/knowledge_base/*</url-pattern>
+    </filter-mapping>
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>

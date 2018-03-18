@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.TestDao">
+
+    <insert id="insertTest" useGeneratedKeys="true" keyProperty="id" parameterType="com.guagua.bean.entity.TestEntiry">
+        INSERT INTO t_test (content) VALUES (#{content})
+    </insert>
+</mapper>

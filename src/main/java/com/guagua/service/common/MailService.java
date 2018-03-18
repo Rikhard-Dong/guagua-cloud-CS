@@ -1,6 +1,6 @@
 package com.guagua.service.common;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 
 /**
  * @author ride
@@ -17,7 +17,7 @@ public interface MailService {
      * @param email  用户邮箱
      * @return 结果
      */
-    ResultDto sendEmailCode(Integer userId, String email);
+    ResultDTO sendEmailCode(Integer userId, String email);
 
     /**
      * 绑定/重新绑定email
@@ -27,5 +27,5 @@ public interface MailService {
      * @param code   验证码
      * @return result
      */
-    ResultDto updateMail(Integer userId, String email, String code);
+    ResultDTO updateMail(Integer userId, String email, String code);
 }

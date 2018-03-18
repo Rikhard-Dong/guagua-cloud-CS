@@ -8,6 +8,10 @@ import org.apache.ibatis.annotations.Param;
  * @date 18-3-14 下午3:28
  */
 public interface MenuDao {
+    /* ************************************************
+     * insert
+     *************************************************/
+
 
     /**
      * 插入一个菜单

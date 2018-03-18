@@ -1,6 +1,7 @@
 package com.guagua.dao.member;
 
 import com.guagua.bean.entity.member.MemberAuthentication;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,7 +29,23 @@ public interface MemberAuthenticationDao {
      * update
      *************************************************/
 
+    /**
+     * 更新认证内容
+     *
+     * @param authentication 认证内容
+     * @return result
+     */
     Integer updateById(MemberAuthentication authentication);
+
+    /**
+     * 更新个人认证的状态
+     *
+     * @param applyId id
+     * @param status  认证状态
+     * @return result
+     */
+    Integer updateStatusById(@Param("id") Integer applyId,
+                             @Param("status") Integer status);
 
     /* ************************************************
      * delete
@@ -73,4 +90,14 @@ public interface MemberAuthenticationDao {
      * @return 结果
      */
     MemberAuthentication findByUserId(Integer userId);
+
+    /**
+     * 根据id查询审核记录
+     *
+     * @param applyId id
+     * @return result
+     */
+    MemberAuthentication findById(Integer applyId);
+
+
 }

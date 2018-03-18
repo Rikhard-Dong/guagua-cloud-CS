@@ -1,6 +1,6 @@
 package com.guagua.web.common;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.service.common.MailService;
 import com.guagua.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +33,14 @@ public class MailController extends BaseController {
      * @return result
      */
     @PostMapping("/code")
-    public ResultDto sendEmailCode(HttpServletRequest request, String email) {
+    public ResultDTO sendEmailCode(HttpServletRequest request, String email) {
 
         return mailService.sendEmailCode(getUserId(request), email);
     }
 
 
     @PutMapping("/bind")
-    public ResultDto bindEmail(HttpServletRequest request, String email, String code) {
+    public ResultDTO bindEmail(HttpServletRequest request, String email, String code) {
         return mailService.updateMail(getUserId(request), email, code);
     }
 

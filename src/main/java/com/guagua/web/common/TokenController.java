@@ -1,11 +1,10 @@
 package com.guagua.web.common;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.service.common.TokenService;
 import com.guagua.web.BaseController;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +33,7 @@ public class TokenController extends BaseController {
      * @return 结果
      */
     @PostMapping("/refresh")
-    public ResultDto refreshJWT(HttpServletRequest request) {
+    public ResultDTO refreshJWT(HttpServletRequest request) {
         Integer userId = (Integer) request.getSession().getAttribute("userId");
 
         logger.info("#####请求user id ===> {} ####", userId);

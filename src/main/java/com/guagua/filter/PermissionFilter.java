@@ -1,9 +1,8 @@
 package com.guagua.filter;
 
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.enums.DataDictionary;
-import com.guagua.exception.common.CustomException;
 import com.guagua.filter.utils.PermissionUtils;
 import com.guagua.utils.JWTUtils;
 import com.guagua.utils.JacksonUtils;
@@ -11,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -40,7 +38,7 @@ public class PermissionFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader("Content-type", "text/html;charset=UTF-8");
 
-        ResultDto resultDto = new ResultDto();
+        ResultDTO resultDto = new ResultDTO();
 
         // 获取前端提交的令牌
         String jwt = request.getHeader("authorization");

@@ -1,6 +1,6 @@
 package com.guagua.service.common.impl;
 
-import com.guagua.bean.dto.ResultDto;
+import com.guagua.bean.dto.ResultDTO;
 import com.guagua.bean.dto.common.SimpleUserDTO;
 import com.guagua.bean.dto.common.UserDTO;
 import com.guagua.bean.entity.common.PhoneValidateCode;
@@ -53,15 +53,15 @@ public class UserServiceImpl extends BaseService implements UserService {
 
 
     // 判断手机号是否存在
-    public ResultDto isPhoneExists(String phone) {
+    public ResultDTO isPhoneExists(String phone) {
         User user = userDao.findByPhone(phone);
-        return user == null ? new ResultDto(DataDictionary.LEGAL_PHONE) :
-                new ResultDto(DataDictionary.ALREADY_REGISTER_PHONE);
+        return user == null ? new ResultDTO(DataDictionary.LEGAL_PHONE) :
+                new ResultDTO(DataDictionary.ALREADY_REGISTER_PHONE);
     }
 
     // 发送验证码短信
     @Transactional
-    public ResultDto sendSMSCode(String phone) throws CustomException {
+    public ResultDTO sendSMSCode(String phone) throws CustomException {
         boolean flag = !RegExpUtils.isPhoneLegal(phone);
         if (flag) {
             // 输入的手机号不合法
@@ -88,12 +88,12 @@ public class UserServiceImpl extends BaseService implements UserService {
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
 
-        return new ResultDto(DataDictionary.ALREADY_SEND_CODE);
+        return new ResultDTO(DataDictionary.ALREADY_SEND_CODE);
     }
 
     // 用户注册
     @Transactional
-    public ResultDto register(User user, String code) throws CustomException {
+    public ResultDTO register(User user, String code) throws CustomException {
         boolean flag = !RegExpUtils.isPhoneLegal(user.getPhone());
         if (flag) {
             // 输入的手机号不合法
@@ -157,17 +157,17 @@ public class UserServiceImpl extends BaseService implements UserService {
             }
         }
 
-        return new ResultDto(DataDictionary.REGISTER_SUCCESS);
+        return new ResultDTO(DataDictionary.REGISTER_SUCCESS);
     }
 
     // 用户登录功能模块
-    public ResultDto login(String account, String password, String loginIp) {
+    public ResultDTO login(String account, String password, String loginIp) {
 
         // TODO 目前只允许用户用手机号登录
         User user = userDao.findByPhone(account);
         if (user == null) {
             logger.info("用户未注册");
-            return new ResultDto(DataDictionary.ACCOUNT_OR_PASSWORD_ERROR);
+            return new ResultDTO(DataDictionary.ACCOUNT_OR_PASSWORD_ERROR);
         }
 
         String encryption = CryptographyUtils.md5(password, user.getSalt());
@@ -183,31 +183,31 @@ public class UserServiceImpl extends BaseService implements UserService {
             UserLoginLog log = new UserLoginLog(user.getId(), loginIp);
             loginLogDao.insertUserLoginLog(log);
 
-            return new ResultDto(DataDictionary.LOGIN_SUCCESS)
+            return new ResultDTO(DataDictionary.LOGIN_SUCCESS)
                     .addData("token", jwt);
         } else {
             logger.info("密码错误");
-            return new ResultDto(DataDictionary.ACCOUNT_OR_PASSWORD_ERROR);
+            return new ResultDTO(DataDictionary.ACCOUNT_OR_PASSWORD_ERROR);
         }
 
     }
 
     // 重置密码
-    public ResultDto resetPassword(String phone, String code, String password, String repassword) {
+    public ResultDTO resetPassword(String phone, String code, String password, String repassword) {
         User user = userDao.findByPhone(phone);
         if (user == null) {
             // 手机号未注册, 不能重置密码
-            return new ResultDto(DataDictionary.UNREGISTER_PHONE);
+            return new ResultDTO(DataDictionary.UNREGISTER_PHONE);
         }
 
         if (!StringUtils.equals(password, repassword)) {
             // 两次密码不一致
-            return new ResultDto(DataDictionary.TOW_PASSWORD_NOT_MATCH);
+            return new ResultDTO(DataDictionary.TOW_PASSWORD_NOT_MATCH);
         }
 
         PhoneValidateCode var1 = codeDao.findLatestPhoneValidateCodeByPhone(phone);
         if (!StringUtils.equals(var1.getCode(), code)) {
-            return new ResultDto(DataDictionary.VALIDATE_CODE_NOT_MATCH);
+            return new ResultDTO(DataDictionary.VALIDATE_CODE_NOT_MATCH);
         }
 
         // 加密密码
@@ -215,14 +215,14 @@ public class UserServiceImpl extends BaseService implements UserService {
         Integer var2 = userDao.updatePassword(phone, encryptionPassword);
 
         if (var2 == 0) {
-            return new ResultDto(DataDictionary.SQL_OPERATION_EXCEPTION);
+            return new ResultDTO(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
 
-        return new ResultDto(DataDictionary.UPDATE_PASSWORD_SUCCESS);
+        return new ResultDTO(DataDictionary.UPDATE_PASSWORD_SUCCESS);
     }
 
     // 获取用户简单信息
-    public ResultDto getSimpleUserInfo(Integer userId) {
+    public ResultDTO getSimpleUserInfo(Integer userId) {
         User user = userDao.findById(userId);
         if (user == null) {
             // 抛出用户不存在异常
@@ -231,20 +231,20 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         SimpleUserDTO var1 = new SimpleUserDTO(user);
 
-        return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("info", var1);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("info", var1);
     }
 
     // 获取用户基本信息
-    public ResultDto getUserInfo(Integer userId) {
+    public ResultDTO getUserInfo(Integer userId) {
         User user = isUserExists(userId);
 
         UserDTO var1 = new UserDTO(user);
-        return new ResultDto(DataDictionary.QUERY_SUCCESS).addData("info", var1);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("info", var1);
     }
 
     // 主动更新用户密码
     @Transactional
-    public ResultDto updatePassword(Integer userId, String oldPassword, String password, String repassword) {
+    public ResultDTO updatePassword(Integer userId, String oldPassword, String password, String repassword) {
         logger.info(">>>>>>>>>>>>>> 更新密码 <<<<<<<<<<<<<<<<<");
         User user = isUserExists(userId);
 
@@ -252,12 +252,12 @@ public class UserServiceImpl extends BaseService implements UserService {
         String var1 = CryptographyUtils.md5(oldPassword, user.getSalt());
         if (!StringUtils.equals(var1, user.getPassword())) {
             // 旧密码不匹配
-            return new ResultDto(DataDictionary.OLD_PASSWORD_NOT_MATCH);
+            return new ResultDTO(DataDictionary.OLD_PASSWORD_NOT_MATCH);
         }
 
         if (!StringUtils.equals(password, repassword)) {
             // 两次密码不匹配
-            return new ResultDto(DataDictionary.TOW_PASSWORD_NOT_MATCH);
+            return new ResultDTO(DataDictionary.TOW_PASSWORD_NOT_MATCH);
         }
 
         // 加密新密码
@@ -267,18 +267,18 @@ public class UserServiceImpl extends BaseService implements UserService {
         Integer var3 = userDao.updatePassword(user.getPhone(), var2);
 
         if (var3 == 0) {
-            return new ResultDto(DataDictionary.SQL_OPERATION_EXCEPTION);
+            return new ResultDTO(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
 
-        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+        return new ResultDTO(DataDictionary.UPDATE_SUCCESS);
     }
 
     // 更新用户头像
     @Transactional
-    public ResultDto updateHeadImage(Integer userId, String imgBase64) {
+    public ResultDTO updateHeadImage(Integer userId, String imgBase64) {
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
 
         // 旧头像
@@ -315,32 +315,32 @@ public class UserServiceImpl extends BaseService implements UserService {
                 QiniuUtils.deleteImg(oldImgUrl);
             } catch (QiniuException e) {
                 logger.info(">>>>>>>>>>>>>>>>>>>删除图片 ===> {} 失败<<<<<<<<<<<<<<<<<<<<<<<<<", oldImgUrl);
-                return new ResultDto(DataDictionary.QINIU_OPERATION_FAIL);
+                return new ResultDTO(DataDictionary.QINIU_OPERATION_FAIL);
             }
         }
 
-        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+        return new ResultDTO(DataDictionary.UPDATE_SUCCESS);
     }
 
     // 更新用户名
-    public ResultDto updateUsername(Integer userId, String username) {
+    public ResultDTO updateUsername(Integer userId, String username) {
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
 
         Integer var1 = userDao.updateUsernameByUserId(userId, username);
         if (var1 == 0) {
-            return new ResultDto(DataDictionary.UPDATE_FAIL);
+            return new ResultDTO(DataDictionary.UPDATE_FAIL);
         }
-        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+        return new ResultDTO(DataDictionary.UPDATE_SUCCESS);
     }
 
     // 更新性别
-    public ResultDto updateSex(Integer userId, Integer sex) {
+    public ResultDTO updateSex(Integer userId, Integer sex) {
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
         // 性别必须是0或1 分别表示女和男
         if (sex != 0 && sex != 1) {
@@ -351,16 +351,16 @@ public class UserServiceImpl extends BaseService implements UserService {
         Integer var1 = userDao.updateSexByUserId(userId, sex);
 
         if (var1 == 0) {
-            return new ResultDto(DataDictionary.UPDATE_FAIL);
+            return new ResultDTO(DataDictionary.UPDATE_FAIL);
         }
-        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+        return new ResultDTO(DataDictionary.UPDATE_SUCCESS);
     }
 
     // 更新qq
-    public ResultDto updateQQ(Integer userId, String qq) {
+    public ResultDTO updateQQ(Integer userId, String qq) {
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
 
         // qq号不合法
@@ -371,16 +371,16 @@ public class UserServiceImpl extends BaseService implements UserService {
         Integer var1 = userDao.updateQQByUserId(userId, qq);
 
         if (var1 == 0) {
-            return new ResultDto(DataDictionary.UPDATE_FAIL);
+            return new ResultDTO(DataDictionary.UPDATE_FAIL);
         }
-        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+        return new ResultDTO(DataDictionary.UPDATE_SUCCESS);
     }
 
     // 更新微信
-    public ResultDto updateWechat(Integer userId, String wechat) {
+    public ResultDTO updateWechat(Integer userId, String wechat) {
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
 
         // 微信号不合法
@@ -391,51 +391,51 @@ public class UserServiceImpl extends BaseService implements UserService {
         Integer var1 = userDao.updateWechatByUserId(userId, wechat);
 
         if (var1 == 0) {
-            return new ResultDto(DataDictionary.UPDATE_FAIL);
+            return new ResultDTO(DataDictionary.UPDATE_FAIL);
         }
-        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+        return new ResultDTO(DataDictionary.UPDATE_SUCCESS);
     }
 
     // 更新描述
-    public ResultDto updateDescription(Integer userId, String description) {
+    public ResultDTO updateDescription(Integer userId, String description) {
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
         Integer var1 = userDao.updateDescriptionByUserId(userId, description);
 
         if (var1 == 0) {
-            return new ResultDto(DataDictionary.UPDATE_FAIL);
+            return new ResultDTO(DataDictionary.UPDATE_FAIL);
         }
-        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+        return new ResultDTO(DataDictionary.UPDATE_SUCCESS);
     }
 
     // 更新教育经历
-    public ResultDto updateEducational(Integer userId, String educational) {
+    public ResultDTO updateEducational(Integer userId, String educational) {
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
 
         Integer var1 = userDao.updateEducationalByUserId(userId, educational);
 
         if (var1 == 0) {
-            return new ResultDto(DataDictionary.UPDATE_FAIL);
+            return new ResultDTO(DataDictionary.UPDATE_FAIL);
         }
-        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+        return new ResultDTO(DataDictionary.UPDATE_SUCCESS);
     }
 
-    public ResultDto updateAddress(Integer userId, String address) {
+    public ResultDTO updateAddress(Integer userId, String address) {
         User user = userDao.findById(userId);
         if (user == null) {
-            return new ResultDto(DataDictionary.USER_NOT_EXISTS);
+            return new ResultDTO(DataDictionary.USER_NOT_EXISTS);
         }
 
         Integer var1 = userDao.updateAddressByUserId(userId, address);
 
         if (var1 == 0) {
-            return new ResultDto(DataDictionary.UPDATE_FAIL);
+            return new ResultDTO(DataDictionary.UPDATE_FAIL);
         }
-        return new ResultDto(DataDictionary.UPDATE_SUCCESS);
+        return new ResultDTO(DataDictionary.UPDATE_SUCCESS);
     }
 }
