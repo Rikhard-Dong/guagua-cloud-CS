@@ -158,6 +158,14 @@ public class KnowledgeBaseServiceImpl extends BaseService implements KnowledgeBa
         return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("info", info);
     }
 
+    // 查询单个知识库描述
+    public ResultDTO queryByKnowledgeBaseId(Integer userId, Integer knowledgeBaseId) {
+        KnowledgeBase base = knowledgeBaseDao.findById(knowledgeBaseId);
+        KnowledgeBaseDTO dto = new KnowledgeBaseDTO(base);
+
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("base", dto);
+    }
+
     /**
      * 将base 转换成dto
      *

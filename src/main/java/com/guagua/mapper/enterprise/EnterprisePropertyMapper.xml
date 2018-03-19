@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.enterprise.EnterprisePropertyDao">
+
+    <insert id="insertOne" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.guagua.bean.entity.enterprise.EnterpriseProperty">
+        INSERT INTO t_enterprise_property (user_id) VALUES (#{userId})
+    </insert>
+    <update id="updateOne">
+        UPDATE t_enterprise_property SET
+        <trim suffixOverrides=",">
+            <if test="property.balance != null">balance = #{property.balance},</if>
+            <if test="property.withdrawCashTotal != null">withdraw_cash_total = #{property.withdrawCashTotal},</if>
+            <if test="property.rechargeTotal != null">recharge_total = #{property.rechargeTotal},</if>
+            <if test="property.payTotal != null">pay_total = #{property.payTotal},</if>
+            last_update_time = current_timestamp()
+        </trim>
+        where id = #{property.id}
+    </update>
+
+    <select id="findByUserId" resultType="com.guagua.bean.entity.enterprise.EnterpriseProperty">
+        SELECT *
+        FROM t_enterprise_property
+        WHERE user_id = #{userId}
+    </select>
+</mapper>

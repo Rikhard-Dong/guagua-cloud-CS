@@ -7,10 +7,12 @@ import com.guagua.bean.entity.common.PhoneValidateCode;
 import com.guagua.bean.entity.common.User;
 import com.guagua.bean.entity.common.UserLoginLog;
 import com.guagua.bean.entity.common.UserRole;
+import com.guagua.bean.entity.member.MemberProperty;
 import com.guagua.dao.common.PhoneValidateCodeDao;
 import com.guagua.dao.common.UserDao;
 import com.guagua.dao.common.UserLoginLogDao;
 import com.guagua.dao.common.UserRoleDao;
+import com.guagua.dao.member.MemberPropertyDao;
 import com.guagua.enums.DataDictionary;
 import com.guagua.enums.RoleConstant;
 import com.guagua.exception.common.CustomException;
@@ -43,12 +45,15 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     private final UserRoleDao userRoleDao;
 
+    private final MemberPropertyDao memberPropertyDao;
+
     @Autowired
-    public UserServiceImpl(PhoneValidateCodeDao codeDao, UserDao userDao, UserLoginLogDao loginLogDao, UserRoleDao userRoleDao) {
+    public UserServiceImpl(PhoneValidateCodeDao codeDao, UserDao userDao, UserLoginLogDao loginLogDao, UserRoleDao userRoleDao, MemberPropertyDao memberPropertyDao) {
         this.codeDao = codeDao;
         this.userDao = userDao;
         this.loginLogDao = loginLogDao;
         this.userRoleDao = userRoleDao;
+        this.memberPropertyDao = memberPropertyDao;
     }
 
 
@@ -148,11 +153,18 @@ public class UserServiceImpl extends BaseService implements UserService {
             if (var8 == 0) {
                 throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
             }
+
+
         } else if (user.getType() == 2) {
             // 绑定会员用户关系
             UserRole var9 = new UserRole(user.getId(), RoleConstant.UNCERTIFIED_MEMBER);
             Integer var10 = userRoleDao.insertUserRole(var9);
             if (var10 == 0) {
+                throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+            }
+            MemberProperty memberProperty = new MemberProperty(user.getId());
+            Integer var11 = memberPropertyDao.insertOne(memberProperty);
+            if (var11 == 0) {
                 throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
             }
         }

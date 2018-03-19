@@ -17,6 +17,10 @@ public enum DataDictionary {
     QUERY_SUCCESS(7, "查询成功"),
     QUERY_FAIL(8, "查询失败"),
 
+    BALANCE_NOT_ENOUGH(10, "余额不足"),
+    WITHDRAW_CASH_SUCCESS(11, "提现成功"),
+    RECHARGE_SUCCESS(12, "重置成功"),
+
     // 登录方面
     LOGIN_SUCCESS(101, "登录成功"),
     ACCOUNT_OR_PASSWORD_ERROR(102, "用户名或者密码不正确"),

@@ -6,15 +6,15 @@
     <insert id="insertOne">
         INSERT INTO t_knowledge_base
         (`name`, description, creator_id) VALUES
-            (#{name}, #{description}, #{creatorId})
+            (#{knowledgeBase.name}, #{knowledgeBase.description}, #{knowledgeBase.creatorId})
     </insert>
 
     <update id="updateOne">
         UPDATE t_knowledge_base
         SET
         <trim suffixOverrides=",">
-            <if test="base.name != null">#{base.name},</if>
-            <if test="base.description != null">#{base.description},</if>
+            <if test="base.name != null">`name` = #{base.name},</if>
+            <if test="base.description != null">`description` = #{base.description},</if>
         </trim>
         where id = #{base.id}
     </update>

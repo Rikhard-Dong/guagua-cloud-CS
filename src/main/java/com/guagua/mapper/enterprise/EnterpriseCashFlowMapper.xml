@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.enterprise.EnterpriseCashFlowDao">
+
+    <insert id="insertOne">
+        INSERT INTO t_enterprise_cash_flow (property_id, `value`, detail, type)
+        VALUES (#{propertyId}, #{value}, #{detail}, #{type})
+    </insert>
+
+    <select id="findByPropertyId" resultType="com.guagua.bean.entity.enterprise.EnterpriseCashFlow">
+        SELECT *
+        FROM t_enterprise_cash_flow
+        WHERE property_id = #{propertyId}
+    </select>
+</mapper>

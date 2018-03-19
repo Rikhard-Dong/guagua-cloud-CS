@@ -75,6 +75,12 @@ public class KnowledgeBaseController extends BaseController {
         return knowledgeBaseService.listWithCreator(getUserId(request), page, size);
     }
 
+    @GetMapping("/query/{knowledgeBaseId}")
+    public ResultDTO queryOne(@PathVariable("knowledgeBaseId") Integer knowledgeBaseId,
+                              HttpServletRequest request) {
+        return knowledgeBaseService.queryByKnowledgeBaseId(getUserId(request), knowledgeBaseId);
+    }
+
     /**
      * 更新知识库
      *

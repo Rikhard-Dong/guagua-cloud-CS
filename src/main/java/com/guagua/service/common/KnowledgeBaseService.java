@@ -99,4 +99,12 @@ public interface KnowledgeBaseService {
      * @return
      */
     ResultDTO listItems(Integer userId, Integer knowledgeBaseId, Integer page, Integer size);
+
+    /**
+     * 查询单挑
+     * @param userId
+     * @param knowledgeBaseId
+     * @return
+     */
+    ResultDTO queryByKnowledgeBaseId(Integer userId, Integer knowledgeBaseId);
 }
