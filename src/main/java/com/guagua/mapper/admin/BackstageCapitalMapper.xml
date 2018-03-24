@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.admin.BackstageCapitalDao">
+
+    <update id="updateOne">
+        UPDATE t_backstage_capital
+        SET total = #{value}, last_update_time = current_timestamp()
+        WHERE id = #{id}
+    </update>
+
+    <select id="findAll" resultType="com.guagua.bean.entity.admin.BackstageCapital">
+        SELECT *
+        FROM t_backstage_capital
+    </select>
+
+    <select id="findById" resultType="com.guagua.bean.entity.admin.BackstageCapital">
+        SELECT *
+        FROM t_backstage_capital
+        WHERE id = #{id}
+    </select>
+</mapper>

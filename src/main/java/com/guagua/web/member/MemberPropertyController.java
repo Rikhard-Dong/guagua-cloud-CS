@@ -1,12 +1,17 @@
 package com.guagua.web.member;
 
 import com.guagua.bean.dto.ResultDTO;
+import com.guagua.enums.DataDictionary;
+import com.guagua.exception.common.CustomException;
 import com.guagua.service.member.MemberPropertyService;
+import com.guagua.utils.DateUtils;
 import com.guagua.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.util.Date;
 
 /**
  * @author ride
@@ -40,16 +45,21 @@ public class MemberPropertyController extends BaseController {
     /**
      * 查询资金流水细则
      *
-     * @param page
-     * @param size
      * @param request
      * @return
      */
-    @GetMapping("/detail/query")
-    public ResultDTO queryDetailCapitalFlow(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                                            @RequestParam(value = "size", defaultValue = "30") Integer size,
+    @PostMapping("/detail/query")
+    public ResultDTO queryDetailCapitalFlow(@RequestParam(value = "startTime") String startTime,
+                                            @RequestParam(value = "endTime") Integer endTime,
                                             HttpServletRequest request) {
-        return propertyService.queryDetailCapitalFlow(getUserId(request), page, size);
+        try {
+            Date startDate = DateUtils.str2Date(startTime + " 0:0:0");
+            Date endDate = DateUtils.str2Date(endTime + " 23:59:59");
+            return propertyService.queryDetailCapitalFlow(getUserId(request), startDate, endDate);
+        } catch (ParseException e) {
+            throw new CustomException(DataDictionary.STRING_CONVERT_DATE_FAIL);
+        }
+
     }
 
     @PutMapping("/withdraw")

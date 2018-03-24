@@ -57,4 +57,29 @@ public interface MessageDao {
      * @return result
      */
     List<Message> findByUserIdLIMIT5(Integer userId);
+
+    /**
+     * 查询已读的记录
+     *
+     * @param userId
+     * @return
+     */
+    List<Message> findByUserIdAndRead(Integer userId);
+
+
+    /**
+     * 查询全部未读记录
+     *
+     * @param userId
+     * @return
+     */
+    List<Message> findByUserIdAndUnread(Integer userId);
+
+    /**
+     * 统计用户未读消息的条数
+     *
+     * @param userId
+     * @return
+     */
+    Integer countUnreadMessageByUserId(Integer userId);
 }

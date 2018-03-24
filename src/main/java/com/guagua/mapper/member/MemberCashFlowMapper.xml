@@ -4,8 +4,8 @@
 <mapper namespace="com.guagua.dao.member.MemberCashFlowDao">
 
     <insert id="insertOne">
-        INSERT INTO t_member_cash_flow (property_id, vale, type, detail)
-        VALUES (#{propertyId}, #{value}, #{type}, #{detail})
+        INSERT INTO t_member_cash_flow (property_id, vale, type, detail, balance)
+        VALUES (#{propertyId}, #{value}, #{type}, #{detail}, #{balance})
     </insert>
 
     <select id="findByPropertyId" resultType="com.guagua.bean.entity.member.MemberCashFlow">
@@ -13,4 +13,11 @@
         FROM t_member_cash_flow
         WHERE #{propertyId};
     </select>
+
+    <select id="findByPropertyIdAndDate" resultType="com.guagua.bean.entity.member.MemberCashFlow">
+        SELECT *
+        FROM t_member_cash_flow
+        WHERE #{propertyId} and between #{taskStartTime} and #{taskEndTime}
+
+     </select>
 </mapper>

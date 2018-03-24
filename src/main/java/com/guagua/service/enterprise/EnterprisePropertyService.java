@@ -2,6 +2,8 @@ package com.guagua.service.enterprise;
 
 import com.guagua.bean.dto.ResultDTO;
 
+import java.util.Date;
+
 /**
  * @author ride
  * @date 18-3-19 下午10:19
@@ -20,11 +22,10 @@ public interface EnterprisePropertyService {
      * 查询资金明细
      *
      * @param userId
-     * @param page
-     * @param size
+
      * @return
      */
-    ResultDTO queryPropertyDetail(Integer userId, Integer page, Integer size);
+    ResultDTO queryPropertyDetail(Integer userId, Date startDate, Date endDate);
 
     /**
      * 提现

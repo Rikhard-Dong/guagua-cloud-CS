@@ -9,6 +9,7 @@ import com.guagua.utils.DateUtils;
  */
 public class EnterpriseAuthenticationDTO {
 
+    private Integer id;                     // 主键id
     private Integer userId;                 // 申请用户id
     private String username;                // 用户姓名
     private String realName;                // 负责人真实姓名
@@ -30,6 +31,7 @@ public class EnterpriseAuthenticationDTO {
     }
 
     public EnterpriseAuthenticationDTO(EnterpriseAuthentication var) {
+        this.id = var.getId();
         this.userId = var.getUserId();
         this.realName = var.getRealName();
         this.idNumber = var.getIdNumber();
@@ -57,6 +59,14 @@ public class EnterpriseAuthenticationDTO {
             default:
                 this.status = "错误状态";
         }
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getUserId() {

@@ -16,7 +16,7 @@ public class User {
     private String headImage;       // 用户头像
     private String email;           // 用户邮箱
     private Integer type;           // 用户类型: 主要有三类: 0. 平台用户 1. 企业用户 2. 客服用户
-    private Integer sex;            // 用户性别
+    private Integer sex;            // 用户性别 0 未知, 1. 女 2 男
     private String qq;              // qq号
     private String wechat;          // 微信号
     private String address;         // 地址

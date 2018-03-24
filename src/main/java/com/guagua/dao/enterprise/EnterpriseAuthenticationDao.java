@@ -102,4 +102,11 @@ public interface EnterpriseAuthenticationDao {
      */
     EnterpriseAuthentication findById(Integer applyId);
 
+    /**
+     * 查询通过的信息
+     *
+     * @param enterpriseId
+     * @return
+     */
+    EnterpriseAuthentication findByEnterpriseIdAndPass(@Param("enterpriseId") Integer enterpriseId);
 }

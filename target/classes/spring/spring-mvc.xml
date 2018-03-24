@@ -28,4 +28,20 @@
 
     <!-- spring 获取context工具类 -->
     <bean id="springContextUtils" class="com.guagua.utils.SpringContextUtils"/>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="stringHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    <!-- String类型解析器，允许直接返回String类型的消息 -->
+    <bean class="org.springframework.http.converter.StringHttpMessageConverter" id="stringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html; charset=utf-8</value>
+            </list>
+        </property>
+    </bean>
 </beans>

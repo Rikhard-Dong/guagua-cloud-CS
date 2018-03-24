@@ -1,30 +1,32 @@
-package com.guagua.bean.entity.enterprise;
+package com.guagua.bean.entity.admin;
 
 import java.util.Date;
 
 /**
  * @author ride
- * @date 18-3-19 下午10:04
+ * @date 18-3-24 上午11:55
+ * <p>
+ * 后台流水情况
  */
-public class EnterpriseCashFlow {
-    private Integer id;
-    private Integer propertyId;
-    private Double value;
-    private String detail;
-    private Integer type;       // 0 收入 1 提现 2 支出 3 充值
-    private Date time;
-    private Double balance;
+public class BackstageCashFlow {
 
-    public EnterpriseCashFlow() {
+    private Integer id;
+    private Integer objectId;   // 发起本次流水的用户id
+    private Double value;
+    private Double total;
+    private String detail;
+    private Integer type;
+    private Date time;
+
+    public BackstageCashFlow() {
     }
 
-    public EnterpriseCashFlow(Integer propertyId, Double value, String detail,
-                              Integer type, Double balance) {
-        this.propertyId = propertyId;
+    public BackstageCashFlow(Integer objectId, Double value, Double total, String detail, Integer type) {
+        this.objectId = objectId;
         this.value = value;
+        this.total = total;
         this.detail = detail;
         this.type = type;
-        this.balance = balance;
     }
 
     public Integer getId() {
@@ -35,20 +37,20 @@ public class EnterpriseCashFlow {
         this.id = id;
     }
 
-    public Integer getPropertyId() {
-        return propertyId;
-    }
-
-    public void setPropertyId(Integer propertyId) {
-        this.propertyId = propertyId;
-    }
-
     public Double getValue() {
         return value;
     }
 
     public void setValue(Double value) {
         this.value = value;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
     public String getDetail() {
@@ -75,24 +77,24 @@ public class EnterpriseCashFlow {
         this.time = time;
     }
 
-    public Double getBalance() {
-        return balance;
+    public Integer getObjectId() {
+        return objectId;
     }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
+    public void setObjectId(Integer objectId) {
+        this.objectId = objectId;
     }
 
     @Override
     public String toString() {
-        return "EnterpriseCashFlow{" +
+        return "BackstageCashFlow{" +
                 "id=" + id +
-                ", propertyId=" + propertyId +
+                ", objectId=" + objectId +
                 ", value=" + value +
+                ", total=" + total +
                 ", detail='" + detail + '\'' +
                 ", type=" + type +
                 ", time=" + time +
-                ", balance=" + balance +
                 '}';
     }
 }

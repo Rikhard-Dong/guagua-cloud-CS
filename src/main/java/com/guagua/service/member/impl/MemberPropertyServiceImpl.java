@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sun.print.CUPSPrinter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,7 +65,7 @@ public class MemberPropertyServiceImpl extends BaseService implements MemberProp
     }
 
     // 查询资金流水细则
-    public ResultDTO queryDetailCapitalFlow(Integer userId, Integer page, Integer size) {
+    public ResultDTO queryDetailCapitalFlow(Integer userId, Date startTime, Date endTime) {
         User user = userDao.findById(userId);
         if (user == null) {
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
@@ -75,12 +76,10 @@ public class MemberPropertyServiceImpl extends BaseService implements MemberProp
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
 
-        PageHelper.startPage(page, size);
-        List<MemberCashFlow> flows = flowDao.findByPropertyId(property.getId());
+        List<MemberCashFlow> flows = flowDao.findByPropertyIdAndDate(property.getId(), startTime, endTime);
         List<MemberCashFlowDTO> dtos = convert2MemberCashFlowDTO(flows);
-        PageInfo<MemberCashFlowDTO> info = new PageInfo<MemberCashFlowDTO>(dtos);
 
-        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("info", info);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("flows", dtos);
     }
 
     // 提现
@@ -113,7 +112,7 @@ public class MemberPropertyServiceImpl extends BaseService implements MemberProp
 
         // 记录收支明细
         value = 0 - value;
-        MemberCashFlow flow = new MemberCashFlow(property.getId(), value, 1, "提现操作");
+        MemberCashFlow flow = new MemberCashFlow(property.getId(), value, 1, "提现操作", property.getBalance());
         Integer var3 = flowDao.insertOne(flow);
         if (var3 == 0) {
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);

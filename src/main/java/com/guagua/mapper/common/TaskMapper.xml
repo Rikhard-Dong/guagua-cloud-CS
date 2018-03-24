@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.common.TaskDao">
+
+<!--    <insert id="insertOne" useGeneratedKeys="true" keyProperty="id" parameterType="com.guagua.bean.entity.common.Task">
+        INSERT into t_task
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="task.enterpriseId != null">enterprise_id,</if>
+            <if test="task.title != null">title,</if>
+            <if test="task.description != null">description,</if>
+            <if test="task.baseSalary != null">base_salary,</if>
+            <if test="task.bonus != null">bonus,</if>
+            <if test="task.totalSalary != null">total_salary,</if>
+            <if test="task.taskStartTime != null">task_start_time,</if>
+            <if test="task.taskEndTime != null">task_end_time,</if>
+            <if test="task.number != null">`number`,</if>
+            <if test="task.workingTimeStart1 != null">working_time_start1,</if>
+            <if test="task.workingTimeEnd1 != null">working_time_end1,</if>
+            <if test="task.workingTimeStart2 != null">working_time_start2,</if>
+            <if test="task.workingTimeEnd2 != null">working_time_end2,</if>
+            <if test="task.workingTimeStart3 != null">working_time_start3,</if>
+            <if test="task.workingTimeEnd3 != null">working_time_end3,</if>
+            <if test="task.workingTimeStart4 != null">working_time_start4,</if>
+            <if test="task.workingTimeEnd4 != null">working_time_end4,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="task.enterpriseId != null">#{task.enterpriseId},</if>
+            <if test="task.title != null">#{task.title},</if>
+            <if test="task.description != null">#{task.description},</if>
+            <if test="task.baseSalary != null">#{task.baseSalary},</if>
+            <if test="task.bonus != null">#{task.bonus},</if>
+            <if test="task.totalSalary != null">#{task.totalSalary},</if>
+            <if test="task.taskStartTime != null">#{task.taskStartTime},</if>
+            <if test="task.taskEndTime != null">#{task.taskEndTime},</if>
+            <if test="task.number != null">#{task.number},</if>
+            <if test="task.workingTimeStart1 != null">#{task.workingTimeStart1},</if>
+            <if test="task.workingTimeEnd1 != null">#{task.workingTimeEnd1},</if>
+            <if test="task.workingTimeStart2 != null">#{task.workingTimeStart2},</if>
+            <if test="task.workingTimeEnd2 != null">#{task.workingTimeEnd2},</if>
+            <if test="task.workingTimeStart3 != null">#{task.workingTimeStart3},</if>
+            <if test="task.workingTimeEnd3 != null">#{task.workingTimeEnd3},</if>
+            <if test="task.workingTimeStart4 != null">#{task.workingTimeStart4},</if>
+            <if test="task.workingTimeEnd4 != null">#{task.workingTimeEnd4},</if>
+        </trim>
+    </insert>-->
+    <insert id="insertOne" useGeneratedKeys="true" keyProperty="id" parameterType="com.guagua.bean.entity.common.Task">
+        INSERT into t_task
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="enterpriseId != null">enterprise_id,</if>
+            <if test="title != null">title,</if>
+            <if test="description != null">description,</if>
+            <if test="baseSalary != null">base_salary,</if>
+            <if test="bonus != null">bonus,</if>
+            <if test="totalSalary != null">total_salary,</if>
+            <if test="taskStartTime != null">task_start_time,</if>
+            <if test="taskEndTime != null">task_end_time,</if>
+            <if test="number != null">`number`,</if>
+            <if test="workingTimeStart1 != null">working_time_start1,</if>
+            <if test="workingTimeEnd1 != null">working_time_end1,</if>
+            <if test="workingTimeStart2 != null">working_time_start2,</if>
+            <if test="workingTimeEnd2 != null">working_time_end2,</if>
+            <if test="workingTimeStart3 != null">working_time_start3,</if>
+            <if test="workingTimeEnd3 != null">working_time_end3,</if>
+            <if test="workingTimeStart4 != null">working_time_start4,</if>
+            <if test="workingTimeEnd4 != null">working_time_end4,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="enterpriseId != null">#{enterpriseId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="description != null">#{description},</if>
+            <if test="baseSalary != null">#{baseSalary},</if>
+            <if test="bonus != null">#{bonus},</if>
+            <if test="totalSalary != null">#{totalSalary},</if>
+            <if test="taskStartTime != null">#{taskStartTime},</if>
+            <if test="taskEndTime != null">#{taskEndTime},</if>
+            <if test="number != null">#{number},</if>
+            <if test="workingTimeStart1 != null">#{workingTimeStart1},</if>
+            <if test="workingTimeEnd1 != null">#{workingTimeEnd1},</if>
+            <if test="workingTimeStart2 != null">#{workingTimeStart2},</if>
+            <if test="workingTimeEnd2 != null">#{workingTimeEnd2},</if>
+            <if test="workingTimeStart3 != null">#{workingTimeStart3},</if>
+            <if test="workingTimeEnd3 != null">#{workingTimeEnd3},</if>
+            <if test="workingTimeStart4 != null">#{workingTimeStart4},</if>
+            <if test="workingTimeEnd4 != null">#{workingTimeEnd4},</if>
+        </trim>
+    </insert>
+
+    <update id="updateStatus">
+        UPDATE t_task
+        SET status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <select id="findByEnterpriseId" resultType="com.guagua.bean.entity.common.Task">
+        SELECT *
+        FROM t_task
+        WHERE enterprise_id = #{enterpriseId}
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="findByEnterpriseIdAndStatus" resultType="com.guagua.bean.entity.common.Task">
+        SELECT *
+        FROM t_task
+        WHERE enterprise_id = #{enterpriseId} AND `status` = #{status}
+    </select>
+
+    <select id="findByTaskId" resultType="com.guagua.bean.entity.common.Task">
+        SELECT *
+        FROM t_task
+        WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultType="com.guagua.bean.entity.common.Task">
+        SELECT *
+        FROM t_task
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="findByStatus" resultType="com.guagua.bean.entity.common.Task">
+        SELECT *
+        FROM t_task
+        WHERE status = #{status}
+        ORDER BY create_time DESC
+    </select>
+</mapper>

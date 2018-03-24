@@ -15,6 +15,8 @@ public class EnterpriseCashFlowDTO {
     private String type;           // 类型: 对于会员用户来说只有0 收入, 1 提现
     private String time;              // 明细时间
     private String detail;      // 明细
+    private Double balance;     // 操作后余额
+
 
     public EnterpriseCashFlowDTO() {
     }
@@ -34,12 +36,17 @@ public class EnterpriseCashFlowDTO {
                 this.type = "支出";
                 break;
             case 3:
-                this.type = "重置";
+                this.type = "充值";
+                break;
+            case 4:
+                this.type = "资金退回";
                 break;
             default:
                 this.type = "异常";
         }
         this.time = DateUtils.date2StrCN(flow.getTime());
+        this.balance = flow.getBalance();
+        this.detail = flow.getDetail();
     }
 
     public Integer getId() {
@@ -90,15 +97,25 @@ public class EnterpriseCashFlowDTO {
         this.detail = detail;
     }
 
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
-        return "MemberCashFlowDTO{" +
+        return "EnterpriseCashFlowDTO{" +
                 "id=" + id +
                 ", propertyId=" + propertyId +
                 ", value=" + value +
                 ", type='" + type + '\'' +
                 ", time='" + time + '\'' +
                 ", detail='" + detail + '\'' +
+                ", balance='" + balance + '\'' +
                 '}';
     }
 }

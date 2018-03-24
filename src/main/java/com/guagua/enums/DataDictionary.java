@@ -19,7 +19,7 @@ public enum DataDictionary {
 
     BALANCE_NOT_ENOUGH(10, "余额不足"),
     WITHDRAW_CASH_SUCCESS(11, "提现成功"),
-    RECHARGE_SUCCESS(12, "重置成功"),
+    RECHARGE_SUCCESS(12, "充值成功"),
 
     // 登录方面
     LOGIN_SUCCESS(101, "登录成功"),
@@ -82,7 +82,12 @@ public enum DataDictionary {
     SQL_OPERATION_EXCEPTION(-2, "数据库操作异常"),
     GET_AUTO_INC_ID_FAIL(-3, "数据库错误, 获取自增Id失败"),
     AUTHORIZATION_FAIL(-4, "认证失败, 请重新登录"),
-    NO_PERMISSION(-5, "权限不足"),;
+    NO_PERMISSION(-5, "权限不足"),
+    STRING_CONVERT_DATE_FAIL(-6, "字符串转换日期失败"),
+    REQUIRED_PARAMETER_IS_NULL(-7, "必填参数为空"),
+    DATE_ERROR(-8, "日期参数错误"),
+    USER_NOT_MATCH(-9, "用户不匹配"),
+    TASK_CAN_NOT_CANCEL(-10, "任务不能取消");
 
     private Integer code;       // 状态码
     private String msg;         // 描述信息

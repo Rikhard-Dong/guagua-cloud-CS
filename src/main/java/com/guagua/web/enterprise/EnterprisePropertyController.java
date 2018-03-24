@@ -1,13 +1,18 @@
 package com.guagua.web.enterprise;
 
 import com.guagua.bean.dto.ResultDTO;
+import com.guagua.enums.DataDictionary;
+import com.guagua.exception.common.CustomException;
 import com.guagua.service.enterprise.EnterprisePropertyService;
+import com.guagua.utils.DateUtils;
 import com.guagua.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.transform.Result;
+import java.text.ParseException;
+import java.util.Date;
 
 /**
  * @author ride
@@ -38,16 +43,21 @@ public class EnterprisePropertyController extends BaseController {
     /**
      * 查询流水细则
      *
-     * @param page
-     * @param size
      * @param request
      * @return
      */
-    @GetMapping("/detail/query")
-    public ResultDTO queryPropertyDetail(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                                         @RequestParam(value = "size", defaultValue = "30") Integer size,
+    @PostMapping("/detail/query")
+    public ResultDTO queryPropertyDetail(@RequestParam(value = "startTime") String startTime,
+                                         @RequestParam(value = "endTime") String endTime,
                                          HttpServletRequest request) {
-        return propertyService.queryPropertyDetail(getUserId(request), page, size);
+        try {
+            Date startDate = DateUtils.str2Date(startTime + " 0:0:0");
+            Date endDate = DateUtils.str2Date(endTime + " 23:59:59");
+            return propertyService.queryPropertyDetail(getUserId(request), startDate, endDate);
+        } catch (ParseException e) {
+            throw new CustomException(DataDictionary.STRING_CONVERT_DATE_FAIL);
+        }
+
     }
 
     /**

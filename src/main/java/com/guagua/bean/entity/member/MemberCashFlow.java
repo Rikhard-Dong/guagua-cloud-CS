@@ -15,15 +15,17 @@ public class MemberCashFlow {
     private Integer type;           // 类型: 对于会员用户来说只有0 收入, 1 提现
     private Date time;              // 明细时间
     private String detail;          // 资金流明细
+    private Double balance;         // 操作后的余额
 
     public MemberCashFlow() {
     }
 
-    public MemberCashFlow(Integer propertyId, Double value, Integer type, String detail) {
+    public MemberCashFlow(Integer propertyId, Double value, Integer type, String detail, Double balance) {
         this.propertyId = propertyId;
         this.value = value;
         this.type = type;
         this.detail = detail;
+        this.balance = balance;
     }
 
     public Integer getId() {
@@ -74,6 +76,14 @@ public class MemberCashFlow {
         this.detail = detail;
     }
 
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
         return "MemberCashFlow{" +
@@ -83,6 +93,7 @@ public class MemberCashFlow {
                 ", type=" + type +
                 ", time=" + time +
                 ", detail='" + detail + '\'' +
+                ", balance=" + balance +
                 '}';
     }
 }

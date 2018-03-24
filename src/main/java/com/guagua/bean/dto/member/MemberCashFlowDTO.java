@@ -17,6 +17,7 @@ public class MemberCashFlowDTO {
     private String type;           // 类型: 对于会员用户来说只有0 收入, 1 提现
     private String time;              // 明细时间
     private String detail;      // 明细
+    private Double balance;
 
     public MemberCashFlowDTO() {
     }
@@ -42,6 +43,7 @@ public class MemberCashFlowDTO {
                 this.type = "异常";
         }
         this.time = DateUtils.date2StrCN(flow.getTime());
+        this.balance = flow.getBalance();
     }
 
     public Integer getId() {
@@ -92,6 +94,14 @@ public class MemberCashFlowDTO {
         this.detail = detail;
     }
 
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
         return "MemberCashFlowDTO{" +
@@ -101,6 +111,7 @@ public class MemberCashFlowDTO {
                 ", type='" + type + '\'' +
                 ", time='" + time + '\'' +
                 ", detail='" + detail + '\'' +
+                ", balance=" + balance +
                 '}';
     }
 }

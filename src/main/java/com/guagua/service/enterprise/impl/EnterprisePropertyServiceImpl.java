@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,7 +65,7 @@ public class EnterprisePropertyServiceImpl extends BaseService implements Enterp
     }
 
     // 查询资金明细
-    public ResultDTO queryPropertyDetail(Integer userId, Integer page, Integer size) {
+    public ResultDTO queryPropertyDetail(Integer userId, Date startDate, Date endDate) {
         User user = userDao.findById(userId);
         if (user == null) {
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
@@ -75,11 +76,12 @@ public class EnterprisePropertyServiceImpl extends BaseService implements Enterp
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
 
-        PageHelper.startPage(page, size);
-        List<EnterpriseCashFlow> flows = flowDao.findByPropertyId(property.getId());
-        List<EnterpriseCashFlowDTO> dtos = convert2EnterpriseCashFlow(flows);
-        PageInfo<EnterpriseCashFlowDTO> info = new PageInfo<EnterpriseCashFlowDTO>(dtos);
-        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("info", info);
+
+        List<EnterpriseCashFlow> flows = flowDao.findByPropertyIdAndDate(property.getId(), startDate, endDate);
+
+        List<EnterpriseCashFlowDTO> flowsDto = convert2EnterpriseCashFlow(flows);
+
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("flows", flowsDto);
     }
 
     // 提现
@@ -111,7 +113,8 @@ public class EnterprisePropertyServiceImpl extends BaseService implements Enterp
 
         // 记录收支明细
         value = 0 - value;
-        EnterpriseCashFlow flow = new EnterpriseCashFlow(property.getId(), value, "提现操作", 1);
+        EnterpriseCashFlow flow = new EnterpriseCashFlow(property.getId(), value, "提现操作", 1,
+                property.getBalance());
         Integer var3 = flowDao.insertOne(flow);
         if (var3 == 0) {
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
@@ -143,7 +146,8 @@ public class EnterprisePropertyServiceImpl extends BaseService implements Enterp
         if (var2 == 0) {
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
-        EnterpriseCashFlow flow = new EnterpriseCashFlow(property.getId(), value, "充值", 4);
+        EnterpriseCashFlow flow = new EnterpriseCashFlow(property.getId(), value, "充值", 3,
+                property.getBalance());
         Integer var3 = flowDao.insertOne(flow);
         if (var3 == 0) {
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);

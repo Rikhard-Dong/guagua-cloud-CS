@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.sql.Time;
+
 import static org.junit.Assert.*;
 
 /**
@@ -22,7 +24,7 @@ public class TestDaoTest {
 
     @Test
     public void insertTest() {
-        TestEntiry testEntiry = new TestEntiry("this is test");
+        TestEntiry testEntiry = new TestEntiry("this is test",  Time.valueOf("101:29:54"));
 
         Integer var1 = testDao.insertTest(testEntiry);
         System.out.println("###### var ===> " + var1);

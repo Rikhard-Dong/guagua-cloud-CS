@@ -1,7 +1,9 @@
 package com.guagua.dao.member;
 
 import com.guagua.bean.entity.member.MemberCashFlow;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,4 +45,16 @@ public interface MemberCashFlowDao {
      * @return
      */
     List<MemberCashFlow> findByPropertyId(int propertyId);
+
+    /**
+     * 根据时间查询资金流
+     *
+     * @param id
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    List<MemberCashFlow> findByPropertyIdAndDate(@Param("propertyId") Integer id,
+                                                 @Param("startTime") Date startTime,
+                                                 @Param("endTime") Date endTime);
 }

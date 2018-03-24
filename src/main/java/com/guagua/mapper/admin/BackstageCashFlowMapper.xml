@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.admin.BackstageCashFlowDao">
+
+    <insert id="insertOne">
+        INSERT INTO t_backstage_cash_flow (object_id, `value`, total, type, detail) VALUES
+            (#{flow.objectId}, #{flow.value}, #{flow.total}, #{flow.type}, #{flow.detail})
+    </insert>
+
+    <select id="findAll" resultType="com.guagua.bean.entity.admin.BackstageCashFlow">
+        SELECT *
+        FROM t_backstage_cash_flow
+    </select>
+
+    <select id="findByUserId" resultType="com.guagua.bean.entity.admin.BackstageCashFlow">
+        SELECT *
+        FROM t_backstage_cash_flow
+        WHERE object_id = #{objectId}
+        ORDER BY `time` DESC
+    </select>
+</mapper>
