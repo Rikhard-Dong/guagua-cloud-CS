@@ -57,4 +57,54 @@ public interface ReleaseTaskService {
      * @return
      */
     ResultDTO cancelTask(Integer userId, Integer taskId);
+
+
+    /**
+     * 查询单个任务的申请情况
+     *
+     * @param userId
+     * @param taskId
+     * @return
+     */
+    ResultDTO queryTaskApplicationWithTaskId(Integer userId, Integer taskId, Integer page, Integer size);
+
+    /**
+     * 查询该任务下所有未处理的申请
+     *
+     * @param userId
+     * @param taskId
+     * @param page
+     * @param size
+     * @return
+     */
+    ResultDTO queryAllUntreatedApplication(Integer userId, Integer taskId, Integer page, Integer size);
+
+    /**
+     * 同意申请
+     *
+     * @param userId
+     * @param taskId
+     * @param applicationId
+     * @return
+     */
+    ResultDTO agreeApplication(Integer userId, Integer taskId, Integer applicationId);
+
+    /**
+     * 拒绝申请
+     *
+     * @param userId
+     * @param taskId
+     * @param applicationId
+     * @return
+     */
+    ResultDTO refuseApplication(Integer userId, Integer taskId, Integer applicationId);
+
+    /**
+     * 得到该任务下的客服人员
+     *
+     * @param userId
+     * @param taskId
+     * @return
+     */
+    ResultDTO getMyCustomerService(Integer userId, Integer taskId);
 }

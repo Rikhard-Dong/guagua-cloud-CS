@@ -37,7 +37,7 @@ public class MemberCashFlowDTO {
                 this.type = "支出";
                 break;
             case 3:
-                this.type = "重置";
+                this.type = "充值";
                 break;
             default:
                 this.type = "异常";

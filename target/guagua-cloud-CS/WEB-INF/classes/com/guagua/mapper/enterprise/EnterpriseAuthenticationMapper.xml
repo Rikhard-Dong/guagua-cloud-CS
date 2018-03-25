@@ -99,5 +99,14 @@
         LIMIT 1
     </select>
 
+    <select id="findByEnterpriseIdAndPass"
+            resultType="com.guagua.bean.entity.enterprise.EnterpriseAuthentication">
+        SELECT *
+        FROM t_real_name_authentication_of_enterprise
+        WHERE user_id = #{enterpriseId}
+              AND `status` = 1
+        LIMIT 1
+    </select>
+
 
 </mapper>

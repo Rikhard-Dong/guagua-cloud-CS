@@ -3,29 +3,34 @@ package com.guagua.service.enterprise.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.guagua.bean.dto.ResultDTO;
+import com.guagua.bean.dto.common.TaskApplicationDTO;
+import com.guagua.bean.dto.common.UserDTO;
 import com.guagua.bean.entity.admin.BackstageCapital;
 import com.guagua.bean.entity.admin.BackstageCashFlow;
-import com.guagua.bean.entity.common.Task;
-import com.guagua.bean.entity.common.User;
+import com.guagua.bean.entity.common.*;
 import com.guagua.bean.entity.enterprise.EnterpriseAuthentication;
 import com.guagua.bean.entity.enterprise.EnterpriseCashFlow;
 import com.guagua.bean.entity.enterprise.EnterpriseProperty;
+import com.guagua.bean.entity.member.MemberCashFlow;
+import com.guagua.bean.entity.member.MemberProperty;
 import com.guagua.dao.admin.BackstageCapitalDao;
 import com.guagua.dao.admin.BackstageCashFlowDao;
-import com.guagua.dao.common.TaskDao;
-import com.guagua.dao.common.UserDao;
+import com.guagua.dao.common.*;
 import com.guagua.dao.enterprise.EnterpriseAuthenticationDao;
 import com.guagua.dao.enterprise.EnterpriseCashFlowDao;
 import com.guagua.dao.enterprise.EnterprisePropertyDao;
+import com.guagua.dao.member.MemberCashFlowDao;
+import com.guagua.dao.member.MemberPropertyDao;
 import com.guagua.enums.DataDictionary;
 import com.guagua.exception.common.CustomException;
 import com.guagua.service.BaseService;
 import com.guagua.service.enterprise.ReleaseTaskService;
-import com.mysql.fabric.xmlrpc.base.Data;
+import com.guagua.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,23 +40,44 @@ import java.util.List;
  */
 @Service("releaseTaskService")
 public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskService {
-
+    // 任务dao
     private final TaskDao taskDao;
-
+    // 用户dao
     private final UserDao userDao;
-
+    // 企业财产dao
     private final EnterprisePropertyDao enterprisePropertyDao;
-
+    // 企业资金流水dao
     private final EnterpriseCashFlowDao enterpriseCashFlowDao;
-
+    // 企业认证dao
     private final EnterpriseAuthenticationDao enterpriseAuthenticationDao;
-
+    // 后台资金dao
     private final BackstageCapitalDao capitalDao;
-
+    // 后台流水dao
     private final BackstageCashFlowDao cashFlowDao;
+    // 任务申请关系dao
+    private final TaskApplicationDao taskApplicationDao;
+    // 消息dao
+    private final MessageDao messageDao;
+    // 任务雇佣关系dao
+    private final TaskEmploymentDao taskEmploymentDao;
+    // 会员财产dao
+    private final MemberPropertyDao memberPropertyDao;
+    // 会员资金流dao
+    private final MemberCashFlowDao memberCashFlowDao;
 
     @Autowired
-    public ReleaseTaskServiceImpl(TaskDao taskDao, UserDao userDao, EnterprisePropertyDao enterprisePropertyDao, EnterpriseCashFlowDao enterpriseCashFlowDao, EnterpriseAuthenticationDao enterpriseAuthenticationDao, BackstageCapitalDao capitalDao, BackstageCashFlowDao cashFlowDao) {
+    public ReleaseTaskServiceImpl(TaskDao taskDao,
+                                  UserDao userDao,
+                                  EnterprisePropertyDao enterprisePropertyDao,
+                                  EnterpriseCashFlowDao enterpriseCashFlowDao,
+                                  EnterpriseAuthenticationDao enterpriseAuthenticationDao,
+                                  BackstageCapitalDao capitalDao,
+                                  BackstageCashFlowDao cashFlowDao,
+                                  TaskApplicationDao taskApplicationDao,
+                                  MessageDao messageDao,
+                                  TaskEmploymentDao taskEmploymentDao,
+                                  MemberPropertyDao memberPropertyDao,
+                                  MemberCashFlowDao memberCashFlowDao) {
         this.taskDao = taskDao;
         this.userDao = userDao;
         this.enterprisePropertyDao = enterprisePropertyDao;
@@ -59,6 +85,11 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
         this.enterpriseAuthenticationDao = enterpriseAuthenticationDao;
         this.capitalDao = capitalDao;
         this.cashFlowDao = cashFlowDao;
+        this.taskApplicationDao = taskApplicationDao;
+        this.messageDao = messageDao;
+        this.taskEmploymentDao = taskEmploymentDao;
+        this.memberPropertyDao = memberPropertyDao;
+        this.memberCashFlowDao = memberCashFlowDao;
     }
 
     // 创建发布一个任务
@@ -209,7 +240,25 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
         }
 
         // TODO 任务被取消需要通知参与投标的客服, 如果用户已中标, 需要支付10%的违约金
-        // TODO 当前先完成更新任务状态, 将钱退还到企业, 更新资金流水
+        List<TaskEmployment> taskEmployments = taskEmploymentDao.findByTaskId(taskId);
+        // 计算需要支付的违约金
+        Double liquidatedDamages = 0.0;
+        if (taskEmployments != null || taskEmployments.size() != 0) {
+            liquidatedDamages = task.getBaseSalary() * 0.1 * taskEmployments.size();
+            Double liquidatedDamages2 = task.getBaseSalary() * 0.1;
+            for (TaskEmployment employment : taskEmployments) {
+                MemberProperty property = memberPropertyDao.findByUserId(employment.getMemberId());
+                property.setBalance(property.getBalance() + liquidatedDamages2);
+                property.setIncomeTotal(property.getIncomeTotal() + liquidatedDamages2);
+                Integer var1 = memberPropertyDao.update(property);
+                if (var1 == null) {
+                    throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+                }
+                MemberCashFlow flow = new MemberCashFlow(property.getId(), liquidatedDamages2, 0,
+                        "任务#" + task.getTitle() + "#取消, 得到违约金!", property.getBalance());
+            }
+        }
+
         // 更新任务状态
         Integer var1 = taskDao.updateStatus(task.getId(), 5);
         if (var1 == 0) {
@@ -241,11 +290,234 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
         }
         BackstageCashFlow backstageCashFlow = new BackstageCashFlow(user.getId(), -task.getTotalSalary(), capital.getTotal(),
                 "任务" + task.getTitle() + "取消, 资金退回", 1);
+
+
+        // 记录支付违约金
+        if (liquidatedDamages != 0) {
+            // 支付违约金
+            enterpriseProperty.setBalance(enterpriseProperty.getBalance() - liquidatedDamages);
+            Integer var5 = enterprisePropertyDao.updateOne(enterpriseProperty);
+            if (var5 == 0) {
+                throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+            }
+            EnterpriseCashFlow enterpriseCashFlow2 = new EnterpriseCashFlow(enterpriseProperty.getId(), -liquidatedDamages,
+                    "任务#" + task.getTitle() + "#取消, 支付违约金" + liquidatedDamages, 2, enterpriseProperty.getBalance());
+            Integer var6 = enterpriseCashFlowDao.insertOne(enterpriseCashFlow2);
+            if (var6 == 0) {
+                throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+            }
+        }
         Integer var5 = cashFlowDao.insertOne(backstageCashFlow);
         if (var5 == 0) {
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
 
+        // 通知所有参加竞标的. 状态为0和1的用户, 任务被取消
+        List<TaskApplication> applications = taskApplicationDao.findByTaskId(taskId);
+        if (applications != null && applications.size() != 0) {
+            for (TaskApplication application : applications) {
+                Message message = new Message();
+                message.setSenderId(user.getId());
+                message.setReceiverId(application.getMemberId());
+                message.setTitle("任务取消通知");
+                if (application.getStatus() == 0) {
+                    message.setContent("任务#" + task.getTitle() + "#已经取消!");
+                } else if (application.getStatus() == 1) {
+                    message.setContent("任务#" + task.getTitle() + "#已经取消! 企业支付违约金, 已到账!");
+                } else {
+                    continue;
+                }
+                Integer var6 = messageDao.insertOne(message);
+                if (var6 == 0) {
+                    throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+                }
+            }
+        }
+
         return new ResultDTO(DataDictionary.UPDATE_SUCCESS);
+    }
+
+    // 查询单个任务的竞标申请情况
+    public ResultDTO queryTaskApplicationWithTaskId(Integer userId, Integer taskId, Integer page, Integer size) {
+        Task task = taskDao.findByTaskId(taskId);
+        if (task == null) {
+            throw new CustomException(DataDictionary.TASK_NOT_EXISTS);
+        }
+
+        PageHelper.startPage(page, size);
+        List<TaskApplication> applications = taskApplicationDao.findByTaskId(taskId);
+        List<TaskApplicationDTO> dtos = convert2TaskApplicationDTO(applications);
+        PageInfo<TaskApplicationDTO> info = new PageInfo<TaskApplicationDTO>(dtos);
+
+        return new ResultDTO(DataDictionary.OPERATION_SUCCESS).addData("applications", info);
+    }
+
+    public ResultDTO queryAllUntreatedApplication(Integer userId, Integer taskId, Integer page, Integer size) {
+        Task task = taskDao.findByTaskId(taskId);
+        if (task == null) {
+            throw new CustomException(DataDictionary.TASK_NOT_EXISTS);
+        }
+
+        PageHelper.startPage(page, size);
+        List<TaskApplication> applications = taskApplicationDao.findUntreatedByTaskId(taskId);
+        List<TaskApplicationDTO> dtos = convert2TaskApplicationDTO(applications);
+        PageInfo<TaskApplicationDTO> info = new PageInfo<TaskApplicationDTO>(dtos);
+
+        return new ResultDTO(DataDictionary.OPERATION_SUCCESS).addData("applications", info);
+    }
+
+    // 同意申请
+    @Transactional
+    public ResultDTO agreeApplication(Integer userId, Integer taskId, Integer applicationId) {
+        User user = userDao.findById(userId);
+        if (user == null) {
+            throw new CustomException(DataDictionary.USER_NOT_EXISTS);
+        }
+        Task task = taskDao.findByTaskId(taskId);
+        if (task == null || task.getStatus() != 1) {
+            throw new CustomException(DataDictionary.TASK_NOT_EXISTS);
+        }
+
+        TaskApplication taskApplication = taskApplicationDao.findById(applicationId);
+        if (taskApplication == null) {
+            throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+        }
+        // TODO 判断客服是否时间冲突
+
+        // 申请通过
+        taskApplication.setStatus(1);
+        Integer var1 = taskApplicationDao.updateStatus(taskApplication.getId(), taskApplication.getStatus());
+        if (var1 == 0) {
+            throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+        }
+
+        TaskEmployment employment = taskEmploymentDao.findByTaskIdAndMemberId(taskId, taskApplication.getMemberId());
+        if (employment != null) {
+            throw new CustomException(DataDictionary.ALREADY_AGREE);
+        }
+
+        // 建立任务与用户的竞标成功联系
+        TaskEmployment taskEmployment = new TaskEmployment(taskId, user.getId(), taskApplication.getMemberId());
+        Integer var2 = taskEmploymentDao.insertOne(taskEmployment);
+        if (var2 == null) {
+            throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+        }
+        // 发消息告诉用户竞标成功
+        Message message = new Message(user.getId(), taskApplication.getMemberId(),
+                "任务竞标成功通知", "您于" + DateUtils.date2StrCN(taskApplication.getCreateTime()) +
+                "参与任务\"" + task.getTitle() + "\"的投标, 已被发起者同意申请!请前往我的任务查看详情");
+        Integer var3 = messageDao.insertOne(message);
+        if (var3 == 0) {
+            throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+        }
+
+        // 查询当前同意该任务的人数, 如果达到任务要求, 则更新任务状态为2(投标结束, 等待开始)
+        Integer countNumber = taskEmploymentDao.countNumber(task.getId());
+        if (task.getNumber().equals(countNumber)) {
+            task.setStatus(2);
+            Integer var4 = taskDao.updateStatus(taskId, task.getStatus());
+            if (var4 == 0) {
+                throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+            }
+
+            // 获取所有状态为0的申请, 将状态改为2
+            List<TaskApplication> applications = taskApplicationDao.findByTaskIdAndStatus(taskId, 0);
+            if (applications != null && applications.size() > 0) {
+                for (TaskApplication application : applications) {
+                    application.setStatus(2);
+                    taskApplicationDao.updateStatus(application.getId(), application.getStatus());
+                    Message message1 = new Message(userId, application.getMemberId(), "申请失败",
+                            "任务#" + task.getTitle() + "#人数已满, 您未能竞标成功");
+                }
+            }
+        }
+        return new ResultDTO(DataDictionary.OPERATION_SUCCESS);
+    }
+
+    // 拒绝申请
+    @Transactional
+    public ResultDTO refuseApplication(Integer userId, Integer taskId, Integer applicationId) {
+        User user = userDao.findById(userId);
+        if (user == null) {
+            throw new CustomException(DataDictionary.USER_NOT_EXISTS);
+        }
+        Task task = taskDao.findByTaskId(taskId);
+        if (task == null) {
+            throw new CustomException(DataDictionary.TASK_NOT_EXISTS);
+        }
+        TaskApplication taskApplication = taskApplicationDao.findById(applicationId);
+        if (taskApplication == null) {
+            throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+        }
+        // 申请不通过
+        taskApplication.setStatus(2);
+        Integer var1 = taskApplicationDao.updateStatus(taskApplication.getId(), taskApplication.getStatus());
+        if (var1 == 0) {
+            throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+        }
+        // 发送消息通知会员用户竞标被拒绝
+        Message message = new Message(user.getId(), taskApplication.getMemberId(),
+                "任务竞标失败通知", "您于" + DateUtils.date2StrCN(taskApplication.getCreateTime()) +
+                "参与任务\"" + task.getTitle() + "\"的投标, 已被发起者拒绝!");
+        Integer var2 = messageDao.insertOne(message);
+        if (var2 == 0) {
+            throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+        }
+
+        return new ResultDTO(DataDictionary.OPERATION_SUCCESS);
+    }
+
+    // 查询任务对应的客服
+    public ResultDTO getMyCustomerService(Integer userId, Integer taskId) {
+        Task task = taskDao.findByTaskId(taskId);
+        if (task == null) {
+            throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+        }
+        List<User> users = taskEmploymentDao.findCustomerServiceByTaskId(taskId);
+
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("customerService", convert2UserDTO(users));
+    }
+
+    /**
+     * convert to TaskApplicationDTO
+     *
+     * @param applications
+     * @return
+     */
+    private List<TaskApplicationDTO> convert2TaskApplicationDTO(List<TaskApplication> applications) {
+        if (applications == null || applications.size() == 0) {
+            return null;
+        }
+
+        List<TaskApplicationDTO> dtos = new ArrayList<TaskApplicationDTO>();
+
+        for (TaskApplication application : applications) {
+            TaskApplicationDTO dto = new TaskApplicationDTO(application);
+            Task task = taskDao.findByTaskId(application.getTaskId());
+            User user = userDao.findById(application.getMemberId());
+            dto.setTaskName(task.getTitle());
+            dto.setMemberName(user.getUsername());
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+
+    /**
+     * convert to userDTO
+     *
+     * @param users
+     * @return
+     */
+    private List<UserDTO> convert2UserDTO(List<User> users) {
+        if (users == null || users.size() == 0) {
+            return null;
+        }
+        List<UserDTO> dtos = new ArrayList<UserDTO>();
+        for (User user : users) {
+            UserDTO dto = new UserDTO(user);
+            dtos.add(dto);
+        }
+
+        return dtos;
     }
 }

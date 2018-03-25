@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.common.TaskEmploymentDao">
+
+    <insert id="insertOne">
+        INSERT INTO t_task_employment (task_id, publisher_id, member_id) VALUES
+            (#{taskId}, #{publisherId}, #{memberId})
+    </insert>
+
+    <update id="updateStatus">
+        UPDATE t_task_employment
+        SET `status` = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateScore">
+        UPDATE t_task_employment
+        SET `score` = #{score}
+        WHERE id = #{id}
+    </update>
+
+    <select id="countNumber" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_task_employment
+        WHERE task_id = #{taskId}
+    </select>
+
+    <select id="findByTaskId" resultType="com.guagua.bean.entity.common.TaskEmployment">
+        SELECT *
+        FROM t_task_employment
+        WHERE task_id = #{taskId}
+    </select>
+
+    <select id="findCustomerServiceByTaskId" resultType="com.guagua.bean.entity.common.User">
+        SELECT u.*
+        FROM t_user u LEFT JOIN t_task_employment t ON u.id = t.member_id
+        WHERE t.task_id = #{taskId}
+    </select>
+
+    <select id="findByTaskIdAndMemberId" resultType="com.guagua.bean.entity.common.TaskEmployment">
+        SELECT *
+        FROM t_task_employment
+        WHERE task_id = #{taskId} AND member_id = #{memberId}
+        LIMIT 1
+    </select>
+
+</mapper>

@@ -10,6 +10,7 @@ import com.guagua.utils.DateUtils;
  * 用户详细信息dto
  */
 public class UserDTO {
+    private Integer userId;     // 用户id
     private String username;        // 用户名
     private String phone;       // 用户手机号
     private String headImage;   // 用户头像
@@ -28,6 +29,7 @@ public class UserDTO {
     }
 
     public UserDTO(User user) {
+        this.userId = user.getId();
         this.username = user.getUsername();
         this.phone = user.getPhone();
         this.headImage = user.getHeadImage();
@@ -52,6 +54,14 @@ public class UserDTO {
         this.address = user.getAddress();
         this.description = user.getDescription();
         this.educationalExperience = user.getEducationalExperience();
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -153,7 +163,8 @@ public class UserDTO {
     @Override
     public String toString() {
         return "UserDTO{" +
-                "username='" + username + '\'' +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
                 ", phone='" + phone + '\'' +
                 ", headImage='" + headImage + '\'' +
                 ", type='" + type + '\'' +

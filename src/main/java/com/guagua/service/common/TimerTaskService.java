@@ -18,4 +18,9 @@ public interface TimerTaskService {
      */
     void clearTableMailValidateCodeData();
 
+    /**
+     * 更新任务状态
+     */
+    void updateTaskStatus();
+
 }

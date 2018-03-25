@@ -93,4 +93,88 @@ public class ReleaseTaskController extends BaseController {
                                 HttpServletRequest request) {
         return taskService.cancelTask(getUserId(request), taskId);
     }
+
+    /*  *******************************
+     *  任务投标方面操作
+     *
+     ***********************************/
+
+    /**
+     * 查看所有申请记录
+     *
+     * @param taskId
+     * @param page
+     * @param size
+     * @param request
+     * @return
+     */
+    @GetMapping("/{taskId}/applications")
+    public ResultDTO getAllTaskApplicationWithTaskId(@PathVariable("taskId") Integer taskId,
+                                                     @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                     @RequestParam(value = "size", defaultValue = "30") Integer size,
+                                                     HttpServletRequest request) {
+        return taskService.queryTaskApplicationWithTaskId(getUserId(request), taskId, page, size);
+    }
+
+    /**
+     * 得到所有未处理的申请记录
+     *
+     * @param taskId
+     * @param page
+     * @param size
+     * @param request
+     * @return
+     */
+    @GetMapping("/{taskId}/applications/untreated")
+    public ResultDTO getAllUntreatedTaskApplication(@PathVariable("taskId") Integer taskId,
+                                                    @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                    @RequestParam(value = "size", defaultValue = "30") Integer size,
+                                                    HttpServletRequest request) {
+        return taskService.queryAllUntreatedApplication(getUserId(request), taskId, page, size);
+    }
+
+    /**
+     * 同意申请
+     *
+     * @param taskId
+     * @param applicationId
+     * @param request
+     * @return
+     */
+    @PutMapping("/{taskId}/application/agree/{applicationId}")
+    public ResultDTO agreeApplication(@PathVariable("taskId") Integer taskId,
+                                      @PathVariable("applicationId") Integer applicationId,
+                                      HttpServletRequest request) {
+
+        return taskService.agreeApplication(getUserId(request), taskId, applicationId);
+    }
+
+    /**
+     * 拒绝申请
+     *
+     * @param taskId
+     * @param applicationId
+     * @param request
+     * @return
+     */
+    @PutMapping("/{taskId}/application/refuse/{applicationId}")
+    public ResultDTO refuseApplication(@PathVariable("taskId") Integer taskId,
+                                       @PathVariable("applicationId") Integer applicationId,
+                                       HttpServletRequest request) {
+        return taskService.refuseApplication(getUserId(request), taskId, applicationId);
+    }
+
+
+    /**
+     * 查询任务对应的客服
+     *
+     * @param taskId
+     * @param request
+     * @return
+     */
+    @GetMapping("/{taskId}/customer_service")
+    public ResultDTO getCustomerService(@PathVariable("taskId") Integer taskId,
+                                        HttpServletRequest request) {
+        return taskService.getMyCustomerService(getUserId(request), taskId);
+    }
 }

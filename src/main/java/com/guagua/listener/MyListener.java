@@ -32,6 +32,7 @@ public class MyListener implements ServletContextListener {
         // 定时器一秒钟后启动, 然后每五分钟执行一次清空手机过期验证码, 每十五分钟清楚一次邮箱验证码
         timer.schedule(new ClearPhoneValidateCodeTimerTask(), 1000, 5 * 60 * 1000);
         timer.schedule(new ClearEmailValidateCodeTimerTask(), 1000, 15 * 60 * 1000);
+        timer.schedule(new UpdateTaskStatus(), 1000, 10 * 60 * 1000);
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
@@ -59,5 +60,10 @@ public class MyListener implements ServletContextListener {
         }
     }
 
+    class UpdateTaskStatus extends TimerTask {
 
+        public void run() {
+            timerTaskService.updateTaskStatus();
+        }
+    }
 }

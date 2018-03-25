@@ -87,10 +87,18 @@ public interface TaskDao {
                                            @Param("status") Integer status);
 
     /**
+     * 会员用户查询所有状态为1的任务
+     * @return
+     */
+    List<Task> findAllByMember();
+
+    /**
      * 查询详细信息
      *
      * @param id
      * @return
      */
     Task findByTaskId(Integer id);
+
+
 }

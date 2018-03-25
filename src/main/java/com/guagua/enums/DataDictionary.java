@@ -87,7 +87,11 @@ public enum DataDictionary {
     REQUIRED_PARAMETER_IS_NULL(-7, "必填参数为空"),
     DATE_ERROR(-8, "日期参数错误"),
     USER_NOT_MATCH(-9, "用户不匹配"),
-    TASK_CAN_NOT_CANCEL(-10, "任务不能取消");
+    TASK_CAN_NOT_CANCEL(-10, "任务不能取消"),
+    TASK_NOT_EXISTS(-11, "任务不存在"),
+    OPERATION_SUCCESS(16, "操作成功"),
+    ALREADY_APPLICATION_THIS_TASK(-12, "已经参与过该任务的投标"),
+    ALREADY_AGREE(-13, "已经同意, 无需再次同意");
 
     private Integer code;       // 状态码
     private String msg;         // 描述信息

@@ -30,4 +30,24 @@
         ORDER BY is_read, send_time DESC
         LIMIT 5
     </select>
+
+    <select id="findByUserIdAndRead" resultType="com.guagua.bean.entity.common.Message">
+        SELECT *
+        FROM t_message
+        WHERE receiver_id = #{userId} AND is_read = '1'
+        ORDER BY send_time DESC
+    </select>
+
+    <select id="findByUserIdAndUnread" resultType="com.guagua.bean.entity.common.Message">
+        SELECT *
+        FROM t_message
+        WHERE receiver_id = #{userId} AND is_read = '0'
+        ORDER BY send_time DESC
+    </select>
+
+    <select id="countUnreadMessageByUserId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_message
+        WHERE receiver_id = #{userId}
+    </select>
 </mapper>
