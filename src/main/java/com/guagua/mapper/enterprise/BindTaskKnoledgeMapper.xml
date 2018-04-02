@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.enterprise.BindTaskKnowledgeDao">
+
+    <insert id="insertOne">
+        INSERT INTO t_bind_task_knowledge (task_id, knowledge_id)
+        VALUES (#{taskId}, #{knowledgeId})
+    </insert>
+
+    <insert id="insertBatch">
+        insert into t_bind_task_knowledge(task_id, knowledge_id)
+        VALUES
+        <foreach collection="list" item="bindTaskKnowledge" index="index" separator=",">
+            (
+            #{bindTaskKnowledge.taskId}, #{bindTaskKnowledge.knowledgeId}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteOne">
+        DELETE FROM t_bind_task_knowledge
+        WHERE id = #{id}
+    </delete>
+
+    <select id="findByTaskId" resultType="com.guagua.bean.entity.enterprise.BindTaskKnowledge">
+        SELECT *
+        FROM t_bind_task_knowledge
+        WHERE task_id = #{taskId}
+    </select>
+
+    <select id="findByTaskIdAndKnowledge" resultType="com.guagua.bean.entity.enterprise.BindTaskKnowledge">
+        SELECT *
+        FROM t_bind_task_knowledge
+        WHERE task_id = #{taskId} AND knowledge_id = #{knowledgeId}
+        LIMIT 1
+    </select>
+
+    <select id="findBaseByTaskId" resultType="com.guagua.bean.entity.common.KnowledgeBase">
+        SELECT k.*
+        FROM t_bind_task_knowledge b LEFT JOIN t_knowledge_base k ON b.knowledge_id = k.id
+        WHERE task_id = #{taskId}
+    </select>
+
+</mapper>

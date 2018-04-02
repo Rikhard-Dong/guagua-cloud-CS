@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.common.CustomerInfoDao">
+
+    <insert id="insertOne">
+        INSERT INTO t_customer_info
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="customer.uuid != null">uuid,</if>
+            <if test="customer.name != null">`name`,</if>
+            <if test="customer.sex != null">sex,</if>
+            <if test="customer.age != null">age,</if>
+            <if test="customer.phone != null">phone,</if>
+            <if test="customer.email != null">email,</if>
+            <if test="customer.taskId != null">task_id,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="customer.uuid != null">#{customer.uuid},</if>
+            <if test="customer.name != null">#{customer.name},</if>
+            <if test="customer.sex != null">#{customer.sex},</if>
+            <if test="customer.age != null">#{customer.age},</if>
+            <if test="customer.phone != null">#{customer.phone},</if>
+            <if test="customer.email != null">#{customer.email},</if>
+            <if test="customer.taskId != null">#{customer.taskId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateOne">
+        UPDATE t_customer_info SET
+        <trim suffixOverrides=",">
+            <if test="customer.name != null">`name` = #{customer.name},</if>
+            <if test="customer.sex != null">sex = #{customer.sex},</if>
+            <if test="customer.age != null">age = #{customer.age},</if>
+            <if test="customer.phone != null">phone = #{customer.phone},</if>
+            <if test="customer.email != null">email = #{customer.email},</if>
+        </trim>
+        where uuid = #{customer.taskId}
+    </update>
+
+    <delete id="deleteOne">
+        DELETE FROM t_customer_info
+        WHERE uuid = #{uuid}
+    </delete>
+
+    <select id="findByTaskId" resultType="com.guagua.bean.entity.common.CustomerInfo">
+        SELECT *
+        FROM t_customer_info
+        WHERE task_id = #{taskId};
+    </select>
+
+    <select id="findByProcessorId" resultType="com.guagua.bean.entity.common.CustomerInfo">
+        SELECT *
+        FROM t_customer_info
+        WHERE processor_id = #{processorId}
+    </select>
+
+    <select id="findByTaskIdAndProcessorId" resultType="com.guagua.bean.entity.common.CustomerInfo">
+        SELECT *
+        FROM t_customer_info
+        WHERE task_id = #{taskId} AND processor_id = #{processorId}
+    </select>
+
+</mapper>

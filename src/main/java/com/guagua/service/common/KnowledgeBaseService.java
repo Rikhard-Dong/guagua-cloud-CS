@@ -102,9 +102,21 @@ public interface KnowledgeBaseService {
 
     /**
      * 查询单挑
+     *
      * @param userId
      * @param knowledgeBaseId
      * @return
      */
     ResultDTO queryByKnowledgeBaseId(Integer userId, Integer knowledgeBaseId);
+
+    /**
+     * 查询根据任务id查询与其关联的知识库
+     *
+     * @param userId
+     * @param taskId
+     * @param page
+     * @param size
+     * @return
+     */
+    ResultDTO findBaseByTaskId(Integer userId, Integer taskId, Integer page, Integer size);
 }

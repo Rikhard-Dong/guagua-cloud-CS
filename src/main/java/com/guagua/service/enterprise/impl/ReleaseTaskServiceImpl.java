@@ -8,6 +8,7 @@ import com.guagua.bean.dto.common.UserDTO;
 import com.guagua.bean.entity.admin.BackstageCapital;
 import com.guagua.bean.entity.admin.BackstageCashFlow;
 import com.guagua.bean.entity.common.*;
+import com.guagua.bean.entity.enterprise.BindTaskKnowledge;
 import com.guagua.bean.entity.enterprise.EnterpriseAuthentication;
 import com.guagua.bean.entity.enterprise.EnterpriseCashFlow;
 import com.guagua.bean.entity.enterprise.EnterpriseProperty;
@@ -16,6 +17,7 @@ import com.guagua.bean.entity.member.MemberProperty;
 import com.guagua.dao.admin.BackstageCapitalDao;
 import com.guagua.dao.admin.BackstageCashFlowDao;
 import com.guagua.dao.common.*;
+import com.guagua.dao.enterprise.BindTaskKnowledgeDao;
 import com.guagua.dao.enterprise.EnterpriseAuthenticationDao;
 import com.guagua.dao.enterprise.EnterpriseCashFlowDao;
 import com.guagua.dao.enterprise.EnterprisePropertyDao;
@@ -26,6 +28,7 @@ import com.guagua.exception.common.CustomException;
 import com.guagua.service.BaseService;
 import com.guagua.service.enterprise.ReleaseTaskService;
 import com.guagua.utils.DateUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,6 +67,8 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
     private final MemberPropertyDao memberPropertyDao;
     // 会员资金流dao
     private final MemberCashFlowDao memberCashFlowDao;
+    // 绑定任务和知识库
+    private final BindTaskKnowledgeDao knowledgeDao;
 
     @Autowired
     public ReleaseTaskServiceImpl(TaskDao taskDao,
@@ -77,7 +82,8 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
                                   MessageDao messageDao,
                                   TaskEmploymentDao taskEmploymentDao,
                                   MemberPropertyDao memberPropertyDao,
-                                  MemberCashFlowDao memberCashFlowDao) {
+                                  MemberCashFlowDao memberCashFlowDao,
+                                  BindTaskKnowledgeDao knowledgeDao) {
         this.taskDao = taskDao;
         this.userDao = userDao;
         this.enterprisePropertyDao = enterprisePropertyDao;
@@ -90,6 +96,7 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
         this.taskEmploymentDao = taskEmploymentDao;
         this.memberPropertyDao = memberPropertyDao;
         this.memberCashFlowDao = memberCashFlowDao;
+        this.knowledgeDao = knowledgeDao;
     }
 
     // 创建发布一个任务
@@ -256,6 +263,10 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
                 }
                 MemberCashFlow flow = new MemberCashFlow(property.getId(), liquidatedDamages2, 0,
                         "任务#" + task.getTitle() + "#取消, 得到违约金!", property.getBalance());
+                Integer var2 = memberCashFlowDao.insertOne(flow);
+                if (var2 == 0) {
+                    throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+                }
             }
         }
 
@@ -382,6 +393,12 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
         if (taskApplication == null) {
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
+
+        TaskEmployment employment = taskEmploymentDao.findByTaskIdAndMemberId(taskId, taskApplication.getMemberId());
+        if (employment != null) {
+            return new ResultDTO(DataDictionary.INSERT_SUCCESS);
+        }
+
         // TODO 判断客服是否时间冲突
 
         // 申请通过
@@ -389,11 +406,6 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
         Integer var1 = taskApplicationDao.updateStatus(taskApplication.getId(), taskApplication.getStatus());
         if (var1 == 0) {
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
-        }
-
-        TaskEmployment employment = taskEmploymentDao.findByTaskIdAndMemberId(taskId, taskApplication.getMemberId());
-        if (employment != null) {
-            throw new CustomException(DataDictionary.ALREADY_AGREE);
         }
 
         // 建立任务与用户的竞标成功联系
@@ -476,6 +488,60 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
         List<User> users = taskEmploymentDao.findCustomerServiceByTaskId(taskId);
 
         return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("customerService", convert2UserDTO(users));
+    }
+
+    // 查询该企业下建立过联系的所有客服
+    public ResultDTO getAllCustomerService(Integer userId, Integer page, Integer size) {
+        User user = userDao.findById(userId);
+        if (user == null) {
+            throw new CustomException(DataDictionary.USER_NOT_EXISTS);
+        }
+
+        PageHelper.startPage(page, size);
+        List<User> users = taskEmploymentDao.findAllCustomerServiceByEnterpriseId(userId);
+        List<UserDTO> dtos = convert2UserDTO(users);
+        PageInfo<UserDTO> info = new PageInfo<UserDTO>(dtos);
+
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("customerService", info);
+    }
+
+    // 绑定任务和知识库
+    public ResultDTO bindKnowledge(Integer userId, Integer taskId, Integer knowledgeId) {
+        BindTaskKnowledge knowledge = knowledgeDao.findByTaskIdAndKnowledge(taskId, knowledgeId);
+        if (knowledge != null) {
+            return new ResultDTO(DataDictionary.INSERT_SUCCESS);
+        }
+
+        knowledge = new BindTaskKnowledge(taskId, knowledgeId);
+        Integer var = knowledgeDao.insertOne(knowledge);
+        if (var == 0) {
+            throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+        }
+        return new ResultDTO(DataDictionary.INSERT_SUCCESS);
+    }
+
+    // 批量绑定任务和知识库
+    public ResultDTO bindKnowledgeBatch(Integer userId, Integer taskId, String knowledgeIds) {
+        String[] ids = knowledgeIds.split("-");
+        List<BindTaskKnowledge> bindTaskKnowledges = new ArrayList<BindTaskKnowledge>();
+        for (String id : ids) {
+            Integer knowledgeId = Integer.valueOf(id);
+            // 数据库中如果已经数据则跳过本次
+            BindTaskKnowledge knowledge = knowledgeDao.findByTaskIdAndKnowledge(taskId, knowledgeId);
+            if (knowledge != null) {
+                continue;
+            }
+            knowledge = new BindTaskKnowledge(taskId, knowledgeId);
+            bindTaskKnowledges.add(knowledge);
+        }
+        // 如果一个都没有的话, 插入会报错
+        if (bindTaskKnowledges.size() > 0) {
+            Integer var1 = knowledgeDao.insertBatch(bindTaskKnowledges);
+            if (var1 == 0) {
+                throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+            }
+        }
+        return new ResultDTO(DataDictionary.INSERT_SUCCESS);
     }
 
     /**

@@ -88,8 +88,6 @@ public class EnterpriseProperty {
         this.lastUpdateTime = lastUpdateTime;
     }
 
-
-
     @Override
     public String toString() {
         return "EnterpriseProperty{" +

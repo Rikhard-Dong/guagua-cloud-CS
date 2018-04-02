@@ -1,8 +1,10 @@
 package com.guagua.filter;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.server.ServletServerHttpRequest;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -55,6 +57,14 @@ public class HeaderFilter implements Filter {
 
         servletRequest.setCharacterEncoding(encoding);
         servletResponse.setCharacterEncoding(encoding);
+
+        String url = httpServletRequest.getRequestURL().toString();
+
+        logger.info("############ url ====> {} ###############", url);
+
+        if (StringUtils.contains(url, "ws")) {
+            return;
+        }
 
         filterChain.doFilter(servletRequest, servletResponse);
     }

@@ -45,4 +45,18 @@
         LIMIT 1
     </select>
 
+    <select id="getTaskIdsByMemberId" resultType="java.lang.Integer">
+        SELECT task_id
+        FROM t_task_employment
+        WHERE member_id = #{memberId} AND `status` = 1
+    </select>
+
+    <select id="findAllCustomerServiceByEnterpriseId" resultType="com.guagua.bean.entity.common.User">
+        SELECT DISTINCT u.*
+        FROM t_user u LEFT JOIN t_task_employment t ON u.id = t.member_id
+        WHERE t.task_id IN (SELECT task.id
+                            FROM t_task task LEFT JOIN t_user u2 ON task.enterprise_id = u2.id
+                            WHERE u2.id = #{userId})
+    </select>
+
 </mapper>

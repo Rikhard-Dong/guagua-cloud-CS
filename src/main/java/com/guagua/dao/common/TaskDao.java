@@ -88,6 +88,7 @@ public interface TaskDao {
 
     /**
      * 会员用户查询所有状态为1的任务
+     *
      * @return
      */
     List<Task> findAllByMember();
@@ -99,6 +100,7 @@ public interface TaskDao {
      * @return
      */
     Task findByTaskId(Integer id);
+
 
 
 }

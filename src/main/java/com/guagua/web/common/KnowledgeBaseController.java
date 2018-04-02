@@ -22,7 +22,6 @@ public class KnowledgeBaseController extends BaseController {
 
     private final KnowledgeBaseService knowledgeBaseService;
 
-
     @Autowired
     public KnowledgeBaseController(KnowledgeBaseService knowledgeBaseService) {
         this.knowledgeBaseService = knowledgeBaseService;
@@ -200,5 +199,22 @@ public class KnowledgeBaseController extends BaseController {
                                HttpServletRequest request) {
 
         return knowledgeBaseService.listItems(getUserId(request), knowledgeBaseId, page, size);
+    }
+
+    /**
+     * 查询任务相关的知识库信息
+     *
+     * @param taskId
+     * @param page
+     * @param size
+     * @param request
+     * @return
+     */
+    @GetMapping("/task/{taskId}/about")
+    public ResultDTO queryTaskAboutKnowledgeBase(@PathVariable("taskId") Integer taskId,
+                                                 @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                 @RequestParam(value = "size", defaultValue = "30") Integer size,
+                                                 HttpServletRequest request) {
+        return knowledgeBaseService.findBaseByTaskId(getUserId(request), taskId, page, size);
     }
 }

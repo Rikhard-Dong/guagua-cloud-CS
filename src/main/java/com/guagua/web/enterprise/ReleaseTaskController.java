@@ -5,9 +5,11 @@ import com.guagua.bean.entity.common.Task;
 import com.guagua.service.enterprise.ReleaseTaskService;
 import com.guagua.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author ride
@@ -176,5 +178,52 @@ public class ReleaseTaskController extends BaseController {
     public ResultDTO getCustomerService(@PathVariable("taskId") Integer taskId,
                                         HttpServletRequest request) {
         return taskService.getMyCustomerService(getUserId(request), taskId);
+    }
+
+
+    /**
+     * 查询所有建立联系的客服
+     *
+     * @param page
+     * @param size
+     * @param request
+     * @return
+     */
+    @GetMapping("/all/customer_service")
+    public ResultDTO getAllCustomerService(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                           @RequestParam(value = "size", defaultValue = "30") Integer size,
+                                           HttpServletRequest request) {
+        return taskService.getAllCustomerService(getUserId(request), page, size);
+    }
+
+    /**
+     * 将任务和知识库绑定
+     *
+     * @param taskId
+     * @param knowledgeId
+     * @param request
+     * @return
+     */
+    @PostMapping("/{taskId}/bind/knowledge/{knowledgeId}")
+    public ResultDTO bindKnowledge(@PathVariable("taskId") Integer taskId,
+                                   @PathVariable("knowledgeId") Integer knowledgeId,
+                                   HttpServletRequest request) {
+        return taskService.bindKnowledge(getUserId(request), taskId, knowledgeId);
+    }
+
+    /**
+     * 批量绑定任务和知识库
+     *
+     * @param taskId
+     * @param knowledgeIds
+     * @param request
+     * @return
+     */
+    @PostMapping("/{taskId}/bind/knowledge/batch/{knowledgeIds}")
+    public ResultDTO bindKnowledge(@PathVariable("taskId") Integer taskId,
+                                   @PathVariable("knowledgeIds") String knowledgeIds,
+                                   HttpServletRequest request) {
+
+        return taskService.bindKnowledgeBatch(getUserId(request), taskId, knowledgeIds);
     }
 }

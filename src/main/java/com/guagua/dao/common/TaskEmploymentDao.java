@@ -94,4 +94,20 @@ public interface TaskEmploymentDao {
      */
     TaskEmployment findByTaskIdAndMemberId(@Param("taskId") Integer taskId,
                                            @Param("memberId") Integer memberId);
+
+    /**
+     * 根据客服的id查询她当前的任务
+     *
+     * @param memberId
+     * @return
+     */
+    List<Integer> getTaskIdsByMemberId(Integer memberId);
+
+    /**
+     * 查询该企业建立联系的所有客服
+     *
+     * @param userId
+     * @return
+     */
+    List<User> findAllCustomerServiceByEnterpriseId(Integer userId);
 }

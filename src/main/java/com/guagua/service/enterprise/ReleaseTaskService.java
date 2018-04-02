@@ -107,4 +107,35 @@ public interface ReleaseTaskService {
      * @return
      */
     ResultDTO getMyCustomerService(Integer userId, Integer taskId);
+
+    /**
+     * 查询该企业下所有的任务关联的客服
+     *
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
+    ResultDTO getAllCustomerService(Integer userId, Integer page, Integer size);
+
+    /**
+     * 绑定任务和知识库
+     *
+     * @param userId
+     * @param taskId
+     * @param knowledgeId
+     * @return
+     */
+    ResultDTO bindKnowledge(Integer userId, Integer taskId, Integer knowledgeId);
+
+    /**
+     * 批量绑定
+     *
+     * @param userId
+     * @param taskId
+     * @param knowledgeIds
+     * @return
+     */
+    ResultDTO bindKnowledgeBatch(Integer userId, Integer taskId, String knowledgeIds);
+
 }

@@ -7,17 +7,22 @@ import com.guagua.bean.dto.common.KnowledgeBaseDTO;
 import com.guagua.bean.dto.common.KnowledgeBaseItemDTO;
 import com.guagua.bean.entity.common.KnowledgeBase;
 import com.guagua.bean.entity.common.KnowledgeBaseItem;
+import com.guagua.bean.entity.common.Task;
 import com.guagua.bean.entity.common.User;
 import com.guagua.dao.common.KnowledgeBaseDao;
 import com.guagua.dao.common.KnowledgeBaseItemDao;
+import com.guagua.dao.common.TaskDao;
 import com.guagua.dao.common.UserDao;
+import com.guagua.dao.enterprise.BindTaskKnowledgeDao;
 import com.guagua.enums.DataDictionary;
 import com.guagua.exception.common.CustomException;
 import com.guagua.service.BaseService;
 import com.guagua.service.common.KnowledgeBaseService;
 
+import com.mysql.fabric.xmlrpc.base.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +34,7 @@ import java.util.List;
  * 知识库维护
  */
 @Service("knowledgeBaseService")
+@Transactional
 public class KnowledgeBaseServiceImpl extends BaseService implements KnowledgeBaseService {
 
     private final UserDao userDao;
@@ -37,11 +43,21 @@ public class KnowledgeBaseServiceImpl extends BaseService implements KnowledgeBa
 
     private final KnowledgeBaseItemDao itemDao;
 
+    private final BindTaskKnowledgeDao bindTaskKnowledgeDao;
+
+    private final TaskDao taskDao;
+
     @Autowired
-    public KnowledgeBaseServiceImpl(KnowledgeBaseDao knowledgeBaseDao, UserDao userDao, KnowledgeBaseItemDao itemDao) {
+    public KnowledgeBaseServiceImpl(KnowledgeBaseDao knowledgeBaseDao,
+                                    UserDao userDao,
+                                    KnowledgeBaseItemDao itemDao,
+                                    BindTaskKnowledgeDao bindTaskKnowledgeDao,
+                                    TaskDao taskDao) {
         this.knowledgeBaseDao = knowledgeBaseDao;
         this.userDao = userDao;
         this.itemDao = itemDao;
+        this.bindTaskKnowledgeDao = bindTaskKnowledgeDao;
+        this.taskDao = taskDao;
     }
 
     // 创建一个知识库
@@ -164,6 +180,24 @@ public class KnowledgeBaseServiceImpl extends BaseService implements KnowledgeBa
         KnowledgeBaseDTO dto = new KnowledgeBaseDTO(base);
 
         return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("base", dto);
+    }
+
+    // 查询与其关联的任务知识库
+    public ResultDTO findBaseByTaskId(Integer userId, Integer taskId, Integer page, Integer size) {
+        Task task = taskDao.findByTaskId(taskId);
+        if (task == null) {
+            throw new CustomException(DataDictionary.TASK_NOT_EXISTS);
+        }
+
+        User creator = userDao.findById(task.getEnterpriseId());
+
+        List<KnowledgeBaseDTO> dtos = null;
+        PageHelper.startPage(page, size);
+        List<KnowledgeBase> bases = bindTaskKnowledgeDao.findBaseByTaskId(taskId);
+        dtos = convert2KnowledgeBaseDTO(bases, creator.getUsername());
+        PageInfo<KnowledgeBaseDTO> info = new PageInfo<KnowledgeBaseDTO>(dtos);
+
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("bases", info);
     }
 
     /**
