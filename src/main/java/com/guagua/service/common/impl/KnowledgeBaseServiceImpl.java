@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.guagua.bean.dto.ResultDTO;
 import com.guagua.bean.dto.common.KnowledgeBaseDTO;
 import com.guagua.bean.dto.common.KnowledgeBaseItemDTO;
+import com.guagua.bean.entity.MyPageInfo;
 import com.guagua.bean.entity.common.KnowledgeBase;
 import com.guagua.bean.entity.common.KnowledgeBaseItem;
 import com.guagua.bean.entity.common.Task;
@@ -91,10 +92,12 @@ public class KnowledgeBaseServiceImpl extends BaseService implements KnowledgeBa
         }
         PageHelper.startPage(page, size);
         List<KnowledgeBase> bases = knowledgeBaseDao.findByCreatorId(userId);
-        List<KnowledgeBaseDTO> dtos = convert2KnowledgeBaseDTO(bases, creator.getUsername());
-        PageInfo<KnowledgeBaseDTO> info = new PageInfo<KnowledgeBaseDTO>(dtos);
+        PageInfo<KnowledgeBase> info = new PageInfo<KnowledgeBase>(bases);
+        List<KnowledgeBaseDTO> dtos = convert2KnowledgeBaseDTO(info.getList(), creator.getUsername());
+        MyPageInfo<KnowledgeBaseDTO> myInfo = new MyPageInfo<KnowledgeBaseDTO>(info);
+        myInfo.setList(dtos);
 
-        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("info", info);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("info", myInfo);
     }
 
     // 更新知识库

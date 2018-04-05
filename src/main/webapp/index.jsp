@@ -16,8 +16,6 @@
 
 <div class="col-lg">
     <div class="page-header" id="info">webSocket及时聊天Demo程序</div>
-
-
     <div class="input-group">
         <input type="text" class="form-control" placeholder="" id="user_info_id">
         <span class="input-group-btn">
@@ -28,6 +26,7 @@
 
 <div class="col-lg">
     <div class="input-group">
+        <input type="text" class="form-control" placeholder="接收方id" id="receiverId">
         <input type="text" class="form-control" placeholder="发送信息..." id="message">
         <span class="input-group-btn">
 				<button class="btn btn-default" type="button" id="send">发送</button>
@@ -41,12 +40,14 @@
     $(function () {
         console.log(uuid(32, 10));
 
+        testUploadArray();
+
         var websocket;
 
         function connectServer() {
             user_info_id = $('#user_info_id').val();
             if ("WebSocket" in window) {
-                websocket = new WebSocket("ws://localhost:8080/chat?userType=0&userId=" + user_info_id);
+                websocket = new WebSocket("ws://192.168.1.102:8080/chat?userType=0&userId=" + user_info_id);
             } else if ("MozWebSocket" in window) {
                 alert("MozWebSocket");
                 websocket = new MozWebSocket("ws://chat");
@@ -85,7 +86,7 @@
         });
 
         function send() {
-            var message = '{"senderId":12,"sender":"发送者:12","receiverId":15,"receiver":"接收者:15","msg":"这是一个测试","sendTime":1522480650815,"type":0}';
+            var message = '{"senderId":' + user_info_id + ',"sender":"发送者:12","receiverId":' + $('#receiverId').val() + ',"receiver":"接收者:15","msg":"' + $('#message').val() + '","sendTime":1522480650815,"type":0}';
             websocket.send(message);
         }
     })
@@ -118,6 +119,24 @@
         }
 
         return uuid.join('');
+    }
+
+    function testUploadArray() {
+        var list = new Array();
+        list.push(1);
+        list.push(2);
+        list.push(3);
+
+        $.ajax({
+            url: 'http://localhost:8080/test/upload/array',
+            type: 'POST',
+            data: {
+                'list': list
+            },
+            success: function (data) {
+                console.log(data);
+            }
+        })
     }
 </script>
 </body>

@@ -119,7 +119,6 @@ public class WebsocketHandler implements WebSocketHandler {
                     // 转发消息
                     user.sendMessage(new TextMessage(messageJson));
                     flag = true;
-                    break;
                 }
             }
             // 用户离线的情况

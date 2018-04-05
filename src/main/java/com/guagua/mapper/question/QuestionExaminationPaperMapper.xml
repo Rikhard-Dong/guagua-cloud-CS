@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.question.QuestionExaminationPaperDao">
+
+    <insert id="insertOne">
+        INSERT INTO t_question_examination_paper_question
+        (examination_id, question_id)
+        VALUES (#{examinationId}, #{questionId})
+    </insert>
+
+    <select id="countByQuestionTypeAndExamination" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_question_examination_paper_question tqepq
+            LEFT JOIN t_question tq ON tqepq.question_id = tq.id
+        WHERE tq.type = #{type} AND tqepq.examination_id = #{examinationId}
+    </select>
+
+    <select id="findByQuestionTypeAndExamination" resultType="com.guagua.bean.entity.question.Question">
+        SELECT tq.*
+        FROM t_question_examination_paper_question tqepq
+            LEFT JOIN t_question tq ON tqepq.question_id = tq.id
+        WHERE tq.type = #{type} AND tqepq.examination_id = #{examinationId}
+    </select>
+
+
+</mapper>

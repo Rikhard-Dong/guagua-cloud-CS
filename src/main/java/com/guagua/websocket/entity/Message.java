@@ -14,6 +14,7 @@ public class Message {
     private String receiver;
     private String msg;
     private Date sendTime;
+    private String sendTimeStr;
     private Integer type;       // 0 站内聊天, 1 客服与客户聊天
 
     public String getSenderId() {
@@ -72,6 +73,14 @@ public class Message {
         this.type = type;
     }
 
+    public String getSendTimeStr() {
+        return sendTimeStr;
+    }
+
+    public void setSendTimeStr(String sendTimeStr) {
+        this.sendTimeStr = sendTimeStr;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
@@ -81,6 +90,7 @@ public class Message {
                 ", receiver='" + receiver + '\'' +
                 ", msg='" + msg + '\'' +
                 ", sendTime=" + sendTime +
+                ", sendTimeStr='" + sendTimeStr + '\'' +
                 ", type=" + type +
                 '}';
     }

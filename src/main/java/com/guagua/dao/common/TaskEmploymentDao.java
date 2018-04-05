@@ -1,5 +1,6 @@
 package com.guagua.dao.common;
 
+import com.guagua.bean.entity.common.Task;
 import com.guagua.bean.entity.common.TaskEmployment;
 import com.guagua.bean.entity.common.User;
 import org.apache.ibatis.annotations.Param;
@@ -110,4 +111,20 @@ public interface TaskEmploymentDao {
      * @return
      */
     List<User> findAllCustomerServiceByEnterpriseId(Integer userId);
+
+    /**
+     * 根据memberId查询该会员参与的所有任务
+     *
+     * @param memberId
+     * @return
+     */
+    List<Task> findParticipateAllByUserId(Integer memberId);
+
+    List<Task> findParticipateNotStartByUserId(Integer userId);
+
+    List<Task> findParticipateHaveInHandByUserId(Integer userId);
+
+    List<Task> findParticipateEndByUserId(Integer userId);
+
+    List<Task> findParticipateCancelByUserId(Integer userId);
 }

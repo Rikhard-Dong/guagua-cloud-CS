@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.question.QuestionItemDao">
+
+    <insert id="insertOne">
+        INSERT into t_question_item
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="item.questionId != null">question_id,</if>
+            <if test="item.item != null">item,</if>
+            <if test="item.content != null">content,</if>
+            <if test="item.remarks != null">remarks,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="item.questionId != null">#{item.questionId},</if>
+            <if test="item.item != null">#{item.item},</if>
+            <if test="item.content != null">#{item.content},</if>
+            <if test="item.remarks != null">#{item.remarks},</if>
+        </trim>
+    </insert>
+    <delete id="deleteOne">
+        DELETE FROM t_question_item
+        WHERE id = #{itemId}
+    </delete>
+
+    <select id="countByQuestionId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_question_item
+        WHERE question_id = #{questionId}
+    </select>
+
+    <select id="findById" resultType="com.guagua.bean.entity.question.QuestionItem">
+        SELECT *
+        FROM t_question_item
+        WHERE id = #{id}
+    </select>
+
+    <select id="findByQuestionId" resultType="com.guagua.bean.entity.question.QuestionItem">
+        SELECT *
+        FROM t_question_item
+        WHERE question_id = #{questionId}
+    </select>
+
+
+</mapper>

@@ -7,7 +7,7 @@
         INSERT INTO t_permission
         <trim prefix="(" suffixOverrides="," suffix=")">
             <if test="permission.id != null">id,</if>
-            <if test="permission.username != null">username,</if>
+            <if test="permission.name != null">username,</if>
             <if test="permission.url != null">url,</if>
             <if test="permission.description != null">description,</if>
             <if test="permission.menuId != null">menu_id,</if>
@@ -15,7 +15,7 @@
         VALUES
         <trim prefix="(" suffixOverrides="," suffix=")">
             <if test="permission.id != null">#{permission.id},</if>
-            <if test="permission.username != null">#{permission.username},</if>
+            <if test="permission.name != null">#{permission.username},</if>
             <if test="permission.url != null">#{permission.url},</if>
             <if test="permission.description != null">#{permission.description},</if>
             <if test="permission.menuId != null">#{permission.menuId},</if>

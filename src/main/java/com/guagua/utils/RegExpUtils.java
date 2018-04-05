@@ -60,11 +60,22 @@ public class RegExpUtils {
      *
      * @param var1 数据库的权限表示
      * @param var2 具体的权限显示
-     * @return  结果
+     * @return 结果
      */
     public static boolean isPermissionLegal(String var1, String var2) {
         var1 = StringUtils.removeAll(var1, "\\*");
 
         return StringUtils.indexOf(var2, var1) != -1;
+    }
+
+    /**
+     * 匹配非负整数
+     *
+     * @param num
+     * @return
+     */
+    public static boolean isInteger(String num) {
+        String regExp = "^[1-9]d*|0$";
+        return num.matches(regExp);
     }
 }

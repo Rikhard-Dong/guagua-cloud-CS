@@ -59,4 +59,34 @@
                             WHERE u2.id = #{userId})
     </select>
 
+    <select id="findParticipateAllByUserId" resultType="com.guagua.bean.entity.common.Task">
+        SELECT t.*
+        FROM t_task_employment e LEFT JOIN t_task t ON e.task_id = t.id
+        WHERE e.member_id = #{memberId}
+    </select>
+
+    <select id="findParticipateNotStartByUserId" resultType="com.guagua.bean.entity.common.Task">
+        SELECT t.*
+        FROM t_task_employment e LEFT JOIN t_task t ON e.task_id = t.id
+        WHERE e.member_id = #{memberId} AND e.status = 0
+    </select>
+
+    <select id="findParticipateHaveInHandByUserId" resultType="com.guagua.bean.entity.common.Task">
+        SELECT t.*
+        FROM t_task_employment e LEFT JOIN t_task t ON e.task_id = t.id
+        WHERE e.member_id = #{memberId} AND e.status = 1
+    </select>
+
+    <select id="findParticipateEndByUserId" resultType="com.guagua.bean.entity.common.Task">
+        SELECT t.*
+        FROM t_task_employment e LEFT JOIN t_task t ON e.task_id = t.id
+        WHERE e.member_id = #{memberId} AND e.status = 2
+    </select>
+
+    <select id="findParticipateCancelByUserId" resultType="com.guagua.bean.entity.common.Task">
+        SELECT t.*
+        FROM t_task_employment e LEFT JOIN t_task t ON e.task_id = t.id
+        WHERE e.member_id = #{memberId} AND e.status = 3
+    </select>
+
 </mapper>

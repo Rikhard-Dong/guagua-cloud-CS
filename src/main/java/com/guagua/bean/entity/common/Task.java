@@ -13,6 +13,8 @@ public class Task {
 
     private Integer id;             // id
     private Integer enterpriseId;   // 发布者(企业)id
+    private String enterpriseName;  // 发布者姓名
+    private String enterpriseHeadImg;   // 发布者头像
     private String title;           // 任务标题
     private String description;     // 任务描述
     private Double baseSalary;      // 个人薪水
@@ -214,11 +216,29 @@ public class Task {
         this.status = status;
     }
 
+    public String getEnterpriseName() {
+        return enterpriseName;
+    }
+
+    public void setEnterpriseName(String enterpriseName) {
+        this.enterpriseName = enterpriseName;
+    }
+
+    public String getEnterpriseHeadImg() {
+        return enterpriseHeadImg;
+    }
+
+    public void setEnterpriseHeadImg(String enterpriseHeadImg) {
+        this.enterpriseHeadImg = enterpriseHeadImg;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
                 "id=" + id +
                 ", enterpriseId=" + enterpriseId +
+                ", enterpriseName='" + enterpriseName + '\'' +
+                ", enterpriseHeadImg='" + enterpriseHeadImg + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", baseSalary=" + baseSalary +

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.question.ExaminationPaperDao">
+
+    <insert id="insertOne">
+        INSERT INTO t_question_examination_paper
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="paper.bankId != null">bank_id,</if>
+            <if test="paper.creator != null">creator,</if>
+            <if test="paper.name != null">`name`,</if>
+            <if test="paper.description != null">description,</if>
+            <if test="paper.type != null">type,</if>
+            <if test="paper.status != null">`status`,</if>
+            <if test="paper.singleNum != null">single_num,</if>
+            <if test="paper.multipleNum != null">multiple_num,</if>
+            <if test="paper.judgementNum != null">judgement_num,</if>
+            <if test="paper.textNum != null">text_num,</if>
+            <if test="paper.num != null">num</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="paper.bankId != null">#{paper.bankId},</if>
+            <if test="paper.creator != null">#{paper.creator},</if>
+            <if test="paper.name != null">#{paper.name},</if>
+            <if test="paper.description != null">#{paper.description},</if>
+            <if test="paper.type != null">#{paper.type},</if>
+            <if test="paper.status != null">#{paper.status},</if>
+            <if test="paper.singleNum != null">#{paper.singleNum},</if>
+            <if test="paper.multipleNum != null">#{paper.multipleNum},</if>
+            <if test="paper.judgementNum != null">#{paper.judgementNum},</if>
+            <if test="paper.textNum != null">#{paper.textNum},</if>
+            <if test="paper.num != null">#{paper.num},</if>
+        </trim>
+    </insert>
+
+    <update id="updateStatus">
+        UPDATE t_question_examination_paper
+        SET `status` = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <select id="findById" resultType="com.guagua.bean.entity.question.ExaminationPaper">
+        SELECT *
+        FROM t_question_examination_paper
+        WHERE id = #{id}
+    </select>
+
+    <select id="findByBankId" resultType="com.guagua.bean.entity.question.ExaminationPaper">
+        SELECT *
+        FROM t_question_examination_paper
+        WHERE bank_id = #{bankId}
+    </select>
+
+    <select id="findManualByBankId" resultType="com.guagua.bean.entity.question.ExaminationPaper">
+        SELECT *
+        FROM t_question_examination_paper
+        WHERE bank_id = #{bankId} AND type = 1
+    </select>
+</mapper>

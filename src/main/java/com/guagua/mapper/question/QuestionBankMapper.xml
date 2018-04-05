@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.question.QuestionBankDao">
+
+    <insert id="insertOne">
+        INSERT INTO t_question_bank (bank_name, description, creator)
+        VALUES (#{bankName}, #{description}, #{creator})
+    </insert>
+
+    <update id="updateOne">
+        UPDATE t_question_bank
+        SET 1 = 1,
+        <trim suffixOverrides=",">
+            <if test="#{bank.bankName != null}">bank_name = #{bank.bankName},</if>
+            <if test="#{bank.description != null}">description = #{bank.description},</if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteOne">
+        DELETE FROM t_question_bank
+        WHERE id = #{id}
+    </delete>
+
+    <select id="queryByCreator" resultType="com.guagua.bean.entity.question.QuestionBank">
+        SELECT *
+        FROM t_question_bank
+        WHERE creator = #{creator}
+    </select>
+
+    <select id="findById" resultType="com.guagua.bean.entity.question.QuestionBank">
+        SELECT *
+        FROM t_question_bank
+        WHERE id = #{id}
+    </select>
+</mapper>

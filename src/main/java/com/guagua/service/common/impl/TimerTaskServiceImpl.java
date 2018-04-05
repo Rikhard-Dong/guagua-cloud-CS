@@ -151,9 +151,10 @@ public class TimerTaskServiceImpl extends BaseService implements TimerTaskServic
                                     "任务" + task.getTitle() + "取消, 企业支付违约金", 1);
                             backstageCashFlowDao.insertOne(backstageCashFlow);
 
-                            // 会员用户增加金额
-                            employment.setStatus(4);
+                            // 任务状态更新为3
+                            employment.setStatus(3);
                             employmentDao.updateStatus(employment.getId(), employment.getStatus());
+                            // 会员用户增加金额
                             MemberProperty property = memberPropertyDao.findByUserId(employment.getMemberId());
                             property.setBalance(property.getBalance() + task.getBaseSalary() * 0.1);
                             property.setIncomeTotal(property.getIncomeTotal() + task.getBaseSalary() * 0.1);

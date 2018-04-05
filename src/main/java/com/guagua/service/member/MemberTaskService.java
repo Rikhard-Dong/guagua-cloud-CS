@@ -35,4 +35,54 @@ public interface MemberTaskService {
      * @return
      */
     ResultDTO applicationTask(Integer userId, Integer taskId);
+
+    /**
+     * 获取所有的参与的任务
+     *
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
+    ResultDTO getParticipateAll(Integer userId, Integer page, Integer size);
+
+    /**
+     * 获取用户所有参与的未开始的任务
+     *
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
+    ResultDTO getParticipateNotStart(Integer userId, Integer page, Integer size);
+
+    /**
+     * 获取用户所有参与的已经开始的任务
+     *
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
+    ResultDTO getParticipateHaveInHand(Integer userId, Integer page, Integer size);
+
+    /**
+     * 查询所有结束的任务
+     *
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
+    ResultDTO getParticipateEnd(Integer userId, Integer page, Integer size);
+
+    /**
+     * 查询所有取消的任务
+     *
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
+    ResultDTO getParticipateCancel(Integer userId, Integer page, Integer size);
 }

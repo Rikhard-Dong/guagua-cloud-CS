@@ -14,7 +14,7 @@ public class TaskEmployment {
     private Integer taskId;
     private Integer publisherId;    // 发布者id
     private Integer memberId;
-    private Integer status;     // 0 任务未开始  1. 任务进行中 2. 任务已结束
+    private Integer status;     // 0 任务未开始  1. 任务进行中 2. 任务已结束  3.任务取消
     private Integer score;      // 任务评分
     private Date createTime;   // 建立雇佣时间
 

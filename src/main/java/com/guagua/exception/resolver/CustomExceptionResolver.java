@@ -49,6 +49,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
             }
 
             ResultDTO resultDto = new ResultDTO(customException.getMsg());
+            resultDto.setData(customException.getData());
 
             out.print(JacksonUtils.toJSon(resultDto));
             out.flush();

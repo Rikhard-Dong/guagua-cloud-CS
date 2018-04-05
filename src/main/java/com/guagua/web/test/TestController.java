@@ -6,10 +6,9 @@ import com.guagua.exception.common.CustomException;
 import com.guagua.utils.MailUtils;
 import com.guagua.utils.QiniuUtils;
 import com.guagua.web.BaseController;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/test")
@@ -44,7 +43,15 @@ public class TestController extends BaseController {
         }
 
         return new ResultDTO(DataDictionary.QUERY_SUCCESS);
+
     }
+
+    @PostMapping("/upload/array")
+    public String uploadArray(@RequestParam(value = "list[]", required = false) List<Integer> list) {
+        logger.info("list =======> {}", list);
+        return "this is test for upload list";
+    }
+
 
     public static void main(String[] args) {
         new Thread(new MailUtils("157@163.com", "111", "this is test")).run();

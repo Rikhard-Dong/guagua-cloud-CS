@@ -267,6 +267,10 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
                 if (var2 == 0) {
                     throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
                 }
+
+                // 任务取消
+                employment.setStatus(3);
+                taskEmploymentDao.updateStatus(employment.getId(), employment.getStatus());
             }
         }
 
