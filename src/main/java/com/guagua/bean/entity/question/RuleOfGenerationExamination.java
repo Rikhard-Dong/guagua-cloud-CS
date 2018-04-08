@@ -4,18 +4,16 @@ import java.util.Date;
 
 /**
  * @author ride
- * @date 18-4-4 下午7:42
+ * @date 18-4-5 下午3:14
  * <p>
- * 试卷
+ * 自动生成试卷规则
  */
-public class ExaminationPaper {
+public class RuleOfGenerationExamination {
     private Integer id;
     private Integer bankId;
     private Integer creator;
     private String name;
     private String description;
-    private Integer type;       // 0 自动生成 1 手动身材隔行
-    private Integer status;     // 0 不生效 1 生效 自动生成的试卷默认生效, 手动生成的 试卷需要绑定题目后才生效
     private Integer num;
     private Integer singleNum;
     private Integer multipleNum;
@@ -61,22 +59,6 @@ public class ExaminationPaper {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public Integer getNum() {
@@ -129,14 +111,12 @@ public class ExaminationPaper {
 
     @Override
     public String toString() {
-        return "ExaminationPaper{" +
+        return "RuleOfGenerationExamination{" +
                 "id=" + id +
                 ", bankId=" + bankId +
                 ", creator=" + creator +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", type=" + type +
-                ", status=" + status +
                 ", num=" + num +
                 ", singleNum=" + singleNum +
                 ", multipleNum=" + multipleNum +
@@ -144,49 +124,5 @@ public class ExaminationPaper {
                 ", textNum=" + textNum +
                 ", createTime=" + createTime +
                 '}';
-    }
-
-    /**
-     * 得到相关类型的题目数量
-     *
-     * @param type
-     * @return
-     */
-    public Integer getNumByType(Integer type) {
-        Integer result;
-        switch (type) {
-            case 0:
-                result = getSingleNum();
-                break;
-            case 1:
-                result = getMultipleNum();
-                break;
-            case 2:
-                result = getJudgementNum();
-                break;
-            case 3:
-                result = getTextNum();
-                break;
-            default:
-                result = -1;
-        }
-
-        return result;
-    }
-
-    /**
-     * 根据自动生成规则设置相关数量
-     *
-     * @param rule
-     */
-    public void setNum(RuleOfGenerationExamination rule) {
-        this.num = rule.getNum();
-        this.singleNum = rule.getSingleNum();
-        this.multipleNum = rule.getMultipleNum();
-        this.judgementNum = rule.getJudgementNum();
-        this.textNum = rule.getTextNum();
-        this.type = 0;
-        this.bankId = rule.getBankId();
-        this.creator = rule.getCreator();
     }
 }

@@ -99,4 +99,11 @@
         WHERE bank_id = #{bankId} AND type = #{type}
         ORDER BY create_time DESC
     </select>
+
+    <select id="findByPaperId" resultType="com.guagua.bean.entity.question.Question">
+        SELECT *
+        FROM t_question question LEFT JOIN t_question_examination_paper_question question2
+                ON question.id = question2.question_id
+        WHERE question2.examination_id = #{paperId}
+    </select>
 </mapper>

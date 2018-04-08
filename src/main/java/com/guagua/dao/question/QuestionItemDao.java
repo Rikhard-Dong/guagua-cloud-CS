@@ -31,9 +31,27 @@ public interface QuestionItemDao {
      * select
      *************************************************/
 
+    /**
+     * 统计问题下有多个选项
+     *
+     * @param questionId
+     * @return
+     */
     Integer countByQuestionId(Integer questionId);
 
+    /**
+     * 查询某个具体的选项
+     *
+     * @param id
+     * @return
+     */
     QuestionItem findById(Integer id);
 
+    /**
+     * 查询该问题下所有的选项
+     *
+     * @param questionId
+     * @return
+     */
     List<QuestionItem> findByQuestionId(Integer questionId);
 }

@@ -21,6 +21,11 @@ public class QuestionDTO {
     private List<Integer> answerIds;
     private String status;
     private List<QuestionItem> items;
+    private QuestionItem item1;
+    private QuestionItem item2;
+    private QuestionItem item3;
+    private QuestionItem item4;
+    private String answer;
     private String createTime;
 
     public QuestionDTO() {
@@ -151,8 +156,68 @@ public class QuestionDTO {
         return items;
     }
 
+    public QuestionItem getItem1() {
+        return item1;
+    }
+
+    public void setItem1(QuestionItem item1) {
+        this.item1 = item1;
+    }
+
+    public QuestionItem getItem2() {
+        return item2;
+    }
+
+    public void setItem2(QuestionItem item2) {
+        this.item2 = item2;
+    }
+
+    public QuestionItem getItem3() {
+        return item3;
+    }
+
+    public void setItem3(QuestionItem item3) {
+        this.item3 = item3;
+    }
+
+    public QuestionItem getItem4() {
+        return item4;
+    }
+
+    public void setItem4(QuestionItem item4) {
+        this.item4 = item4;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
     public void setItems(List<QuestionItem> items) {
         this.items = items;
+        if (items.size() >= 1) {
+            this.item1 = items.get(0);
+        }
+        if (items.size() >= 2) {
+            this.item2 = items.get(1);
+        }
+        if (items.size() >= 3) {
+            this.item3 = items.get(2);
+        }
+        if (items.size() >= 4) {
+            this.item4 = items.get(3);
+        }
     }
 
     @Override
@@ -168,6 +233,12 @@ public class QuestionDTO {
                 ", answerIds=" + answerIds +
                 ", status='" + status + '\'' +
                 ", items=" + items +
+                ", item1=" + item1 +
+                ", item2=" + item2 +
+                ", item3=" + item3 +
+                ", item4=" + item4 +
+                ", answer='" + answer + '\'' +
+                ", createTime='" + createTime + '\'' +
                 '}';
     }
 }

@@ -1,10 +1,7 @@
 package com.guagua.web.enterprise;
 
 import com.guagua.bean.dto.ResultDTO;
-import com.guagua.bean.entity.question.ExaminationPaper;
-import com.guagua.bean.entity.question.Question;
-import com.guagua.bean.entity.question.QuestionBank;
-import com.guagua.bean.entity.question.QuestionItem;
+import com.guagua.bean.entity.question.*;
 import com.guagua.service.question.QuestionService;
 import com.guagua.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -394,5 +391,77 @@ public class QuestionManagerController extends BaseController {
                                        @PathVariable("examinationId") Integer examinationId,
                                        HttpServletRequest request) {
         return questionService.examinationDetail(examinationId);
+    }
+
+    /* *******************************************
+     * 自动生成试卷的规则操作
+     **********************************************/
+
+
+    /**
+     * 添加一条自动生成试卷的规则
+     *
+     * @param bankId
+     * @param rule
+     * @param request
+     * @return
+     */
+    @PostMapping("/{bankId}/rule/create")
+    public ResultDTO createRule(@PathVariable("bankId") Integer bankId,
+                                RuleOfGenerationExamination rule,
+                                HttpServletRequest request) {
+        rule.setBankId(bankId);
+        rule.setCreator(getUserId(request));
+
+        return questionService.createRule(rule);
+    }
+
+    /**
+     * 删除一条
+     *
+     * @param bankId
+     * @param ruleId
+     * @param request
+     * @return
+     */
+    @DeleteMapping("/{bankId}/rule/{ruleId}/delete")
+    public ResultDTO deleteRule(@PathVariable("bankId") Integer bankId,
+                                @PathVariable("ruleId") Integer ruleId,
+                                HttpServletRequest request) {
+
+        return questionService.deleteRule(ruleId);
+    }
+
+    /**
+     * 查询题库下的所有生成规则
+     *
+     * @param bankId
+     * @param page
+     * @param size
+     * @param request
+     * @return
+     */
+    @GetMapping("/{bankId}/rule/list")
+    public ResultDTO listRules(@PathVariable("bankId") Integer bankId,
+                               @RequestParam(value = "page", defaultValue = "1") Integer page,
+                               @RequestParam(value = "size", defaultValue = "30") Integer size,
+                               HttpServletRequest request) {
+
+        return questionService.listRulesByBankId(bankId, page, size);
+    }
+
+    /**
+     * 查询用户的所有规则
+     *
+     * @param page
+     * @param size
+     * @param request
+     * @return
+     */
+    @GetMapping("/rule/list")
+    public ResultDTO listRulesByCreator(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                        @RequestParam(value = "size", defaultValue = "30") Integer size,
+                                        HttpServletRequest request) {
+        return questionService.listRulesByCreator(getUserId(request), page, size);
     }
 }

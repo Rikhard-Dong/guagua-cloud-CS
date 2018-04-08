@@ -1,6 +1,7 @@
 package com.guagua.web.test;
 
 import com.guagua.bean.dto.ResultDTO;
+import com.guagua.bean.entity.question.Answer;
 import com.guagua.enums.DataDictionary;
 import com.guagua.exception.common.CustomException;
 import com.guagua.utils.MailUtils;
@@ -9,6 +10,7 @@ import com.guagua.web.BaseController;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/test")
@@ -47,7 +49,7 @@ public class TestController extends BaseController {
     }
 
     @PostMapping("/upload/array")
-    public String uploadArray(@RequestParam(value = "list[]", required = false) List<Integer> list) {
+    public String uploadArray(@RequestBody List<Answer> list) {
         logger.info("list =======> {}", list);
         return "this is test for upload list";
     }

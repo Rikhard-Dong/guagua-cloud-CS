@@ -1,5 +1,6 @@
 package com.guagua.dao.question;
 
+import com.guagua.bean.entity.question.ExaminationPaper;
 import com.guagua.bean.entity.question.Question;
 import com.guagua.bean.entity.question.QuestionExaminationPaper;
 import org.apache.ibatis.annotations.Param;
@@ -41,4 +42,6 @@ public interface QuestionExaminationPaperDao {
 
     List<Question> findByQuestionTypeAndExamination(@Param("examinationId") Integer examinationId,
                                                     @Param("type") Integer type);
+
+
 }

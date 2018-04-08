@@ -65,6 +65,10 @@
             <if test="workingTimeEnd3 != null">working_time_end3,</if>
             <if test="workingTimeStart4 != null">working_time_start4,</if>
             <if test="workingTimeEnd4 != null">working_time_end4,</if>
+            <if test="isNeedExamination != null">is_need_examination,</if>
+            <if test="examinationType != null">examination_type,</if>
+            <if test="examinationId != null">examination_id,</if>
+            <if test="ruleId != null">rule_id,</if>
         </trim>
         VALUES
         <trim prefix="(" suffixOverrides="," suffix=")">
@@ -85,6 +89,10 @@
             <if test="workingTimeEnd3 != null">#{workingTimeEnd3},</if>
             <if test="workingTimeStart4 != null">#{workingTimeStart4},</if>
             <if test="workingTimeEnd4 != null">#{workingTimeEnd4},</if>
+            <if test="isNeedExamination != null">#{isNeedExamination},</if>
+            <if test="examinationType != null">#{examinationType}</if>
+            <if test="examinationId != null">#{examinationId},</if>
+            <if test="ruleId != null">#{ruleId},</if>
         </trim>
     </insert>
 

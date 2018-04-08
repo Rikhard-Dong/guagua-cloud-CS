@@ -1,5 +1,6 @@
 package com.guagua.dao.question;
 
+import com.guagua.bean.entity.question.Question;
 import com.guagua.bean.entity.question.QuestionBank;
 
 import java.util.List;
@@ -36,4 +37,7 @@ public interface QuestionBankDao {
 
     QuestionBank findById(Integer id);
 
+    Integer countQuestionByType(int type);
+
+    List<Question> findByType(int type);
 }

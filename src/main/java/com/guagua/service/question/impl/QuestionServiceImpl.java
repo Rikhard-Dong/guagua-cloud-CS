@@ -42,19 +42,23 @@ public class QuestionServiceImpl extends BaseService implements QuestionService 
 
     private final QuestionExaminationPaperDao questionExaminationPaperDao;
 
+    private final RuleOfGenerationExaminationDao ruleDao;
+
     @Autowired
     public QuestionServiceImpl(UserDao userDao,
                                QuestionBankDao bankDao,
                                QuestionDao questionDao,
                                QuestionItemDao itemDao,
                                ExaminationPaperDao paperDao,
-                               QuestionExaminationPaperDao questionExaminationPaperDao) {
+                               QuestionExaminationPaperDao questionExaminationPaperDao,
+                               RuleOfGenerationExaminationDao ruleDao) {
         this.userDao = userDao;
         this.bankDao = bankDao;
         this.questionDao = questionDao;
         this.itemDao = itemDao;
         this.paperDao = paperDao;
         this.questionExaminationPaperDao = questionExaminationPaperDao;
+        this.ruleDao = ruleDao;
     }
 
     // 创建一个题库
@@ -432,8 +436,8 @@ public class QuestionServiceImpl extends BaseService implements QuestionService 
 
         return new ResultDTO(DataDictionary.INSERT_SUCCESS);
     }
-    // 查询该题库下的所有试卷
 
+    // 查询该题库下的所有试卷
     public ResultDTO listManualExaminationByBankId(Integer bankId, Integer page, Integer size) {
         PageHelper.startPage(page, size);
         List<ExaminationPaper> papers = paperDao.findManualByBankId(bankId);
@@ -450,6 +454,47 @@ public class QuestionServiceImpl extends BaseService implements QuestionService 
 
         return new ResultDTO(DataDictionary.QUERY_SUCCESS)
                 .addData("examination", convert2ExaminationPaperDTO(paper));
+    }
+
+    // 自动生成试卷的规则
+    public ResultDTO createRule(RuleOfGenerationExamination rule) {
+        Integer num = rule.getSingleNum() + rule.getMultipleNum() + rule.getJudgementNum() + rule.getTextNum();
+
+        rule.setNum(num);
+
+        Integer var1 = ruleDao.insertOne(rule);
+        if (var1 == 0) {
+            throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
+        }
+        return new ResultDTO(DataDictionary.INSERT_SUCCESS);
+    }
+
+    // 删除一条记录
+    public ResultDTO deleteRule(Integer ruleId) {
+
+        Integer var1 = ruleDao.deleteOne(ruleId);
+        if (var1 == 0) {
+            throw new CustomException(DataDictionary.DELETE_FAIL);
+        }
+
+        return new ResultDTO(DataDictionary.DELETE_SUCCESS);
+    }
+
+    // 查询知识库下的规则
+    public ResultDTO listRulesByBankId(Integer bankId, Integer page, Integer size) {
+        PageHelper.startPage(page, size);
+        List<RuleOfGenerationExamination> rules = ruleDao.findByBankId(bankId);
+        PageInfo<RuleOfGenerationExamination> info = new PageInfo<RuleOfGenerationExamination>(rules);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("rules", info);
+    }
+
+    // 查询用户所创建的规则
+    public ResultDTO listRulesByCreator(Integer userId, Integer page, Integer size) {
+        PageHelper.startPage(page, size);
+        List<RuleOfGenerationExamination> rules = ruleDao.findByCreator(userId);
+        PageInfo<RuleOfGenerationExamination> info = new PageInfo<RuleOfGenerationExamination>(rules);
+
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("rules", info);
     }
 
     /**
@@ -635,12 +680,32 @@ public class QuestionServiceImpl extends BaseService implements QuestionService 
                 .findByQuestionTypeAndExamination(paper.getId(), 3);
 
         result.setSingleCurNum(singleQuestions == null ? 0 : singleQuestions.size());
+        if (singleQuestions != null && singleQuestions.size() > 0) {
+            for (Question question : singleQuestions) {
+                List<QuestionItem> items = itemDao.findByQuestionId(question.getId());
+                question.setItems(items);
+            }
+        }
         result.setSingleQuestions(singleQuestions);
 
         result.setMultipleCurNum(multipleQuestions == null ? 0 : multipleQuestions.size());
+        if (multipleQuestions != null && multipleQuestions.size() > 0) {
+            for (Question question : multipleQuestions) {
+                List<QuestionItem> items = itemDao.findByQuestionId(question.getId());
+                question.setItems(items);
+            }
+        }
         result.setMultipleQuestions(multipleQuestions);
 
         result.setJudgementCurNum(judgementQuestions == null ? 0 : judgementQuestions.size());
+        if (judgementQuestions != null && judgementQuestions.size() > 0) {
+            List<QuestionItem> items = new ArrayList<QuestionItem>();
+            items.add(itemDao.findById(1));
+            items.add(itemDao.findById(0));
+            for (Question question : judgementQuestions) {
+                question.setItems(items);
+            }
+        }
         result.setJudgementQuestions(judgementQuestions);
 
         result.setTextCurNum(textQuestions == null ? 0 : textQuestions.size());

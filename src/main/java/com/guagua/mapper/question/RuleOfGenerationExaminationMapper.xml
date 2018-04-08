@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.guagua.dao.question.RuleOfGenerationExaminationDao">
+    <insert id="insertOne">
+        INSERT INTO t_question_rule_of_generation_examination
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="rule.bankId != null">bank_id,</if>
+            <if test="rule.creator != null">creator,</if>
+            <if test="rule.name != null">`name`,</if>
+            <if test="rule.description != null">description,</if>
+            <if test="rule.num != null">num,</if>
+            <if test="rule.singleNum != null">single_num,</if>
+            <if test="rule.multipleNum != null">multiple_num,</if>
+            <if test="rule.judgementNum != null">judgement_num,</if>
+            <if test="rule.textNum != null">text_num,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="rule.bankId != null">#{rule.bankId},</if>
+            <if test="rule.creator != null">#{rule.creator},</if>
+            <if test="rule.name != null">#{rule.name},</if>
+            <if test="rule.description != null">#{rule.description},</if>
+            <if test="rule.num != null">#{rule.num},</if>
+            <if test="rule.singleNum != null">#{rule.singleNum},</if>
+            <if test="rule.multipleNum != null">#{rule.multipleNum},</if>
+            <if test="rule.judgementNum != null">#{rule.judgementNum},</if>
+            <if test="rule.textNum != null">#{rule.textNum},</if>
+        </trim>
+    </insert>
+
+
+    <delete id="deleteOne">
+        DELETE FROM t_question_rule_of_generation_examination
+        WHERE id = #{id}
+    </delete>
+
+    <select id="findByCreator" resultType="com.guagua.bean.entity.question.RuleOfGenerationExamination">
+        SELECT *
+        FROM t_question_rule_of_generation_examination
+        WHERE bank_id = #{bankId}
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="findByBankId" resultType="com.guagua.bean.entity.question.RuleOfGenerationExamination">
+        SELECT *
+        FROM t_question_rule_of_generation_examination
+        WHERE creator = #{creator}
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="findById" resultType="com.guagua.bean.entity.question.RuleOfGenerationExamination">
+        SELECT *
+        FROM t_question_rule_of_generation_examination
+        WHERE id = #{id}
+        LIMIT 1
+    </select>
+</mapper>

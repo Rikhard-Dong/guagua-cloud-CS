@@ -1,10 +1,7 @@
 package com.guagua.service.question;
 
 import com.guagua.bean.dto.ResultDTO;
-import com.guagua.bean.entity.question.ExaminationPaper;
-import com.guagua.bean.entity.question.Question;
-import com.guagua.bean.entity.question.QuestionBank;
-import com.guagua.bean.entity.question.QuestionItem;
+import com.guagua.bean.entity.question.*;
 
 import java.util.List;
 
@@ -189,4 +186,38 @@ public interface QuestionService {
      */
     ResultDTO examinationDetail(Integer examinationId);
 
+    /**
+     * 创建一个自动生成的试卷的规则
+     *
+     * @param rule
+     * @return
+     */
+    ResultDTO createRule(RuleOfGenerationExamination rule);
+
+    /**
+     * 删除一条规则
+     *
+     * @param ruleId
+     * @return
+     */
+    ResultDTO deleteRule(Integer ruleId);
+
+    /**
+     * 列出题库下所有的自动生成试卷规则
+     *
+     * @param bankId
+     * @return
+     */
+    ResultDTO listRulesByBankId(Integer bankId, Integer page, Integer size);
+
+
+    /**
+     * 查询用户创建的所有自动生成试卷的规则
+     *
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
+    ResultDTO listRulesByCreator(Integer userId, Integer page, Integer size);
 }

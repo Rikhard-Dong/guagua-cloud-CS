@@ -3,34 +3,35 @@
 
 <mapper namespace="com.guagua.dao.question.ExaminationPaperDao">
 
-    <insert id="insertOne">
+    <insert id="insertOne" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.guagua.bean.entity.question.ExaminationPaper">
         INSERT INTO t_question_examination_paper
         <trim prefix="(" suffixOverrides="," suffix=")">
-            <if test="paper.bankId != null">bank_id,</if>
-            <if test="paper.creator != null">creator,</if>
-            <if test="paper.name != null">`name`,</if>
-            <if test="paper.description != null">description,</if>
-            <if test="paper.type != null">type,</if>
-            <if test="paper.status != null">`status`,</if>
-            <if test="paper.singleNum != null">single_num,</if>
-            <if test="paper.multipleNum != null">multiple_num,</if>
-            <if test="paper.judgementNum != null">judgement_num,</if>
-            <if test="paper.textNum != null">text_num,</if>
-            <if test="paper.num != null">num</if>
+            <if test="bankId != null">bank_id,</if>
+            <if test="creator != null">creator,</if>
+            <if test="name != null">`name`,</if>
+            <if test="description != null">description,</if>
+            <if test="type != null">type,</if>
+            <if test="status != null">`status`,</if>
+            <if test="singleNum != null">single_num,</if>
+            <if test="multipleNum != null">multiple_num,</if>
+            <if test="judgementNum != null">judgement_num,</if>
+            <if test="textNum != null">text_num,</if>
+            <if test="num != null">num</if>
         </trim>
         VALUES
         <trim prefix="(" suffixOverrides="," suffix=")">
-            <if test="paper.bankId != null">#{paper.bankId},</if>
-            <if test="paper.creator != null">#{paper.creator},</if>
-            <if test="paper.name != null">#{paper.name},</if>
-            <if test="paper.description != null">#{paper.description},</if>
-            <if test="paper.type != null">#{paper.type},</if>
-            <if test="paper.status != null">#{paper.status},</if>
-            <if test="paper.singleNum != null">#{paper.singleNum},</if>
-            <if test="paper.multipleNum != null">#{paper.multipleNum},</if>
-            <if test="paper.judgementNum != null">#{paper.judgementNum},</if>
-            <if test="paper.textNum != null">#{paper.textNum},</if>
-            <if test="paper.num != null">#{paper.num},</if>
+            <if test="bankId != null">#{bankId},</if>
+            <if test="creator != null">#{creator},</if>
+            <if test="name != null">#{name},</if>
+            <if test="description != null">#{description},</if>
+            <if test="type != null">#{type},</if>
+            <if test="status != null">#{status},</if>
+            <if test="singleNum != null">#{singleNum},</if>
+            <if test="multipleNum != null">#{multipleNum},</if>
+            <if test="judgementNum != null">#{judgementNum},</if>
+            <if test="textNum != null">#{textNum},</if>
+            <if test="num != null">#{num},</if>
         </trim>
     </insert>
 

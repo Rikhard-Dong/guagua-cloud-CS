@@ -1,5 +1,8 @@
 package com.guagua.singleton;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 
 /**
@@ -9,6 +12,9 @@ import java.util.*;
  * 单例, 存放在线的客服id
  */
 public class MemberSingleton {
+
+    private static final Logger logger = LoggerFactory.getLogger(MemberSingleton.class);
+
     private static volatile MemberSingleton INSTANCE = null;
 
     // 保存在线客服所有ID
@@ -17,12 +23,16 @@ public class MemberSingleton {
     // 保存客服和对应的任务
     private Map<Integer, List<Integer>> members;
 
+    // 客服处理接入的数量
+    private Map<Integer, Integer> memberAccesses;
+
     /**
      * 私有构造函数
      */
     private MemberSingleton() {
         members = new HashMap<Integer, List<Integer>>();
         onlineMembers = new HashSet<Integer>();
+        memberAccesses = new HashMap<Integer, Integer>();
     }
 
     /**
@@ -91,6 +101,36 @@ public class MemberSingleton {
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * 客服接入一个服务对象
+     *
+     * @param memberId
+     */
+    public void accessCustomer(Integer memberId) {
+        Integer count = memberAccesses.get(memberId);
+        if (count == null) {
+            memberAccesses.put(memberId, 1);
+            return;
+        }
+        count++;
+        memberAccesses.put(memberId, count);
+    }
+
+    /**
+     * 客服减少一个服务对象
+     *
+     * @param memberId
+     */
+    public void removeCustomer(Integer memberId) {
+        Integer count = memberAccesses.get(memberId);
+        if (count != null && count > 0) {
+            count--;
+            memberAccesses.put(memberId, count);
+        } else {
+            logger.error("更新客服处理服务对象的操作异常");
         }
     }
 

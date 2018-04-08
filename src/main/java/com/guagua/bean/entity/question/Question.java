@@ -1,6 +1,7 @@
 package com.guagua.bean.entity.question;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author ride
@@ -17,6 +18,8 @@ public class Question {
     private String standardAnswer;     // 对应itemId, 如果是多选题的话, 使用'-'拼接id
     private Integer status;         // 题目生效是否 0 不生效, 1 生效, 判断题和文字题默认生效, 如果是单选题和多选题, 则需要选项达到3个才生效
     private Date createTime;
+
+    private List<QuestionItem> items;
 
 
     public Integer getId() {
@@ -99,6 +102,15 @@ public class Question {
         this.createTime = createTime;
     }
 
+
+    public List<QuestionItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<QuestionItem> items) {
+        this.items = items;
+    }
+
     @Override
     public String toString() {
         return "Question{" +
@@ -112,6 +124,7 @@ public class Question {
                 ", standardAnswer='" + standardAnswer + '\'' +
                 ", status=" + status +
                 ", createTime=" + createTime +
+                ", items=" + items +
                 '}';
     }
 }

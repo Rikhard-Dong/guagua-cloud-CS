@@ -203,6 +203,11 @@ public class KnowledgeBaseServiceImpl extends BaseService implements KnowledgeBa
         return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("bases", info);
     }
 
+    public ResultDTO itemDetail(Integer itemId) {
+        KnowledgeBaseItem item = itemDao.findByItemId(itemId);
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("item", item);
+    }
+
     /**
      * 将base 转换成dto
      *

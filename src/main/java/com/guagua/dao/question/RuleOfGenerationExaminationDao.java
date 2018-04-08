@@ -1,40 +1,38 @@
 package com.guagua.dao.question;
 
-import com.guagua.bean.entity.question.ExaminationPaper;
-import com.guagua.bean.entity.question.Question;
+import com.guagua.bean.entity.question.RuleOfGenerationExamination;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
  * @author ride
- * @date 18-4-4 下午7:47
+ * @date 18-4-5 下午3:16
  */
-public interface ExaminationPaperDao {
-
+public interface RuleOfGenerationExaminationDao {
     /* ************************************************
      * insert
      *************************************************/
-    Integer insertOne(ExaminationPaper paper);
 
+    Integer insertOne(@Param("rule") RuleOfGenerationExamination rule);
 
     /* ************************************************
      * update
      *************************************************/
 
-    Integer updateStatus(@Param("id") Integer id,
-                         @Param("status") Integer status);
-
     /* ************************************************
      * delete
      *************************************************/
+
+    Integer deleteOne(Integer id);
+
     /* ************************************************
      * select
      *************************************************/
 
-    ExaminationPaper findById(Integer id);
+    List<RuleOfGenerationExamination> findByBankId(Integer bankId);
 
-    List<ExaminationPaper> findByBankId(Integer bankId);
+    List<RuleOfGenerationExamination> findByCreator(Integer creator);
 
-    List<ExaminationPaper> findManualByBankId(Integer bankId);
+    RuleOfGenerationExamination findById(Integer ruleId);
 }

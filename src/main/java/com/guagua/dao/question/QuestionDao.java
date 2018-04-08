@@ -53,4 +53,12 @@ public interface QuestionDao {
 
     List<Question> findAllByBankIdAndType(@Param("bankId") Integer bankId,
                                           @Param("type") Integer type);
+
+    /**
+     * 查询该试卷下的所有问题
+     *
+     * @param paperId
+     * @return
+     */
+    List<Question> findByPaperId(Integer paperId);
 }

@@ -201,6 +201,14 @@ public class KnowledgeBaseController extends BaseController {
         return knowledgeBaseService.listItems(getUserId(request), knowledgeBaseId, page, size);
     }
 
+    @GetMapping("/{knowledgeBaseId}/item/{itemId}/detail")
+    public ResultDTO itemDetail(@PathVariable("knowledgeBaseId") Integer knowledgeBaseId,
+                                @PathVariable("itemId") Integer itemId,
+                                HttpServletRequest request) {
+
+        return knowledgeBaseService.itemDetail(itemId);
+    }
+
     /**
      * 查询任务相关的知识库信息
      *

@@ -1,6 +1,9 @@
 package com.guagua.service.member;
 
 import com.guagua.bean.dto.ResultDTO;
+import com.guagua.bean.entity.question.Answer;
+
+import java.util.List;
 
 /**
  * @author ride
@@ -35,6 +38,25 @@ public interface MemberTaskService {
      * @return
      */
     ResultDTO applicationTask(Integer userId, Integer taskId);
+
+    /**
+     * 获取试卷
+     *
+     * @param userId
+     * @param taskId
+     * @return
+     */
+    ResultDTO getExamination(Integer userId, Integer taskId);
+
+    /**
+     * 提交答卷
+     *
+     * @param userId
+     * @param taskId
+     * @param answers
+     * @return
+     */
+    ResultDTO handExamination(Integer userId, Integer taskId, Integer paperId, List<Answer> answers);
 
     /**
      * 获取所有的参与的任务

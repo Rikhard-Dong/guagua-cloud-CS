@@ -127,10 +127,18 @@ public class WebsocketHandler implements WebSocketHandler {
             }
 
         } else if (message.getType() == 1) {    // 客服与客户交流的情况
-            // TODO 连线后需要根据后台情况选择一个客服进行服务
-
+            for (WebSocketSession user : users) {
+                UserInfo userInfo = (UserInfo) user.getAttributes().get("USERINFO");
+                if (userInfo == null || userInfo.getUserType().equals(UserInfo.USER_TYPE_OTHER)) {
+                    continue;
+                }
+                if (StringUtils.equals(userInfo.getUserId(), message.getReceiverId())) {
+                    user.sendMessage(new TextMessage(messageJson));
+                }
+            }
 
             // TODO 同样需要记录客户的聊天的内容
+
         }
     }
 

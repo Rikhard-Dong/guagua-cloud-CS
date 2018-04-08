@@ -38,9 +38,12 @@
     var user_info_id;
 
     $(function () {
-        console.log(uuid(32, 10));
+        testUploadList();
+        // testListQuestion();
 
-        testUploadArray();
+        // console.log(uuid(32, 10));
+
+        // testUploadArray();
 
         var websocket;
 
@@ -137,6 +140,49 @@
                 console.log(data);
             }
         })
+    }
+
+    function testListQuestion() {
+        $.ajax({
+            url: 'http://localhost:8080/enterprise/question_bank/1/question/list',
+            type: 'GET',
+            headers: {
+                'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6IjE4MzI5MDY3NTAzIiwiZXhwIjoxNTIzMTkwMjA5LCJ1c2VySWQiOjEyfQ.0D-ng9N3mWCIFkKYd6YknVMG6UcTQdNR667osriAaNg'
+            },
+            success: function (data) {
+                // data = eval("(" + data + ")");
+                var questions = data.data.questions.list;
+                questions.forEach(function (value) {
+                    console.log(value.question);
+                    items = value.items;
+                    if (items != null && items.length > 0) {
+                        console.log("拥有选项:");
+                        items.forEach(function (value2) {
+                            console.log(value2.item + ":" + value2.content);
+                        });
+                    }
+                    console.log("##############################");
+                });
+
+            }
+        })
+    }
+
+    function testUploadList() {
+        var answerList = new Array();
+        answerList.push({questionId: 1, answer: '1111'});
+        answerList.push({questionId: 2, answer: '2222'});
+        $.ajax({
+                url: 'http://localhost:8080/test//upload/array',
+                type: 'POST',
+                data: JSON.stringify(answerList),
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    console.log(data)
+                }
+            }
+        )
     }
 </script>
 </body>

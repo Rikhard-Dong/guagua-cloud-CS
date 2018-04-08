@@ -1,6 +1,7 @@
 package com.guagua.web.member;
 
 import com.guagua.bean.dto.ResultDTO;
+import com.guagua.bean.entity.question.Answer;
 import com.guagua.service.member.MemberTaskService;
 import com.guagua.web.BaseController;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author ride
@@ -65,6 +67,38 @@ public class TaskHallController extends BaseController {
     @PostMapping("/task/{taskId}/application")
     public ResultDTO applicationTask(@PathVariable("taskId") Integer taskId,
                                      HttpServletRequest request) {
+
         return taskService.applicationTask(getUserId(request), taskId);
+    }
+
+    /**
+     * 得到试卷
+     *
+     * @param taskId
+     * @param request
+     * @return
+     */
+    @GetMapping("/task/{taskId}/get_examination")
+    public ResultDTO getExamination(@PathVariable("taskId") Integer taskId,
+                                    HttpServletRequest request) {
+
+        return taskService.getExamination(getUserId(request), taskId);
+    }
+
+    /**
+     * 提交答卷
+     *
+     * @param taskId
+     * @param answers
+     * @param request
+     * @return
+     */
+    @PostMapping("/task/{taskId}/examination/{paperId}/hand_exam")
+    public ResultDTO handExamination(@PathVariable("taskId") Integer taskId,
+                                     @PathVariable("paperId") Integer paperId,
+                                     @RequestBody List<Answer> answers,
+                                     HttpServletRequest request) {
+
+        return taskService.handExamination(getUserId(request), taskId, paperId, answers);
     }
 }

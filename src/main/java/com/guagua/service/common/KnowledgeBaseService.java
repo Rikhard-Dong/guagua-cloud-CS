@@ -119,4 +119,12 @@ public interface KnowledgeBaseService {
      * @return
      */
     ResultDTO findBaseByTaskId(Integer userId, Integer taskId, Integer page, Integer size);
+
+    /**
+     * 查询知识库中摸个某个item的详细信息
+     *
+     * @param itemId
+     * @return
+     */
+    ResultDTO itemDetail(Integer itemId);
 }

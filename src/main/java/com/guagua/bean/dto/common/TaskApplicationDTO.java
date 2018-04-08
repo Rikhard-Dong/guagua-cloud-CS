@@ -1,6 +1,7 @@
 package com.guagua.bean.dto.common;
 
 import com.guagua.bean.entity.common.TaskApplication;
+import com.guagua.bean.entity.common.User;
 import com.guagua.utils.DateUtils;
 
 /**
@@ -16,6 +17,16 @@ public class TaskApplicationDTO {
     private Integer status;
     private String statusDesc;
     private String createTime;
+
+    private String sex;
+    private String phone;
+    private String qq;
+    private String wechat;
+    private String address;
+    private String description;
+    private String educationalExperience;
+    private String email;
+
 
     public TaskApplicationDTO() {
     }
@@ -46,6 +57,28 @@ public class TaskApplicationDTO {
             default:
                 this.statusDesc = "状态错误";
         }
+    }
+
+    public void setMemberInfo(User member) {
+        this.memberName = member.getUsername();
+        switch (member.getSex()) {
+            case 0:
+                this.sex = "未知";
+                break;
+            case 1:
+                this.sex = "女";
+                break;
+            case 2:
+                this.sex = "男";
+                break;
+        }
+        this.qq = member.getQq();
+        this.wechat = member.getWechat();
+        this.phone = member.getPhone();
+        this.email = member.getEmail();
+        this.description = member.getDescription();
+        this.address = member.getAddress();
+        this.educationalExperience = member.getEducationalExperience();
     }
 
     public Integer getId() {
@@ -112,6 +145,70 @@ public class TaskApplicationDTO {
         this.createTime = createTime;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getEducationalExperience() {
+        return educationalExperience;
+    }
+
+    public void setEducationalExperience(String educationalExperience) {
+        this.educationalExperience = educationalExperience;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "TaskApplicationDTO{" +
@@ -119,10 +216,18 @@ public class TaskApplicationDTO {
                 ", taskId=" + taskId +
                 ", taskName='" + taskName + '\'' +
                 ", memberId=" + memberId +
-                ", memberName=" + memberName +
+                ", memberName='" + memberName + '\'' +
                 ", status=" + status +
                 ", statusDesc='" + statusDesc + '\'' +
                 ", createTime='" + createTime + '\'' +
+                ", sex='" + sex + '\'' +
+                ", phone='" + phone + '\'' +
+                ", qq='" + qq + '\'' +
+                ", wechat='" + wechat + '\'' +
+                ", address='" + address + '\'' +
+                ", description='" + description + '\'' +
+                ", educationalExperience='" + educationalExperience + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

@@ -92,7 +92,8 @@ public enum DataDictionary {
     OPERATION_SUCCESS(16, "操作成功"),
     ALREADY_APPLICATION_THIS_TASK(-12, "已经参与过该任务的投标"),
     ALREADY_AGREE(-13, "已经同意, 无需再次同意"),
-    ERROR(-100, "错误");
+    ERROR(-100, "错误"),
+    NEED_EXAMINATION(-12, "该任务需要笔试");
 
     private Integer code;       // 状态码
     private String msg;         // 描述信息

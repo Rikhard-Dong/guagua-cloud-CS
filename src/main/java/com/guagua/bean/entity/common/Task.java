@@ -35,6 +35,11 @@ public class Task {
     private Boolean needUploadFile; // 是否需要上传相关文件
     private String uploadFilePath;  // 文件上传路径
     private Integer status;         // 任务状态, 参见任务状态字典
+    private Integer isNeedExamination;  // 0 不需要 1 需要
+    private Integer examinationType;    // 选择试卷 0 自动生成试卷 1 手动创建
+    private Integer ruleId;
+    private Integer examinationId;
+
 
     public Task() {
     }
@@ -232,6 +237,38 @@ public class Task {
         this.enterpriseHeadImg = enterpriseHeadImg;
     }
 
+    public Integer getIsNeedExamination() {
+        return isNeedExamination;
+    }
+
+    public void setIsNeedExamination(Integer isNeedExamination) {
+        this.isNeedExamination = isNeedExamination;
+    }
+
+    public Integer getExaminationType() {
+        return examinationType;
+    }
+
+    public void setExaminationType(Integer examinationType) {
+        this.examinationType = examinationType;
+    }
+
+    public Integer getRuleId() {
+        return ruleId;
+    }
+
+    public void setRuleId(Integer ruleId) {
+        this.ruleId = ruleId;
+    }
+
+    public Integer getExaminationId() {
+        return examinationId;
+    }
+
+    public void setExaminationId(Integer examinationId) {
+        this.examinationId = examinationId;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
@@ -259,6 +296,10 @@ public class Task {
                 ", needUploadFile=" + needUploadFile +
                 ", uploadFilePath='" + uploadFilePath + '\'' +
                 ", status=" + status +
+                ", isNeedExamination=" + isNeedExamination +
+                ", examinationType=" + examinationType +
+                ", ruleId=" + ruleId +
+                ", examinationId=" + examinationId +
                 '}';
     }
 }

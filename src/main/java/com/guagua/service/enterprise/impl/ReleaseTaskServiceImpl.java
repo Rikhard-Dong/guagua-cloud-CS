@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.guagua.bean.dto.ResultDTO;
 import com.guagua.bean.dto.common.TaskApplicationDTO;
 import com.guagua.bean.dto.common.UserDTO;
+import com.guagua.bean.entity.MyPageInfo;
 import com.guagua.bean.entity.admin.BackstageCapital;
 import com.guagua.bean.entity.admin.BackstageCashFlow;
 import com.guagua.bean.entity.common.*;
@@ -361,12 +362,15 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
 
         PageHelper.startPage(page, size);
         List<TaskApplication> applications = taskApplicationDao.findByTaskId(taskId);
-        List<TaskApplicationDTO> dtos = convert2TaskApplicationDTO(applications);
-        PageInfo<TaskApplicationDTO> info = new PageInfo<TaskApplicationDTO>(dtos);
+        PageInfo<TaskApplication> info = new PageInfo<TaskApplication>(applications);
+        List<TaskApplicationDTO> dtos = convert2TaskApplicationDTO(info.getList());
+        MyPageInfo<TaskApplicationDTO> myInfo = new MyPageInfo<TaskApplicationDTO>(info);
+        myInfo.setList(dtos);
 
-        return new ResultDTO(DataDictionary.OPERATION_SUCCESS).addData("applications", info);
+        return new ResultDTO(DataDictionary.OPERATION_SUCCESS).addData("applications", myInfo);
     }
 
+    // 查询所有未处理的申请
     public ResultDTO queryAllUntreatedApplication(Integer userId, Integer taskId, Integer page, Integer size) {
         Task task = taskDao.findByTaskId(taskId);
         if (task == null) {
@@ -375,10 +379,12 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
 
         PageHelper.startPage(page, size);
         List<TaskApplication> applications = taskApplicationDao.findUntreatedByTaskId(taskId);
-        List<TaskApplicationDTO> dtos = convert2TaskApplicationDTO(applications);
-        PageInfo<TaskApplicationDTO> info = new PageInfo<TaskApplicationDTO>(dtos);
+        PageInfo<TaskApplication> info = new PageInfo<TaskApplication>(applications);
+        List<TaskApplicationDTO> dtos = convert2TaskApplicationDTO(info.getList());
+        MyPageInfo<TaskApplicationDTO> myInfo = new MyPageInfo<TaskApplicationDTO>(info);
+        myInfo.setList(dtos);
 
-        return new ResultDTO(DataDictionary.OPERATION_SUCCESS).addData("applications", info);
+        return new ResultDTO(DataDictionary.OPERATION_SUCCESS).addData("applications", myInfo);
     }
 
     // 同意申请
@@ -566,7 +572,7 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
             Task task = taskDao.findByTaskId(application.getTaskId());
             User user = userDao.findById(application.getMemberId());
             dto.setTaskName(task.getTitle());
-            dto.setMemberName(user.getUsername());
+            dto.setMemberInfo(user);
             dtos.add(dto);
         }
         return dtos;

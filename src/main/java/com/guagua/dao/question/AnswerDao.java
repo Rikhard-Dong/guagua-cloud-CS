@@ -1,40 +1,42 @@
 package com.guagua.dao.question;
 
-import com.guagua.bean.entity.question.ExaminationPaper;
-import com.guagua.bean.entity.question.Question;
-import org.apache.ibatis.annotations.Param;
+import com.guagua.bean.entity.question.Answer;
 
 import java.util.List;
 
 /**
  * @author ride
- * @date 18-4-4 下午7:47
+ * @date 18-4-6 下午1:08
  */
-public interface ExaminationPaperDao {
+public interface AnswerDao {
 
     /* ************************************************
      * insert
      *************************************************/
-    Integer insertOne(ExaminationPaper paper);
+
+    Integer insertOne(Answer answer);
+
+    /**
+     * 批量插入
+     *
+     * @param temp
+     * @return
+     */
+    Integer insertBatch(List<Answer> temp);
 
 
     /* ************************************************
      * update
      *************************************************/
 
-    Integer updateStatus(@Param("id") Integer id,
-                         @Param("status") Integer status);
 
     /* ************************************************
      * delete
      *************************************************/
+
     /* ************************************************
      * select
      *************************************************/
 
-    ExaminationPaper findById(Integer id);
-
-    List<ExaminationPaper> findByBankId(Integer bankId);
-
-    List<ExaminationPaper> findManualByBankId(Integer bankId);
+    List<Answer> findBySheetId(Integer sheetId);
 }
