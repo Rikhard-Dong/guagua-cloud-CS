@@ -7,9 +7,29 @@
         INSERT INTO t_role (role_name, name, description) VALUES (#{roleName}, #{name}, #{description})
     </insert>
 
+    <update id="updateRole">
+        UPDATE t_role SET
+        <trim suffixOverrides=",">
+            <if test="roleName != null">role_name = #{roleName},</if>
+            <if test="description != null">description = #{description},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteByRoleId">
+        DELETE * FROM t_role
+        WHERE id = #{roleId}
+    </delete>
+
     <select id="findAllRoles" resultType="com.guagua.bean.entity.common.Role">
         SELECT *
         FROM t_user_role;
+    </select>
+
+    <select id="findById" resultType="com.guagua.bean.entity.common.Role">
+        SELECT *
+        FROM t_role
+        WHERE id = #{roleId}
     </select>
 
 </mapper>

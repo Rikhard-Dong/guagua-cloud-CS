@@ -123,7 +123,8 @@ public class MemberTaskServiceImpl extends BaseService implements MemberTaskServ
         if (task.getIsNeedExamination() == 1) {
             AnswerSheet sheet = sheetDao.findByAnswererAndTaskId(userId, taskId);
             if (sheet == null) {
-                throw new CustomException(DataDictionary.NEED_EXAMINATION).addData("detail", "该任务需要进行笔试之后才能提交申请");
+                throw new CustomException(DataDictionary.NEED_EXAMINATION)
+                        .addData("detail", "该任务需要进行笔试之后才能提交申请");
             }
         }
 

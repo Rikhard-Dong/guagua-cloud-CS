@@ -21,6 +21,29 @@ public interface RoleDao {
      */
     Integer insertRole(Role role);
 
+    /* ************************************************
+     * update
+     *************************************************/
+
+    /**
+     * update role
+     *
+     * @param role
+     * @return
+     */
+    Integer updateRole(Role role);
+
+    /* ************************************************
+     * delete
+     *************************************************/
+
+    /**
+     * delete role by role id
+     *
+     * @param roleId role id
+     * @return result
+     */
+    Integer deleteByRoleId(Integer roleId);
 
     /* ************************************************
      * select
@@ -33,4 +56,11 @@ public interface RoleDao {
      */
     List<Role> findAllRoles();
 
+    /**
+     * find role by role id
+     *
+     * @param roleId role id
+     * @return role
+     */
+    Role findById(Integer roleId);
 }

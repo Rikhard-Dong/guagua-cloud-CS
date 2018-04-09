@@ -64,6 +64,7 @@
             connectServer();
 
             websocket.onopen = function (event) {
+                console.log(event.data);
                 $("#info").html("连接成功");
             };
 

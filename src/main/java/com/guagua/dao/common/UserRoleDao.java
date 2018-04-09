@@ -25,6 +25,14 @@ public interface UserRoleDao {
      */
     Integer insertUserRole(UserRole userRole);
 
+    /**
+     * batch insert user role contact
+     *
+     * @param userRoles list of user role info
+     * @return result
+     */
+    Integer insertBatch(List<UserRole> userRoles);
+
     /* ************************************************
      * delete
      *************************************************/
@@ -36,6 +44,16 @@ public interface UserRoleDao {
      * @return id
      */
     Integer deleteById(Integer id);
+
+    /**
+     * delete by user id and role id
+     *
+     * @param userId user id
+     * @param roleId role id
+     * @return result
+     */
+    Integer deleteByUserAndRole(@Param("userId") Integer userId,
+                                @Param("roleId") Integer roleId);
 
     /* ************************************************
      * select
@@ -58,4 +76,6 @@ public interface UserRoleDao {
      */
     UserRole findByUserIdAndRoleId(@Param("userId") Integer userId,
                                    @Param("roleId") Integer roleId);
+
+
 }

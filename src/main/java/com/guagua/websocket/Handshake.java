@@ -6,8 +6,10 @@ import com.guagua.dao.common.CustomerInfoDao;
 import com.guagua.dao.common.UserDao;
 import com.guagua.enums.DataDictionary;
 import com.guagua.exception.common.CustomException;
+import com.guagua.singleton.MemberSingleton;
 import com.guagua.utils.SpringContextUtils;
 import com.guagua.websocket.entity.UserInfo;
+import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.util.Map;
 
 /**
@@ -32,6 +36,7 @@ public class Handshake implements HandshakeInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(Handshake.class);
 
 
+    MemberSingleton singleton = MemberSingleton.getInstance();
     private CustomerInfoDao customerInfoDao;
 
 
@@ -55,6 +60,7 @@ public class Handshake implements HandshakeInterceptor {
                 logger.info("user type ======> {}\n" +
                         "user id ==========> {}\n\n", userType, userId);
                 userInfo.setUserId(String.valueOf(userId));
+
             } else if (userType.equals(UserInfo.USER_TYPE_ANON)) {
                 // 如果是匿名用户, 完善信息
                 String userId = request.getServletRequest().getParameter("userId");
@@ -81,6 +87,10 @@ public class Handshake implements HandshakeInterceptor {
                 customer.setEmail(email);
 
                 insertCustomerInfo(customer);
+
+                // 任务累计加1
+                Integer csId = Integer.valueOf(request.getServletRequest().getParameter("csId"));
+                singleton.accessCustomer(csId);
             }
 
             HttpSession session = request.getServletRequest().getSession(true);

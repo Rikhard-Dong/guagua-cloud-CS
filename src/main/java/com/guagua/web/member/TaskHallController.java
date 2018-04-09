@@ -99,6 +99,8 @@ public class TaskHallController extends BaseController {
                                      @RequestBody List<Answer> answers,
                                      HttpServletRequest request) {
 
+        logger.info("list of answers ====> {}", answers);
+
         return taskService.handExamination(getUserId(request), taskId, paperId, answers);
     }
 }

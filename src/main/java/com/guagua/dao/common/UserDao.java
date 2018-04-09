@@ -3,6 +3,8 @@ package com.guagua.dao.common;
 import com.guagua.bean.entity.common.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserDao {
     /* ************************************************
      * insert
@@ -111,12 +113,15 @@ public interface UserDao {
 
     /**
      * 更新用户邮箱
+     *
      * @param userId user id
-     * @param email 用户邮箱地址
+     * @param email  用户邮箱地址
      * @return 更新行数
      */
     Integer updateEmail(@Param("userId") Integer userId,
                         @Param("email") String email);
+
+    Integer updateDeleteStatus(Integer userId);
 
     /* ************************************************
      * delete
@@ -174,4 +179,14 @@ public interface UserDao {
      * @return 最大的id
      */
     Integer findMaxId();
+
+    /**
+     * 根据用户类型查找用户
+     *
+     * @param type
+     * @return
+     */
+    List<User> findByType(Integer type);
+
+
 }

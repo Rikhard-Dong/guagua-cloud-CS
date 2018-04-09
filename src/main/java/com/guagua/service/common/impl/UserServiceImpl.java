@@ -181,6 +181,9 @@ public class UserServiceImpl extends BaseService implements UserService {
             logger.info("用户未注册");
             return new ResultDTO(DataDictionary.ACCOUNT_OR_PASSWORD_ERROR);
         }
+        if (user.getIsDelete() == 1) {
+            throw new CustomException(DataDictionary.ERROR).addData("detail", "用户被删除, 如有疑问请与管理员联系");
+        }
 
         String encryption = CryptographyUtils.md5(password, user.getSalt());
         logger.info("encryption ===> {}\n" +

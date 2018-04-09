@@ -147,6 +147,42 @@ public class MemberSingleton {
         }
     }
 
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    public static MemberSingleton getINSTANCE() {
+        return INSTANCE;
+    }
+
+    public static void setINSTANCE(MemberSingleton INSTANCE) {
+        MemberSingleton.INSTANCE = INSTANCE;
+    }
+
+    public Set<Integer> getOnlineMembers() {
+        return onlineMembers;
+    }
+
+    public void setOnlineMembers(Set<Integer> onlineMembers) {
+        this.onlineMembers = onlineMembers;
+    }
+
+    public Map<Integer, List<Integer>> getMembers() {
+        return members;
+    }
+
+    public void setMembers(Map<Integer, List<Integer>> members) {
+        this.members = members;
+    }
+
+    public Map<Integer, Integer> getMemberAccesses() {
+        return memberAccesses;
+    }
+
+    public void setMemberAccesses(Map<Integer, Integer> memberAccesses) {
+        this.memberAccesses = memberAccesses;
+    }
+
     public static void main(String[] args) {
         Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
         List<Integer> var1 = map.get(1);

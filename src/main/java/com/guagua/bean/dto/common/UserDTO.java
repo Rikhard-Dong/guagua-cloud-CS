@@ -1,7 +1,10 @@
 package com.guagua.bean.dto.common;
 
+import com.guagua.bean.entity.common.Role;
 import com.guagua.bean.entity.common.User;
 import com.guagua.utils.DateUtils;
+
+import java.util.List;
 
 /**
  * @author ride
@@ -11,7 +14,7 @@ import com.guagua.utils.DateUtils;
  */
 public class UserDTO {
     private Integer userId;     // 用户id
-    private String username;        // 用户名
+    private String username;    // 用户名
     private String phone;       // 用户手机号
     private String headImage;   // 用户头像
     private String type;        // 用户类型
@@ -23,6 +26,8 @@ public class UserDTO {
     private String address;     // 地址
     private String description; // 描述
     private String educationalExperience;       // 教育经历
+    private String isDelete;                    // 用户是否被删除
+    private List<Role> roles;                   // user have roles
 
 
     public UserDTO() {
@@ -35,20 +40,32 @@ public class UserDTO {
         this.headImage = user.getHeadImage();
         switch (user.getType()) {
             case 0:
-                type = "平台用户";
+                this.type = "平台用户";
                 break;
             case 1:
-                type = "企业用户";
+                this.type = "企业用户";
                 break;
             case 2:
-                type = "客服用户";
+                this.type = "客服用户";
                 break;
             default:
-                type = "非法用户";
+                this.type = "非法用户";
         }
         this.email = user.getEmail() == null ? "未绑定邮箱" : user.getEmail();
         this.createTime = DateUtils.date2StrCN(user.getCreateTime());
-        this.sex = user.getSex() == 1 ? "男" : "女";
+        switch (user.getSex()) {
+            case 0:
+                this.sex = "未知";
+                break;
+            case 1:
+                this.sex = "男";
+                break;
+            case 2:
+                this.sex = "女";
+                break;
+            default:
+                this.sex = "异常";
+        }
         this.qq = user.getQq();
         this.wechat = user.getWechat();
         this.address = user.getAddress();
@@ -160,6 +177,22 @@ public class UserDTO {
         this.educationalExperience = educationalExperience;
     }
 
+    public String getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -176,6 +209,8 @@ public class UserDTO {
                 ", address='" + address + '\'' +
                 ", description='" + description + '\'' +
                 ", educationalExperience='" + educationalExperience + '\'' +
+                ", isDelete='" + isDelete + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

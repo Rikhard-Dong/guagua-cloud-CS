@@ -16,6 +16,7 @@ public class UserInfo implements Serializable {
     private String userId;   // 针对0和2用户
     private Integer userType; // 0 客服用户, 1 匿名用户 2 其他用户(包括企业和后台管理人员)
     private String username;  // 用户名, 如果是站内用户使用站内用户名, 如果是飞站内用户名, 则需要用户输入
+    private Integer csId;      // 对应接入客服Id
 
     // 匿名用户需要携带任务信息
     private Integer taskId;
@@ -60,12 +61,21 @@ public class UserInfo implements Serializable {
         this.taskId = taskId;
     }
 
+    public Integer getCsId() {
+        return csId;
+    }
+
+    public void setCsId(Integer csId) {
+        this.csId = csId;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
                 "userId='" + userId + '\'' +
                 ", userType=" + userType +
                 ", username='" + username + '\'' +
+                ", csId=" + csId +
                 ", taskId=" + taskId +
                 '}';
     }

@@ -226,4 +226,18 @@ public class ReleaseTaskController extends BaseController {
 
         return taskService.bindKnowledgeBatch(getUserId(request), taskId, knowledgeIds);
     }
+
+    /**
+     * 获取该任务的顾客接入地址
+     *
+     * @param taskId
+     * @param request
+     * @return
+     */
+    @GetMapping("/{taskId}/customer_access_url")
+    public ResultDTO getCustomerAccessUrl(@PathVariable("taskId") Integer taskId,
+                                          HttpServletRequest request) {
+
+        return taskService.getCustomerAccessUrl(taskId);
+    }
 }

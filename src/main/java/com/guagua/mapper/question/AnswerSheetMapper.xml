@@ -46,8 +46,8 @@
 
     <select id="findByAnswererAndTaskId" resultType="com.guagua.bean.entity.question.AnswerSheet">
         SELECT *
-        FROM t_question_answer
-        WHERE answer = #{answerer} AND task_id = #{taskId}
+        FROM t_question_answer_sheet
+        WHERE answerer = #{answerer} AND task_id = #{taskId}
         LIMIT 1
     </select>
 

@@ -38,14 +38,14 @@
     <select id="findByCreator" resultType="com.guagua.bean.entity.question.RuleOfGenerationExamination">
         SELECT *
         FROM t_question_rule_of_generation_examination
-        WHERE bank_id = #{bankId}
+        WHERE creator = #{creator}
         ORDER BY create_time DESC
     </select>
 
     <select id="findByBankId" resultType="com.guagua.bean.entity.question.RuleOfGenerationExamination">
         SELECT *
         FROM t_question_rule_of_generation_examination
-        WHERE creator = #{creator}
+        WHERE bank_id = #{bankId}
         ORDER BY create_time DESC
     </select>
 

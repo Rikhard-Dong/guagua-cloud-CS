@@ -45,7 +45,7 @@ public class AnswerSheetDTO extends ExaminationPaperSimpleDTO {
         this.score = sheet.getScore();
         this.remark = sheet.getRemark();
         this.sheetCreateTime = DateUtils.date2StrCN(sheet.getCreateTime());
-        this.evaluationTime = DateUtils.date2StrCN(sheet.getMarkTime());
+        this.evaluationTime = sheet.getMarkTime() == null ? "" : DateUtils.date2StrCN(sheet.getMarkTime());
         this.evaluationStatus = sheet.getEvaluationStatus() == 0 ? "已评价" : "未评价";
     }
 

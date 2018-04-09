@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/admin/auditing/enterprise")
 public class AuditingEnterpriseController extends BaseController {
-    
+
     private final EnterpriseAuthenticationService authenticationService;
 
     private final HandleEnterpriseAuthenticationService handleService;
@@ -47,9 +47,9 @@ public class AuditingEnterpriseController extends BaseController {
     /**
      * 获取所有未审核的用户认证
      *
-     * @param page
-     * @param size
-     * @return
+     * @param page page
+     * @param size size
+     * @return result dto
      */
     @GetMapping("/authentication/unaudited")
     public ResultDTO getAllUnauditedAuthentication(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -60,9 +60,9 @@ public class AuditingEnterpriseController extends BaseController {
     /**
      * 获取所有审核通过的
      *
-     * @param page
-     * @param size
-     * @return
+     * @param page page
+     * @param size size
+     * @return result dto
      */
     @GetMapping("/authentication/pass")
     public ResultDTO getAllPassAuthentication(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -74,9 +74,9 @@ public class AuditingEnterpriseController extends BaseController {
     /**
      * 获取所有审核不通过的认证信息
      *
-     * @param page
-     * @param size
-     * @return
+     * @param page page
+     * @param size size
+     * @return result dto
      */
     @GetMapping("/authentication/fail_pass")
     public ResultDTO getAllFailPassAuthentication(@RequestParam(value = "page", defaultValue = "1") Integer page,

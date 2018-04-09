@@ -1,5 +1,6 @@
 package com.guagua.websocket;
 
+import com.guagua.bean.entity.common.User;
 import com.guagua.dao.common.TaskEmploymentDao;
 import com.guagua.singleton.MemberSingleton;
 import com.guagua.utils.JacksonUtils;
@@ -9,8 +10,6 @@ import com.guagua.websocket.entity.UserInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
 import java.io.IOException;
@@ -72,7 +71,11 @@ public class WebsocketHandler implements WebSocketHandler {
         }
         logger.info("连接出错, 关闭连接....\n message ===> {}", throwable.getMessage());
         users.remove(session);
-        removeAbout(Integer.valueOf(userInfo.getUserId()));
+        if (userInfo.getUserType().equals(UserInfo.USER_TYPE_MEMBER)) {
+            removeAboutMember(Integer.valueOf(userInfo.getUserId()));
+        } else if (userInfo.getUserType().equals(UserInfo.USER_TYPE_ANON)) {
+            memberSingleton.removeCustomer(userInfo.getCsId());
+        }
 
     }
 
@@ -84,7 +87,11 @@ public class WebsocketHandler implements WebSocketHandler {
         users.remove(webSocketSession);
 
         // 移除单例中该用户和相关的任务管理
-        removeAbout(Integer.valueOf(userInfo.getUserId()));
+        if (userInfo.getUserType() == UserInfo.USER_TYPE_MEMBER) {
+            removeAboutMember(Integer.valueOf(userInfo.getUserId()));
+        }else if (userInfo.getUserType().equals(UserInfo.USER_TYPE_ANON)) {
+            memberSingleton.removeCustomer(userInfo.getCsId());
+        }
     }
 
     public boolean supportsPartialMessages() {
@@ -147,7 +154,7 @@ public class WebsocketHandler implements WebSocketHandler {
      *
      * @param memberId memberId
      */
-    private void removeAbout(Integer memberId) {
+    private void removeAboutMember(Integer memberId) {
         memberSingleton.removeOnlineMember(memberId);
         List<Integer> taskIds = taskEmploymentDao.getTaskIdsByMemberId(memberId);
         if (taskIds != null && taskIds.size() > 0) {

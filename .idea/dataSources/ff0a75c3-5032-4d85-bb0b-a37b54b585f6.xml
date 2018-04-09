@@ -3467,69 +3467,77 @@ task_id</ColNames>
       <DataType>varchar(128)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="702" parent="262" name="t_user_username_uindex">
+    <column id="702" parent="262" name="is_delete">
+      <Position>16</Position>
+      <Comment>0 用户未删除 1 用户已删除</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="703" parent="262" name="t_user_username_uindex">
       <ColNames>username</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="703" parent="262" name="t_user_phone_uindex">
+    <index id="704" parent="262" name="t_user_phone_uindex">
       <ColNames>phone</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="704" parent="262" name="t_user_email_uindex">
+    <index id="705" parent="262" name="t_user_email_uindex">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="705" parent="262" name="PRIMARY">
+    <key id="706" parent="262" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="706" parent="262" name="t_user_username_uindex">
+    <key id="707" parent="262" name="t_user_username_uindex">
       <ColNames>username</ColNames>
       <UnderlyingIndexName>t_user_username_uindex</UnderlyingIndexName>
     </key>
-    <key id="707" parent="262" name="t_user_phone_uindex">
+    <key id="708" parent="262" name="t_user_phone_uindex">
       <ColNames>phone</ColNames>
       <UnderlyingIndexName>t_user_phone_uindex</UnderlyingIndexName>
     </key>
-    <key id="708" parent="262" name="t_user_email_uindex">
+    <key id="709" parent="262" name="t_user_email_uindex">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>t_user_email_uindex</UnderlyingIndexName>
     </key>
-    <column id="709" parent="263" name="id">
+    <column id="710" parent="263" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="710" parent="263" name="login_ip">
+    <column id="711" parent="263" name="login_ip">
       <Position>2</Position>
       <DataType>varchar(150)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="711" parent="263" name="login_time">
+    <column id="712" parent="263" name="login_time">
       <Position>3</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="712" parent="263" name="user_id">
+    <column id="713" parent="263" name="user_id">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="713" parent="263" name="t_user_login_log_t_user_id_fk">
+    <index id="714" parent="263" name="t_user_login_log_t_user_id_fk">
       <ColNames>user_id</ColNames>
     </index>
-    <key id="714" parent="263" name="PRIMARY">
+    <key id="715" parent="263" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="715" parent="263" name="t_user_login_log_t_user_id_fk">
+    <foreign-key id="716" parent="263" name="t_user_login_log_t_user_id_fk">
       <ColNames>user_id</ColNames>
       <RefSchemaName>db_guagua</RefSchemaName>
       <RefTableName>t_user</RefTableName>
@@ -3537,37 +3545,37 @@ task_id</ColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="716" parent="264" name="id">
+    <column id="717" parent="264" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="717" parent="264" name="user_id">
+    <column id="718" parent="264" name="user_id">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="718" parent="264" name="role_id">
+    <column id="719" parent="264" name="role_id">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="719" parent="264" name="t_user_role_t_user_id_fk">
+    <index id="720" parent="264" name="t_user_role_t_user_id_fk">
       <ColNames>user_id</ColNames>
     </index>
-    <index id="720" parent="264" name="t_user_role_t_role_id_fk">
+    <index id="721" parent="264" name="t_user_role_t_role_id_fk">
       <ColNames>role_id</ColNames>
     </index>
-    <key id="721" parent="264" name="PRIMARY">
+    <key id="722" parent="264" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="722" parent="264" name="t_user_role_t_user_id_fk">
+    <foreign-key id="723" parent="264" name="t_user_role_t_user_id_fk">
       <ColNames>user_id</ColNames>
       <RefSchemaName>db_guagua</RefSchemaName>
       <RefTableName>t_user</RefTableName>
@@ -3575,7 +3583,7 @@ task_id</ColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="723" parent="264" name="t_user_role_t_role_id_fk">
+    <foreign-key id="724" parent="264" name="t_user_role_t_role_id_fk">
       <ColNames>role_id</ColNames>
       <RefSchemaName>db_guagua</RefSchemaName>
       <RefTableName>t_role</RefTableName>

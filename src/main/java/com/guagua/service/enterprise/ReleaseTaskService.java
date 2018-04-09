@@ -138,4 +138,11 @@ public interface ReleaseTaskService {
      */
     ResultDTO bindKnowledgeBatch(Integer userId, Integer taskId, String knowledgeIds);
 
+    /**
+     * 顾客获取服务的地址
+     *
+     * @param taskId
+     * @return
+     */
+    ResultDTO getCustomerAccessUrl(Integer taskId);
 }

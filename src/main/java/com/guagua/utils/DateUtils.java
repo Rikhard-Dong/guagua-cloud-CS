@@ -34,6 +34,9 @@ public class DateUtils {
      * @return 转换后的字符串
      */
     public static String date2StrCN(Date date) {
+        if (date == null) {
+            return null;
+        }
         return formatCN.format(date);
     }
 

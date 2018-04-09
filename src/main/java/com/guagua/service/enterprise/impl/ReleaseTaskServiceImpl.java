@@ -29,11 +29,13 @@ import com.guagua.exception.common.CustomException;
 import com.guagua.service.BaseService;
 import com.guagua.service.enterprise.ReleaseTaskService;
 import com.guagua.utils.DateUtils;
+import com.guagua.utils.PropertiesUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -552,6 +554,26 @@ public class ReleaseTaskServiceImpl extends BaseService implements ReleaseTaskSe
             }
         }
         return new ResultDTO(DataDictionary.INSERT_SUCCESS);
+    }
+
+    /**
+     * 返回顾客的接入url
+     * type  0 错误 1 正常 2. 任务不在进行状态
+     *
+     * @param taskId
+     * @return
+     */
+    public ResultDTO getCustomerAccessUrl(Integer taskId) {
+        String domain = null;
+        try {
+            domain = PropertiesUtils.getProperties("/properties/domain.properties", "guagua.domain");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String url = "http://" + domain + "/customer/access?taskId=" + taskId;
+
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("url", url);
     }
 
     /**

@@ -6,16 +6,11 @@ import com.guagua.bean.entity.common.User;
 import com.guagua.dao.common.RolePermissionDao;
 import com.guagua.dao.common.UserDao;
 import com.guagua.dao.common.UserRoleDao;
-import com.guagua.utils.RegExpUtils;
 import com.guagua.utils.SpringContextUtils;
 import com.guagua.utils.UrlUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -43,12 +38,12 @@ public class PermissionUtils {
     /**
      * 判断当前用户是否存在
      *
-     * @param userId
-     * @return
+     * @param userId user id
+     * @return true ===> user exists | false ==> user not exists
      */
     public static boolean isUserExists(Integer userId) {
         User user = userDao.findById(userId);
-        return user != null;
+        return user != null && user.getIsDelete() != 1;
     }
 
     /**
@@ -72,7 +67,7 @@ public class PermissionUtils {
                 if (permission == null) {
                     continue;
                 }
-                // TODO 需要考虑到资源问题, 比如删除用户的url为delete:/admin/user/delete/*, *号代表可以匹配的
+                // 需要考虑到资源问题, 比如删除用户的url为delete:/admin/user/delete/*, *号代表可以匹配的
                 if (UrlUtils.match(permission.getUrl(), permissionUrl, 0, 0)) {
                     return true;
                 }

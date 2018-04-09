@@ -90,7 +90,7 @@
             <if test="workingTimeStart4 != null">#{workingTimeStart4},</if>
             <if test="workingTimeEnd4 != null">#{workingTimeEnd4},</if>
             <if test="isNeedExamination != null">#{isNeedExamination},</if>
-            <if test="examinationType != null">#{examinationType}</if>
+            <if test="examinationType != null">#{examinationType},</if>
             <if test="examinationId != null">#{examinationId},</if>
             <if test="ruleId != null">#{ruleId},</if>
         </trim>

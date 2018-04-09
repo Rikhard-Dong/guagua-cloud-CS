@@ -22,6 +22,7 @@ public class User {
     private String address;         // 地址
     private String description;     // 个人简介
     private String educationalExperience;   // 教育经历
+    private Integer isDelete;           // 0 user not delete ### 1 user delete
 
     private List<Role> roles;       // 该用户拥有的角色
 
@@ -60,6 +61,18 @@ public class User {
         this.username = username;
         this.createTime = new Date();
         this.type = type;
+        this.salt = createTime.getTime() + UUIDUtils.getUUID();
+        this.salt = salt.substring(0, 32);
+        this.password = CryptographyUtils.md5(password, salt);
+    }
+
+    /**
+     * 对密码进行加密
+     *
+     * @param password
+     */
+    public void encryptPassword(String password) {
+        this.createTime = new Date();
         this.salt = createTime.getTime() + UUIDUtils.getUUID();
         this.salt = salt.substring(0, 32);
         this.password = CryptographyUtils.md5(password, salt);
@@ -193,6 +206,13 @@ public class User {
         this.educationalExperience = educationalExperience;
     }
 
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
 
     @Override
     public String toString() {
@@ -212,6 +232,7 @@ public class User {
                 ", address='" + address + '\'' +
                 ", description='" + description + '\'' +
                 ", educationalExperience='" + educationalExperience + '\'' +
+                ", isDelete=" + isDelete +
                 ", roles=" + roles +
                 '}';
     }
