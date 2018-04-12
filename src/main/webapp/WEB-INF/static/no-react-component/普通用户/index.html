@@ -1,279 +1,300 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title></title>
+    <meta charset="UTF-8">
+    <title></title>
 
-<link rel="stylesheet" type="text/css" href="css/qq.css"/>
-<link href="css/online.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="css/qq.css"/>
+    <link href="css/online.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-	<div id="onService_panel">
-		<div class="onService_panel_s">
-			<div class="online_boxs">
-				<div class="boxs_t"><span class="boxs_t_l"></span><span class="boxs_t_m"></span><span class="boxs_t_r"></span></div>
-				<div class="boxs_m_l">
-					<div class="boxs_m_r">
-						<div class="box_m_m">
-							<div id="onlineList">
-								<em class="online_close" id="onlineClose" title="关闭"></em>
-								<div class="online_open" id="onlineOpen"></div>
-								
-								<div id="online_tel_icon" class="online_icon">
-									<span class="pic"><img src="img/online_tel.png" /></span>
-									<span class="name">客服评分</span>
-								</div>
-								
-								<div id="online_qq_icon" class="online_icon">
-									<span class="pic"><img src="img/online_qq.png" /></span>
-									<span class="name">在线客服</span>
-								</div>
-								
-								<div id="online_message_icon" class="online_icon">
-									<span class="pic"><img src="img/online_message.png" /></span>
-									<span class="name">在线留言</span>
-								</div>
-								
-								<div id="online_email_icon" class="online_icon">
-									<span class="pic"><a href="mailto:1234567@qq.com"><img src="img/online_email.png" /></a></span>
-									<span class="name">发送邮件</span>
-								</div>
-								
-								<div id="online_address_icon" class="online_icon">
-									<span class="pic"><a href="http://www.17sucai.com/"><img src="img/online_address.png" /></a></span>
-									<span class="name">企业地标</span>
-								</div>
-								
-								<div id="onlineTelTab" class="online_tab">
-									<div class="online_boxs">
-										<div class="boxs_t"><span class="boxs_t_l"></span><span class="boxs_t_m"></span><span class="boxs_t_r"></span></div>
-										<div class="boxs_m_l">
-											<div class="boxs_m_r">
-												<div class="box_m_m">
-													<div id="onlineTel" class="online_tab_c">
-														<small class="sanjiao"></small>
-														<small class="tab_close"></small>
-														<dl>
-																<div id="starRating">
-																		<p class="photo" style="height:250px;margin-top:-10px;">
-																			<span><i class="high"></i><i class="nohigh"></i></span>
-																			<span><i class="high"></i><i class="nohigh"></i></span>
-																			<span><i class="high"></i><i class="nohigh"></i></span>
-																			<span><i class="high"></i><i class="nohigh"></i></span>
-																			<span><i class="high"></i><i class="nohigh"></i></span>
-																		</p>
-																		<p class="starNum">0.0分</p>
-																		<div class="bottoms">
-																			<a class="blueBtn sureStar">确认</a>
-																		</div>
-																	</div>
-														</dl>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="boxs_b"><span class="boxs_b_l"></span><span class="boxs_b_m"></span><span class="boxs_b_r"></span></div>
-									</div>
-								</div>
-								
-								<div id="onlineQQTab" class="online_tab">
-									<div class="online_boxs">
-										<div class="boxs_t"><span class="boxs_t_l"></span><span class="boxs_t_m"></span><span class="boxs_t_r"></span></div>
-										<div class="boxs_m_l">
-											<div class="boxs_m_r">
-												<div class="box_m_m">
-													<div id="onlineQQ" class="online_tab_c">
-														<small class="sanjiao"></small>
-														<small class="tab_close"></small>
-														<dl>
-															<dt>经理 </dt>
-															<dd> <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1234567&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:1234567:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a> </dd>
-															<dt>销售 </dt>
-															<dd> <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1234567&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:1234567:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a> </dd>
-														</dl>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="boxs_b"><span class="boxs_b_l"></span><span class="boxs_b_m"></span><span class="boxs_b_r"></span></div>
-									</div>
-								</div>
-								
-								<div id="onlineMessageTab" class="online_tab">
-									<div class="online_boxs">
-										<div class="boxs_t"><span class="boxs_t_l"></span><span class="boxs_t_m"></span><span class="boxs_t_r"></span></div>
-										<div class="boxs_m_l">
-											<div class="boxs_m_r">
-												<div class="box_m_m">
-													<div id="onlineMessage" class="online_tab_c">
-														<small class="sanjiao"></small>
-														<small class="tab_close"></small>
-														<dl>
-															<dt><textarea onfocus="h_con()" onblur="s_con()" name="content2" id="content2" onkeyup="checkLen(this,200)"></textarea></dt>
-															<dd class="text_length">还可输入字符<b>200</b>（限制字符200）</dd>
-															<dd>
-																<label>您的姓名：</label>
-																<input type="text" class="text_input" name="name" id="name"  maxlength="20" />
-															</dd>
-															<dd>
-																<label>您的邮箱：</label>
-																<input type="text" class="text_input" name="e_mail" id="e_mail" maxlength="50" />
-															</dd>
-															<dd>
-																<label>您的电话：</label>
-																<input type="text" class="text_input" name="tel" id="tel" maxlength="30"/>
-																<input type="button" class="submitBut" value="提交" onclick="sub_check(446632)" />
-															</dd>
-														</dl>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="boxs_b"><span class="boxs_b_l"></span><span class="boxs_b_m"></span><span class="boxs_b_r"></span></div>
-									</div>
-								</div>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="boxs_b"><span class="boxs_b_l"></span><span class="boxs_b_m"></span><span class="boxs_b_r"></span></div>
-			</div>
-		</div>
-	</div><!--onService_panel end-->
-	
+<div id="onService_panel">
+    <div class="onService_panel_s">
+        <div class="online_boxs">
+            <div class="boxs_t"><span class="boxs_t_l"></span><span class="boxs_t_m"></span><span
+                    class="boxs_t_r"></span></div>
+            <div class="boxs_m_l">
+                <div class="boxs_m_r">
+                    <div class="box_m_m">
+                        <div id="onlineList">
+                            <em class="online_close" id="onlineClose" title="关闭"></em>
+                            <div class="online_open" id="onlineOpen"></div>
+
+                            <div id="online_tel_icon" class="online_icon">
+                                <span class="pic"><img src="img/online_tel.png"/></span>
+                                <span class="name">客服评分</span>
+                            </div>
+
+                            <div id="online_qq_icon" class="online_icon">
+                                <span class="pic"><img src="img/online_qq.png"/></span>
+                                <span class="name">在线客服</span>
+                            </div>
+
+                            <div id="online_message_icon" class="online_icon">
+                                <span class="pic"><img src="img/online_message.png"/></span>
+                                <span class="name">在线留言</span>
+                            </div>
+
+                            <div id="online_email_icon" class="online_icon">
+                                <span class="pic"><a href="mailto:1234567@qq.com"><img src="img/online_email.png"/></a></span>
+                                <span class="name">发送邮件</span>
+                            </div>
+
+                            <div id="online_address_icon" class="online_icon">
+                                <span class="pic"><a href="http://www.17sucai.com/"><img src="img/online_address.png"/></a></span>
+                                <span class="name">企业地标</span>
+                            </div>
+
+                            <div id="onlineTelTab" class="online_tab">
+                                <div class="online_boxs">
+                                    <div class="boxs_t"><span class="boxs_t_l"></span><span
+                                            class="boxs_t_m"></span><span class="boxs_t_r"></span></div>
+                                    <div class="boxs_m_l">
+                                        <div class="boxs_m_r">
+                                            <div class="box_m_m">
+                                                <div id="onlineTel" class="online_tab_c">
+                                                    <small class="sanjiao"></small>
+                                                    <small class="tab_close"></small>
+                                                    <dl>
+                                                        <div id="starRating">
+                                                            <p class="photo" style="height:250px;margin-top:-10px;">
+                                                                <span><i class="high"></i><i class="nohigh"></i></span>
+                                                                <span><i class="high"></i><i class="nohigh"></i></span>
+                                                                <span><i class="high"></i><i class="nohigh"></i></span>
+                                                                <span><i class="high"></i><i class="nohigh"></i></span>
+                                                                <span><i class="high"></i><i class="nohigh"></i></span>
+                                                            </p>
+                                                            <p class="starNum">0.0分</p>
+                                                            <div class="bottoms">
+                                                                <a class="blueBtn sureStar">确认</a>
+                                                            </div>
+                                                        </div>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="boxs_b"><span class="boxs_b_l"></span><span
+                                            class="boxs_b_m"></span><span class="boxs_b_r"></span></div>
+                                </div>
+                            </div>
+
+                            <div id="onlineQQTab" class="online_tab">
+                                <div class="online_boxs">
+                                    <div class="boxs_t"><span class="boxs_t_l"></span><span
+                                            class="boxs_t_m"></span><span class="boxs_t_r"></span></div>
+                                    <div class="boxs_m_l">
+                                        <div class="boxs_m_r">
+                                            <div class="box_m_m">
+                                                <div id="onlineQQ" class="online_tab_c">
+                                                    <small class="sanjiao"></small>
+                                                    <small class="tab_close"></small>
+                                                    <dl>
+                                                        <dt>经理</dt>
+                                                        <dd><a target="_blank"
+                                                               href="http://wpa.qq.com/msgrd?v=3&uin=1234567&site=qq&menu=yes"><img
+                                                                border="0" src="http://wpa.qq.com/pa?p=2:1234567:51"
+                                                                alt="点击这里给我发消息" title="点击这里给我发消息"/></a></dd>
+                                                        <dt>销售</dt>
+                                                        <dd><a target="_blank"
+                                                               href="http://wpa.qq.com/msgrd?v=3&uin=1234567&site=qq&menu=yes"><img
+                                                                border="0" src="http://wpa.qq.com/pa?p=2:1234567:51"
+                                                                alt="点击这里给我发消息" title="点击这里给我发消息"/></a></dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="boxs_b"><span class="boxs_b_l"></span><span
+                                            class="boxs_b_m"></span><span class="boxs_b_r"></span></div>
+                                </div>
+                            </div>
+
+                            <div id="onlineMessageTab" class="online_tab">
+                                <div class="online_boxs">
+                                    <div class="boxs_t"><span class="boxs_t_l"></span><span
+                                            class="boxs_t_m"></span><span class="boxs_t_r"></span></div>
+                                    <div class="boxs_m_l">
+                                        <div class="boxs_m_r">
+                                            <div class="box_m_m">
+                                                <div id="onlineMessage" class="online_tab_c">
+                                                    <small class="sanjiao"></small>
+                                                    <small class="tab_close"></small>
+                                                    <dl>
+                                                        <dt><textarea onfocus="h_con()" onblur="s_con()" name="content2"
+                                                                      id="content2"
+                                                                      onkeyup="checkLen(this,200)"></textarea></dt>
+                                                        <dd class="text_length">还可输入字符<b>200</b>（限制字符200）</dd>
+                                                        <dd>
+                                                            <label>您的姓名：</label>
+                                                            <input type="text" class="text_input" name="name" id="name"
+                                                                   maxlength="20"/>
+                                                        </dd>
+                                                        <dd>
+                                                            <label>您的邮箱：</label>
+                                                            <input type="text" class="text_input" name="e_mail"
+                                                                   id="e_mail" maxlength="50"/>
+                                                        </dd>
+                                                        <dd>
+                                                            <label>您的电话：</label>
+                                                            <input type="text" class="text_input" name="tel" id="tel"
+                                                                   maxlength="30"/>
+                                                            <input type="button" class="submitBut" value="提交"
+                                                                   onclick="sub_check(446632)"/>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="boxs_b"><span class="boxs_b_l"></span><span
+                                            class="boxs_b_m"></span><span class="boxs_b_r"></span></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="boxs_b"><span class="boxs_b_l"></span><span class="boxs_b_m"></span><span
+                    class="boxs_b_r"></span></div>
+        </div>
+    </div>
+</div><!--onService_panel end-->
+
 <div class="qqBox">
-	<div class="BoxHead">
-		<div class="headImg">
-			<img src="img/6.jpg"/>
-		</div>
-		<div class="internetName">90后大叔</div>
-	</div>
-	<div class="context">
-		<div class="conLeft">
-			<ul>
-				<li>
-					<div class="liLeft"><img src="img/20170926103645_04.jpg"/></div>
-					<div class="liRight">
-						<span class="intername">客服小张</span>
-						<span class="infor">厉害了</span>
-					</div>
-				</li>
-				<li class="bg">
-					<div class="liLeft"><img src="img/20170926103645_19.jpg"/></div>
-					<div class="liRight">
-						<span  class="intername">客服赵鹏</span>
-						<span class="infor">[流泪]</span>
-					</div>
-				</li>
-				<li>
-					<div class="liLeft"><img src="img/20170926103645_27.jpg"/></div>
-					<div class="liRight">
-						<span  class="intername">客服小娜</span>
-						<span class="infor">666</span>
-					</div>
-				</li>
-				<li>
-					<div class="liLeft"><img src="img/20170926103645_21.jpg"/></div>
-					<div class="liRight">
-						<span  class="intername">客服小美</span>
-						<span class="infor">这个群人多</span>
-					</div>
-				</li>
-				<li>
-					<div class="liLeft"><img src="img/20170926103645_23.jpg"/></div>
-					<div class="liRight">
-						<span  class="intername">客服小刚</span>
-						<span class="infor">[文件]</span>
-					</div>
-				</li>
-				<li>
-					<div class="liLeft"><img src="img/20170926103645_25.jpg"/></div>
-					<div class="liRight">
-						<span  class="intername">客服小艾</span>
-						<span class="infor">[么么哒]</span>
-					</div>
-				</li>
-				<li>
-					<div class="liLeft"><img src="img/20170926103645_27.jpg"/></div>
-					<div class="liRight">
-						<span  class="intername">客服小娟</span>
-						<span class="infor">前端小黑：怎么才能</span>
-					</div>
-				</li>
-				<li>
-					<div class="liLeft"><img src="img/20170926103645_29.jpg"/></div>
-					<div class="liRight">
-						<span  class="intername">客服小瓜</span>
-						<span class="infor">大西瓜：差评，这个下面又</span>
-					</div>
-				</li>
-			
-				
-			</ul>
-		</div>
-		<div class="conRight">
-			<div class="Righthead">
-				<div class="headName">赵鹏</div>
-				<div class="headConfig">
-					<ul>
-						<li><img src="img/20170926103645_06.jpg"/></li>
-						<li><img src="img/20170926103645_08.jpg"/></li>
-						<li><img src="img/20170926103645_10.jpg"/></li>
-						<li><img src="img/20170926103645_12.jpg"/></li>
-					</ul>
-				</div>
-			</div>
-			<div class="RightCont">
-				<ul class="newsList">
-				
-				</ul>
-			</div>
-			<div class="RightFoot">
-				<div class="emjon">
-					<ul>
-						<li><img src="img/em_02.jpg"/></li>
-						<li><img src="img/em_05.jpg"/></li>
-						<li><img src="img/em_07.jpg"/></li>
-						<li><img src="img/em_12.jpg"/></li>
-						<li><img src="img/em_14.jpg"/></li>
-						<li><img src="img/em_16.jpg"/></li>
-						<li><img src="img/em_20.jpg"/></li>
-						<li><img src="img/em_23.jpg"/></li>
-						<li><img src="img/em_25.jpg"/></li>
-						<li><img src="img/em_30.jpg"/></li>
-						<li><img src="img/em_31.jpg"/></li>
-						<li><img src="img/em_33.jpg"/></li>
-						<li><img src="img/em_37.jpg"/></li>
-						<li><img src="img/em_38.jpg"/></li>
-						<li><img src="img/em_40.jpg"/></li>
-						<li><img src="img/em_45.jpg"/></li>
-						<li><img src="img/em_47.jpg"/></li>
-						<li><img src="img/em_48.jpg"/></li>
-						<li><img src="img/em_52.jpg"/></li>
-						<li><img src="img/em_54.jpg"/></li>
-						<li><img src="img/em_55.jpg"/></li>
-					</ul>
-				</div>
-				<div class="footTop">
-					<ul>
-						<li><img src="img/20170926103645_31.jpg"/></li>
-						<li class="ExP"><img src="img/20170926103645_33.jpg"/></li>
-						<li><img src="img/20170926103645_35.jpg"/></li>
-						<li><img src="img/20170926103645_37.jpg"/></li>
-						<li><img src="img/20170926103645_39.jpg"/></li>
-						<li><img src="img/20170926103645_41.jpg" alt="" /></li>
-						<li><img src="img/20170926103645_43.jpg"/></li>
-						<li><img src="img/20170926103645_45.jpg"/></li>
-					</ul>
-				</div>
-				<div class="inputBox">
-					<textarea id="dope" style="width: 99%;height: 75px; border: none;outline: none;" name="" rows="" cols=""></textarea>
-					<button class="sendBtn" >发送(s)</button>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="BoxHead">
+        <div class="headImg">
+            <img src="img/6.jpg"/>
+        </div>
+        <div class="internetName">90后大叔</div>
+    </div>
+    <div class="context">
+        <div class="conLeft">
+            <ul>
+                <li>
+                    <div class="liLeft"><img src="img/20170926103645_04.jpg"/></div>
+                    <div class="liRight">
+                        <span class="intername">客服小张</span>
+                        <span class="infor">厉害了</span>
+                    </div>
+                </li>
+                <li class="bg">
+                    <div class="liLeft"><img src="img/20170926103645_19.jpg"/></div>
+                    <div class="liRight">
+                        <span class="intername">客服赵鹏</span>
+                        <span class="infor">[流泪]</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="liLeft"><img src="img/20170926103645_27.jpg"/></div>
+                    <div class="liRight">
+                        <span class="intername">客服小娜</span>
+                        <span class="infor">666</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="liLeft"><img src="img/20170926103645_21.jpg"/></div>
+                    <div class="liRight">
+                        <span class="intername">客服小美</span>
+                        <span class="infor">这个群人多</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="liLeft"><img src="img/20170926103645_23.jpg"/></div>
+                    <div class="liRight">
+                        <span class="intername">客服小刚</span>
+                        <span class="infor">[文件]</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="liLeft"><img src="img/20170926103645_25.jpg"/></div>
+                    <div class="liRight">
+                        <span class="intername">客服小艾</span>
+                        <span class="infor">[么么哒]</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="liLeft"><img src="img/20170926103645_27.jpg"/></div>
+                    <div class="liRight">
+                        <span class="intername">客服小娟</span>
+                        <span class="infor">前端小黑：怎么才能</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="liLeft"><img src="img/20170926103645_29.jpg"/></div>
+                    <div class="liRight">
+                        <span class="intername">客服小瓜</span>
+                        <span class="infor">大西瓜：差评，这个下面又</span>
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+        <div class="conRight">
+            <div class="Righthead">
+                <div class="headName">赵鹏</div>
+                <div class="headConfig">
+                    <ul>
+                        <li><img src="img/20170926103645_06.jpg"/></li>
+                        <li><img src="img/20170926103645_08.jpg"/></li>
+                        <li><img src="img/20170926103645_10.jpg"/></li>
+                        <li><img src="img/20170926103645_12.jpg"/></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="RightCont">
+                <ul class="newsList">
+
+                </ul>
+            </div>
+            <div class="RightFoot">
+                <div class="emjon">
+                    <ul>
+                        <li><img src="img/em_02.jpg"/></li>
+                        <li><img src="img/em_05.jpg"/></li>
+                        <li><img src="img/em_07.jpg"/></li>
+                        <li><img src="img/em_12.jpg"/></li>
+                        <li><img src="img/em_14.jpg"/></li>
+                        <li><img src="img/em_16.jpg"/></li>
+                        <li><img src="img/em_20.jpg"/></li>
+                        <li><img src="img/em_23.jpg"/></li>
+                        <li><img src="img/em_25.jpg"/></li>
+                        <li><img src="img/em_30.jpg"/></li>
+                        <li><img src="img/em_31.jpg"/></li>
+                        <li><img src="img/em_33.jpg"/></li>
+                        <li><img src="img/em_37.jpg"/></li>
+                        <li><img src="img/em_38.jpg"/></li>
+                        <li><img src="img/em_40.jpg"/></li>
+                        <li><img src="img/em_45.jpg"/></li>
+                        <li><img src="img/em_47.jpg"/></li>
+                        <li><img src="img/em_48.jpg"/></li>
+                        <li><img src="img/em_52.jpg"/></li>
+                        <li><img src="img/em_54.jpg"/></li>
+                        <li><img src="img/em_55.jpg"/></li>
+                    </ul>
+                </div>
+                <div class="footTop">
+                    <ul>
+                        <li><img src="img/20170926103645_31.jpg"/></li>
+                        <li class="ExP"><img src="img/20170926103645_33.jpg"/></li>
+                        <li><img src="img/20170926103645_35.jpg"/></li>
+                        <li><img src="img/20170926103645_37.jpg"/></li>
+                        <li><img src="img/20170926103645_39.jpg"/></li>
+                        <li><img src="img/20170926103645_41.jpg" alt=""/></li>
+                        <li><img src="img/20170926103645_43.jpg"/></li>
+                        <li><img src="img/20170926103645_45.jpg"/></li>
+                    </ul>
+                </div>
+                <div class="inputBox">
+                    <textarea id="dope" style="width: 99%;height: 75px; border: none;outline: none;" name="" rows=""
+                              cols=""></textarea>
+                    <button class="sendBtn">发送(s)</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -282,192 +303,198 @@
 <script type="text/javascript" src="../js/address.js"></script>
 <script>
 
-var id='';
-var starRating = 0;
-function uuid(len, radix) {
-    var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
-    var uuid = [], i;
-    radix = radix || chars.length;
+    var id = '';
+    var starRating = 0;
 
-    if (len) {
-        // Compact form
-        for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix];
-    } else {
-        // rfc4122, version 4 form
-        var r;
+    function uuid(len, radix) {
+        var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+        var uuid = [], i;
+        radix = radix || chars.length;
 
-        // rfc4122 requires these characters
-        uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
-        uuid[14] = '4';
+        if (len) {
+            // Compact form
+            for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix];
+        } else {
+            // rfc4122, version 4 form
+            var r;
 
-        // Fill in random data.  At i==19 set the high bits of clock sequence as
-        // per rfc4122, sec. 4.1.5
-        for (i = 0; i < 36; i++) {
-            if (!uuid[i]) {
-                r = 0 | Math.random() * 16;
-                uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
+            // rfc4122 requires these characters
+            uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+            uuid[14] = '4';
+
+            // Fill in random data.  At i==19 set the high bits of clock sequence as
+            // per rfc4122, sec. 4.1.5
+            for (i = 0; i < 36; i++) {
+                if (!uuid[i]) {
+                    r = 0 | Math.random() * 16;
+                    uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
+                }
             }
         }
+
+        return uuid.join('');
     }
 
-    return uuid.join('');
-}
-
-var userid=uuid(32, 16);
-
-         $.ajax({
-                url: httpaddress + 'customer/'+ 12+'/obtain_customer_service',
-                type: 'get',
-               
-                xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,
-
-                success:function(data)
-                {
-					console.log(data);
-                     console.log(data.data.cs_id);
-                     id=data.data.cs_id;
-                }
-            });
-
-console.log(userid);
+    var userid = uuid(32, 16);
 
     $.ajax({
-                url: httpaddress + 'customer/access/task/'+12,
-                type: 'get',
-               
-                xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,
+        url: httpaddress + 'customer/' + 12 + '/obtain_customer_service',
+        type: 'get',
 
-                success:function(data)
-                {
-                     console.log(data);
-                     
-                }
-            });
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
 
+        success: function (data) {
+            console.log(data);
+            console.log(data.data.cs_id);
+            id = data.data.cs_id;
+        }
+    });
 
-websocket = new WebSocket("ws://192.168.1.102:8080/chat?userId="+userid+"&username=小猪&userType=1&taskId=12&csId=15"); 
-websocket.onopen = function() {  
-                    //   alert("WebSocket连接成功");  
-					}
+    console.log(userid);
 
-					websocket.onmessage = function(event) {  
-         
-		 console.log(event);
-	  
-		 var messageJson=eval("("+event.data+")");  
-		   console.log(messageJson.msg);
-		
-		  sessionStorage.setItem('msg3',messageJson.msg);
-		  setTimeout(answers,1000); 
-	 }				
+    $.ajax({
+        url: httpaddress + 'customer/access/task/' + 12,
+        type: 'get',
 
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
 
-function getNowDate() {
- var date = new Date();
- var sign1 = "-";
- var sign2 = ":";
- var year = date.getFullYear() // 年
- var month = date.getMonth() + 1; // 月
- var day  = date.getDate(); // 日
- var hour = date.getHours(); // 时
- var minutes = date.getMinutes(); // 分
- var seconds = date.getSeconds() //秒
- var weekArr = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
- var week = weekArr[date.getDay()];
- // 给一位数数据前面加 “0”
- if (month >= 1 && month <= 9) {
-  month = "0" + month;
- }
- if (day >= 0 && day <= 9) {
-  day = "0" + day;
- }
- if (hour >= 0 && hour <= 9) {
-  hour = "0" + hour;
- }
- if (minutes >= 0 && minutes <= 9) {
-  minutes = "0" + minutes;
- }
- if (seconds >= 0 && seconds <= 9) {
-  seconds = "0" + seconds;
- }
- var currentdate = year + sign1 + month + sign1 + day + " " + hour + sign2 + minutes + sign2 + seconds ;
- return currentdate;
-}
-console.log(getNowDate());
-var timestamp=new Date().getTime();
+        success: function (data) {
+            console.log(data);
+
+        }
+    });
 
 
+    websocket = new WebSocket(chataddress + "chat?userId=" + userid + "&username=小猪&userType=1&taskId=12&csId=15");
+    websocket.onopen = function () {
+        //   alert("WebSocket连接成功");
+    }
 
-$('.sendBtn').on('click',function(){
-		var news=$('#dope').val();                   
-   console.log(news);
-		if(news==''){
-			alert('不能为空');
-		}else{
-            var content={"senderId":userid,"sender":'小猪',"receiverId":15,"receiver":'董凌浩',"msg":news,"sendTimeStr":getNowDate(),"type":1,"sendTime":timestamp};
-            websocket.send(JSON.stringify(content)); 
+    websocket.onmessage = function (event) {
+
+        console.log(event);
+
+        var messageJson = eval("(" + event.data + ")");
+        console.log(messageJson.msg);
+
+        sessionStorage.setItem('msg3', messageJson.msg);
+        setTimeout(answers, 1000);
+    }
+
+
+    function getNowDate() {
+        var date = new Date();
+        var sign1 = "-";
+        var sign2 = ":";
+        var year = date.getFullYear() // 年
+        var month = date.getMonth() + 1; // 月
+        var day = date.getDate(); // 日
+        var hour = date.getHours(); // 时
+        var minutes = date.getMinutes(); // 分
+        var seconds = date.getSeconds() //秒
+        var weekArr = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
+        var week = weekArr[date.getDay()];
+        // 给一位数数据前面加 “0”
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (day >= 0 && day <= 9) {
+            day = "0" + day;
+        }
+        if (hour >= 0 && hour <= 9) {
+            hour = "0" + hour;
+        }
+        if (minutes >= 0 && minutes <= 9) {
+            minutes = "0" + minutes;
+        }
+        if (seconds >= 0 && seconds <= 9) {
+            seconds = "0" + seconds;
+        }
+        var currentdate = year + sign1 + month + sign1 + day + " " + hour + sign2 + minutes + sign2 + seconds;
+        return currentdate;
+    }
+
+    console.log(getNowDate());
+    var timestamp = new Date().getTime();
+
+
+    $('.sendBtn').on('click', function () {
+        var news = $('#dope').val();
+        console.log(news);
+        if (news == '') {
+            alert('不能为空');
+        } else {
+            var content = {
+                "senderId": userid,
+                "sender": '小猪',
+                "receiverId": 15,
+                "receiver": '董凌浩',
+                "msg": news,
+                "sendTimeStr": getNowDate(),
+                "type": 1,
+                "sendTime": timestamp
+            };
+            websocket.send(JSON.stringify(content));
             console.log(JSON.stringify(content));
-			$('#dope').val('');
-		var str='';
-		str+='<li>'+
-				'<div class="nesHead"><img src="../images/y.jpg"/></div>'+
-				'<div class="news"><img class="jiao" src="img/20170926103645_03_02.jpg">'+news+'</div>'+
-			'</li>';
-		$('.newsList').append(str);
-		
-		$('.conLeft').find('li.bg').children('.liRight').children('.infor').text(news);
-		$('.RightCont').scrollTop($('.RightCont')[0].scrollHeight );
-	}
-	
-	})
+            $('#dope').val('');
+            var str = '';
+            str += '<li>' +
+                '<div class="nesHead"><img src="../images/y.jpg"/></div>' +
+                '<div class="news"><img class="jiao" src="img/20170926103645_03_02.jpg">' + news + '</div>' +
+                '</li>';
+            $('.newsList').append(str);
+
+            $('.conLeft').find('li.bg').children('.liRight').children('.infor').text(news);
+            $('.RightCont').scrollTop($('.RightCont')[0].scrollHeight);
+        }
+
+    })
 
 
- 
- function answers(){
-	var answer='';
-		answer='<li>'+
-					'<div class="answerHead"><img src="./img/2.jpg"></div>'+
-					'<div class="answers"><img class="jiao" src="img/jiao.jpg">'+sessionStorage.getItem('msg3')+'</div>'+
-				'</li>';
-		$('.newsList').append(answer);	
-        $('.RightCont').scrollTop($('.RightCont')[0].scrollHeight );
-	}
+    function answers() {
+        var answer = '';
+        answer = '<li>' +
+            '<div class="answerHead"><img src="./img/2.jpg"></div>' +
+            '<div class="answers"><img class="jiao" src="img/jiao.jpg">' + sessionStorage.getItem('msg3') + '</div>' +
+            '</li>';
+        $('.newsList').append(answer);
+        $('.RightCont').scrollTop($('.RightCont')[0].scrollHeight);
+    }
 
 
-     //确定评分
-	 $('.sureStar').on('click',function () {
-            if(starRating===0) {
-                alert('最低一颗星！');
-            } else {
-			   alert('评分：'+(starRating+'分'));
-			   $.ajax({
+    //确定评分
+    $('.sureStar').on('click', function () {
+        if (starRating === 0) {
+            alert('最低一颗星！');
+        } else {
+            alert('评分：' + (starRating + '分'));
+            $.ajax({
                 url: httpaddress + 'customer/12/evaluate/15',
                 type: 'post',
-               data:{
-				   'score':starRating
-			   },
+                data: {
+                    'score': starRating
+                },
                 xhrFields: {
                     withCredentials: true
                 },
                 crossDomain: true,
 
-                success:function(data)
-                {
-					 console.log(data);
-					 alert("谢谢您的评价，祝您生活愉快！")
-                     
+                success: function (data) {
+                    console.log(data);
+                    alert("谢谢您的评价，祝您生活愉快！")
+
                 }
             });
 
 
-            }
-        })
+        }
+    })
 </script>
 </body>
 </html>
