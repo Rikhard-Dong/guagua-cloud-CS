@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/recharge.css">
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/common2.css">
+    <script src="../js/address.js"></script>
+</head>
+
+<body>
+    <div id="header">充值记录</div>
+    <div id="search">创建日期:
+        <input type="date" value="2018-09-24" style="margin-left:20px;" />---
+        <input type="date" value="2018-09-24" />
+        <div id="recharge">
+            钱包￥：
+            <input type="text" id="money" readonly="true" value="" style="width:70px" />
+            <button type="button" class="btn btn-success" id="btnrecharge">充值</button>
+            <button type="button" class="btn btn-success" id="btnwithdraw">提现</button>
+        </div>
+    </div>
+    <form action="" method="post" id="withdraw" style="float:right;margin-top:-20px;display:none">
+         
+                <label>
+                    <font color="#ff0000">* </font>提现金额：
+                    <input type="text" name=""   id="withdrawvalue" style="border: 1px solid" />
+                    <input type="button" value="确认体现" class="submitBtn" id="btn-withdraw" />
+                </label>
+
+    </form>
+
+    <div id="dialogBg"></div>
+    <div id="dialog" class="animated" style="height:40%;width:40%;margin-left:-20%;">
+        <img class="dialogIco" width="50" height="50" src="../images/ico.png" alt="" />
+        <div class="dialogTop">
+            <a href="javascript:;" class="claseDialogBtn">关闭</a>
+        </div>
+        <form action="" method="post" id="editForm">
+            <ul class="editInfos">
+                <li>
+                    <label>
+                        <font color="#ff0000">* </font>充值金额：
+
+                        <input type="text" name="" required value="" id="value" class="ipt" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <font color="#ff0000">* </font>充值备注：
+                        <input type="text" name="" required value="" id="remark" class="ipt" />
+                    </label>
+                    <br />
+                    <input type="button" value="确认提交" class="submitBtn" id="btn-recharge" />
+                </li>
+            </ul>
+        </form>
+    </div>
+</body>
+<script>
+    var w, h, className;
+
+    function getSrceenWH() {
+        w = $(window).width();
+        h = $(window).height();
+        $('#dialogBg').width(w).height(h);
+    }
+
+    window.onresize = function () {
+        getSrceenWH();
+    }
+    $(window).resize();
+
+    $(function () {
+        getSrceenWH();
+
+        //显示弹框
+        $('a').click(function () {
+            className = $(this).attr('class');
+            $('#dialogBg').fadeIn(300);
+            $('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
+        });
+
+        //关闭弹窗
+        $('.claseDialogBtn').click(function () {
+            $('#dialogBg').fadeOut(300, function () {
+                $('#dialog').addClass('bounceOutUp').fadeOut();
+            });
+        });
+    });
+
+    $("#btnrecharge").click(function () {
+        $('#dialogBg').fadeIn(300);
+        $('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
+    });
+
+
+    $("#btnwithdraw").click(function () {
+  
+     $('#withdraw').slideToggle("slow");
+  });
+   
+
+
+
+    $("#btn-recharge").click(function () {
+
+        $.ajax({
+            url: httpaddress + 'enterprise/property/recharge',
+            type: 'put',
+            data: {
+                'value': $("#value").val()
+
+            },
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            success: function (data) {
+                console.log(data);  
+                if(data.code==12){
+              window.location.href="./recharge.html"
+        }
+            }
+        });
+    });
+
+    $("#btn-withdraw").click(function () {
+
+$.ajax({
+    url: httpaddress + 'enterprise/property/withdraw',
+    type: 'put',
+    data: {
+        'value': $("#withdrawvalue").val()
+
+    },
+    xhrFields: {
+        withCredentials: true
+    },
+    crossDomain: true,
+    headers: {
+        'Authorization': sessionStorage.getItem('cookie')
+    },
+    success: function (data) {
+      console.log(data);
+      if(data.code==11){
+          alert("体现成功");
+        $('#withdraw').hide();
+        }
+      
+    }
+});
+});
+
+    $.ajax({
+        url: httpaddress + 'enterprise/property/query',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        success: function (data) {
+            console.log(data);
+       $("#money").val(data.data.property.balance);
+        }
+    });
+
+
+      $.ajax({
+        url: httpaddress + 'enterprise/property/detail/query',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        data:{'page':1,
+            'size':30   
+    },
+        success: function (data) {
+            
+   console.log(data);
+        }
+    });
+
+</script>
+
+</html>

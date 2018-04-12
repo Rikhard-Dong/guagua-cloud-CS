@@ -59,6 +59,7 @@ public class MemberSingleton {
      */
     public void addOnlineMember(Integer memberId) {
         onlineMembers.add(memberId);
+        memberAccesses.put(memberId, 0);
     }
 
     /**
@@ -135,9 +136,9 @@ public class MemberSingleton {
     }
 
     /**
-     * 移除某个任务, 即摸个任务结束了
+     * 移除某个任务, 即某个任务结束了
      *
-     * @param taskId
+     * @param taskId task id
      */
     public void removeTask(Integer taskId) {
         for (Map.Entry<Integer, List<Integer>> entry : members.entrySet()) {

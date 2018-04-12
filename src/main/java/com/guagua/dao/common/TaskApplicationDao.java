@@ -20,8 +20,8 @@ public interface TaskApplicationDao {
     /**
      * 插入一条申请记录
      *
-     * @param application
-     * @return
+     * @param application application
+     * @return result
      */
     Integer insertOne(TaskApplication application);
 
@@ -32,9 +32,9 @@ public interface TaskApplicationDao {
     /**
      * 更新任务状态
      *
-     * @param id
-     * @param status
-     * @return
+     * @param id     id
+     * @param status status
+     * @return result
      */
     Integer updateStatus(@Param("id") Integer id,
                          @Param("status") Integer status);
@@ -54,7 +54,7 @@ public interface TaskApplicationDao {
     /**
      * 查询用户是否参与过本次任务的投标
      *
-     * @return
+     * @return result
      */
     TaskApplication findByTaskIdAndMemberId(@Param("taskId") Integer taskId,
                                             @Param("memberId") Integer memberId);
@@ -62,34 +62,44 @@ public interface TaskApplicationDao {
     /**
      * 查询该任务下的所有申请
      *
-     * @param taskId
-     * @return
+     * @param taskId task id
+     * @return result
      */
     List<TaskApplication> findByTaskId(Integer taskId);
 
     /**
      * 查询单条
      *
-     * @param applicationId
-     * @return
+     * @param applicationId application id
+     * @return result
      */
     TaskApplication findById(Integer applicationId);
 
     /**
      * 查询该任务下所有未处理的申请
      *
-     * @param taskId
-     * @return
+     * @param taskId task id
+     * @return result
      */
     List<TaskApplication> findUntreatedByTaskId(Integer taskId);
 
     /**
      * 根据任务id和任务状态查询
      *
-     * @param taskId
-     * @param status
-     * @return
+     * @param taskId task id
+     * @param status status
+     * @return result
      */
     List<TaskApplication> findByTaskIdAndStatus(@Param("taskId") Integer taskId,
                                                 @Param("status") Integer status);
+
+    /**
+     * 根据申请的状态查询申请数量
+     *
+     * @param memberId member id
+     * @param status   status
+     * @return result
+     */
+    Integer countTaskByStatus(@Param("memberId") Integer memberId,
+                              @Param("status") Integer status);
 }

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../easyui/jquery.min.js"></script>
+    <script src="../easyui/jquery.easyui.min.js"></script>
+    <script src="../easyui/plugins/jquery.datagrid.js"></script>
+    <script src="../easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" href="../easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" href="../easyui/themes/icon.css" />
+    <script src="../js/address.js"></script>
+    <title>Document</title>
+</head>
+
+<body style="margin: 1px;">
+    <table id="dg" title="用户管理查询查询" class="easyui-datagrid" fitColumns="true" pagination="true" rownumbers="true" fit="true"
+        toolbar="#tb">
+        <thead>
+            <tr>
+            </tr>
+        </thead>
+    </table>
+    <div id="tb">
+        <div>
+            <a href="javascript:openRoleAddDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>
+            <a href="javascript:openRoleModifyDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+            <a href="javascript:deleteRole()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+            <a href="javascript:unfriend()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">解除关系</a>
+        </div>
+
+      
+
+    </div>
+
+    <div id="dlg" class="easyui-dialog" style="width: 570px;height: 190px;padding: 10px 20px" closed="true" buttons="#dlg-buttons">
+        <form id="fm" method="post">
+            <table cellspacing="5px;">
+
+                <tr>
+                    <td>用户类型：</td>
+                    <td width="80%">
+                        <select onchange="getUserId()" type="text" id="usertype" name="username" class="easyui-validatebox" required="true">
+                            <option value="enterprise">企业用户</option>
+                            <option value="member">会员用户</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>用户登录名：</td>
+                    <td width="80%">
+                        <select type="text" id="userId" name="username" class="easyui-validatebox" required="true" /></select>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="dlg-buttons">
+        <a href="javascript:saveRole()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+        <a href="javascript:closeRoleSaveDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+    </div>
+    
+
+
+
+    <div id="dlg2" class="easyui-dialog" style="width: 570px;height: 190px;padding: 10px 20px" closed="true" buttons="#dlg-buttons2">
+      
+            <table cellspacing="5px;">
+
+                <tr>
+                    <td>用户类型：</td>
+                    <td width="80%">
+                        <select onchange="getUserId()" type="text" id="usertype" name="username" class="easyui-validatebox" required="true">
+                            <option value="enterprise">企业用户</option>
+                            <option value="member">会员用户</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>用户登录名：</td>
+                    <td width="80%">
+                        <select type="text" id="userId2" name="username" class="easyui-validatebox" required="true" /></select>
+                    </td>
+                </tr>
+      
+    </div>
+    <div id="dlg-buttons2">
+        <a href="javascript:unfriendRole()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+        <a href="javascript:closeRoleSaveDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+    </div>
+</body>
+<script>
+    function getUserId() {
+        $.ajax({
+            url: httpaddress + 'admin/auditing/' + $("#usertype option:selected").val() + '/authentication/all',
+            type: 'get',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'page': 1,
+                'size': 10
+            },
+            success: function (data) {
+
+                console.log(data.data.pageInfo.list);
+                var id = [];
+                var name = [];
+                for (var value in data.data.pageInfo.list) {
+                    i = data.data.pageInfo.list[value].id;
+                    n = data.data.pageInfo.list[value].username;
+                    id.push(i);
+                    name.push(n);
+
+                }
+                var questionId = document.getElementById("userId");
+                questionId.innerHTML = "";
+                for (var i = 0; i < questionId.childNodes.length; i++) {
+                    questionId.removeChild(questionId.options[0]);
+                    questionId.remove(0);
+                    questionId.options[0] = null;
+                }
+                for (var i = 0; i < data.data.pageInfo.list.length; i++) {
+                    $("#userId").append("<option value='" + id[i] + "'>" + name[i] + "</option>");
+                    $("#userId2").append("<option value='" + id[i] + "'>" + name[i] + "</option>");
+                }
+
+            }
+
+
+        });
+
+    }
+
+
+function  unfriend()
+{
+         $("#dlg2").dialog("open").dialog("setTitle", "解除角色用户");
+
+}
+
+function  unfriendRole()                            //解除关系的函数
+{
+    $.ajax({
+            url: httpaddress + 'admin/user_role/delete/contact',
+            type: 'delete',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'userId': $("#userId2 option:selected").val(),
+                'roleIds': idd
+            },
+            success: function (data) {
+
+                alert("操作成功");
+            }
+        });
+
+
+
+
+
+}
+
+
+
+
+    $.ajax({
+        url: httpaddress + 'admin/role/list',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        data: {
+            'page': 1,
+            'size': 100
+        },
+        success: function (data) {
+           
+            var a = data.data.roles.list;
+            console.log(a);
+            var treeData1 = [];
+            var name=[];
+            var id=[];
+            for (var value in a) {
+                var treeData = {
+                    'ID': a[value].id,
+                    'name1': a[value].roleName,
+                    'name2': a[value].name,
+                    'description': a[value].description,
+
+                };
+                treeData1.push(treeData);
+        name.push(a[value].name);
+        id.push(a[value].id);
+            }
+for(var i=0;i<a.length;i++)
+{
+    $("#idd").append("<option value='" + id[i] + "'>" + name[i] + "</option>");
+}
+            $('#dg').datagrid('loadData', treeData1);
+        }
+
+
+    });
+
+    var id = '';
+    var id2='';  //解除关系的id
+    $("#dg").datagrid({
+        //双击事件  
+        onDblClickRow: function (index, row) {
+            console.log(row.ID);
+            $("#dlg").dialog("open").dialog("setTitle", "添加该角色用户");
+            id = row.ID;
+
+        },
+      onClickRow: function (index, row) {
+        
+         
+            id2 = row.ID;
+            console.log(id2);
+   
+
+        }
+
+
+
+
+    });
+
+    $(function () {
+        $("#dg").datagrid({
+
+            columns: [
+
+                [{
+                        title: '编号',
+                        field: 'ID',
+                        width: 100,
+                        checkbox: true, //这个checkbox:true 就表示让Id这一行显示为复选框的样式。  
+                    },
+                    {
+                        field: 'name1',
+                        title: '角色英文名',
+                        width: 250
+                    },
+                    {
+                        field: 'name2',
+                        title: '角色名',
+                        width: 250
+                    },
+                    {
+                        field: 'description',
+                        title: '角色描述',
+                        width: 250
+                    }
+                ]
+            ]
+        })
+
+
+    })
+
+
+    function saveRole() {
+        $.ajax({
+            url: httpaddress + 'admin/user_role/create/contact',
+            type: 'post',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'userId': $("#userId option:selected").val(),
+                'roleIds': id
+            },
+            success: function (data) {
+
+                alert("操作成功");
+            }
+        });
+
+    }
+
+
+    function searchRole()
+    {
+        $.ajax({
+        url: httpaddress + 'admin/role/'+ $("#idd option:selected").val()+'/detail',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        success: function (data) {
+
+ console.log(data.data.role.permissions);
+  var id=[];
+  var name=[];
+  var url=[];
+  var description=[];
+
+    for (var value in data.data.role.permissions) {
+                var treeData = {
+                    'ID': data.data.role.permissions[value].id,
+              
+                    'name': data.data.role.permissions[value].name,
+                    'description': data.data.role.permissions[value].description,
+}
+                };
+        }
+        });
+    }
+</script>
+
+</html>

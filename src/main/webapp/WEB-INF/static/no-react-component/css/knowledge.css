@@ -1,0 +1,55 @@
+#header
+{
+width: 100%;
+height:50px;
+font-size:30px;
+font-family:'楷体';
+font-weight:bold;
+position: relative;
+}
+#function{
+    width: 100%;
+    height:60px;
+    position: relative;
+}
+#search{
+width:50%;
+height: 30px;
+position: relative;
+margin-left:50%;
+margin-top: -32px;
+}
+#item
+{
+    width: 100%;
+    height:500px;
+    position: relative;
+    margin-top: 20px;
+}
+#content
+{
+    height:60%;
+    width: 100%;
+    position: relative;
+}
+ul li
+{
+   
+   list-style:none;
+   font-size:1.1em;
+    /* position:relative; padding-left:20px;  height:20px; ; line-height:20px; list-style:none;padding-right:60px;letter-spacing: 2px;padding-top: 5px;  */
+}
+
+body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体"; background: url('../images/timg.jpg')  ; background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;background-repeat: no-repeat; }
+h1,p{margin:0;}
+ul{padding:0;margin:0;list-style:none;}
+#result{font-size:24px;font-family:'微软雅黑','宋体';color:#333;margin:0;font-weight:normal;}
+#pager ul.pages{padding-top:20px;height:40px;}
+#pager ul.pages li{float:left;border:none;background:#5bc0de; margin:0 15px 0 0;padding:5px 8px;border-radius: 15px;}
+#pager ul.pages li:hover{border-radius: 15px;}
+#pager ul.pages li.pgEmpty{border-radius: 15px;}
+#pager ul.pages li.pgCurrent{border-radius: 15px;font-weight:700;background-color:#de5bd8;}
+.txt{padding-top:5px;font-size:14px;font-family:Arial,Times New Roman;}
+.txt b{margin-left:5px;color:#f60;}

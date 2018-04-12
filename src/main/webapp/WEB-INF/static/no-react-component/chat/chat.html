@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="../css/qq.css" />
+    
+
+</head>
+
+<body>
+
+    <div class="qqBox">
+        <div class="BoxHead">
+            <div class="headImg">
+                <img id="headd" src="" />
+            </div>
+            <div class="internetName">
+                <input type="text" readonly="true" id="usernmae" style="background-color:#1a91ed;border:none">
+                <input type="text" readonly="true" id="userid" style="background-color:#1a91ed;border:none;display:none">
+            </div>
+        </div>
+        <div class="context">
+            <div class="conLeft">
+                <ul id="box">
+                    <!-- <li>
+					<div class="liLeft"><img src="img/20170926103645_04.jpg"/></div>
+					<div class="liRight">
+						<span class="intername">前端交流群</span>
+						<span class="infor">厉害了</span>
+					</div>
+				</li>
+				<li >
+					<div class="liLeft"><img src="img/20170926103645_19.jpg"/></div>
+					<div class="liRight">
+						<span  class="intername">赵鹏</span>
+						<span class="infor">[流泪]</span>
+					</div>
+				</li> -->
+
+                </ul>
+            </div>
+            <div class="conRight">
+                <div class="Righthead">
+                    <div class="headName"><input type="text" id="toname" readonly="true" style="border:none;background-color:White">
+                        
+                    </div>
+                    <div class="headConfig">
+                        <ul>
+                            <li>
+                                <img src="img/20170926103645_06.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/20170926103645_08.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/20170926103645_10.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/20170926103645_12.jpg" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="RightCont">
+                    <ul class="newsList">
+
+                    </ul>
+                </div>
+                <div class="RightFoot">
+                    <div class="emjon">
+                        <ul>
+                            <li>
+                                <img src="img/em_02.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_05.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_07.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_12.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_14.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_16.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_20.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_23.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_25.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_30.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_31.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_33.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_37.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_38.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_40.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_45.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_47.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_48.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_52.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_54.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/em_55.jpg" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footTop">
+                        <ul>
+                            <li>
+                                <img src="img/20170926103645_31.jpg" />
+                            </li>
+                            <li class="ExP">
+                                <img src="img/20170926103645_33.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/20170926103645_35.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/20170926103645_37.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/20170926103645_39.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/20170926103645_41.jpg" alt="" />
+                            </li>
+                            <li>
+                                <img src="img/20170926103645_43.jpg" />
+                            </li>
+                            <li>
+                                <img src="img/20170926103645_45.jpg" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="inputBox">
+                        <textarea id="dope" style="width: 99%;height:300px ; border: none;outline: none;" name="" rows="" cols=""></textarea>
+                        <button class="sendBtn">发送(s)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/chat.js"></script>
+    <script type="text/javascript" src="../js/address.js"></script>
+  
+</body>
+<script>
+   
+ var websocket = null; 
+ var imgurl;
+    $.ajax({
+        url: httpaddress + 'user/profile/info',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        success: function (data) {
+            console.log(data);
+            console.log(data.data.info.headImage);
+            document.getElementById("headd").src = data.data.info.headImage;
+    
+            $("#usernmae").val(data.data.info.username);
+            $("#userid").val(data.data.info.userId);
+
+    
+      }  
+    });
+
+websocket = new WebSocket("ws://192.168.1.102:8080/chat?userId=12&username=斯晓冬&userType=2"); 
+websocket.onopen = function() {  
+                    //   alert("WebSocket连接成功");  
+                    }
+
+     websocket.onmessage = function(event) {  
+         
+        console.log(event);
+     
+        var messageJson=eval("("+event.data+")");  
+          console.log(messageJson.msg);
+       
+         sessionStorage.setItem('msg',messageJson.msg);
+         setTimeout(answers,1000); 
+    }
+
+    $.ajax({
+        url: httpaddress + 'enterprise/task/all/customer_service',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        data: {
+            'page': 1,
+            'size': 30
+        },
+        crossDomain: true,
+        success: function (data) {
+            console.log(data.data.customerService.list);
+            var id = [];
+            var name = [];
+            var headImage = [];
+            for (var value in data.data.customerService.list) {
+                var idd = data.data.customerService.list[value].userId;
+                var username = data.data.customerService.list[value].username;
+                var headimage = data.data.customerService.list[value].headImage;
+             
+                id.push(idd);
+                name.push(username);
+                headImage.push(headimage);
+            }
+            
+            var list = '';
+            for (var i = 0; i < data.data.customerService.list.length; i++) {
+                list += "<li class="+ name[i]+" id="+id[i]+">" +
+                    "<div class='liLeft'><img onclick='message()' style='width:50px;height:50px;border-radius:50%;' src="+ headImage[i]+"></div>" +
+                    "<div class='liRight'> " +
+                    "<span class='intername'>" + name[i] + "</span>" +
+                    "</div>" +
+                    "</li>"
+            }
+            document.getElementById('box').innerHTML = list;
+
+        }
+    });
+
+var bid;
+var bid2;
+
+ var timestamp=new Date().getTime();
+function message()
+{
+   $("ul li").click(function () {
+         bid=$(this).attr('id');
+         bid2=$(this).attr('class');
+       $("#toname").val(bid2);
+    
+     });
+}
+
+	function answers(){
+  
+    
+		var answer='';
+		answer='<li>'+
+					'<div class="answerHead"><img src="../images/dlh.jpg"></div>'+
+					'<div class="answers"><img class="jiao" src="img/jiao.jpg">'+sessionStorage.getItem('msg')+'</div>'+
+				'</li>';
+		$('.newsList').append(answer);	
+        $('.RightCont').scrollTop($('.RightCont')[0].scrollHeight );
+       
+	}
+
+function getNowDate() {
+ var date = new Date();
+ var sign1 = "-";
+ var sign2 = ":";
+ var year = date.getFullYear() // 年
+ var month = date.getMonth() + 1; // 月
+ var day  = date.getDate(); // 日
+ var hour = date.getHours(); // 时
+ var minutes = date.getMinutes(); // 分
+ var seconds = date.getSeconds() //秒
+ var weekArr = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
+ var week = weekArr[date.getDay()];
+ // 给一位数数据前面加 “0”
+ if (month >= 1 && month <= 9) {
+  month = "0" + month;
+ }
+ if (day >= 0 && day <= 9) {
+  day = "0" + day;
+ }
+ if (hour >= 0 && hour <= 9) {
+  hour = "0" + hour;
+ }
+ if (minutes >= 0 && minutes <= 9) {
+  minutes = "0" + minutes;
+ }
+ if (seconds >= 0 && seconds <= 9) {
+  seconds = "0" + seconds;
+ }
+ var currentdate = year + sign1 + month + sign1 + day + " " + hour + sign2 + minutes + sign2 + seconds ;
+ return currentdate;
+}
+console.log(getNowDate());
+
+	$('.sendBtn').on('click',function(){
+		var news=$('#dope').val();                   
+ 
+		if(news==''){
+			alert('不能为空');
+		}else{
+         
+            var content={"senderId":$("#userid").val(),"sender": $("#usernmae").val(),"receiverId":bid,"receiver":bid2,"msg":news,"sendTimeStr":getNowDate(),"type":0,"sendTime":timestamp};
+            websocket.send(JSON.stringify(content)); 
+            console.log(JSON.stringify(content));
+			$('#dope').val('');
+		var str='';
+		str+='<li>'+
+				'<div class="nesHead"><img src="../images/y.jpg"/></div>'+
+				'<div class="news"><img class="jiao" src="img/20170926103645_03_02.jpg">'+news+'</div>'+
+			'</li>';
+		$('.newsList').append(str);
+		
+		$('.conLeft').find('li.bg').children('.liRight').children('.infor').text(news);
+		$('.RightCont').scrollTop($('.RightCont')[0].scrollHeight );
+	}
+	
+	})
+ 
+</script>
+
+</html>

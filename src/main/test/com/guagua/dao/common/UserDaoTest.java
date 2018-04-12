@@ -2,11 +2,15 @@ package com.guagua.dao.common;
 
 import com.guagua.bean.entity.common.User;
 import com.guagua.utils.CryptographyUtils;
+import com.guagua.utils.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.text.ParseException;
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -54,5 +58,16 @@ public class UserDaoTest {
     public void deleteById() {
         Integer flag = userDao.deleteById(1);
         assertTrue(flag != 0);
+    }
+
+    @Test
+    public void countUserNum() throws ParseException {
+        Date startTime = DateUtils.str2Date("2000-1-1 0:0:0");
+        Date endTime = new Date();
+        System.out.println(userDao.countUserNum(startTime, endTime));
+    }
+
+    @Test
+    public void countUserNumByUserType() {
     }
 }

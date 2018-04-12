@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/task-ing.css">
+    <link rel="stylesheet" href="../css/common2.css">
+
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js/address.js"></script>
+    <script src="../js/jquery.pager.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="header">
+        查看我的任务
+    </div>
+
+    <div id="search">
+        <select id="taskstate" style="height:40px;width:25%;font-size:1em;cursor:pointer;border-radius:3px;background:rgba(248,248,248,0.3);border:none">
+            <option value="">所有任务</option>
+            <option value="/status/1">招标中的任务</option>
+            <option value="/status/2">招标完成但是未开始的任务</option>
+            <option value="/status/3">已开始的任务</option>
+            <option value="/status/4">正结束的任务</option>
+            <option value="/status/5">已取消的任务</option>
+        </select>
+        <input type="text" style="float:right;height:30px;width:20%;font-size:1em;background:rgba(248,248,248,0.3);border:none" placeholder="搜索任务"
+        />
+    </div>
+    <div id="show-item">
+        <ul id="box"></ul>
+    </div>
+
+    <div id="pager"></div>
+
+
+    <div id="dialogBg"></div>
+    <div id="dialog" class="animated" style="height:90%;width:40%;margin-top:-20%;background-color:honeydew;margin-right:200px">
+        <img class="dialogIco" width="50" height="50" src="../images/ico.png" alt="" />
+        <div class="dialogTop">
+            <a href="javascript:;" class="claseDialogBtn">关闭</a>
+        </div>
+        <form action="" method="post" id="editForm">
+            <ul class="editInfos">
+                <li>
+
+                    <font color="#ff0000">* </font>标题：
+                    <input type="text" name="" required value="" id="title" class="ipt" style="background:rgba(248,248,248,0.3);border:none"
+                    />
+
+                </li>
+                <li>
+
+                    <font color="#ff0000">* </font>描述：
+                    <textarea rows="4" cols="21" id="description" class="ipt" style="background:rgba(248,248,248,0.3);border:none">
+                        我是一个文本框。
+                    </textarea>
+
+
+                </li>
+                <li>
+
+                    <font color="#ff0000">* </font>工资：
+                    <input type="text" name="" required value="" id="basesalary" class="ipt" style="background:rgba(248,248,248,0.3);border:none"
+                    />
+
+                </li>
+                <!-- <li>
+
+                    <font color="#ff0000">* </font>奖金：
+                    <input type="text" name="" required value="" id="bonus" class="ipt" style="background:rgba(248,248,248,0.3);border:none"
+                    />
+
+                </li> -->
+                <li>
+
+                    <font color="#ff0000">* </font>人数：
+                    <input type="text" name="" required value="" id="number" class="ipt" style="background:rgba(248,248,248,0.3);border:none"
+                    />
+
+                </li>
+                <li>
+
+                    <font color="#ff0000">* </font>任务开始时间：
+                    <input type="text" name="" required value="" id="startTime" class="ipt" style="background:rgba(248,248,248,0.3);border:none"
+                    />
+
+                </li>
+                <li>
+
+                    <font color="#ff0000">* </font>任务结束时间：
+                    <input type="text" name="" required value="" id="endTime" class="ipt" style="background:rgba(248,248,248,0.3);border:none"
+                    />
+
+                </li>
+            </ul>
+        </form>
+    </div>
+</body>
+<script>
+    var w, h, className;
+    var pagea;
+
+    function getSrceenWH() {
+        w = $(window).width();
+        h = $(window).height();
+        $('#dialogBg').width(w).height(h);
+    }
+
+    window.onresize = function () {
+        getSrceenWH();
+    }
+    $(window).resize();
+    $(function () {
+        getSrceenWH();
+
+        //显示弹框
+        $('a').click(function () {
+            className = $(this).attr('class');
+            $('#dialogBg').fadeIn(300);
+            $('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
+        });
+
+        //关闭弹窗
+        $('.claseDialogBtn').click(function () {
+            $('#dialogBg').fadeOut(300, function () {
+                $('#dialog').addClass('bounceOutUp').fadeOut();
+            });
+        });
+    });
+
+    $(function () { //分页
+        $("#pager").pager({
+            pagenumber: 1,
+            pagecout: pagea,
+            buttonClickCallback: PageClick
+        });
+    })
+
+    PageClick = function (pageclickednumber) {
+        $("#pager").pager({
+            pagenumber: pageclickednumber,
+            pagecount: pagea,
+            buttonClickCallback: PageClick
+        })
+
+
+        $.ajax({
+            url: httpaddress + 'enterprise/task/query',
+            type: 'get',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'page': pageclickednumber,
+                'size': 4
+            },
+            success: function (data) {
+                console.log(data.data.tasks.navigatepageNums.length);
+                pagea = data.data.tasks.navigatepageNums.length;
+                console.log(data.data.tasks.list);
+                var id = [];
+                var title = [];
+                var description = [];
+                var status = [];
+                var baseSalary = [];
+                var bonus = [];
+                var num = [];
+
+                for (var value in data.data.tasks.list) {
+                    var id1 = data.data.tasks.list[value].id;
+                    var title1 = data.data.tasks.list[value].title;
+                    var description1 = data.data.tasks.list[value].description;
+                    var status1 = data.data.tasks.list[value].status;
+                    var basesalary = data.data.tasks.list[value].baseSalary;
+                    var bonus1 = data.data.tasks.list[value].bonus;
+                    var num1 = data.data.tasks.list[value].number;
+
+                    id.push(id1);
+                    title.push(title1);
+                    description.push(description1);
+                    status.push(status1);
+                    baseSalary.push(basesalary);
+                    bonus.push(bonus1);
+                    num.push(num1);
+
+                }
+                var list = '';
+                for (var i = 0; i < data.data.tasks.list.length; i++) {
+                    list +=
+                        "<div id='listimg' style='position:relative;float:left;margin-top:12px;padding-right:10px;' >" +
+                        "<img src='../images/dlh.jpg' style='width:85px;heitgh:85px;'>" + "</div>" +
+                        "<div id='listnum' style='position:relative'>" + "<li id=" + id[i] + " class=" +
+                        status[i] + ">" + '  标题：' + title[i] + '<br />' + '描述：' +
+                        '<span style="" >' + description[i] + '</span>' + '<br />' +
+                        '<span style="font-size:15px">基本工资：</span>' +
+                        '<span style="color:red;font-size:3px;"> ' + "￥" + baseSalary[i] + '</span>' +
+                        '<br />' + '<span style="font-size:15px">奖金：</span>' +
+                        '<span style="color:red;font-size:4px;"> ' + "￥" + bonus[i] + '</span >' +
+                        '<span style="padding-left:60px;">人数：</span>' + '<span style="color:red">' +
+                        num[i] + '</span>' + '<br />' +
+                        '<a id="quxiao"  href="javascript:void(0);"  ><button type="button" onclick="cancel()" class="btn btn-danger">取消任务</button></a>' +
+                        '-' +
+                        '<a id="look"  href="javascript:void(0);" onclick="look()" ><button type="button" class="btn btn-info">查看详细任务</button></a>' +
+                        '-' +
+                        '<a id="look"  href="javascript:void(0);" onclick="bid()" ><button type="button" class="btn btn-info">查看竞标记录</button></a>' +
+                        '-' +
+                        '<a id="knowLook"  href="javascript:void(0);" onclick="knowLook()" ><button type="button" class="btn btn-info">查看知识库</button></a>' +
+                        '<hr />' +
+                        "</li>" + "</div>";
+                }
+                document.getElementById('box').innerHTML = list;
+            }
+        });
+
+
+    }
+
+
+
+
+
+    $.ajax({
+        url: httpaddress + 'enterprise/task/query',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        data: {
+            'page': 1,
+            'size': 4
+        },
+        success: function (data) {
+
+            console.log(data.data.tasks.list);
+            var id = [];
+            var title = [];
+            var description = [];
+            var status = [];
+            var baseSalary = [];
+            var bonus = [];
+            var num = [];
+            for (var value in data.data.tasks.list) {
+                var id1 = data.data.tasks.list[value].id;
+                var title1 = data.data.tasks.list[value].title;
+                var description1 = data.data.tasks.list[value].description;
+                var status1 = data.data.tasks.list[value].status;
+                var basesalary = data.data.tasks.list[value].baseSalary;
+                var bonus1 = data.data.tasks.list[value].bonus;
+                var num1 = data.data.tasks.list[value].number;
+                id.push(id1);
+                title.push(title1);
+                description.push(description1);
+                status.push(status1);
+                baseSalary.push(basesalary);
+                bonus.push(bonus1);
+                num.push(num1);
+            }
+            var list = '';
+            for (var i = 0; i < data.data.tasks.list.length; i++) {
+                list +=
+                    "<div id='listimg' style='position:relative;float:left;margin-top:12px;padding-right:10px;' >" +
+                    "<img src='../images/dlh.jpg' style='width:85px;heitgh:85px;'>" + "</div>" +
+                    "<div id='listnum' style='position:relative'>" + "<li id=" + id[i] + " class=" + status[
+                        i] + ">" + '  标题：' + title[i] + '<br />' + '描述：' +
+                    '<span style="" >' + description[i] + '</span>' + '<br />' +
+                    '<span style="font-size:15px">基本工资：</span>' +
+                    '<span style="color:red;font-size:3px;"> ' + "￥" + baseSalary[i] + '</span>' + '<br />' +
+                    '<span style="font-size:15px">奖金：</span>' + '<span style="color:red;font-size:4px;"> ' +
+                    "￥" + bonus[i] + '</span >' + '<span style="padding-left:60px;">人数：</span>' +
+                    '<span style="color:red">' + num[i] + '</span>' + '<br />' +
+                    '<a id="quxiao"  href="javascript:void(0);"  ><button type="button" onclick="cancel()" class="btn btn-danger">取消任务</button></a>' +
+                    '-' +
+                    '<a id="look"  href="javascript:void(0);" onclick="look()" ><button type="button" class="btn btn-info">查看详细任务</button></a>' +
+                    '-' +
+                    '<a id="look"  href="javascript:void(0);" onclick="bid()" ><button type="button" class="btn btn-info">查看竞标记录</button></a>' +
+                    '-' +
+                    '<a id="knowLook"  href="javascript:void(0);" onclick="knowLook()" ><button type="button" class="btn btn-info">查看知识库</button></a>' +
+                    '<hr />' +
+                    "</li>" + "</div>";
+            }
+            document.getElementById('box').innerHTML = list;
+        }
+    });
+
+    function knowLook() {
+        $("ul li").click(function () {
+            var TASKID = $(this).attr('id');
+            sessionStorage.setItem('TASKID', TASKID);
+            window.location.href = './know-llok.html';
+        });
+    }
+
+
+
+    $('#taskstate').change(
+        function () {
+            $.ajax({
+                url: httpaddress + 'enterprise/task/query' + $('#taskstate option:selected').val(),
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                crossDomain: true,
+                data: {
+                    'page': 1,
+                    'size': 4
+                },
+                success: function (data) {
+                    console.log(data);
+                    console.log(data.data.tasks.list);
+                    var id = [];
+                    var title = [];
+                    var description = [];
+                    var status = [];
+                    var baseSalary = [];
+                    var bonus = [];
+                    var num = [];
+                    for (var value in data.data.tasks.list) {
+                        var id1 = data.data.tasks.list[value].id;
+                        var title1 = data.data.tasks.list[value].title;
+                        var description1 = data.data.tasks.list[value].description;
+                        var status1 = data.data.tasks.list[value].status;
+                        var basesalary = data.data.tasks.list[value].baseSalary;
+                        var bonus1 = data.data.tasks.list[value].bonus;
+                        var num1 = data.data.tasks.list[value].number;
+                        id.push(id1);
+                        title.push(title1);
+                        description.push(description1);
+                        status.push(status1);
+                        baseSalary.push(basesalary);
+                        bonus.push(bonus1);
+                        num.push(num1);
+                    }
+
+                    var list = '';
+
+                    for (var i = 0; i < data.data.tasks.list.length; i++) {
+                        list +=
+                            "<div id='listimg' style='position:relative;float:left;margin-top:12px;padding-right:10px;' >" +
+                            "<img src='../images/dlh.jpg' style='width:85px;heitgh:85px;'>" + "</div>" +
+                            "<div id='listnum' style='position:relative'>" + "<li id=" + id[i] +
+                            " class=" + status[i] + ">" + '标题：' + title[i] + '<br />' + '描述：' +
+                            "<span style=''>" + description[i] + '<br />' +
+                            '<span style="font-size:15px">基本工资：</span>' +
+                            '<span style="color:red;font-size:3px;"> ' + "￥" + baseSalary[i] +
+                            '</span>' + '<br />' + '<span style="font-size:15px">奖金：</span>' +
+                            '<span style="color:red;font-size:4px;"> ' + "￥" + bonus[i] + '</span>' +
+                            '<span style="padding-left:60px;">人数：</span>' + '<span style="color:red">' +
+                            num[i] + '</span>' + '<br />' +
+                            '<a id="quxiao"  href="javascript:void(0);" onclick="cancel()" ><button type="button" class="btn btn-danger">取消任务</button></a>' +
+                            '-' +
+                            '<a id="look"  href="javascript:void(0);" onclick="look()" ><button type="button" class="btn btn-info">查看详细任务</button></a>' +
+                            '-' +
+                            '<a id="look"  href="javascript:void(0);" onclick="bid()" ><button type="button" class="btn btn-info">查看竞标记录</button></a>' +
+                            '-' +
+                            '<a id="knowLook"  href="javascript:void(0);" onclick="knowLook()" ><button type="button" class="btn btn-info">查看知识库</button></a>' +
+                            '<hr />' +
+                            "</li>" + "</div>"
+                    }
+                    document.getElementById('box').innerHTML = list;
+                }
+            })
+
+        }
+    );
+
+
+
+    function bid() {
+        $("ul li").click(function () {
+            var bid = $(this).attr('id');
+
+            sessionStorage.setItem('bid', bid);
+            window.location.href = './bind.html';
+        });
+    }
+
+
+    function cancel() {
+
+        $("ul li").click(function () {
+            var detail = $(this).attr('id');
+            var detail1 = $(this).attr('class');
+            console.log(detail1);
+            if (detail1 == 1 || detail1 == 2) {
+                $.ajax({
+                    url: httpaddress + 'enterprise/task/cancel/' + detail,
+                    type: 'put',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    headers: {
+                        'Authorization': sessionStorage.getItem('cookie')
+                    },
+                    crossDomain: true,
+                    data: {
+                        'id': detail
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+            } else if (detail1 == 5) {
+                $("#quxiao").hide();
+            } else {
+                alert("取消将支付额外的费用");
+            }
+
+
+        });
+    }
+
+
+
+
+    function look() {
+        $('#dialogBg').fadeIn(300);
+        $('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
+        $("ul li").click(function () {
+
+            var detail = $(this).attr('id');
+            $.ajax({
+                url: httpaddress + 'enterprise/task/query/detail/' + detail,
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                crossDomain: true,
+                data: {
+                    'id': detail
+                },
+                success: function (data) {
+                    console.log(data.data.task);
+                    $("#title").val(data.data.task.title);
+                    $("#description").val(data.data.task.description);
+                    $("#basesalary").val(data.data.task.baseSalary);
+                    $("#bonus").val(data.data.task.bonus);
+                    $("#number").val(data.data.task.number);
+                    var date = new Date(data.data.task.taskEndTime);
+                    Y = date.getFullYear() + '-';
+                    M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() +
+                        1) + '-';
+                    D = date.getDate() + ' ';
+                    h = date.getHours() + ':';
+                    m = date.getMinutes() + ':';
+                    s = date.getSeconds();
+                    var date1 = new Date(data.data.task.taskStartTime);
+                    Y1 = date1.getFullYear() + '-';
+                    M1 = (date1.getMonth() + 1 < 10 ? '0' + (date1.getMonth() + 1) : date1.getMonth() +
+                        1) + '-';
+                    D1 = date1.getDate() + ' ';
+                    h1 = date1.getHours() + ':';
+                    m1 = date1.getMinutes() + ':';
+                    s1 = date1.getSeconds();
+                    $("#startTime").val(Y1 + M1 + D1 + h1 + m1 + s1);
+                    $("#endTime").val(Y + M + D + h + m + s);
+                }
+            });
+
+        });
+
+    }
+</script>
+
+</html>

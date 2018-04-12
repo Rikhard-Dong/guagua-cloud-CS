@@ -21,4 +21,26 @@
             <if test="permission.menuId != null">#{permission.menuId},</if>
         </trim>
     </insert>
+
+    <update id="updatePermission">
+        update t_permission set
+        <trim suffixOverrides=",">
+            1 = 1,
+            <if test="name != null">`name` = #{name},</if>
+            <if test="url != null">url = #{url}.</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="menuId != nul">menu_id = #{menuId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteByPermissionId">
+        DELETE FROM t_permission
+        WHERE id = #{permissionId}
+    </delete>
+
+    <select id="findAllPermissions" resultType="com.guagua.bean.entity.common.Permission">
+        SELECT *
+        FROM t_permission
+    </select>
 </mapper>

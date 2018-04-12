@@ -58,7 +58,7 @@ public interface KnowledgeBaseDao {
      * 查找该创建者所有的知识库
      *
      * @param creatorId 创建者id
-     * @return
+     * @return list of knowledge base
      */
     List<KnowledgeBase> findByCreatorId(Integer creatorId);
 
@@ -69,4 +69,20 @@ public interface KnowledgeBaseDao {
      * @return result
      */
     KnowledgeBase findById(Integer id);
+
+    /**
+     * 根据任务查询知识库的id list
+     *
+     * @param taskId task id
+     * @return list of knowledge base id
+     */
+    List<Integer> findBaseIdByTaskId(Integer taskId);
+
+    /**
+     * 统计某个用户创建了多少知识库
+     *
+     * @param creator creator
+     * @return result
+     */
+    Integer countNums(Integer creator);
 }

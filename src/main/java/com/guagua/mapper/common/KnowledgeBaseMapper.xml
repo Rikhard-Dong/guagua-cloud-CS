@@ -36,4 +36,17 @@
         WHERE id = #{id}
         LIMIT 1
     </select>
+
+    <select id="findBaseIdByTaskId" resultType="java.lang.Integer">
+        SELECT base.id
+        FROM t_knowledge_base base
+            LEFT JOIN t_bind_task_knowledge bind ON base.id = bind.knowledge_id
+        WHERE task_id = #{taskId}
+    </select>
+
+    <select id="countNums" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_knowledge_base
+        WHERE creator_id = #{creator}
+    </select>
 </mapper>

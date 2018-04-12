@@ -36,6 +36,7 @@
             </list>
         </property>
     </bean>
+
     <!-- String类型解析器，允许直接返回String类型的消息 -->
     <bean class="org.springframework.http.converter.StringHttpMessageConverter" id="stringHttpMessageConverter">
         <property name="supportedMediaTypes">
@@ -44,4 +45,12 @@
             </list>
         </property>
     </bean>
+
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEN-INF/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <mvc:resources mapping="/static/**" location="/WEB-INF/static/"/>
 </beans>

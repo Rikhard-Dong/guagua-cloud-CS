@@ -40,10 +40,17 @@
         FROM t_question_bank bank LEFT JOIN t_question tq ON bank.id = tq.bank_id
         WHERE tq.type = #{type}
     </select>
+
     <select id="findByType" resultType="com.guagua.bean.entity.question.Question">
         SELECT *
         FROM t_question_bank bank LEFT JOIN t_question tq ON bank.id = tq.bank_id
         WHERE tq.type = #{type}
+    </select>
+
+    <select id="countNUms" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_question_bank
+        WHERE creator = #{userId}
     </select>
 
 </mapper>

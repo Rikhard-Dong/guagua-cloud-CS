@@ -15,8 +15,8 @@ public class TaskEmployment {
     private Integer publisherId;    // 发布者id
     private Integer memberId;
     private Integer status;     // 0 任务未开始  1. 任务进行中 2. 任务已结束  3.任务取消
-    private Integer score;      // 任务评分
     private Date createTime;   // 建立雇佣时间
+    private Float customerAvgScore;
 
     public TaskEmployment() {
     }
@@ -67,13 +67,6 @@ public class TaskEmployment {
         this.status = status;
     }
 
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
-    }
 
     public Date getCreateTime() {
         return createTime;
@@ -81,6 +74,14 @@ public class TaskEmployment {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Float getCustomerAvgScore() {
+        return customerAvgScore;
+    }
+
+    public void setCustomerAvgScore(Float customerAvgScore) {
+        this.customerAvgScore = customerAvgScore;
     }
 
     @Override
@@ -91,8 +92,8 @@ public class TaskEmployment {
                 ", publisherId=" + publisherId +
                 ", memberId=" + memberId +
                 ", status=" + status +
-                ", score=" + score +
                 ", createTime=" + createTime +
+                ", customerAvgScore=" + customerAvgScore +
                 '}';
     }
 }

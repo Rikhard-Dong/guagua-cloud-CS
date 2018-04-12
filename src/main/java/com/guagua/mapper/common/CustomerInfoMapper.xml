@@ -6,23 +6,26 @@
     <insert id="insertOne">
         INSERT INTO t_customer_info
         <trim prefix="(" suffixOverrides="," suffix=")">
-            <if test="customer.uuid != null">uuid,</if>
-            <if test="customer.name != null">`name`,</if>
-            <if test="customer.sex != null">sex,</if>
-            <if test="customer.age != null">age,</if>
-            <if test="customer.phone != null">phone,</if>
-            <if test="customer.email != null">email,</if>
-            <if test="customer.taskId != null">task_id,</if>
+            <if test="uuid != null">uuid,</if>
+            <if test="name != null">`name`,</if>
+            <if test="sex != null">sex,</if>
+            <if test="age != null">age,</if>
+            <if test="phone != null">phone,</if>
+            <if test="email != null">email,</if>
+            <if test="taskId != null">task_id,</if>
+            <if test="processorId != null">processor_id,</if>
+
         </trim>
         VALUES
         <trim prefix="(" suffixOverrides="," suffix=")">
-            <if test="customer.uuid != null">#{customer.uuid},</if>
-            <if test="customer.name != null">#{customer.name},</if>
-            <if test="customer.sex != null">#{customer.sex},</if>
-            <if test="customer.age != null">#{customer.age},</if>
-            <if test="customer.phone != null">#{customer.phone},</if>
-            <if test="customer.email != null">#{customer.email},</if>
-            <if test="customer.taskId != null">#{customer.taskId},</if>
+            <if test="uuid != null">#{uuid},</if>
+            <if test="name != null">#{name},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="age != null">#{age},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="email != null">#{email},</if>
+            <if test="taskId != null">#{taskId},</if>
+            <if test="processorId != null">#{processorId},</if>
         </trim>
     </insert>
 

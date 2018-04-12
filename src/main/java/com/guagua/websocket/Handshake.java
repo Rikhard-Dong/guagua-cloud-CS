@@ -68,8 +68,8 @@ public class Handshake implements HandshakeInterceptor {
                 userInfo.setUserId(userId);
 
                 Integer taskId = Integer.valueOf(request.getServletRequest().getParameter("taskId"));
-                Integer sex = Integer.valueOf(request.getServletRequest().getParameter("sex"));
-                Integer age = Integer.valueOf(request.getServletRequest().getParameter("age"));
+                Integer sex = request.getServletRequest().getParameter("sex") == null ? null : Integer.valueOf(request.getServletRequest().getParameter("sex"));
+                Integer age = request.getServletRequest().getParameter("age") == null ? null : Integer.valueOf(request.getServletRequest().getParameter("age"));
                 String phone = request.getServletRequest().getParameter("phone");
                 String email = request.getServletRequest().getParameter("email");
 
@@ -86,11 +86,13 @@ public class Handshake implements HandshakeInterceptor {
                 customer.setPhone(phone);
                 customer.setEmail(email);
 
-                insertCustomerInfo(customer);
-
                 // 任务累计加1
                 Integer csId = Integer.valueOf(request.getServletRequest().getParameter("csId"));
                 singleton.accessCustomer(csId);
+
+                customer.setProcessorId(csId);
+                insertCustomerInfo(customer);
+
             }
 
             HttpSession session = request.getServletRequest().getSession(true);

@@ -75,11 +75,29 @@ public class KnowledgeBaseServiceImpl extends BaseService implements KnowledgeBa
     }
 
     // 删除对应的数据库
+    @Transactional
     public ResultDTO deleteKnowledgeBase(Integer userId, Integer id) {
+        KnowledgeBase base = knowledgeBaseDao.findById(id);
+        if (base == null) {
+            throw new CustomException(DataDictionary.QUERY_FAIL)
+                    .addData("detail", "知识库不存在");
+        }
+
+        List<KnowledgeBaseItem> items = itemDao.findByKnowledgeBase(id);
+        for (KnowledgeBaseItem item : items) {
+            Integer var2 = itemDao.deleteOne(item.getId());
+            if (var2 == 0) {
+                throw new CustomException(DataDictionary.DELETE_FAIL)
+                        .addData("detail", "删除相关item失败");
+            }
+        }
+
         Integer var1 = knowledgeBaseDao.deleteById(id);
         if (var1 == 0) {
             throw new CustomException(DataDictionary.SQL_OPERATION_EXCEPTION);
         }
+
+
         return new ResultDTO(DataDictionary.DELETE_SUCCESS);
     }
 
@@ -254,9 +272,9 @@ public class KnowledgeBaseServiceImpl extends BaseService implements KnowledgeBa
     /**
      * 将item 转换成item
      *
-     * @param items
-     * @param knowledgeBaseName
-     * @return
+     * @param items             items
+     * @param knowledgeBaseName knowledge base name
+     * @return list of knowledge base item dto
      */
     private List<KnowledgeBaseItemDTO> convert2KnowledgeBaseItemDTO(List<KnowledgeBaseItem> items,
                                                                     String knowledgeBaseName) {

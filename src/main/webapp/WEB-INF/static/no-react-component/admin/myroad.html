@@ -1,0 +1,176 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Highcharts 教程 | 菜鸟教程(runoob.com)</title>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="../js/address.js"></script>
+</head>
+<body>
+<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<div id="container2" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<script language="JavaScript">
+
+var admin='';
+var member='';
+var enterprise='';
+
+
+  $.ajax({
+                url: httpaddress + 'admin/data_statistics/summary',
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                crossDomain: true,
+                success: function (data) {
+                        console.log(data.data.user_summary);
+                        admin=data.data.user_summary.admin_total;
+                        member=data.data.user_summary.member_total;
+                        enterprise=data.data.user_summary.enterprise_total; 
+
+
+$(document).ready(function() {  
+   var chart = {
+      type: 'column'
+   };
+   var title = {
+      text: '我们的队伍'   
+   };
+   var subtitle = {
+      text: 'Source: Dingding.com'  
+   };
+   var xAxis = {
+      categories: ['当前'],
+      crosshair: true
+   };
+   var yAxis = {
+      min: 0,
+      title: {
+         text: '人数（人）'         
+      }      
+   };
+   var tooltip = {
+      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+         '<td style="padding:0"><b>{point.y:.1f} 人</b></td></tr>',
+      footerFormat: '</table>',
+      shared: true,
+      useHTML: true
+   };
+   var plotOptions = {
+      column: {
+         pointPadding: 0.2,
+         borderWidth: 0
+      }
+   };  
+   var credits = {
+      enabled: false
+   };
+   
+   var series= [{
+            name: '企业用户',
+            data:[enterprise]
+        }, {
+            name: '会员用户',
+            data:[member]
+        }, {
+            name: '后台用户',
+            data: [admin]
+        }];     
+      
+   var json = {};   
+   json.chart = chart; 
+   json.title = title;   
+   json.subtitle = subtitle; 
+   json.tooltip = tooltip;
+   json.xAxis = xAxis;
+   json.yAxis = yAxis;  
+   json.series = series;
+   json.plotOptions = plotOptions;  
+   json.credits = credits;
+   $('#container').highcharts(json);
+  
+});
+
+
+
+$(document).ready(function() {  
+   var chart = {
+       plotBackgroundColor: null,
+       plotBorderWidth: null,
+       plotShadow: false
+   };
+   var title = {
+      text: '我们队伍的人员占比'   
+   };      
+   var tooltip = {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+   };
+   var plotOptions = {
+      pie: {
+         allowPointSelect: true,
+         cursor: 'pointer',
+         dataLabels: {
+            enabled: false           
+         },
+         showInLegend: true
+      }
+   };
+   var series= [{
+      type: 'pie',
+      name: '人数占比',
+      data: [
+         ['会员人数',   member],
+         ['后台用户',    admin],
+         ['企业用户',     enterprise],
+      ]
+   }];     
+      
+   var json = {};   
+   json.chart = chart; 
+   json.title = title;     
+   json.tooltip = tooltip;  
+   json.series = series;
+   json.plotOptions = plotOptions;
+   $('#container2').highcharts(json);  
+});
+
+
+
+
+
+                    
+        }
+  });
+
+
+
+
+$.ajax({
+                url: httpaddress + 'admin/data_statistics/summary/2016-12-12 12:12:12/to/2018-4-10 12:12:12',
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                crossDomain: true,
+                success: function (data) {
+
+  console.log(data);
+
+                }
+});
+
+
+
+
+
+</script>
+</body>
+</html>

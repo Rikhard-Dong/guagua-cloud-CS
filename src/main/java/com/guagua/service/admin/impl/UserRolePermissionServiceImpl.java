@@ -1,5 +1,6 @@
 package com.guagua.service.admin.impl;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.guagua.bean.dto.ResultDTO;
@@ -12,7 +13,6 @@ import com.guagua.enums.DataDictionary;
 import com.guagua.exception.common.CustomException;
 import com.guagua.service.BaseService;
 import com.guagua.service.admin.UserRolePermissionService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,17 +38,21 @@ public class UserRolePermissionServiceImpl extends BaseService implements UserRo
 
     private final RolePermissionDao rolePermissionDao;
 
+    private final UserLoginLogDao logDao;
+
     @Autowired
     public UserRolePermissionServiceImpl(UserDao userDao,
                                          RoleDao roleDao,
                                          PermissionDao permissionDao,
                                          UserRoleDao userRoleDao,
-                                         RolePermissionDao rolePermissionDao) {
+                                         RolePermissionDao rolePermissionDao,
+                                         UserLoginLogDao logDao) {
         this.userDao = userDao;
         this.roleDao = roleDao;
         this.permissionDao = permissionDao;
         this.userRoleDao = userRoleDao;
         this.rolePermissionDao = rolePermissionDao;
+        this.logDao = logDao;
     }
 
 
@@ -103,7 +107,18 @@ public class UserRolePermissionServiceImpl extends BaseService implements UserRo
         return new ResultDTO(DataDictionary.DELETE_SUCCESS);
     }
 
+    // list user login info
+    public ResultDTO listUserLoginInfo(Integer userId, Integer page, Integer size) {
+        if (userDao.findById(userId) == null) {
+            throw new CustomException(DataDictionary.USER_NOT_EXISTS);
+        }
 
+        PageHelper.startPage(page, size);
+        List<UserLoginLog> logs = logDao.findByUserId(userId);
+        PageInfo<UserLoginLog> info = new PageInfo<UserLoginLog>();
+
+        return new ResultDTO(DataDictionary.QUERY_SUCCESS).addData("logs", info);
+    }
 
 
     /* *******************************
@@ -200,11 +215,6 @@ public class UserRolePermissionServiceImpl extends BaseService implements UserRo
         return new ResultDTO(DataDictionary.DELETE_SUCCESS);
     }
 
-
-
-
-
-
     /* *******************************
      * 用户角色管理模块
      *
@@ -268,6 +278,7 @@ public class UserRolePermissionServiceImpl extends BaseService implements UserRo
 
         return new ResultDTO(DataDictionary.DELETE_SUCCESS);
     }
+
 
     /* *******************************
      * private function

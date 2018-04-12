@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="../css/base.css" type="text/css" rel="stylesheet" />
+    <link href="../css/editTable.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../js/editTable.js"></script>
+    <script src="../js/address.js"></script>
+</head>
+
+<body>
+    <div id="header">知识库具体详情</div>
+  
+<ul id="tableId">
+
+
+</ul>
+
+
+
+   <table class="edtitable" id="tableid">
+			<thead>
+				<tr>
+					<th colspan="12" style="text-align:center">知识库表格</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr >
+					<th style="text-align:center">知识库编号</th>
+					<th style="text-align:center">知识库名称</th>
+                    <th style="text-align:center">问题</th>
+                    <th style="text-align:center">答案</th>
+					<th style="text-align:center">相似问题一</th>
+					<th style="text-align:center">相似问题二</th>
+                    <th style="text-align:center">相似问题三</th>
+                    <th style="text-align:center">相似问题四</th>
+                    <th style="text-align:center">相似问题五</th>
+                    <th style="text-align:center" class="del-col">操作1</th>
+                    <th style="text-align:center" class="del-col">操作2</th>
+                    <th style="text-align:center" class="del-col">操作3</th>
+				</tr>
+			</tbody>
+		</table> 
+
+    <script type="text/javascript">
+
+
+        $.ajax({
+            url: httpaddress+'knowledge_base/' + sessionStorage.getItem('detail') + '/item/list',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            type: 'get',
+            data: {
+                'knowledgeBaseId': sessionStorage.getItem('detail'),
+                'page':1,
+                'size': 7
+            },
+            success: function (data) {
+                console.log(data.data.info.list);
+                var knowledgeBaseId=[];
+                var knowledgeBaseName=[];
+                var question=[];
+                var similarquestion1=[];
+                var similarquestion2=[];
+                var similarquestion3=[];
+                var similarquestion4=[];
+                var similarquestion5=[];
+                var answer=[];
+                var id=[];
+                for(var  value in data.data.info.list)
+                {
+                var knowledgeBaseId1=data.data.info.list[value].knowledgeBaseId;
+                var knowledgeBaseName1=data.data.info.list[value].knowledgeBaseName;
+                var question1=data.data.info.list[value].question;
+                var similarquestionn11=data.data.info.list[value].similarQuestion1;
+                var similarquestion22=data.data.info.list[value].similarQuestion2;
+                var similarquestion33=data.data.info.list[value].similarQuestion3;
+                var similarquestion44=data.data.info.list[value].similarQuestion4;
+                var similarquestion55=data.data.info.list[value].similarQuestion5;
+                var answer1=data.data.info.list[value].answer;
+                var idd=data.data.info.list[value].id;
+                knowledgeBaseId.push(knowledgeBaseId1);
+                knowledgeBaseName.push(knowledgeBaseName1);
+                question.push(question1);
+                similarquestion1.push(similarquestionn11);
+                similarquestion2.push(similarquestion22);
+                similarquestion3.push(similarquestion33);
+                similarquestion4.push(similarquestion44);
+                similarquestion5.push(similarquestion55);
+                answer.push(answer1);
+                id.push(idd);
+                }
+        var list='';
+for(var i=0;i<data.data.info.list.length;i++)
+{
+list+='<tr id='+id[i]+' class='+ knowledgeBaseId[i]+'><td >'+knowledgeBaseId[i]+'</td><td>'+knowledgeBaseName[i]+'</td><td>'+question[i]+'</td><td>'+answer[i]+'</td><td>'+similarquestion1[i]+'</td><td>'+similarquestion2[i]+'</td><td>'+similarquestion3[i]+'</td><td>'+similarquestion4[i]+'</td><td>'+similarquestion5[i]+'</td><td class="del-col">'+'<button  onclick="delTr()" class="btn btn-danger" id="delBtn">删除</button></td><td class="del-col">'+'<button onclick="modify()"  class="btn btn-warning" id="modifybtn">修改</button></td><td class="del-col">'+'<button id="addbtn"  class="btn btn-info" onclick="add()">新增</button></td></tr>'
+}
+$("#tableid").append(list);
+            }
+            
+            });
+
+ function delTr(){                                         //删除某知识库的某一条item
+	$("#delBtn").click(function(){
+		
+        var deleteId= $(this).parent().parent().attr("id");
+        var deleteKnowId= $(this).parent().parent().attr("class");
+        $.ajax({
+                url: httpaddress + 'knowledge_base/'+deleteKnowId+'/item/delete/'+deleteId,
+                type: 'delete',
+                data: {
+                    'knowledgeBaseId': deleteKnowId,
+                    'itemId':deleteId
+               
+                },
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                success:function(data)
+                {
+                     console.log(data);
+                }
+            });
+	});
+ }
+      
+function add()
+{
+    $("#addbtn").click(function(){
+      
+        var addKnowId= $(this).parent().parent().attr("class");   //设置增加知识库的id
+       
+        sessionStorage.setItem('addKnowId',addKnowId);
+        window.location.href="../knowledge/additem.html"  
+    });
+}
+      
+function modify()
+{
+    $("#modifybtn").click(function(){
+        var modifyKnowId= $(this).parent().parent().attr("class");   //设置增加知识库的id
+        var modifyId=$(this).parent().parent().attr("id");   //设置某一个知识库的某一个id
+        sessionStorage.setItem('modifyKnowId',modifyKnowId);
+        sessionStorage.setItem('modifyId',modifyId);
+        window.location.href="../knowledge/modifyitem.html"  
+    });
+}
+    </script>
+</body>
+
+</html>

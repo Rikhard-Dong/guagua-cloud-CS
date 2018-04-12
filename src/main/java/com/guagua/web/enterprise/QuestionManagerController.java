@@ -35,9 +35,9 @@ public class QuestionManagerController extends BaseController {
     /**
      * 创建一个题库
      *
-     * @param bank
-     * @param request
-     * @return
+     * @param bank    bank
+     * @param request request
+     * @return result dto
      */
     @PostMapping("/create")
     public ResultDTO createQuestionBank(QuestionBank bank,
@@ -52,10 +52,10 @@ public class QuestionManagerController extends BaseController {
     /**
      * 更新题库
      *
-     * @param bankId
-     * @param bank
-     * @param request
-     * @return
+     * @param bankId  bank id
+     * @param bank    bank
+     * @param request request
+     * @return result dto
      */
     @PutMapping("/{bankId}/update")
     public ResultDTO updateQuestionBank(@PathVariable("bankId") Integer bankId,
@@ -68,9 +68,9 @@ public class QuestionManagerController extends BaseController {
     /**
      * 删除题库
      *
-     * @param bankId
-     * @param request
-     * @return
+     * @param bankId  bank id
+     * @param request request
+     * @return result dto
      */
     @DeleteMapping("/{bankId}/delete")
     public ResultDTO deleteQuestionBank(@PathVariable("bankId") Integer bankId,
@@ -81,8 +81,8 @@ public class QuestionManagerController extends BaseController {
     /**
      * 查询该用户的所有题库
      *
-     * @param request
-     * @return
+     * @param request request
+     * @return result dto
      */
     @GetMapping("/list")
     public ResultDTO listQuestionBank(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -94,9 +94,9 @@ public class QuestionManagerController extends BaseController {
     /**
      * 查询某个题库的信息
      *
-     * @param bankId
-     * @param request
-     * @return
+     * @param bankId  bank id
+     * @param request request
+     * @return result dto
      */
     @GetMapping("/{bankId}/detail")
     public ResultDTO queryDetailBank(@PathVariable("bankId") Integer bankId,
@@ -111,10 +111,10 @@ public class QuestionManagerController extends BaseController {
     /**
      * 创建一个题目并和知识库绑定
      *
-     * @param bankId
-     * @param question
-     * @param request
-     * @return
+     * @param bankId   bank id
+     * @param question question
+     * @param request  request
+     * @return result dto
      */
     @PostMapping("/{bankId}/question/create")
     public ResultDTO createQuestion(@PathVariable("bankId") Integer bankId,
@@ -137,11 +137,11 @@ public class QuestionManagerController extends BaseController {
     /**
      * 更新一个题目
      *
-     * @param bankId
-     * @param questionId
-     * @param question
-     * @param request
-     * @return
+     * @param bankId     bank id
+     * @param questionId question id
+     * @param question   question
+     * @param request    request
+     * @return result dto
      */
     @PutMapping("/{bankId}/question/{questionId}/update")
     public ResultDTO updateQuestion(@PathVariable("bankId") Integer bankId,
@@ -157,10 +157,10 @@ public class QuestionManagerController extends BaseController {
     /**
      * 删除一个问题
      *
-     * @param bankId
-     * @param questionId
-     * @param request
-     * @return
+     * @param bankId     bank id
+     * @param questionId question id
+     * @param request    request
+     * @return result dto
      */
     @DeleteMapping("/{bankId}/question/{questionId}/delete")
     public ResultDTO deleteQuestion(@PathVariable("bankId") Integer bankId,
@@ -172,9 +172,9 @@ public class QuestionManagerController extends BaseController {
     /**
      * 查询题库下的所以所有问题
      *
-     * @param bankId
-     * @param request
-     * @return
+     * @param bankId  bank id
+     * @param request request
+     * @return result dto
      */
     @GetMapping("/{bankId}/question/list")
     public ResultDTO listQuestions(@PathVariable("bankId") Integer bankId,
@@ -188,12 +188,12 @@ public class QuestionManagerController extends BaseController {
     /**
      * 查询题库下指定类型的题目
      *
-     * @param bankId
-     * @param type
-     * @param page
-     * @param size
-     * @param request
-     * @return
+     * @param bankId  bank id
+     * @param type    type
+     * @param page    page
+     * @param size    size
+     * @param request request
+     * @return result dto
      */
     @GetMapping("/{bankId}/question/list/type/{type}")
     public ResultDTO listQuestionsByType(@PathVariable("bankId") Integer bankId,
@@ -207,10 +207,10 @@ public class QuestionManagerController extends BaseController {
     /**
      * 查询某个具体任务
      *
-     * @param bankId
-     * @param questionId
-     * @param request
-     * @return
+     * @param bankId     bank id
+     * @param questionId question id
+     * @param request    request
+     * @return result dto
      */
     @GetMapping("/{bankId}/question/{questionId}/detail")
     public ResultDTO detailQuestion(@PathVariable("bankId") Integer bankId,
@@ -224,17 +224,15 @@ public class QuestionManagerController extends BaseController {
     /**
      * 在任务下创建一个选项
      *
-     * @param bankId
-     * @param questionId
-     * @param item
-     * @param servletRequest
-     * @return
+     * @param bankId     bank id
+     * @param questionId question id
+     * @param item       item
+     * @return result dto
      */
     @PostMapping("/{bankId}/question/{questionId}/item/create")
     public ResultDTO addItemForQuestion(@PathVariable("bankId") Integer bankId,
                                         @PathVariable("questionId") Integer questionId,
-                                        QuestionItem item,
-                                        HttpServletRequest servletRequest) {
+                                        QuestionItem item) {
         item.setQuestionId(questionId);
         return questionService.addItem(item);
     }
@@ -242,11 +240,11 @@ public class QuestionManagerController extends BaseController {
     /**
      * 删除一个选项
      *
-     * @param bankId
-     * @param questionId
-     * @param itemId
-     * @param request
-     * @return
+     * @param bankId     bank id
+     * @param questionId question id
+     * @param itemId     item id
+     * @param request    request
+     * @return result dto
      */
     @DeleteMapping("/{bankId}/question/{questionId}/item/{itemId}/delete")
     public ResultDTO deleteItemForQuestion(@PathVariable("bankId") Integer bankId,
@@ -260,12 +258,12 @@ public class QuestionManagerController extends BaseController {
     /**
      * 设置一个问题的答案
      *
-     * @param bankId
-     * @param questionId
-     * @param hasAnswer
-     * @param answer
-     * @param request
-     * @return
+     * @param bankId     bank id
+     * @param questionId question id
+     * @param hasAnswer  has answer
+     * @param answer     answer
+     * @param request    request
+     * @return result dto
      */
     @PutMapping("/{bankId}/question/{questionId}/set_answer")
     public ResultDTO setAnswer(@PathVariable("bankId") Integer bankId,
@@ -280,10 +278,10 @@ public class QuestionManagerController extends BaseController {
     /**
      * 查询一个问题的所有选项
      *
-     * @param bankId
-     * @param questionId
-     * @param request
-     * @return
+     * @param bankId     bank id
+     * @param questionId question id
+     * @param request    request
+     * @return result dto
      */
     @GetMapping("/{bankId}/question/{questionId}/items")
     public ResultDTO getItemsByQuestion(@PathVariable("bankId") Integer bankId,
@@ -301,10 +299,10 @@ public class QuestionManagerController extends BaseController {
     /**
      * 手动创建试卷, 试卷类型一定为1(手动), 试卷状态一定为0(未启用)
      *
-     * @param bankId
-     * @param paper
-     * @param request
-     * @return
+     * @param bankId  bank id
+     * @param paper   paper
+     * @param request request
+     * @return result dto
      */
     @PostMapping("/{bankId}/examination/create/manual")
     public ResultDTO createExamination(@PathVariable("bankId") Integer bankId,
@@ -323,12 +321,12 @@ public class QuestionManagerController extends BaseController {
     /**
      * 建立试卷题目联系 单条
      *
-     * @param bankId
-     * @param examinationId
-     * @param type
-     * @param questionId
-     * @param request
-     * @return
+     * @param bankId        bank id
+     * @param examinationId examination id
+     * @param type          type
+     * @param questionId    question id
+     * @param request       request
+     * @return result dto
      */
     @PostMapping("/{bankId}/examination/{examinationId}/question/add")
     public ResultDTO examinationAddQuestion(@PathVariable("bankId") Integer bankId,
@@ -343,14 +341,14 @@ public class QuestionManagerController extends BaseController {
     /**
      * 建立批量的联系
      *
-     * @param bankId
-     * @param examinationId
-     * @param singleList
-     * @param multipleList
-     * @param judgementList
-     * @param textList
-     * @param request
-     * @return
+     * @param bankId        bank id
+     * @param examinationId examination id
+     * @param singleList    single list
+     * @param multipleList  multiple list
+     * @param judgementList judgement list
+     * @param textList      text list
+     * @param request       request
+     * @return result dto
      */
     @PostMapping("/{bankId}/examination/{examinationId}/question/add/batch")
     public ResultDTO examinationAddQuestionBatch(@PathVariable("bankId") Integer bankId,
@@ -368,11 +366,18 @@ public class QuestionManagerController extends BaseController {
     }
 
 
+    /**
+     * 手动创建试卷
+     *
+     * @param bankId bank id
+     * @param page   page
+     * @param size   size
+     * @return result dto
+     */
     @GetMapping("/{bankId}/examination/list/manual")
     public ResultDTO listManualExamination(@PathVariable("bankId") Integer bankId,
                                            @RequestParam(value = "page", defaultValue = "1") Integer page,
-                                           @RequestParam(value = "size", defaultValue = "30") Integer size,
-                                           HttpServletRequest request) {
+                                           @RequestParam(value = "size", defaultValue = "30") Integer size) {
 
         return questionService.listManualExaminationByBankId(bankId, page, size);
     }
@@ -381,10 +386,10 @@ public class QuestionManagerController extends BaseController {
     /**
      * 查询某个试卷详细信息
      *
-     * @param bankId
-     * @param examinationId
-     * @param request
-     * @return
+     * @param bankId        bank id
+     * @param examinationId examination id
+     * @param request       request
+     * @return result dto
      */
     @GetMapping("/{bankId}/examination/{examinationId}/detail")
     public ResultDTO examinationDetail(@PathVariable("bankId") Integer bankId,
@@ -401,10 +406,10 @@ public class QuestionManagerController extends BaseController {
     /**
      * 添加一条自动生成试卷的规则
      *
-     * @param bankId
-     * @param rule
-     * @param request
-     * @return
+     * @param bankId  bank id
+     * @param rule    rule
+     * @param request request
+     * @return result dto
      */
     @PostMapping("/{bankId}/rule/create")
     public ResultDTO createRule(@PathVariable("bankId") Integer bankId,
@@ -419,10 +424,10 @@ public class QuestionManagerController extends BaseController {
     /**
      * 删除一条
      *
-     * @param bankId
-     * @param ruleId
-     * @param request
-     * @return
+     * @param bankId  bank id
+     * @param ruleId  rule id
+     * @param request request
+     * @return result dto
      */
     @DeleteMapping("/{bankId}/rule/{ruleId}/delete")
     public ResultDTO deleteRule(@PathVariable("bankId") Integer bankId,
@@ -435,11 +440,11 @@ public class QuestionManagerController extends BaseController {
     /**
      * 查询题库下的所有生成规则
      *
-     * @param bankId
-     * @param page
-     * @param size
-     * @param request
-     * @return
+     * @param bankId  bank id
+     * @param page    page
+     * @param size    size
+     * @param request request
+     * @return result dto
      */
     @GetMapping("/{bankId}/rule/list")
     public ResultDTO listRules(@PathVariable("bankId") Integer bankId,
@@ -453,10 +458,10 @@ public class QuestionManagerController extends BaseController {
     /**
      * 查询用户的所有规则
      *
-     * @param page
-     * @param size
-     * @param request
-     * @return
+     * @param page    page
+     * @param size    size
+     * @param request request
+     * @return result dto
      */
     @GetMapping("/rule/list")
     public ResultDTO listRulesByCreator(@RequestParam(value = "page", defaultValue = "1") Integer page,

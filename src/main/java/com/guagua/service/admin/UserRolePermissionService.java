@@ -156,4 +156,14 @@ public interface UserRolePermissionService {
      * @return result dto
      */
     ResultDTO deleteRolePermissionContact(Integer roleId, List<Integer> permissionIds);
+
+    /**
+     * 用户登录日志信息
+     *
+     * @param userId user id
+     * @param page   page
+     * @param size   size
+     * @return result dto
+     */
+    ResultDTO listUserLoginInfo(Integer userId, Integer page, Integer size);
 }

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/moneymanage.css">
+    <script src="../js/address.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
+</head>
+
+<body>
+    <div id="header">资金管理</div>
+    <div id="search">
+        <label>余额：</label>
+        <input type="text" id="value" style="width:6%;" readonly="true" />
+        <!-- <label>可支配：</label>
+        <input type="text" id="canvalue" style="width:6%;" readonly="true" />+
+        <label>待支付：</label>
+        <input type="text" id="shouldvalue" style="width:6%;" readonly="true" /> -->
+    </div>
+    </div>
+    <div id="serach2">
+        交易日期：
+        <input type="date" id="startTime" value="" style="margin-left:20px;" />---
+        <input type="date" value="" id="endTime" />
+        <button class="btn btn-default btn-lg " id="week" >七天内</button>
+        <button class="btn btn-default btn-lg " id="month">一个月内</button>
+        <button class="btn btn-default btn-lg ">查询</button>
+    </div>
+    <div id="container">
+    </div>
+</body>
+<script language="JavaScript">
+var d=new Date()
+var day=d.getDate()
+var weekday=d.getDate()-7
+var month=d.getMonth() + 1
+var lastmonth=d.getMonth()
+var year=d.getFullYear()
+var nowTime=year + "-" + month + "-" + day;
+var weekTime=year + "-" + month + "-" + weekday
+var monthTime=year + "-" + lastmonth + "-" + day;
+console.log(nowTime);
+
+    $.ajax({ //展示余额
+        url: httpaddress + 'enterprise/property/query',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        success: function (data) {
+            console.log(data);
+            $("#value").val(data.data.property.balance);
+        }
+    });
+    $("#week").click(function () {
+        $.ajax({ //展示资金流动的折线图 
+            url: httpaddress + 'enterprise/property/detail/query',
+            type: 'post',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'startTime': weekTime,
+                'endTime': nowTime
+            },
+            success: function (data) {
+                console.log(data.data.flows);
+                console.log(data.data.flows.length)
+                var caozuo = [];
+                var money = [];
+                var yue = [];
+                var time = [];
+                for (var value in data.data.flows) {
+                    var caozuo1 = data.data.flows[value].type;
+                    var money1 = data.data.flows[value].value;
+                    var yue1 = data.data.flows[value].balance;
+                    var time1 = data.data.flows[value].time;
+                    caozuo.push(caozuo1);
+                    money.push(money1);
+                    yue.push(yue1);
+                    time.push(time1);
+                }
+                $('#container').highcharts({
+                    chart: {
+                        zoomType: 'xy'
+                    },
+                    title: {
+                        text: '财务收入和支出记录'
+                    },
+                    subtitle: {
+                        text: '数据来源:'
+                    },
+                    xAxis: [{
+                        categories: time,
+                        crosshair: true
+                    }],
+                    yAxis: [{ // Primary yAxis
+                        labels: {
+                            format: '{value}￥',
+                            style: {
+                                color: Highcharts.getOptions().colors[
+                                    1]
+                            }
+                        },
+                        title: {
+                            text: 'RMB',
+                            style: {
+                                color: Highcharts.getOptions().colors[
+                                    1]
+                            }
+                        }
+                    }, { // Secondary yAxis
+                        title: {
+                            text: 'RMB',
+                            style: {
+                                color: Highcharts.getOptions().colors[
+                                    0]
+                            }
+                        },
+                        labels: {
+                            format: '{value}￥',
+                            style: {
+                                color: Highcharts.getOptions().colors[
+                                    0]
+                            }
+                        },
+                        opposite: true
+                    }],
+                    tooltip: {
+                        shared: true
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'left',
+                        x: 120,
+                        verticalAlign: 'top',
+                        y: 100,
+                        floating: true,
+                        backgroundColor: (Highcharts.theme &&
+                                Highcharts.theme.legendBackgroundColor) ||
+                            '#FFFFFF'
+                    },
+                    series: [{
+                        name: '余额',
+                        type: 'column',
+                        yAxis: 1,
+                        data: yue,
+                        tooltip: {
+                            valueSuffix: ' ￥'
+                        }
+                    }, {
+                        name: '支出或者充值',
+                        type: 'spline',
+                        data: money,
+                        tooltip: {
+                            valueSuffix: '￥'
+                        }
+                    }]
+
+                });
+            }
+        });
+    }); 
+    
+    $("#month").click(function () {
+        $.ajax({ //展示资金流动的折线图 
+            url: httpaddress + 'enterprise/property/detail/query',
+            type: 'post',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'startTime': monthTime,
+                'endTime': nowTime
+            },
+            success: function (data) {
+                console.log(data.data.flows);
+                console.log(data.data.flows.length)
+                var caozuo = [];
+                var money = [];
+                var yue = [];
+                var time = [];
+                for (var value in data.data.flows) {
+                    var caozuo1 = data.data.flows[value].type;
+                    var money1 = data.data.flows[value].value;
+                    var yue1 = data.data.flows[value].balance;
+                    var time1 = data.data.flows[value].time;
+                    caozuo.push(caozuo1);
+                    money.push(money1);
+                    yue.push(yue1);
+                    time.push(time1);
+                }
+                $('#container').highcharts({
+                    chart: {
+                        zoomType: 'xy'
+                    },
+                    title: {
+                        text: '财务收入和支出记录'
+                    },
+                    subtitle: {
+                        text: '数据来源:'
+                    },
+                    xAxis: [{
+                        categories: time,
+                        crosshair: true
+                    }],
+                    yAxis: [{ // Primary yAxis
+                        labels: {
+                            format: '{value}￥',
+                            style: {
+                                color: Highcharts.getOptions().colors[
+                                    1]
+                            }
+                        },
+                        title: {
+                            text: 'RMB',
+                            style: {
+                                color: Highcharts.getOptions().colors[
+                                    1]
+                            }
+                        }
+                    }, { // Secondary yAxis
+                        title: {
+                            text: 'RMB',
+                            style: {
+                                color: Highcharts.getOptions().colors[
+                                    0]
+                            }
+                        },
+                        labels: {
+                            format: '{value}￥',
+                            style: {
+                                color: Highcharts.getOptions().colors[
+                                    0]
+                            }
+                        },
+                        opposite: true
+                    }],
+                    tooltip: {
+                        shared: true
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'left',
+                        x: 120,
+                        verticalAlign: 'top',
+                        y: 100,
+                        floating: true,
+                        backgroundColor: (Highcharts.theme &&
+                                Highcharts.theme.legendBackgroundColor) ||
+                            '#FFFFFF'
+                    },
+                    series: [{
+                        name: '余额',
+                        type: 'column',
+                        yAxis: 1,
+                        data: yue,
+                        tooltip: {
+                            valueSuffix: ' ￥'
+                        }
+                    }, {
+                        name: '支出或者充值',
+                        type: 'spline',
+                        data: money,
+                        tooltip: {
+                            valueSuffix: '￥'
+                        }
+                    }]
+
+                });
+            }
+        });
+    });
+    $("button").click(function () {
+        $.ajax({ //展示资金流动的折线图 
+            url: httpaddress + 'enterprise/property/detail/query',
+            type: 'post',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'startTime': $("#startTime").val(),
+                'endTime': $("#endTime").val()
+            },
+            success: function (data) {
+                console.log(data.data.flows);
+                console.log(data.data.flows.length)
+                var caozuo = [];
+                var money = [];
+                var yue = [];
+                var time = [];
+                for (var value in data.data.flows) {
+                    var caozuo1 = data.data.flows[value].type;
+                    var money1 = data.data.flows[value].value;
+                    var yue1 = data.data.flows[value].balance;
+                    var time1 = data.data.flows[value].time;
+                    caozuo.push(caozuo1);
+                    money.push(money1);
+                    yue.push(yue1);
+                    time.push(time1);
+                }
+                $('#container').highcharts({
+                    chart: {
+                        zoomType: 'xy'
+                    },
+                    title: {
+                        text: '财务收入和支出记录'
+                    },
+                    subtitle: {
+                        text: '数据来源:'
+                    },
+                    xAxis: [{
+                        categories: time,
+                        crosshair: true
+                    }],
+                    yAxis: [{ // Primary yAxis
+                        labels: {
+                            format: '{value}￥',
+                            style: {
+                                color: Highcharts.getOptions().colors[
+                                    1]
+                            }
+                        },
+                        title: {
+                            text: 'RMB',
+                            style: {
+                                color: Highcharts.getOptions().colors[
+                                    1]
+                            }
+                        }
+                    }, { // Secondary yAxis
+                        title: {
+                            text: 'RMB',
+                            style: {
+                                color: Highcharts.getOptions().colors[
+                                    0]
+                            }
+                        },
+                        labels: {
+                            format: '{value}￥',
+                            style: {
+                                color: Highcharts.getOptions().colors[
+                                    0]
+                            }
+                        },
+                        opposite: true
+                    }],
+                    tooltip: {
+                        shared: true
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'left',
+                        x: 120,
+                        verticalAlign: 'top',
+                        y: 100,
+                        floating: true,
+                        backgroundColor: (Highcharts.theme &&
+                                Highcharts.theme.legendBackgroundColor) ||
+                            '#FFFFFF'
+                    },
+                    series: [{
+                        name: '余额',
+                        type: 'column',
+                        yAxis: 1,
+                        data: yue,
+                        tooltip: {
+                            valueSuffix: ' ￥'
+                        }
+                    }, {
+                        name: '支出或者充值',
+                        type: 'spline',
+                        data: money,
+                        tooltip: {
+                            valueSuffix: '￥'
+                        }
+                    }]
+
+                });
+            }
+        });
+    });
+</script>
+
+</html>

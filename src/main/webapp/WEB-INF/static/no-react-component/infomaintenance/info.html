@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Cropper</title>
+	<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="../css/amazeui.min.css">
+	<link rel="stylesheet" href="../css/amazeui.cropper.css">
+	<link rel="stylesheet" href="../css/custom_up_img.css">
+	<link rel="stylesheet" href="../css/common2.css">
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="../js/info.js"></script>
+	<script src="../js/china_area.js"></script>
+	<script src="../js/address.js"></script>
+	<script src="../js/AllSchool.js"></script>
+	<style type="text/css">
+		.up-img-cover {
+			width: 100px;
+			height: 100px;
+		}
+		.up-img-cover img {
+			width: 100%;
+		}
+		input {
+			border: none;
+		}
+
+		span {
+			font-weight: bold;
+			font-size: 1.2em;
+		}
+		select{
+         width: 100%;
+         height: 30px;
+         border-radius: 5px;
+         border-color: aliceblue;
+         font-size: 14px;
+         letter-spacing: 5px;
+     }
+     .label{
+         display: inline-block;
+         padding: 10px;
+         color: #03A9F4;
+         letter-spacing: 7px;
+     }
+	</style>
+</head>
+<body>
+	<div id="header-bg" style="width:100%;height:100px;">
+
+		<img style="height:160px;width:99%;" src="../images/bg-header.jpg">
+
+	</div>
+	<div class="up-img-cover" id="up-img-touch">
+		<img style="border:5px solid White" class="am-circle" alt="点击图片上传" id="img" src="" data-am-popover="{content: '点击上传', trigger: 'hover focus'}">
+	</div>
+	<div>
+		<a style="text-align: center; display: block;" id="pic"></a>
+	</div>
+	<div id="username">
+		<input type="text" name="username" onblur="checkname(this)" id="username2" placeholder="请输入昵称" style="height:30px;width:160;margin-top:-2px;margin-left:20px;font-size:2em"
+		/>
+		<input name="nametip" id="nametip" type="text" readonly="true" />
+		<a href="#" style="float:right">返回我的主页</a>
+	</div>
+
+	<form id="phone" name="phone">
+		<div id="phone">
+			<span>*电话：</span>
+			<input type="text" name="phone" id="phone2" placeholder="请输入电话" onblur="checkphone(this)" style="height:30px;width:160;margin-top:-2px;margin-left:120px;"
+			/>
+			<input style="color:red;" id="phonetip" />
+		</div>
+	</form>
+
+
+	<form id="email" name="email">
+		<div id="email">
+			<span>*邮箱：</span>
+			<input type="text" name="email" id="email2" onblur="checkemail(this)" placeholder="请输入邮箱" style="height:30px;width:160px;;margin-top:-2px;margin-left:120px;"
+			/>
+			<input id="emailtip" readonly="true" style="color:red;" />
+			<input id="bind" name="bingd" style="height:30px;width:65px;display:none" placeholder="输入验证码" onblur="bindemail(this)" />
+			<input id="sendbind" type="button" value="发送" style="height:30px;width:50px;display:none" />
+		</div>
+	</form>
+
+	<!-- <form id="wechater" name="wechater">
+		<div id="email">
+			<span>*微信：</span>
+			<input type="text" name="wechat" id="wechat" onblur="checkwechat(this)" placeholder="请输入微信" style="height:30px;width:160px;;margin-top:-2px;margin-left:120px;"
+			/>
+			<input id="emailtip" style="color:red;" />
+		</div>
+	</form> -->
+
+	<form id="qqer" name="qqer">
+		<div id="email">
+			<span>&nbsp;*QQ：</span>
+			<input type="text" name="qq" id="qq" onblur="checkqq(this)" placeholder="请输入qq" style="height:30px;width:160px;;margin-top:-2px;margin-left:126px;"
+			/>
+			<input id="emailtip" style="color:red;" />
+		</div>
+	</form>
+
+
+
+	<form id="gender" name="gender">
+		<div id="gender">
+			<span>*性别：</span>
+			<input type="text" id="sexname" onblur="checksex2(this)" name="sexname" style="height:30px;width:20px;margin-left:125px;">
+			<select onblur="checksex(this)" id="sex" name="sex" style="height:30px;width:20%;display:none;margin-left:123px;">
+				<option value="0">女</option>
+				<option value="1">男</option>
+			</select>
+		</div>
+	</form>
+
+	<form id="address" name="address">
+		<div id="address" style="width:90%;">
+			<span style="margin-left:-9px;">*地址：</span>
+			<select id="selProvince" style="height:30px;width:20%;margin-left:125px;display:none">
+				<option value="0">--请选择省份--</option>
+			</select>
+			<select id="selCity" style="height:30px;width:20%;margin-left:10px;display:none">
+				<option value="0">--请选择城市--</option>
+			</select>
+			<select id="selDistrict" style="height:30px;width:20%;margin-left:10px;display:none">
+				<option value="0">--请选择区/县--</option>
+			</select>
+			<input type="text" id="placedetailed" onblur="checkplace2(this)" placeholder="输入街道/村落" style="height:30px;width:105px;margin-left:10px;display:none"
+			/>
+			<input type="text" id="infomation" placeholder="请输入地址" onblur="checkplace(this)" style="margin-left:125px;height:30px;width:60%;"
+			/>
+		</div>
+	</form>
+
+	<form id="introduce" name="introduce">
+		<div id="introduce">
+			<span>*个人介绍：</span>
+			<textarea rows="4" cols="50" name="comment" id="introducer" style="margin-left:110px;border:none" onblur="checkintroduce(this)">
+			</textarea>
+		</div>
+	</form>
+
+	<form id="education" name="education" onblur="checkeducation(this)">
+		<div id="education">
+			<span>*教育经历：</span>
+			 
+			  
+			   <select id="province" name="province" style="width:100px;display:none;margin-left:100px;" ></select>
+			 
+			   <select id="city" name="city"  style="width:100px;display:none"></select>
+			
+			  <select id="school" name="school"  style="width:100px;display:none" onblur="submiteducation(this)"></select> 
+
+			   <input type="text"  id="education-info" style="margin-left:125px;height:30px;width:60%;"  onblur="checkeducation(this)" placeholder="请在此输入"/>
+		</div>
+	</form>
+	<form id="password" name="password">
+
+		<div class="box">
+			<a href="javascript:;" class="bounceInDown" style="margin-left:200px;margin-top:-60px;">
+				<button class="btn btn-info" style="width:12%;height:40px;margin-left:11%;">点击修改密码</button>
+			</a>
+			<div id="dialogBg"></div>
+			<div id="dialog" class="animated">
+				<img class="dialogIco" width="50" height="50" id="img" src="../images/ico.png" alt="" />
+				<div class="dialogTop">
+					<a href="javascript:;" class="claseDialogBtn">关闭</a>
+				</div>
+				<form action="" id="editForm">
+					<ul class="editInfos">
+						<li>
+							<label>旧密码：
+								<input type="password" name="" id="oldpasswordd" required value="" class="ipt" />
+							</label>
+						</li>
+						<li>
+							<label>新密码：
+								<input type="password" name="" id="passwordd" required value="" class="ipt" />
+							</label>
+						</li>
+						<li>
+							<label>确认噢：
+								<input type="password" name="" id="repasswordd" required value="" class="ipt" placeholder="请重复您的新密码噢！" />
+							</label>
+						</li>
+						<li>
+							<button id="submitt">确认提交</button>
+						</li>
+					</ul>
+				</form>
+
+			</div>
+		</div>
+
+	</form>
+	<!--图片上传框-->
+	<div class="am-modal am-modal-no-btn up-frame-bj " tabindex="-1" id="doc-modal-1">
+		<div class="am-modal-dialog up-frame-parent up-frame-radius">
+			<div class="am-modal-hd up-frame-header">
+				<label>修改头像</label>
+				<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd  up-frame-body">
+				<div class="am-g am-fl">
+					<div class="am-form-group am-form-file">
+						<div class="am-fl">
+							<button type="button" class="am-btn am-btn-default am-btn-sm">
+								<i class="am-icon-cloud-upload"></i> 选择要上传的文件</button>
+						</div>
+						<input type="file" id="inputImage">
+					</div>
+				</div>
+				<div class="am-g am-fl">
+					<div class="up-pre-before up-frame-radius">
+						<img alt="" src="" id="image">
+					</div>
+					<div class="up-pre-after up-frame-radius">
+					</div>
+				</div>
+				<div class="am-g am-fl">
+					<div class="up-control-btns">
+						<span class="am-icon-rotate-left" onclick="rotateimgleft()"></span>
+						<span class="am-icon-rotate-right" onClick="rotateimgright()"></span>
+						<span class="am-icon-check" id="up-btn-ok" url="/admin/user/upload.action"></span>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!--加载框-->
+	<div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal-loading">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">正在上传...</div>
+			<div class="am-modal-bd">
+				<span class="am-icon-spinner am-icon-spin"></span>
+			</div>
+		</div>
+	</div>
+
+	<!--警告框-->
+	<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">信息</div>
+			<div class="am-modal-bd" id="alert_content">
+				成功了
+			</div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn">确定</span>
+			</div>
+		</div>
+	</div>
+	<script src="../js/jquery.min.js" charset="utf-8"></script>
+	<script src="../js/amazeui.min.js" charset="utf-8"></script>
+	<script src="../js/cropper.min.js" charset="utf-8"></script>
+	<script src="../js/custom_up_img.js" charset="utf-8"></script>
+	<script src="../js/info.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$.each(provinceJson, function (k, p) {
+				var option = "<option value='" + p.id + "'>" + p.province + "</option>";
+				$("#selProvince").append(option);
+			});
+			$("#selProvince").change(function () {
+				var selValue = $(this).val();
+				$("#selCity option:gt(0)").remove();
+				$.each(cityJson, function (k, p) {
+					// 直辖市处理.|| p.parent == selValue，直辖市为当前自己
+					if (p.id == selValue || p.parent == selValue) {
+						var option = "<option value='" + p.id + "'>" + p.city + "</option>";
+						$("#selCity").append(option);
+					}
+				});
+			});
+			$("#selCity").change(function () {
+				var selValue = $(this).val();
+				$("#selDistrict option:gt(0)").remove();
+				$.each(countyJson, function (k, p) {
+					if (p.parent == selValue) {
+						var option = "<option value='" + p.id + "'>" + p.county + "</option>";
+						$("#selDistrict").append(option);
+					}
+				});
+			});
+
+			$.ajax({ //获取信息的异步请求
+				url: httpaddress + 'user/profile/info',
+				type: 'get',
+				xhrFields: {
+					withCredentials: true
+				},
+				headers: {
+					'Authorization': sessionStorage.getItem('cookie')
+				},
+				crossDomain: true,
+				success: function (data) {
+					if (data.code == 7) {
+						console.log(data);
+						$("#phone2").val(data.data.info.phone);
+						$("#username2").val(data.data.info.username)
+						$("#address2").val(data.data.info.address);
+						$("#email2").val(data.data.info.email);
+						$("#sexname").val(data.data.info.sex);
+						$("#infomation").val(data.data.info.address);
+						$("#wechater").val(data.data.info.wechat);
+						$("#qq").val(data.data.info.qq);
+						$("#introducer").val(data.data.info.description);
+						$("#education-info").val(data.data.info.educationalExperience);
+
+					}
+				},
+				error: function () {
+					console.log("发生错误啦");
+				}
+			});
+
+
+
+			//绑定上传图片的事件
+			$('#up-btn-ok').on('click', function () {
+				var $image = $('#image');
+				var $modal = $('#my-modal-loading');
+				var $modal_alert = $('#my-alert');
+				var img_src = $image.attr("src");
+				if (img_src == "") {
+					set_alert_info("没有选择上传的图片");
+					$modal_alert.modal();
+					return false;
+				}
+				$modal.modal();
+				var url = $(this).attr("url");
+				var canvas = $("#image").cropper('getCroppedCanvas');
+				var data = canvas.toDataURL(); //转成base64
+				console.log(sessionStorage.getItem('cookie'));
+				console.log(data.toString());
+				$.ajax({
+					url: httpaddress+'user/profile/head',
+					dataType: 'json',
+					type: "put",
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					headers: {
+						'Authorization': sessionStorage.getItem('cookie')
+					},
+					data: {
+						"imgBase64": data.toString()
+					},
+					success: function (data) {
+						$modal.modal('close');
+						set_alert_info(data.result);
+						console.log("成功啦");
+						$modal_alert.modal();
+						if (data.result == "ok") {
+							$("#up-img-touch img").attr("src", data.file);
+
+							var img_name = data.file.split('/')[2];
+							console.log(img_name);
+							$("#pic").text(img_name);
+						}
+						window.location.href = "#";
+					},
+					error: function () {
+						$modal.modal('close');
+						set_alert_info("上传文件失败了！");
+						$modal_alert.modal();
+						//console.log('Upload error');  
+					}
+				});
+
+			});
+		});
+
+
+		function checkname() { //检查姓名的合法性以及姓名的实时提交
+			var name = document.getElementById("username2");
+			if (name.value == '') {
+				document.getElementById("nametip").value = "*姓名不能为空";
+				name.focus();
+				return false;
+			} else {
+				var vname = (/^[a-zA-Z\u4e00-\u9fa5]{2,10}$/);
+
+				if (!vname.test(name.value)) {
+					document.getElementById("nametip").value = "姓名必须是中文";
+					name.focus();
+					return false;
+				} else {
+					$.ajax({
+						url: httpaddress + 'user/profile/username',
+						dataType: 'json',
+						type: "put",
+						xhrFields: {
+							withCredentials: true
+						},
+						crossDomain: true,
+						headers: {
+							'Authorization': sessionStorage.getItem('cookie')
+						},
+
+						data: {
+							"username": $("#username2").val()
+						},
+						success: function (data) {
+							console.log(data);
+						},
+						error: function () {
+
+						}
+					});
+				}
+
+
+			}
+		}
+
+		function checkeducation() {
+			$("#province").show();
+			$("#city").show();
+			$("#school").show();
+			$("#education-info").hide();
+
+		}
+
+ function submiteducation()
+ {
+	 var school1= $("#province option:checked").text();
+	 var school2=$("#city option:checked").text();
+	 var school3=$("#school option:checked").text();
+	 var school=school1.concat(school2,school3);
+	 console.log(school);
+	$.ajax({
+				url: httpaddress + 'user/profile/educational',
+				dataType: 'json',
+				type: "put",
+
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				headers: {
+					'Authorization': sessionStorage.getItem('cookie')
+				},
+
+				data: {
+					"educational":school 
+				},
+				success: function (data) {
+					console.log(data);
+				},
+				error: function () {
+
+				}
+			});
+ }
+
+		function checkintroduce() {                                                              //更改个人简介的操作
+			$.ajax({
+				url: httpaddress + 'user/profile/description',
+				dataType: 'json',
+				type: "put",
+
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				headers: {
+					'Authorization': sessionStorage.getItem('cookie')
+				},
+
+				data: {
+					"description": $("#introducer").val()
+				},
+				success: function (data) {
+					console.log(data);
+				},
+				error: function () {
+
+				}
+			});
+		}
+
+		function checkphone() {
+
+		}
+
+		function checkplace() {
+			$("#infomation").hide();
+			$("#selProvince").show();
+			$("#selDistrict").show();
+			$("#selCity").show();
+			$("#placedetailed").show();
+
+		}
+
+		function checkplace2() {                                               //更改住址的异步请求
+			var address1 = $("#selProvince option:checked").text();
+			var address2 = $("#selCity option:checked").text();
+			var address3=$("#selDistrict option:checked").text();
+
+			var address = address1.concat(address2,address3, $("#placedetailed").val());
+			console.log(address);
+			$.ajax({
+				url: httpaddress + 'user/profile/address',
+				dataType: 'json',
+				type: "put",
+
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				headers: {
+					'Authorization': sessionStorage.getItem('cookie')
+				},
+				data: {
+					"address": address
+				},
+				success: function (data) {
+					console.log(data);
+				},
+				error: function () {
+
+				}
+			});
+		}
+
+		function checkwechat() {
+
+		}
+
+		function checkqq() {                                 //更改qq的异步操作
+			console.log();
+			$.ajax({
+				url: httpaddress + 'user/profile/qq',
+				dataType: 'json',
+				type: "put",
+
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				headers: {
+					'Authorization': sessionStorage.getItem('cookie')
+				},
+
+				data: {
+					"qq": $("#qq").val()
+				},
+				success: function (data) {
+					console.log(data);
+				},
+				error: function () {
+
+				}
+			});
+
+		}
+
+
+		$.ajax({                                                   //更新头像的异步操作
+			url: httpaddress + 'user/profile/info/simple',
+			type: 'get',
+			xhrFields: {
+				withCredentials: true
+			},
+			headers: {
+				'Authorization': sessionStorage.getItem('cookie')
+			},
+			crossDomain: true,
+			success: function (data) {
+				console.log(data.data.info.headImage);
+				document.getElementById("img").src = data.data.info.headImage;
+			}
+
+		});
+
+		function checksex2() {                                //更改性别
+			$("#sex").show();
+			$("#sexname").hide();
+		}
+
+		function checksex() {                                //更改性别
+			console.log($("#sex").val());
+			$.ajax({
+				url: httpaddress + 'user/profile/sex',
+				type: 'put',
+				xhrFields: {
+					withCredentials: true
+				},
+				headers: {
+					'Authorization': sessionStorage.getItem('cookie')
+				},
+				crossDomain: true,
+				data: {
+					'sex': $("#sex").val(),
+				},
+				success: function (data) {
+					console.log(data);
+				}
+
+			});
+		}
+
+		function checkemail() {
+			$("#bind").show();
+			$("#sendbind").show();
+
+			//			邮箱
+			var email = document.getElementById('email2');
+			document.getElementById("phonetip").value = "";
+			if (email.value == '') {
+				document.getElementById("emailtip").value = "邮箱不能为空";
+				email.focus();
+				return false;
+			} else {
+				var vemail = /^[0-9a-zA-Z]+(?:[\_\.\-][a-z0-9\-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\.[a-zA-Z]+$/;
+				if (!vemail.test(email.value)) {
+					document.getElementById("emailtip").value = "邮箱格式不正确";
+					email.focus();
+					return false;
+				}
+			}
+
+		}
+		$("#sendbind").click(function () {                          //发送邮箱验证码
+			$.ajax({
+				url: httpaddress + 'email/code',
+				type: 'post',
+				xhrFields: {
+					withCredentials: true
+				},
+				headers: {
+					'Authorization': sessionStorage.getItem('cookie')
+				},
+				data: {
+					'email': $("#email2").val()
+				},
+				crossDomain: true,
+				success: function (data) {
+					console.log(data);
+				}
+			});
+		})
+
+		function bindemail() //绑定邮箱认证
+		{
+			$.ajax({
+				url: httpaddress + 'email/bind',
+				type: 'put',
+				xhrFields: {
+					withCredentials: true
+				},
+				headers: {
+					'Authorization': sessionStorage.getItem('cookie')
+				},
+				crossDomain: true,
+				data: {
+					'email': $("#email2").val(),
+					'code': $("#bind").val()
+				},
+				success: function (data) {
+					console.log(data);
+				}
+			});
+		}
+
+		$('#submitt').on('click', function () { //修改密码的异步请求
+
+			var a = sessionStorage.getItem('cookie');
+			console.log(a + "123");
+			$.ajax({
+				url: httpaddress + 'user/profile/password',
+				type: 'put',
+				xhrFields: {
+					withCredentials: true
+				},
+				headers: {
+					'Authorization': a
+				},
+				data: {
+					'oldPassword': $("#oldpasswordd").val(),
+					'password': $("#passwordd").val(),
+					'repassword': $("#repasswordd").val()
+				},
+				crossDomain: true,
+				success: function (data) {
+					console.log(data);
+				},
+				error: function () {
+					console.log("出错啦");
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>

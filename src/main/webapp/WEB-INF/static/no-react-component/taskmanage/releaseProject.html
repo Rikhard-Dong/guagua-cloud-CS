@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/releaseproject.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../js/address.js"></script>
+</head>
+<body>
+    <div id="header">
+        发布项目
+    </div>
+    <div id="name-descript">
+        *任务名称：
+        <input type="text" id="name" name="name" placeholder="请在此输入项目名称" style="margin-left:20px;width:40%;height:30px;background:rgba(248,248,248);">
+        <br />
+        <br /> *任务描述：
+        <textarea rows="3" placeholder="请在此输入项目的详细描述" cols="100" id="description" name="comment" form="usrform" style="margin-left:19px;width:40%;background:rgba(248,248,248)"></textarea>
+        <!-- <div id="logo"> -->
+    </div>
+    </div>
+    <div id="tasktype">*任务类型(多选)：
+        <div id="typeone"> 任务类型：
+            <br />
+            <input type="checkbox" name="taskteamType" />市场营销
+            <input type="checkbox" name="taskteamType" />数据标注
+            <input type="checkbox" name="taskteamType" />售前咨询
+            <input type="checkbox" name="taskteamType" />预约
+            <input type="checkbox" name="taskteamType" />客户回访
+            <input type="checkbox" name="taskteamType" />问卷调查
+            <input type="checkbox" name="taskteamType" />报名通知
+            <br />
+            <input type="checkbox" name="taskteamType" />市场开拓
+            <input type="checkbox" name="taskteamType" />会议邀约
+            <input type="checkbox" name="taskteamType" />挖掘潜在客户
+        </div>
+
+    </div>
+    <div id="pay">
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp任务报酬:
+        <input type="text" placeholder="请在此输入任务的报酬" id="basesalary" style="margin-left:20px;width:16%;height:30px;" />
+        <br />
+        <br /> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp任务奖金:
+        <input type="text" placeholder="请在此输入任务的奖金" id="bonus" style="margin-left:20px;width:16%;height:30px;" />
+        <!-- <br />
+        <br /> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp全部金额:
+        <input type="text" style="margin-left:20px;width:5%;height:30px;" /> -->
+        <br />
+        <br /> *任务起始时间:
+        <input type="date" id="start" style="margin-left:20px;width:18.6%;height:30px;;background:rgba(248,248,248,0.3);border:none" />
+        <br />
+        <br /> *任务结束时间:
+        <input type="date" id="end" style="margin-left:20px;width:18.6%;height:30px;;background:rgba(248,248,248,0.3);border:none" />
+        <br />
+        <br /> *工作时段(多选)：
+        <input type="checkbox" id="" />8:00-12:00 &nbsp
+        <input type="checkbox" />13:00-18:00 &nbsp
+        <input type="checkbox" />19:00-22:00
+        <br />
+        <br /> &nbsp&nbsp&nbsp&nbsp&nbsp*客服人数(以上)：
+        <input placeholder="请在这里输入客服的人数" type="text" id="number" style="margin-left:20px;width:15%;height:30px;;background:rgba(248,248,248,0.3);border:none">
+        <br />
+        <br /> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp是否需要面试：
+        <select id="needOrNot" style="margin-left:17px;width:10%;height:30px;;background:rgba(248,248,248,0.3);border:none" onchange="needtest()">
+            <option value="0">不需要</option>
+            <option value="1">需要</option>
+        </select>
+        <br />
+        <br /> <span id="testType" style="display:none">笔试类型(以上)：
+        <select  style="margin-left:17px;width:16%;height:30px;;background:rgba(248,248,248,0.3);border:none" onchange="choose()">
+            <option value="0">自动生成试卷</option>
+            <option value="1">从已有试卷库选择</option>
+        </select>
+        </span>
+        <br />
+    
+        <br />
+        <span  id="shoudong" style="display:none">
+        题库名：<select id="testShoudong" style="margin-left:20px;width:10%;height:30px;;background:rgba(248,248,248,0.3);border:none;" onchange="selectQuestion()"></select>
+        问题名：<select name="" id="questionId" style="margin-left:20px;width:20%;height:30px;;background:rgba(248,248,248,0.3);border:none;"></select>
+        </span>
+        <br />
+        <span id="zidong" style="display:none">
+        题库名：<select id="testZidong" style="margin-left:20px;width:10%;height:30px;;background:rgba(248,248,248,0.3);border:none;" onchange="selectRuleId()"></select>
+         规则ID：<select name="" id="ruleId" style="margin-left:20px;width:20%;height:30px;;background:rgba(248,248,248,0.3);border:none;"></select>
+        </span>
+        <br />
+        <br />
+        <label for="inputfile">文件输入</label>
+        <input type="file" id="inputfile">
+        <br />
+        <!-- <br /> -->
+        <button type="button" onclick="submit()" class="btn btn-success">发布任务</button></div>
+        <script>
+
+         function selectQuestion()
+     {
+        $.ajax({ //查询题库简易信息的异步请求
+            url: httpaddress + 'enterprise/question_bank/' + $("#testShoudong option:selected").val() +
+                '/examination/list/manual',
+            type: 'get',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'bankId': $("#testShoudong option:selected").val(),
+                'page': 1,
+                'size': 10
+            },
+            success:function(data)
+            {
+            console.log(data.data.papers.list);
+            var id=[];
+            var question=[];
+            var questionId = document.getElementById("questionId");
+                questionId.innerHTML = "";
+                for (var i = 0; i < questionId.childNodes.length; i++) {
+                    questionId.removeChild(questionId.options[0]);
+                    questionId.remove(0);
+                    questionId.options[0] = null;
+                }
+      for(var value in data.data.papers.list)
+     {
+          idd=data.data.papers.list[value].id;
+          q=data.data.papers.list[value].name;
+          id.push(idd);
+          question.push(q);
+     }
+
+
+for(var i=0;i<data.data.papers.list.length;i++)
+{
+    $("#questionId").append("<option value='" + id[i] + "'>" + question[i] + "</option>");
+}
+ 
+
+ }
+
+        });
+
+     }
+
+ $.ajax({                                       //查询题库简易信息的异步请求
+        url: httpaddress + 'enterprise/question_bank/list',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        success: function (data) {
+            console.log(data.data.banks.list);
+            var id = [];
+            var bankname = [];
+
+            for (var value in data.data.banks.list) {
+                idd = data.data.banks.list[value].id;
+                banknamee = data.data.banks.list[value].bankName;
+                id.push(idd);
+                bankname.push(banknamee);
+            }
+
+            for (var i = 0; i < data.data.banks.list.length; i++) {
+                $("#testShoudong").append("<option value='" + id[i] + "'>" + bankname[i] + "</option>");
+                $("#testZidong").append("<option value='" + id[i] + "'>" + bankname[i] + "</option>");
+            }
+
+        }
+    });
+
+
+function needtest()
+{
+      if($("#needOrNot option:selected").val()==1)
+      {
+         $("#testType").show();
+      }  
+      else{
+        $("#testType").hide();
+      }
+}
+
+function choose()
+{
+        if($("#testType option:selected").val()==1)
+    {
+       $("#shoudong").show();
+       $("#zidong").hide();
+
+    }
+        else
+        {
+   $("#zidong").show();
+   $("#shoudong").hide();
+
+        }
+}
+
+function submit()
+{
+               $.ajax({
+                url:httpaddress+'enterprise/task/create',
+                type:'post',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                crossDomain: true,
+                data: {
+                    'title': $("#name").val(),
+                    'description': $("#description").val(),
+                    'baseSalary': $("#basesalary").val(),
+                    'bonus': $("#bonus").val(),
+                    'number': $("#number").val(),
+                    'taskStartTime': $("#start").val()+' 12:00:00',
+                    'taskEndTime': $("#end").val()+' 12:00:00',
+                    'workingTimeStart1': '12:00:00',
+                    'workingTimeEnd1': '13:00:00',
+                    'workingTimeStart2': '14:00:00',
+                    'workingTimeEnd2': '15:00:00',
+                    'workingTimeStart3': '16:00:00',
+                    'workingTimeEnd3': '17:00:00',
+                    'workingTimeStart4': '18:00:00',
+                    'workingTimeEnd4': '19:00:00',
+                    'isNeedExamination':$("#needOrNot option:selected").val(),
+                    'examinationType':$("#testType option:selected").val(),
+                    'ruleId':$("#ruleId option:selected").val(),
+                    'examinationId':$("#questionId option:selected").val()
+                },
+                success: function (data) {
+                    console.log(data);
+                    if(data.msg=='插入成功')
+                    {
+                        alert("发布成功");
+                        window.location.href='#';
+                    }
+
+                }
+
+            }); 
+}
+function selectRuleId()
+{
+    $.ajax({ //查询题库简易信息的异步请求
+        url: httpaddress + 'enterprise/question_bank/'+$("#testZidong option:selected").val()+'/rule/list',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        data:{
+            'bankId':$("#testZidong option:selected").val(),
+            'page':1,
+            'size':10
+        },
+        success: function (data) {
+            var question=[];
+            var id=[];
+            for(var value in data.data.rules.list)
+            {
+                q=data.data.rules.list[value].name;
+                i=data.data.rules.list[value].id;
+                question.push(q);
+                id.push(i);
+            }
+            var questionId = document.getElementById("ruleId");
+                questionId.innerHTML = "";
+                for (var i = 0; i < questionId.childNodes.length; i++) {
+                    questionId.removeChild(questionId.options[0]);
+                    questionId.remove(0);
+                    questionId.options[0] = null;
+                }
+            for(var i=0;i<data.data.rules.list.length;i++)
+            {
+                $("#ruleId").append("<option value='" + id[i] + "'>" + question[i] + "</option>");
+            }
+
+        }
+    });
+
+
+
+}
+</script>
+    
+</body>
+
+</html>

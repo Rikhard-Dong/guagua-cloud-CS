@@ -23,7 +23,7 @@
 
     <select id="findAllRoles" resultType="com.guagua.bean.entity.common.Role">
         SELECT *
-        FROM t_user_role;
+        FROM t_role
     </select>
 
     <select id="findById" resultType="com.guagua.bean.entity.common.Role">

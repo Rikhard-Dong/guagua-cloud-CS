@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CSS3答题卡翻页效果</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="../css/risk_test.css" rel="stylesheet" />
+</head>
+
+<body style="background-color:powderblue">
+
+	<div class="wrapper">
+    	<div id="answer" class="card_wrap">
+        	<!--Q1-->
+       	  	<div class="card_cont card1">
+            	<div class="card">
+                    <p class="question"><span>Q1、</span>判断题</p>
+                    <ul class="select" >
+                            <li>
+                                    <input id="q1_1" type="radio" name="r-group-1" >
+                                    <label for="q1_1">下一题</label>
+                                </li>
+                    </ul>
+                    <ul id="one">
+
+                    </ul>
+                    <div class="card_bottom"><span><b>1</b>/4</span></div>
+                </div>
+            </div>
+            <!--Q2-->
+          	<div class="card_cont card2" >
+            	<div class="card">
+                	<p class="question"><span>Q2、</span>多选题</p>
+					<ul class="select">
+                            <li>
+                                    <input id="q2_1" type="radio" name="r-group-2" >
+                                    <label for="q2_1">下一题</label>
+                                </li>
+                    </ul>
+                    <ul id="two">
+                      
+                        </ul>
+                    <div class="card_bottom"><a class="prev">上一题</a><span><b>2</b>/4</span></div>
+                </div>
+            </div>
+            <!--Q3-->
+          	<div class="card_cont card3">
+            	<div class="card">
+                	<p class="question"><span>Q3、</span>单选题</p>
+                	<ul class="select">
+                        <li>
+                            <input id="q3_1" type="radio" name="r-group-3" >
+                            <label for="q3_1">下一题</label>
+                        </li>
+                       
+                    </ul>
+                    <ul id="three">
+                    </ul>
+                    <div class="card_bottom"><a class="prev">上一题</a><span><b>3</b>/4</span></div>
+                    
+                </div>
+            </div>
+            <!--Q4-->
+          	<div class="card_cont">
+            	<div class="card">
+                	<p class="question"><span>Q4、</span>文字题</p>
+               	  <ul class="select" id="four">
+                       
+                    </ul>
+                    <button style="margin-top:150px;" id="sure" class="btn btn-info">确认提交</button>
+                    <div class="card_bottom"><a class="prev">上一题</a><span><b>4</b>/4</span></div>
+                          
+                </div>
+                  
+            </div>
+                
+    	</div><!--/card_wrap-->
+
+	</div>
+        
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/answer.js"></script>
+    <script src="../js/address.js"></script>
+    <script>
+	$(function(){
+		$("#answer").answerSheet({});
+	})
+   var answerList=[];
+
+var shijuanId='';                //试卷的id
+           $.ajax({
+                    url: httpaddress + 'member/task_hall/task/' +sessionStorage.getItem('testId')+'/get_examination',
+                    type: 'get',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    headers: {
+                        'Authorization': sessionStorage.getItem('cookie')
+                    },
+                    crossDomain: true,
+                    data:{
+                        'taskId':sessionStorage.getItem('testId')
+                    },
+                    success:function(data)
+                    {
+                         console.log(data.data);
+                     
+                         shijuanId=data.data.paper.id;
+                         var list1='';
+                        for(var i=0;i<data.data.paper.judgementQuestions.length;i++)
+                        {
+                            list1+='<li id='+data.data.paper.judgementQuestions[i].id+'><span style="width:150px;height:30px;">问题：'+data.data.paper.judgementQuestions[i].question+'<span><br /><br /><span style="width:150px;height:30px;">回答：'+data.data.paper.judgementQuestions[i].remarks+'</span><br/><br />'+
+                                '<span>'+'<select id='+i+' style="width:100px;height:20px;"><option value="true">正确</option><option value="flase">错误</option></select>'+'</span><br><hr />'+'</li><br/>'
+                        }
+                        document.getElementById("one").innerHTML = list1;
+
+console.log(data.data.paper.multipleQuestions[0].items[1].content);
+
+                            
+                        var list2='';
+                        for(var i=0;i<data.data.paper.multipleQuestions.length;i++)
+                        {
+                       list2+='<li  id='+data.data.paper.multipleQuestions[i].id+'><span>问题：'+data.data.paper.multipleQuestions[i].question+'</sapn><br /><br /><span><select id="multip"></select></span>'+'</li>'
+                        }
+               
+                        document.getElementById("two").innerHTML = list2;
+                for(var j=0;j<data.data.paper.multipleQuestions[0].items.length;j++)
+                            {
+                                $("#multip").append("<option value='" + data.data.paper.multipleQuestions[0].items[j].id + "'>" +data.data.paper.multipleQuestions[0].items[j].content + "</option>");
+
+                            }
+
+
+
+                         var  list3='';
+                         for(var i=0;i<data.data.paper.singleQuestions.length;i++)
+                         {
+
+                                list3+='<li  id='+data.data.paper.singleQuestions[i].id+'><span>问题:'+data.data.paper.singleQuestions[i].question+'</span><br/><br/><span><select id='+4*(i+1)+'><option value='+data.data.paper.singleQuestions[i].items[0].id+'>'+data.data.paper.singleQuestions[i].items[0].content+'</option><option value='+data.data.paper.singleQuestions[i].items[1].item+'>'+data.data.paper.singleQuestions[i].items[1].content+'</option><option value='+data.data.paper.singleQuestions[i].items[2].item+'>'+data.data.paper.singleQuestions[i].items[2].content+'</option></select></span>'+'</li><hr/>';
+
+                         }
+
+document.getElementById("three").innerHTML = list3;
+
+                            var  textQuestion=[];
+                            var  textRemarks=[]; 
+                            for(var value in data.data.paper.textQuestions )
+                            {
+                                    textq=data.data.paper.textQuestions[value].question;
+                                     textR=data.data.paper.textQuestions[value].remarks;
+                                     textQuestion.push(textq);
+                                     textRemarks.push(textR);
+                            }
+                            var list4='';
+                            for(var i=0;i<data.data.paper.textQuestions.length;i++)
+                            {
+                                      list4+='<li  id='+data.data.paper.textQuestions[i].id+'><span>问题：'+textQuestion[i]+'</sapn><br /><br /><span>'+textRemarks[i]+'</span><br/><br />你的见解：<br/><textarea id="textarea" type="text" rows="4" cols="30"></textarea></li>'
+                            }
+                            document.getElementById("four").innerHTML = list4;
+
+                    }
+                });
+
+
+$("#sure").click(function()
+    {
+       
+        var judge1=$("#0 option:selected").val();
+        var judge2=$("#1 option:selected").val();
+        var single4=$("#4 option:selected").val();
+      answerList.push({questionId:7,answer:judge1},{questionId:8,answer:judge2},{questionId:6,answer:$("#multip option:selected").val()},{questionId:2,answer:single4},{questionId:4,answer:$("#textarea").val()});
+  console.log(answerList);
+
+
+        $.ajax({
+                    url: httpaddress + 'member/task_hall/task/' +sessionStorage.getItem('testId')+'/examination/'+shijuanId+'/hand_exam',
+                    type: 'post',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    headers: {
+                        'Authorization': sessionStorage.getItem('cookie')
+                    },
+                    crossDomain: true,
+                    data:JSON.stringify(answerList),
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8',
+                    success:function(data)
+                    {
+                            alert("答题成功！等待审核");
+                            window.location.href='./test.html'
+                            
+                    }
+        });
+
+    }
+);
+      
+    </script>
+</body>
+
+</html>

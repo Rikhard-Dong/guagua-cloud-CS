@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>叮叮云中心</title>
+    <link rel="stylesheet" href="./no-react-component/css/pintuer.css">
+    <link rel="stylesheet" href="./no-react-component/css/admin.css">
+    <!-- <link rel="stylesheet" href="./no-react-component/css/spigPet.css"> -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./no-react-component/js/jquery.js"></script>
+    <script src="./no-react-component/js/address.js"></script>
+    <!-- <script src="./no-react-component/js/spig.js"></script> -->
+
+
+</head>
+
+<body style="background-color:#f2f9fd;">
+    <div class="header bg-main">
+        <!-- <img style="float:left;width:800px;" src="./no-react-component/images/font2.png"> -->
+
+        <div class="logo margin-big-right fadein-top" style="float:right">
+            <h1>
+                <img src="" id="img" class="radius-circle rotate-hover" height="50" alt="" />
+                <span>叮叮中心</span>
+            </h1>
+        </div>
+        <div id="head-l" class="head-l" style="float:right;display:none">
+            <a class="button button-little bg-red" id="exit" href="./no-react-component/index.html">
+                <span class="icon-power-off"></span> 安全退出</a>
+        </div>
+    </div>
+
+    <div class="leftnav">
+        <div class="leftnav-title">
+            <strong>
+                <span id="gn" class="icon-list">叮叮云功能</span>
+            </strong>
+
+        </div>
+        <div class="leftnav-content">
+        <h2 id="enterpriseInfo">
+            <span class="icon-pencil-square-o"></span>企业信息</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/Enterprise/Authentication.html" target="right">
+                    <span class="icon-caret-right"></span>企业认证</a>
+            </li>
+        </ul>
+        <h2 id="label">
+            <span class="icon-table"></span>标签管理</h2>
+        <ul>
+        </ul>
+        <h2 id="infoMaintenance">
+            <span class="icon-info-circle"></span>信息维护</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/infomaintenance/info.html" target="right">
+                    <span class="icon-caret-right"></span>信息修改</a>
+            </li>
+
+        </ul>
+        <h2 id="projectManagement">
+            <span class="icon-suitcase"></span>项目管理</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/taskmanage/releaseProject.html" target="right">
+                    <span class="icon-caret-right"></span>发布项目</a>
+            </li>
+            <!-- <li>
+                <a href="./no-react-component/taskmanage/chooseService.html" target="right">
+                    <span class="icon-caret-right"></span>客服大厅</a>
+            </li> -->
+
+            <li>
+                <a href="./no-react-component/taskmanage/task-ing.html" target="right">
+                    <span class="icon-caret-right"></span>查看项目</a>
+            </li>
+            <li>
+                <a href="./no-react-component/taskmanage/myService.html" target="right">
+                    <span class="icon-caret-right"></span>我的客服</a>
+            </li>
+            <!-- <li>
+                <a href="#" target="right">
+                    <span class="icon-caret-right"></span>项目完成</a>
+            </li> -->
+        </ul>
+        <h2 id="moneyMaintenance">
+            <span class="icon-money"></span>财务维护</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/financial/moneymanage.html" target="right">
+                    <span class="icon-caret-right"></span>资金管理</a>
+            </li>
+            <li>
+                <a href="./no-react-component/financial/recharge.html" target="right">
+                    <span class="icon-caret-right"></span>充值</a>
+            </li>
+        </ul>
+        <h2 id="knowledgebaseMaintenance">
+            <span class="icon-book"></span>知识库维护</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/knowledge/knowledge.html" target="right">
+                    <span class="icon-caret-right"></span>任务知识库</a>
+            </li>
+        </ul>
+
+        <h2 id="moneyMaintenance2" style="display:none">
+            <span class="icon-pencil-square-o"></span>财务维护</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/financial/recharge2.html" target="right">
+                    <span class="icon-caret-right"></span>充值</a>
+            </li>
+        </ul>
+        <h2 id="memberauthentication" style="display:none">
+            <span class="icon-pencil-square-o"></span>信息认证</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/Enterprise/memberauthentication.html" target="right">
+                    <span class="icon-caret-right"></span>会员信息认证</a>
+            </li>
+        </ul>
+        <h2 id="sign-integral">
+            <span class="icon-pencil-square-o"></span>签到积分系统</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/signintergral/sign.html" target="right">
+                    <span class="icon-caret-right"></span>签到系统</a>
+            </li>
+            <li>
+                <a href="./no-react-component/signintergral/intergral.html" target="right">
+                    <span class="icon-caret-right"></span>积分系统</a>
+            </li>
+        </ul>
+
+        <h2 id="memberManagement" style="display:none">
+            <span class="icon-pencil-square-o"></span>会员审核管理</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/admin/viewMember.html" target="right">
+                    <span class="icon-caret-right"></span>会员查看系统</a>
+            </li>
+            <li>
+                <a href="./no-react-component/admin/memberCertification.html" target="right">
+                    <span class="icon-caret-right"></span>会员认证系统</a>
+            </li>
+        </ul>
+
+        <h2 id="businessManagement" style="display:none">
+            <span class="icon-pencil-square-o"></span>企业审核管理</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/admin/viewEnterprise.html" target="right">
+                    <span class="icon-caret-right"></span>企业查看系统</a>
+            </li>
+            <li>
+                <a href="./no-react-component/admin/enterpriseCertification.html" target="right">
+                    <span class="icon-caret-right"></span>企业认证系统</a>
+            </li>
+        </ul>
+        <h2 id="tasksysytem" style="display:none">
+            <span class="icon-pencil-square-o"></span>任务系统</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/membertask/tasksquare.html" target="right">
+                    <span class="icon-caret-right"></span>任务大厅</a>
+            </li>
+            <li>
+                <a href="./no-react-component/membertask/chat2.html" target="right">
+                    <span class="icon-caret-right"></span>我的任务</a>
+            </li>
+            <li>
+                <a href="./no-react-component/membertask/mytask.html" target="right">
+                    <span class="icon-caret-right"></span>消息大厅</a>
+            </li>
+            <li>
+                <a href="./no-react-component/membertask/普通用户/index.html" target="right">
+                    <span class="icon-caret-right"></span>您的客户</a>
+            </li>
+
+        </ul>
+        <h2 id="testsystem" style="">
+            <span class="icon-pencil-square-o"></span>测试管理</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/questions/questionsBank.html" target="right">
+                    <span class="icon-caret-right"></span>题库管理</a>
+            </li>
+            <li>
+                <a href="./no-react-component/questions/test.html" target="right">
+                    <span class="icon-caret-right"></span>手动生成试卷</a>
+            </li>
+            <li>
+                <a href="./no-react-component/questions/alltest.html" target="right">
+                    <span class="icon-caret-right"></span>查看所有试卷</a>
+            </li>
+            <li>
+                <a href="./no-react-component/questions/modifytest.html" target="right">
+                    <span class="icon-caret-right"></span>修改/查看试卷题型</a>
+            </li>
+            <li>
+                <a href="./no-react-component/questions/ruleadd.html" target="right">
+                    <span class="icon-caret-right"></span>生成试卷规则</a>
+            </li>
+            <li>
+                <a href="./no-react-component/questions/allrule.html" target="right">
+                    <span class="icon-caret-right"></span>查看所有规则</a>
+            </li>
+        </ul>
+        <h2 id="jiLuSystem">
+            <span class="icon-pencil-square-o"></span>记录系统</h2>
+
+        <ul>
+            <li>
+                <a href="./no-react-component/jilv/index.html" target="right">
+                    <span class="icon-caret-right"></span>记录查看历史</a>
+            </li>
+
+        </ul>
+        <h2 id="yongHuSystem" style="display:none">
+            <span class="icon-pencil-square-o"></span>用户管理</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/admin/allUser.html" target="right">
+                    <span class="icon-caret-right"></span>查询所有管理员用户</a>
+            </li>
+            <li>
+                <a href="./no-react-component/admin/allenterpriser.html" target="right">
+                    <span class="icon-caret-right"></span>查询所有企业用户</a>
+            </li>
+            <li>
+                <a href="./no-react-component/admin/allMember.html" target="right">
+                    <span class="icon-caret-right"></span>查询所有会员用户</a>
+            </li>
+
+        </ul>
+
+        <h2 id="roleSystem" style="display:none">
+            <span class="icon-pencil-square-o"></span>角色管理</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/admin/allrole.html" target="right">
+                    <span class="icon-caret-right"></span>查询所有角色</a>
+            </li>
+            <li>
+                <a href="./no-react-component/admin/roleInfo.html" target="right">
+                    <span class="icon-caret-right"></span>查询角色详细信息</a>
+            </li>
+        </ul>
+
+        <h2 id="perssionSystem" style="display:none">
+            <span class="icon-pencil-square-o"></span>权限管理</h2>
+        <ul>
+            <li>
+                <a href="./no-react-component/admin/allpermission.html" target="right">
+                    <span class="icon-caret-right"></span>查询所有权限</a>
+            </li>
+        </ul>
+        <h2 id="myroadSystem" style="display:none">
+                <span class="icon-pencil-square-o"></span>我的成长</h2>
+            <ul>
+                <li>
+                    <a href="./no-react-component/admin/myroad.html" target="right">
+                        <span class="icon-caret-right"></span>查看我们的队伍</a>
+                </li>
+            </ul>
+
+            <h2 id="myroadSystem2" style="display:none">
+                    <span class="icon-pencil-square-o"></span>我的成长</h2>
+                <ul>
+                    <li>
+                        <a href="./no-react-component/Enterprise/myroad.html" target="right">
+                            <span class="icon-caret-right"></span>查看我的历程</a>
+                    </li>
+                </ul>
+
+                <h2 id="myroadSystem3" style="display:none">
+                        <span class="icon-pencil-square-o"></span>我的成长</h2>
+                    <ul>
+                        <li>
+                            <a href="./no-react-component/membertask/myroad.html" target="right">
+                                <span class="icon-caret-right"></span>查看我的历程</a>
+                        </li>
+                    </ul>
+</div>
+    </div>
+    <script type="text/javascript">
+        var webid;
+        var webname;
+        $(function () {
+            $(".leftnav h2").click(function () {
+                $(this).next().slideToggle(200);
+                $(this).toggleClass("on");
+            })
+            $("#img").click(function () {
+                $("#head-l").fadeToggle(2000);
+            })
+            $(".leftnav ul li a").click(function () {
+                $("#a_leader_txt").text($(this).text());
+                $(".leftnav ul li a").removeClass("on");
+                $(this).addClass("on");
+            })
+            console.log(sessionStorage.getItem('cookie'));
+            var token = sessionStorage.getItem('cookie');
+            $("#exit").click(function () {
+                sessionStorage.removeItem('cookie')
+            })
+            $.ajax({
+                url: httpaddress + 'user/profile/info',
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                crossDomain: true,
+                success: function (data) {
+
+                    console.log(data);
+                    webid = data.data.info.userId;
+                    webname = data.data.info.username;
+               
+                    if (data.data.info.type == '客服用户') {
+                        websocket = new WebSocket("ws://192.168.1.102:8080/chat?userId=" + webid +
+                            "&username=" + webname + "&userType=0");
+                        websocket.onopen = function () {
+                            //   alert("WebSocket连接成功");  
+                        }
+                    } else {
+                        websocket = new WebSocket("ws://192.168.1.102:8080/chat?userId=" + webid +
+                            "&username=" + webname + "&userType=2");
+                        websocket.onopen = function () {
+                            //   alert("WebSocket连接成功"); 
+                        }
+                    }
+                    console.log(data.data.info.headImage);
+                    document.getElementById("img").src = data.data.info.headImage;
+
+                    console.log(data.data.info.type);
+                    if (data.data.info.type == '客服用户') {
+                        console.log("123");
+                        $("#enterpriseInfo").hide();
+                        $("#projectManagement").hide();
+                        $("#knowledgebaseMaintenance").hide();
+                        $("#moneyMaintenance").hide();
+                        $("#moneyMaintenance2").show();
+                        $("#memberauthentication").show();
+                        $("#sign-integral").show();
+                        $("#tasksysytem").show();
+                        $("#testsystem").hide();
+                        $("#myroadSystem3").show();
+                        $("#iframe").attr("src", "./no-react-component/demo1.html");
+
+
+                    } else if (data.data.info.type == '平台用户') {
+                        $("#enterpriseInfo").hide();
+                        $("#projectManagement").hide();
+                        $("#knowledgebaseMaintenance").hide();
+                        $("#moneyMaintenance").hide();
+                        $("#infoMaintenance").hide();
+                        $("#label").hide();
+                        $("#memberManagement").show();
+                        $("#businessManagement").show();
+                        $("#yongHuSystem").show();
+                        $("#roleSystem").show();
+                        $("#perssionSystem").show();
+                        $("#testsystem").hide();
+
+                        $("#myroadSystem").show();
+                        $("#iframe").attr("src", "./no-react-component/demo.html");
+
+                    } else {
+                        $("#iframe").attr("src", "./no-react-component/demo3.html");
+                        $("#myroadSystem2").show();
+                    }
+
+                }
+            });
+            $.ajax({ //显示消息的数目的异步请求
+                url: httpaddress + 'message/latest',
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                crossDomain: true,
+                success: function (data) {
+                    console.log(data.data.messages);
+                    var count = 0;
+                    for (var value in data.data.messages) {
+                        if (data.data.messages[value].status == '未读') {
+                            count++;
+                        }
+                        $("#messageNum").val(count);
+                    }
+                }
+            });
+        });
+
+        function lookmessage() {
+            window.location.href = "./no-react-component/infomaintenance/message.html"
+        }
+
+
+    $("#gn").click(function()
+    
+    {
+        $(".leftnav-content").hide();
+        var child=document.getElementById("admin");
+        child.style.left='0px';
+        console.log(child.offsetLeft);
+    }
+    );
+
+        $("#gn").dblclick(function()
+    
+    {
+        $(".leftnav-content").show();
+        var child=document.getElementById("admin");
+        child.style.left='180px';
+       
+    }
+    );
+    </script>
+    <ul class="bread">
+        <li>
+            <a href="./no-react-component/demo3.html" target="right" class="icon-home"> 首页</a>
+        </li>
+        <img src='./no-react-component/images/message.png' />
+        <label>未读消息:</label>
+        <input type="text" id="messageNum" onclick="lookmessage(this)" style="border:none;background-color:#f2f9fd;color:red;" />
+    </ul>
+    <div class="admin" id="admin">
+        <iframe scrolling="auto" rameborder="0" src="" name="right" id="iframe" width="100%" height="100%"></iframe>
+
+    </div>
+
+
+
+    <!-- <div id="spig" class="spig">
+        <div id="message">正在加载中……</div>
+        <div id="mumu" class="mumu"></div>
+    </div> -->
+</body>
+
+</html>

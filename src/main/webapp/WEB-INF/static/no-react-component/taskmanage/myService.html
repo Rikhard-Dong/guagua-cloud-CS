@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../css/myService.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/address.js"></script>
+  
+</head>
+
+<body>
+    <div id="header">我的客服</div>
+    <label>任务名称：</label><select id="myservice" style="height:40px;width:25%;font-size:1em;cursor:pointer;border-radius:3px" >
+        </select>
+<div id="content">
+    <ul id="box"></ul>
+   </div>
+    <script>
+
+    $.ajax({
+        url: httpaddress + 'enterprise/task/query',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        data: {
+            'page': 1,
+            'size': 30
+        },
+        success: function (data) {
+            console.log(data.data.tasks.list);
+            var taskid=[];
+            var taskName=[];
+          for(var value in data.data.tasks.list)
+          {
+               var taskid1=data.data.tasks.list[value].id;
+               var title=data.data.tasks.list[value].title;
+               taskName.push(title);
+               taskid.push(taskid1);
+          }
+          for(var j=0;j<data.data.tasks.list.length;j++)
+          {
+            $("#myservice").append("<option value='"+taskid[j]+"'>"+taskName[j]+"</option>");
+          }
+
+        }
+    });
+
+
+
+function chat()
+{
+
+
+  
+window.location.href='../chat/chat.html';
+ 
+}
+
+var url='';
+$('#myservice').change(function()
+{
+    $.ajax({
+            url: httpaddress + 'enterprise/task/' + $("#myservice option:selected").val() + '/customer_access_url',
+            type: 'get',
+            data: {
+                'id':$("#myservice option:selected").val()
+            },
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            success: function (data) {
+                console.log(data.data.url);
+                url=data.data.url;
+            }
+    });
+
+
+
+
+
+
+    
+ $.ajax({
+            url: httpaddress + 'enterprise/task/' + $("#myservice option:selected").val() + '/customer_service',
+            type: 'get',
+            data: {
+                'id':$("#myservice option:selected").val()
+            },
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            success: function (data) {
+             if(data.data.customerService==null)
+             {
+                 alert("该任务暂时没有客服");
+                 var list='';
+                 document.getElementById('box').innerHTML = list;
+             }
+             else{
+
+                  console.log(data);
+                var username = [];
+                var phone = [];
+                var sex = [];
+                var headImage=[];
+                var id=[];
+                var  address=[];
+                var eduactionExperice=[];
+                var email=[]
+                for (var value in data.data.customerService) {
+                    var username1 = data.data.customerService[value].username;
+                    var phone1 = data.data.customerService[value].phone;
+                    var sex1 = data.data.customerService[value].sex;
+                    var headImage1=data.data.customerService[value].headImage;
+                    var idd=data.data.customerService[value].userId;
+                    var address1=data.data.customerService[value].address;
+                    var education=data.data.customerService[value].educationalExperience;
+                    var email1=data.data.customerService[value].email;
+                    username.push(username1);
+                    phone.push(phone1);
+                    sex.push(sex1);
+                    headImage.push(headImage1);
+                    id.push(idd);
+                    address.push(address1);
+                    eduactionExperice.push(education);
+                    email.push(email1);
+                }
+                var list = '';
+                for (var i = 0; i < data.data.customerService.length; i++) {
+                    list +=  "<img style='width:90px;height:90px;border-radius:50%;margin-top:10px' src="+ headImage[i]+">"+"<li  style='margin-left:114px;margin-top:-100px;'>" +'客服姓名：'+ username[i] + '<br />' +'联系方式：'+
+                       '<span style="color:red">' +phone[i]  +'</span><span style="padding-left:30%;">客服性别：'+sex[i]+'</span><br />'+'现居地址：<span style="color:blue">'+address[i]+'</span><span style="padding-left:19.5%">邮箱：<span style="color:blue">'+ email[i]+'</span></span>'+'<br />'+'<span >教育经历：<span style="color:red">'+eduactionExperice[i]+"</span>"+'<span style="margin-left:10%" >任务外链：<span style="color:red">'+url+"</span>"+"<button style='background:#5bc0de;border-radius:10%;border:none;float:right'>和我联系</button></span><img onclick='chat()'  style='float:right ' src="+"../images/电话.png"+">"+'<hr /><br /> <br />'+
+                        "</li>";  
+                }
+              document.getElementById('box').innerHTML = list;
+             }
+              
+            },
+            error:function()
+            {
+                alert("该任务暂时没有客服接单");
+            }
+        });
+
+
+
+
+
+}
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    </script>
+</body>
+
+</html>

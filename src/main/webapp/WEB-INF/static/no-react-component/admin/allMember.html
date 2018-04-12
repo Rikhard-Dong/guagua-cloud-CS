@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../easyui/jquery.min.js"></script>
+    <script src="../easyui/jquery.easyui.min.js"></script>
+    <script src="../easyui/plugins/jquery.datagrid.js"></script>
+    <script src="../easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" href="../easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" href="../easyui/themes/icon.css" />
+    <script src="../js/address.js"></script>
+    <title>Document</title>
+</head>
+<body style="margin: 1px;">
+        <table id="dg" title="用户管理查询查询" class="easyui-datagrid" fitColumns="true" pagination="true" rownumbers="true" fit="true"
+            toolbar="#tb">
+            <thead>
+                <tr>
+                </tr>
+            </thead>
+        </table>
+        <div id="tb">
+            <div>
+                <a href="javascript:openRoleAddDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>
+                <a href="javascript:openRoleModifyDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+                <a href="javascript:deleteRole()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+            </div>
+        </div>
+    
+        <div id="dlg" class="easyui-dialog" style="width: 570px;height: 350px;padding: 10px 20px" closed="true" buttons="#dlg-buttons">
+            <form id="fm" method="post">
+                <!-- <table cellspacing="5px;">
+                    <tr>
+                        <td>用户显示名字：</td>
+                        <td width="80%">
+                            <input type="text" id="roleName" name="name" class="easyui-validatebox" required="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>用户登录名：</td>
+                        <td width="80%">
+                            <input type="text" id="roleName" name="username" class="easyui-validatebox" required="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>单位ID：</td>
+                        <td width="80%">
+                            <input type="text" id="roleName" name="title" class="easyui-validatebox" required="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>用户类型：</td>
+                        <td width="80%">
+                            <input type="text" id="roleName" name="userType" class="easyui-validatebox" required="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>密码：</td>
+                        <td width="80%">
+                            <input type="text" id="roleName" name="password" class="easyui-validatebox" required="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>再次确认密码：</td>
+                        <td width="80%">
+                            <input type="text" id="roleName" name="password2" class="easyui-validatebox" required="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注：</td>
+                        <td width="80%">
+                            <input type="text" id="roleName" name="memo" class="easyui-validatebox" required="true" />
+                        </td>
+                    </tr>
+                </table> -->
+            </form>
+        </div>
+        <div id="dlg-buttons">
+            <a href="javascript:saveRole()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+            <a href="javascript:closeRoleSaveDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+        </div>
+        <div id="dlg2" class="easyui-dialog" style="width: 300px;height: 450px;padding: 10px 20px" closed="true" buttons="#dlg2-buttons">
+            <ul id="tree" class="easyui-tree"></ul>
+        </div>
+        <div id="dlg2-buttons">
+            <a href="javascript:saveAuth()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+            <a href="javascript:closeAuthDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+        </div>
+    </body>
+ <script>
+
+   $.ajax({
+                url: httpaddress + 'admin/user/member_user/list',
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                crossDomain: true,
+                data:{
+                  'page':1,
+                  'size':10
+                },
+                success: function (data) {
+            var a=data.data.users.list;
+            console.log(data);
+            var treeData1=[];
+            for(var value in a){
+               var treeData={
+                'ID':1,
+               'name':a[value].username,
+               'sex':a[value].sex,
+               'phone':a[value].phone,
+               'userType':a[value].type,
+               'memo':a[value].createTime
+
+            }; 
+            treeData1.push(treeData);
+            }
+            
+            $('#dg').datagrid('loadData', treeData1);
+
+                }
+
+
+   });
+
+
+        $(function () {
+            $("#dg").datagrid({
+                singleSelect: true,
+                columns: [
+
+                    [{
+                            title: '编号',
+                            field: 'ID',
+                            width: 100,
+                            checkbox: true, //这个checkbox:true 就表示让Id这一行显示为复选框的样式。  
+                        },
+                        {
+                            field: 'name',
+                            title: '用户姓名',
+                            width: 250
+                        },
+                        {
+                            field: 'sex',
+                            title: '用户性别',
+                            width: 250
+                        },
+                        {
+                            field: 'phone',
+                            title: '用户手机号',
+                            width: 250
+                        },
+                        {
+                            field: 'userType',
+                            title: '用户类型',
+                            width: 250,
+                   
+                        },
+                        {
+                            field: 'memo',
+                            title: '用户创建时间',
+                            width: 250
+
+                        }
+                    ]
+                ]
+            })
+
+
+        })
+
+
+function deleteRole()
+{
+    
+}
+
+
+
+
+
+
+</script>
+</html>

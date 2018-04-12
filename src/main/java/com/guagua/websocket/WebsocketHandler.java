@@ -44,6 +44,7 @@ public class WebsocketHandler implements WebSocketHandler {
         if (userInfo.getUserType().equals(UserInfo.USER_TYPE_MEMBER)) {
             Integer memberId = Integer.valueOf(userInfo.getUserId());
             memberSingleton.addOnlineMember(memberId);
+
             List<Integer> taskIds = taskEmploymentDao.getTaskIdsByMemberId(memberId);
             if (taskIds != null && taskIds.size() > 0) {
                 for (Integer taskId : taskIds) {
@@ -51,6 +52,9 @@ public class WebsocketHandler implements WebSocketHandler {
                 }
             }
         }
+
+
+        logger.info("member singleton get online members ====> {}", memberSingleton.getOnlineMembers());
     }
 
     // 处理信息
@@ -87,9 +91,9 @@ public class WebsocketHandler implements WebSocketHandler {
         users.remove(webSocketSession);
 
         // 移除单例中该用户和相关的任务管理
-        if (userInfo.getUserType() == UserInfo.USER_TYPE_MEMBER) {
+        if (userInfo.getUserType().equals(UserInfo.USER_TYPE_MEMBER)) {
             removeAboutMember(Integer.valueOf(userInfo.getUserId()));
-        }else if (userInfo.getUserType().equals(UserInfo.USER_TYPE_ANON)) {
+        } else if (userInfo.getUserType().equals(UserInfo.USER_TYPE_ANON)) {
             memberSingleton.removeCustomer(userInfo.getCsId());
         }
     }

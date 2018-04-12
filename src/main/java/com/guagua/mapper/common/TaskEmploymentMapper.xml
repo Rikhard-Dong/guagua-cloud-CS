@@ -16,7 +16,7 @@
 
     <update id="updateScore">
         UPDATE t_task_employment
-        SET `score` = #{score}
+        SET customer_avg_score = #{score}
         WHERE id = #{id}
     </update>
 
@@ -87,6 +87,13 @@
         SELECT t.*
         FROM t_task_employment e LEFT JOIN t_task t ON e.task_id = t.id
         WHERE e.member_id = #{memberId} AND e.status = 3
+    </select>
+
+    <select id="countNumByMemberAndStatus" resultType="java.lang.Integer">
+        select count(*) from t_task_employment where member_id = #{memberId}
+        <if test="status != null">
+            and `status` = #{status}
+        </if>
     </select>
 
 </mapper>

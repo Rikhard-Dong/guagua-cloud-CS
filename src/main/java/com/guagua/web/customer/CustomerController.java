@@ -1,10 +1,10 @@
 package com.guagua.web.customer;
 
 import com.guagua.bean.dto.ResultDTO;
+import com.guagua.bean.entity.member.SatisfactionEvaluation;
 import com.guagua.service.customer.CustomerService;
 import com.guagua.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * <p>
  * 顾客服务接口
  */
-@Controller
+@RestController
 @RequestMapping("/customer")
 public class CustomerController extends BaseController {
 
@@ -29,9 +29,10 @@ public class CustomerController extends BaseController {
      *
      * @param taskId task id
      */
-    @GetMapping("/access")
-    public void accessCustomer(@RequestParam("taskId") Integer taskId) {
-        return;
+    @GetMapping("/access/task/{taskId}")
+    public ResultDTO accessCustomer(@PathVariable("taskId") Integer taskId) {
+
+        return customerService.accessTask(taskId);
     }
 
     /**
@@ -41,9 +42,26 @@ public class CustomerController extends BaseController {
      * @return result dto
      */
     @GetMapping("/{taskId}/obtain_customer_service")
-    @ResponseBody
     public ResultDTO obtainCustomerService(@PathVariable("taskId") Integer taskId) {
 
         return customerService.obtainCustomerService(taskId);
+    }
+
+    /**
+     * 对客服进行评价
+     *
+     * @param taskId     task id
+     * @param memberId   member id
+     * @param evaluation evaluation
+     * @return result dto
+     */
+    @PostMapping("/{taskId}/evaluate/{memberId}")
+    public ResultDTO evaluateCS(@PathVariable("taskId") Integer taskId,
+                                @PathVariable("memberId") Integer memberId,
+                                SatisfactionEvaluation evaluation) {
+        evaluation.setMemberId(memberId);
+        evaluation.setTaskId(taskId);
+
+        return customerService.evaluateCS(evaluation);
     }
 }

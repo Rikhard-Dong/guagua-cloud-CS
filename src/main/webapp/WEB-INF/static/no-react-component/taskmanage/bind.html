@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/task-ing.css">
+    <link rel="stylesheet" href="../css/common2.css">
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="../css/editTable.css" type="text/css" rel="stylesheet" />
+    <script src="../js/address.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="header">
+        查看竞标记录
+    </div>
+    <ul id="box"></ul>
+
+    <table class="edtitable" id="tableid">
+        <thead>
+            <tr>
+                <th colspan="11" style="text-align:center">竞标人信息</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th style="text-align:center">竞标任务编号</th>
+                <th style="text-align:center">竞标人名称</th>
+                <th style="text-align:center">竞标人手机号码</th>
+                <th style="text-align:center">竞标人教育经历</th>
+                <th style="text-align:center">竞标人性别</th>
+                <th style="text-align:center">竞标状态</th>
+                <th style="text-align:center">竞标项目名</th>
+                <th style="text-align:center">竞标人现居住址</th>
+                <th style="text-align:center" class="del-col">操作一</th>
+                <th style="text-align:center" class="del-col">操作二</th>
+                <th style="text-align:center" class="del-col">操作三</th>
+
+            </tr>
+        </tbody>
+    </table>
+    <div id="dialogBg"></div>
+    <div id="dialog" class="animated" style="height:100%;width:40%;margin-left:-20%;margin-top:-20%;background-color:powderblue">
+        <img class="dialogIco" width="50" height="50" src="../images/ico.png" alt="" />
+        <div class="dialogTop">
+            <a href="javascript:;" class="claseDialogBtn">关闭</a>
+        </div>
+        <form action="" method="post" id="editForm">
+            <ul class="editInfos">
+                 试卷名称：<input type="text" id="question" style= "background-color:transparent " />
+                 <br />
+                 
+                 判断题问题：<input type="text" id="judgequestion1" style= "background-color:transparent ">
+                 
+                 <br />
+                 判断题答案：<input type="text" id="judgeanswer1" style= "background-color:transparent ">
+                 
+                 <br />
+                 判断题问题：<input type="text" id="judgequestion2" style= "background-color:transparent ">
+               
+                 <br />
+                 判断题答案：<input type="text" id="judgeanswer2" style= "background-color:transparent ">
+              
+                 <br />
+                 多选题问题：<input type="text" id="muliplequestion" style= "background-color:transparent ">
+                 <br/>
+              
+                 多选题答案：<input type="text" id="mulipleanswer" style= "background-color:transparent ">
+                 <br/>
+               
+                 单选题问题：<input type="text" id="singlequestion" style= "background-color:transparent ">
+                 <br/>
+               
+                 单选题答案：<input type="text" id="singleanswer" style= "background-color:transparent ">
+                 <br />
+             
+                 文字题问题：<input type="text" id="textquestion" style= "background-color:transparent ">
+                 <br/>
+                 文字题答案：<input type="text" id="textanswer" style= "background-color:transparent ">
+                 <br>
+                 <br>
+                 考卷分数：<select name="socre" id="score">
+                     <option value="1">1</option>
+                     <option value="2">2</option>
+                     <option value="3">3</option>
+                     <option value="4">4</option>
+                     <option value="5">5</option>
+                     <option value="6">6</option>
+                     <option value="7">7</option>
+                     <option value="8">8</option>
+                     <option value="9">9</option>
+                     <option value="10">10</option>
+                    </select>
+                <br>
+                <br>
+                <br>
+                考卷备注：<input type="text" id="remarks" />
+
+                <li>
+                    <input type="button" value="确认阅卷" class="submitBtn" id="update-btn" />
+                </li>
+            </ul>
+        </form>
+    </div>
+    <script>
+var sheetID='';
+
+
+
+
+
+
+
+  var w, h, className;
+  function getSrceenWH() {
+        w = $(window).width();
+        h = $(window).height();
+        $('#dialogBg').width(w).height(h);
+    }
+
+    window.onresize = function () {
+        getSrceenWH();
+    }
+    $(window).resize();
+          $(function () {
+        getSrceenWH();
+
+        //显示弹框
+        $('a').click(function () {
+            className = $(this).attr('class');
+            $('#dialogBg').fadeIn(300);
+            $('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
+        });
+
+        //关闭弹窗
+        $('.claseDialogBtn').click(function () {
+            $('#dialogBg').fadeOut(300, function () {
+                $('#dialog').addClass('bounceOutUp').fadeOut();
+            });
+        });
+    });
+        var memberId = '';
+        $.ajax({
+            url: httpaddress + 'enterprise/task/' + sessionStorage.getItem('bid') + '/applications',
+            type: 'get',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'taskid': sessionStorage.getItem('bid')
+            },
+            success: function (data) {
+
+                console.log(data.data.applications.list);
+                memberId = data.data.applications.list[0].memberId;
+                var taskName = [];
+                var memberName = [];
+                var memberPhone = [];
+                var statusDesc = [];
+                var status = [];
+                var id = [];
+                var taskId = [];
+                var experiencee = [];
+                var sex = [];
+                var address = [];
+                for (var value in data.data.applications.list) {
+                    var taskname = data.data.applications.list[value].taskName;
+                    var membername = data.data.applications.list[value].memberName;
+                    var phone = data.data.applications.list[value].phone;
+                    var statusdesc = data.data.applications.list[value].statusDesc;
+                    var status1 = data.data.applications.list[value].status;
+                    var idd = data.data.applications.list[value].id;
+                    var taskid = data.data.applications.list[value].taskId;
+                    var experience = data.data.applications.list[value].educationalExperience;
+                    var sexx = data.data.applications.list[value].sex;
+                    var addresss = data.data.applications.list[value].address;
+                    taskName.push(taskname);
+                    memberName.push(membername);
+                    statusDesc.push(statusdesc);
+                    status.push(status1);
+                    id.push(idd);
+                    taskId.push(taskid);
+                    memberPhone.push(phone);
+                    experiencee.push(experience);
+                    sex.push(sexx);
+                    address.push(addresss);
+                }
+
+
+                var list = '';
+
+                for (var i = 0; i < data.data.applications.list.length; i++) {
+                    list += '<tr id=' + id[i] + ' class=' + taskId[i] + '><td>' + taskId[i] + '</td><td>' +
+                        memberName[i] + '</td><td>' + memberPhone[i] + '</td><td>' + experiencee[i] +
+                        '</td><td>' + sex[i] + '</td><td>' +
+                        statusDesc[i] + '</td><td>' + taskName[i] + '</td><td>' + address[i] + '</td>' +
+                        '<td class="del-col">' +
+                        '<a  href="javascript:void(0);" id="addbtn" onclick="agree()" ><button  class="btn btn-info" ">同意</button></a></td>' +
+                        '<td class="del-col">' +
+                        '<a  href="javascript:void(0);" id="refusebtn" onclick="refuse()" ><button  class="btn btn-danger" ">拒绝</button></a></td><td class="del-col">' +
+                        '<a  href="javascript:void(0);" id="looktextbtn" onclick="looktest()" ><button  class="btn btn-success" ">查看问卷</button></a></td></tr>'
+                }
+                $("#tableid").append(list);
+            }
+        });
+
+        function looktest() {
+            className = $(this).attr('class');
+        $('#dialogBg').fadeIn(300);
+        $('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
+            $("tr td").click(function () {
+                var taskid = $(this).parent().attr('class');
+
+                $.ajax({
+                    url: httpaddress + 'enterprise/sheet/task/' + taskid + '/answerer/' + memberId,
+                    type: 'get',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    headers: {
+                        'Authorization': sessionStorage.getItem('cookie')
+                    },
+                    crossDomain: true,
+                    success: function (data) {
+                        console.log(data.data.sheet);
+                        sheetID=data.data.sheet.sheetId;
+                      
+                        $("#question").val(data.data.sheet.name);
+                        $("#judgequestion1").val(data.data.sheet.judgementQuestions[0].question);
+                        $("#judgequestion2").val(data.data.sheet.judgementQuestions[1].question);
+                        $("#judgeanswer1").val(data.data.sheet.judgementQuestions[0].answer);
+                        $("#judgeanswer2").val(data.data.sheet.judgementQuestions[1].answer);
+                        $("#muliplequestion").val(data.data.sheet.multipleQuestions[0].question);
+                        $("#mulipleanswer").val(data.data.sheet.multipleQuestions[0].remarks);
+                        $("#singlequestion").val(data.data.sheet.singleQuestions[0].question);
+                        $("#singleanswer").val(data.data.sheet.singleQuestions[0].answer);
+                        $("#textquestion").val(data.data.sheet.textQuestions[0].question);
+                        $("#textanswer").val(data.data.sheet.textQuestions[0].answer);
+                    }
+                });
+
+            });
+        }
+
+
+
+
+$("#update-btn").click(function()
+{
+    $.ajax({
+                    url: httpaddress + 'enterprise/sheet/' + sheetID + '/score',
+                    type: 'put',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    headers: {
+                        'Authorization': sessionStorage.getItem('cookie')
+                    },
+                    crossDomain: true,
+                    data:{
+                        'score':$("#score option:selected").val(),
+                        'remark':$("#remarks").val()
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        alert("更新成功");
+                        window.location.href='./bind.html'
+                    }
+    });
+
+
+}
+);
+
+
+
+        function agree() {
+            $("tr td").click(function () {
+                var applicationid = $(this).parent().attr('id');
+                var taskid = $(this).parent().attr('class');
+                sessionStorage.setItem('taskid', taskid);
+                console.log(sessionStorage.getItem('taskid'));
+                $.ajax({
+                    url: httpaddress + 'enterprise/task/' + taskid + '/application/agree/' +
+                        applicationid,
+                    type: 'put',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    headers: {
+                        'Authorization': sessionStorage.getItem('cookie')
+                    },
+                    crossDomain: true,
+                    data: {
+                        'application': applicationid,
+                        'taskId': taskid
+                    },
+                    success: function (data) {
+                        var data1 = eval("(" + data + ")");
+                        alert("处理成功");
+                        window.location.href = './task-ing.html'
+                    }
+                });
+
+            });
+        }
+
+        function refuse() {
+            $("ul li").click(function () {
+                var applicationid = $(this).parent().attr('id');
+                var taskid = $(this).parent().attr('class');
+                $.ajax({
+                    url: httpaddress + 'enterprise/task/' + taskid + '/application/refuse/' +
+                        applicationid,
+                    type: 'put',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    headers: {
+                        'Authorization': sessionStorage.getItem('cookie')
+                    },
+                    crossDomain: true,
+                    data: {
+                        'application': applicationid,
+                        'taskId': taskid
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        alert("处理成功");
+                        window.location.href = './task-ing.html'
+                    }
+                });
+            });
+
+        }
+    </script>
+</body>
+
+</html>

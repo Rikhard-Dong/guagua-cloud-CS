@@ -3,6 +3,7 @@ package com.guagua.dao.common;
 import com.guagua.bean.entity.common.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface UserDao {
@@ -44,9 +45,9 @@ public interface UserDao {
     /**
      * 更新用户名
      *
-     * @param userId
-     * @param username
-     * @return
+     * @param userId   user id
+     * @param username user name
+     * @return result
      */
     Integer updateUsernameByUserId(@Param("userId") Integer userId,
                                    @Param("username") String username);
@@ -54,9 +55,9 @@ public interface UserDao {
     /**
      * 更新用户性别
      *
-     * @param userId
-     * @param sex
-     * @return
+     * @param userId user id
+     * @param sex    sex
+     * @return result
      */
     Integer updateSexByUserId(@Param("userId") Integer userId,
                               @Param("sex") Integer sex);
@@ -64,9 +65,9 @@ public interface UserDao {
     /**
      * 更新用户qq
      *
-     * @param userId
-     * @param qq
-     * @return
+     * @param userId user id
+     * @param qq     qq
+     * @return result
      */
     Integer updateQQByUserId(@Param("userId") Integer userId,
                              @Param("qq") String qq);
@@ -74,9 +75,9 @@ public interface UserDao {
     /**
      * 更新用户微信
      *
-     * @param userId
-     * @param wechat
-     * @return
+     * @param userId user id
+     * @param wechat wechat
+     * @return result
      */
     Integer updateWechatByUserId(@Param("userId") Integer userId,
                                  @Param("wechat") String wechat);
@@ -84,9 +85,9 @@ public interface UserDao {
     /**
      * 更新用户地址
      *
-     * @param userId
-     * @param address
-     * @return
+     * @param userId  user id
+     * @param address address
+     * @return result
      */
     Integer updateAddressByUserId(@Param("userId") Integer userId,
                                   @Param("address") String address);
@@ -94,9 +95,9 @@ public interface UserDao {
     /**
      * 更新用户描述
      *
-     * @param userId
-     * @param description
-     * @return
+     * @param userId      user id
+     * @param description description
+     * @return result
      */
     Integer updateDescriptionByUserId(@Param("userId") Integer userId,
                                       @Param("description") String description);
@@ -104,9 +105,9 @@ public interface UserDao {
     /**
      * 更新用户教育经历
      *
-     * @param userId
-     * @param educational
-     * @return
+     * @param userId      user id
+     * @param educational educational
+     * @return result
      */
     Integer updateEducationalByUserId(@Param("userId") Integer userId,
                                       @Param("educational") String educational);
@@ -183,10 +184,42 @@ public interface UserDao {
     /**
      * 根据用户类型查找用户
      *
-     * @param type
-     * @return
+     * @param type type
+     * @return list of user type
      */
     List<User> findByType(Integer type);
 
+
+    /**
+     * statistical user number by [startTime, endTime]
+     *
+     * @param startTime start time
+     * @param endTime   end time
+     * @return the number of user
+     */
+    Integer countUserNum(@Param("startTime") Date startTime,
+                         @Param("endTime") Date endTime);
+
+    /**
+     * statistical user number by type and time in [startTime, endTime]
+     *
+     * @param type      type
+     * @param startTime start time
+     * @param endTime   end time
+     * @return the number of type user
+     */
+    Integer countUserNumByUserType(@Param("type") Integer type,
+                                   @Param("startTime") Date startTime,
+                                   @Param("endTime") Date endTime);
+
+    /**
+     * count is delete
+     *
+     * @param startTime start time
+     * @param endTime   end time
+     * @return the number of is already delete user
+     */
+    Integer countIsDeleteUserNum(@Param("startTime") Date startTime,
+                                 @Param("endTime") Date endTime);
 
 }

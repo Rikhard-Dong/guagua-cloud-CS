@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+	<style type="text/css">
+	
+	</style>
+</head>
+<body>
+<div id="wind">
+    <div id="plane" class="front">  
+             <label>生成试卷的规则</label>
+             <br />
+             <br />
+			<label>试卷的题库:</label><select style="width:214px;height:34px;" id="taskid"></select>
+            <br />
+            <br />
+			<label>规则的标题:</label><input type="text" placeholder="请输入关键词" id="title"/>
+            <br />
+            <br />
+            <label>规则的简要:</label><input type="text" placeholder="请输入关键词" id="description"/>
+            <br />
+            <br />
+			<label>单选题数量:</label><select style="width:214px;height:34px;" id="singlenum">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="0">0</option>
+            </select>
+        <br />
+        <br />
+		<label>多选题数量:</label><select style="width:214px;height:34px;" id="kindnum">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="0">0</option>
+            </select>
+        <br />
+        <br />
+		<label>判断题数量:</label><select style="width:214px;height:34px;" id="ornotnum">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="0">0</option>
+            </select>
+        <br />
+        <br />
+		<label>文字题数量:<select style="width:214px;height:34px;" id="wordnum">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="0">0</option>
+            </select>
+	
+        <br />
+  
+        <button class="send" id="ok" style="background-color:wheat"> 生成 </button> <br/>
+
+        <div id="plane_bottom">
+            <a href="javascript:;" id="plane_close"> X </a>
+        </div>
+    </div>
+ 
+    <div id="wind_container" class="beginning">
+        <div id="left-wing">
+            <div class="top_left curvable"> </div>
+            <div class="bottom_left curvable"> </div>
+            <div class="wing wing1"></div>
+            <div class="wing wing2"></div>
+        </div>
+ 
+        <div id="right-wing">
+            <div class="top_right curvable"> </div>
+            <div class="bottom_right curvable"> </div>
+            <div class="wing wing3"></div>
+            <div class="wing wing4"></div>
+        </div>
+ 
+    </div>
+ 
+</div>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/test.js"></script>
+<script src="../js/address.js"></script>
+<script type="text/javascript">
+	$(function(){
+    // 纸飞机
+	    // 起飞
+	    $('.send').click(function() {
+	        // 步骤一：隐藏面板、显示飞机、完成折叠效果
+	        setTimeout(function() {
+	            // 隐藏信息面板
+	            $('#plane').removeClass('front');
+	            // 翻转至正面
+	            $('#wind_container').removeClass('beginning');
+	            // 折叠效果（左翼、右翼）
+	            $('.curvable').addClass('curved');
+	            // 颜色变换
+	            $("body").css({"background-color": "#54575A"});
+	            // 步骤二：平放飞机
+	            setTimeout(function() {
+	                $('#wind_container').addClass('hover');
+	                $("body").css({"background-color": "#AD8BD8"});
+	                // 步骤三：飞机后退助跑
+	                setTimeout(function() {
+	                    $('#wind_container').addClass('fly_away_first');
+	                    $("body").css({"background-color": "#6E99C4"});
+	                    // 步骤四：飞机向前飞翔至消失
+	                    setTimeout(function() {
+	                        $('#wind_container').addClass('fly_away');
+	                        $("body").css({"background-color": "#3F9BFF"});
+	                        // 步骤五：飞机复位
+	                        setTimeout(function(){
+	                            $('#plane').addClass('front');
+	                            $('#wind_container').removeClass('fly_away fly_away_first hover').addClass('beginning');
+	                            $('.curvable').removeClass('curved');
+	                            $("body").css({"background-color": "#000"});
+	                        },3000);
+	                    }, 600);
+	                }, 2000);
+	            }, 2800);
+	        }, 200);
+	    });
+	    // 关闭弹窗
+	    $("#plane_close").click(function(){
+	        $("#wind").fadeOut(200);
+	    });
+	 
+    });
+    
+    $.ajax({                                                           //查询题库简易信息的异步请求
+        url: httpaddress + 'enterprise/question_bank/list',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        success: function (data) {
+            console.log(data.data.banks.list);
+            var id=[];
+            var bankname=[];
+           
+            for(var  value in  data.data.banks.list)
+            {
+            idd=data.data.banks.list[value].id;
+            banknamee=data.data.banks.list[value].bankName;
+            id.push(idd);
+            bankname.push(banknamee);
+            }
+        
+         for(var i=0;i<data.data.banks.list.length;i++)
+         {
+            $("#taskid").append("<option value='" + id[i] + "'>" + bankname[i] + "</option>");
+         }
+        
+        }
+    });
+
+
+
+$("#ok").click(function(){
+    $.ajax({                                                           //生成试卷规则
+        url: httpaddress + 'enterprise/question_bank/'+$("#taskid option:selected").val()+'/rule/create',
+        type: 'post',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        data:{
+            'bankId':$("#taskid option:selected").val(),
+            'name':$("#title").val(),
+            'description':$("#description").val(),
+            'singleNum':$("#singlenum").val(),
+            'multipleNum':$("#kindnum").val(),
+            'judgementNum':$("#ornotnum").val(),
+            'textNum':$("#wordnum").val(),
+        },
+        success: function (data) {
+console.log(data);
+        }
+    });
+
+
+});
+</script>
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.guagua.dao.common;
 import com.guagua.bean.entity.common.Task;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,15 +57,15 @@ public interface TaskDao {
     /**
      * 查询所有
      *
-     * @return
+     * @return list of all task
      */
     List<Task> findAll();
 
     /**
      * 查询某种状态的所有任务
      *
-     * @param status
-     * @return
+     * @param status status
+     * @return list of task
      */
     List<Task> findByStatus(@Param("status") Integer status);
 
@@ -72,7 +73,7 @@ public interface TaskDao {
      * 企业查询该企业发布的任务
      *
      * @param enterpriseId 企业id
-     * @return
+     * @return list of task
      */
     List<Task> findByEnterpriseId(@Param("enterpriseId") Integer enterpriseId);
 
@@ -89,18 +90,52 @@ public interface TaskDao {
     /**
      * 会员用户查询所有状态为1的任务
      *
-     * @return
+     * @return list of members
      */
     List<Task> findAllByMember();
 
     /**
      * 查询详细信息
      *
-     * @param id
-     * @return
+     * @param id id
+     * @return task
      */
     Task findByTaskId(Integer id);
 
+    /**
+     * @param startTime start time
+     * @param endTime   end time
+     * @return num of task
+     */
+    Integer countNum(@Param("startTime") Date startTime,
+                     @Param("endTime") Date endTime);
 
 
+    /**
+     * @param status    status
+     * @param startTime start time
+     * @param endTime   end time
+     * @return num of task by type
+     */
+    Integer countNumByStatus(@Param("status") Integer status,
+                             @Param("startTime") Date startTime,
+                             @Param("endTime") Date endTime);
+
+    /**
+     * 统计企业发布的任务数量
+     *
+     * @param userId user id
+     * @return result
+     */
+    Integer countNumByUserId(@Param("userId") Integer userId);
+
+    /**
+     * 根据任务状态统计企业发布的不同状态的任务
+     *
+     * @param userId user id
+     * @param status status
+     * @return result
+     */
+    Integer countNumByStatusAndUserId(@Param("userId") Integer userId,
+                                      @Param("status") Integer status);
 }

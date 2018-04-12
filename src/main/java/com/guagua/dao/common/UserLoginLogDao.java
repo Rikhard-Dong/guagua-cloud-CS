@@ -28,5 +28,18 @@ public interface UserLoginLogDao {
      * select
      *************************************************/
 
+    /**
+     * user login log
+     *
+     * @return list of all user login logs
+     */
     List<UserLoginLog> findAll();
+
+    /**
+     * list user login log by user id
+     *
+     * @param userId user id
+     * @return list of user login log
+     */
+    List<UserLoginLog> findByUserId(Integer userId);
 }

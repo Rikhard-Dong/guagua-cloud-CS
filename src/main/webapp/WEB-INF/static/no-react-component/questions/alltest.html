@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link type="text/css" rel="stylesheet" href="../css/alltest.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../js/address.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="header" style="text-align:center">
+        <select id="ID" style="font-size:1.4em;width:160px;height:40px;border-radius:25px;border:2px solid #a1a1a1;" onchange="change()">
+        </select>
+    </div>
+
+        <ul id="UL"></ul>
+            
+       
+    </div>
+
+</body>
+<script>
+    function change() {
+        $.ajax({ //查询题库简易信息的异步请求
+            url: httpaddress + 'enterprise/question_bank/' + $("#ID option:selected").val() +
+                '/examination/list/manual',
+            type: 'get',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'bankId': $("#ID option:selected").val(),
+                'page': 1,
+                'size': 10
+            },
+            success: function (data) {
+             
+              var name=[];
+              var description=[];
+              var creatorName=[];
+              var createTime=[];
+              var judgementQuestions=[];
+              var multipleQuestions=[];
+              var singleQuestions=[];
+              var textQuestions=[];
+              var status=[];
+              var type=[];
+              for(var value in data.data.papers.list)
+              {
+                 var namee=data.data.papers.list[value].name;
+                 var descriptionn=data.data.papers.list[value].description; 
+                 var creatorNamee=data.data.papers.list[value].creatorName;
+                 var judgementQuestion=data.data.papers.list[value].judgementQuestions;
+                 var multipleQuestion=data.data.papers.list[value].multipleQuestions;
+                 var singleQuestion=data.data.papers.list[value].singleQuestions;
+                 var textQuestion=data.data.papers.list[value].textQuestions;
+                 var stauss=data.data.papers.list[value].status;
+                 var typee=data.data.papers.list[value].type;
+                 var createTimee=data.data.papers.list[value].createTime;
+                 name.push(namee);
+                 description.push(descriptionn);
+                 creatorName.push(creatorNamee);
+                 judgementQuestions.push(judgementQuestion);
+                 multipleQuestions.push(multipleQuestion);
+                 singleQuestions.push(singleQuestion);
+                 textQuestions.push(textQuestion);
+                 status.push(stauss);
+                 type.push(typee);
+                 createTime.push(createTimee);
+              }
+        console.log( data.data.papers.list);
+        
+             var single=[];
+             var singleItem=[];
+             var multiple=[];
+             var multipleItem=[];
+             var judgement1=[];
+             var judgement2=[];
+             var  jremarks1 =[];
+             var  jremarks2 =[]
+              var text=[];
+
+
+for(var l=0;l<textQuestions.length;l++)
+{
+    if(textQuestions[l].length>=1)
+    {
+        t=textQuestions[l][0].question;
+        text.push(t);
+    }
+    else{
+        text.push('');
+    }
+}
+
+for(var k=0;k<judgementQuestions.length;k++)
+{
+        if(judgementQuestions[k].length>=1)
+        {
+                      j=judgementQuestions[k][0].question;                                           
+                      judgement1.push(j);                                    //问题
+                      jj=judgementQuestions[k][0].remarks;
+                      jremarks1.push(jj);
+
+                      j1=judgementQuestions[k][1].question;
+                      judgement2.push(j1);
+                      jj1=judgementQuestions[k][1].remarks;
+                      jremarks2.push(jj1);
+                   
+        }
+        else{
+                judgement1.push('');
+                judgement2.push(' ');
+                jremarks1.push(' ');
+                jremarks2.push(' ');
+        }
+
+}
+
+
+
+       for(var j=0;j<singleQuestions.length;j++)
+       {
+           if(singleQuestions[j].length==1)
+           {
+                s=singleQuestions[j][0].question;
+                single.push(s);
+                singleItem.push(singleQuestions[j][0].items);
+           }
+           else{
+               single.push(' ');
+               singleItem.push([ ]);
+           }
+          
+       } 
+       for(var j=0;j<multipleQuestions.length;j++)
+       {
+           if(multipleQuestions[j].length==1)
+           {
+                s=multipleQuestions[j][0].question;
+                multiple.push(s);
+                multipleItem.push(multipleQuestions[j][0].items);
+           }
+           else{
+               multiple.push(' ');
+               multipleItem.push([ ]);
+           }
+          
+       } 
+
+       var singlea1=[];
+       var singlea2=[];
+       var singlea3=[];
+       var multiple1=[];
+       var multiple2=[];
+       var multiple3=[];
+       var multiple4=[];
+
+          for(var i=0;i<singleQuestions.length;i++)
+          {
+                if(singleItem[i].length >=1)
+                {
+                  
+                       singlea11=singleItem[i][0].content
+                       singlea1.push(singlea11);    
+                   
+                }  
+                else{
+                    singlea1.push('');
+                }             
+          } 
+
+          for(var i=0;i<multipleQuestions.length;i++)
+          {
+                if(multipleItem[i].length >=1)
+                {
+                  
+                       multiple11=multipleItem[i][0].content
+                       multiple1.push(multiple11);   
+                   
+                }  
+                else{
+                    multiple1.push('');
+                }             
+                
+
+          }   
+          
+                 for(var i=0;i<singleQuestions.length;i++)
+          {
+                if(singleItem[i].length >=1)
+                {
+                  
+                       singlea11=singleItem[i][1].content
+                       singlea2.push(singlea11);    
+                   
+                }  
+                else{
+                    singlea2.push('');
+                }             
+          } 
+
+      for(var i=0;i<multipleQuestions.length;i++)
+          {
+                if(multipleItem[i].length >=1)
+                {
+                  
+                       multiple11=multipleItem[i][1].content
+                       multiple2.push(multiple11);   
+                   
+                }  
+                else{
+                    multiple2.push('');
+                }             
+            
+          }   
+          for(var i=0;i<singleQuestions.length;i++)
+          {
+                if(singleItem[i].length >=1)
+                {
+                  
+                       singlea11=singleItem[i][2].content
+                       singlea3.push(singlea11);     
+                }  
+                else{
+                    singlea3.push('');
+                }             
+          } 
+          for(var i=0;i<multipleQuestions.length;i++)
+          {
+                if(multipleItem[i].length >=1)
+                {
+                  
+                       multiple11=multipleItem[i][2].content
+                       multiple3.push(multiple11);   
+                   
+                }  
+                else{
+                    multiple3.push('');
+                }             
+            
+          }   
+          for(var i=0;i<multipleQuestions.length;i++)
+          {
+                if(multipleItem[i].length >=1)
+                {
+                  
+                       multiple11=multipleItem[i][3].content
+                       multiple4.push(multiple11);   
+                   
+                }  
+                else{
+                    multiple4.push('');
+                }             
+          }   
+
+
+
+              var list='';
+              for(var i=0;i<data.data.papers.list.length;i++)
+              {
+                  list+= '<div class="container"><li><div class="receipt"><span class="receipt__title">试卷名字:'+name[i]+'</span>'+'<br /><span class="receipt__subtitle">试卷描述：'+description[i]+'</span>'+'<br />'+'<span class="receipt__subtitle">试卷的生成时间：'+createTime[i]+'</span>'+'<br />'+'<span class="receipt__subtitle">试卷的创作人：'+creatorName[i]
+                    +'</span>'+'<br /><span class="receipt__subtitle">试卷的类型：'+type[i]+'</span><br /><span class="receipt__subtitle">试卷的状态：'+status[i]+'</span>'+'<br />'+'<span class="receipt__subtitle">单选题问题:'+single[i]+'</span>'+'<br/><span class="receipt__subtitle">答案一：'+ singlea1[i]+'</span><span class="receipt__subtitle">答案二：'+ singlea2[i]+'</span><span class="receipt__subtitle">答案三：'+ singlea3[i]+'</span>'+
+                    '<br /><span class="receipt__subtitle">多选题问题：'+multiple[i]+'</span><br /><span class="receipt__subtitle">答案一:'+ multiple1[i]+'</span><span class="receipt__subtitle">答案二：'+multiple2[i]+'</span><span class="receipt__subtitle">答案三：'+multiple3[i]+'</span><span class="receipt__subtitle">答案四：'+multiple4[i]+'</span>'+'<br/>'+'<span  class="receipt__subtitle">判断题一：'+ judgement1[i]+''+jremarks1[i]+'</span>'+
+                    '<br />'+'<span class="receipt__subtitle">正确</span>'+'<span class="receipt__subtitle">错误</span><br /><span class="receipt__subtitle">判断题二：'+judgement2[i]+''+jremarks2[i]+'</span><br />'+'<span class="receipt__subtitle">正确</span>'+'<span class="receipt__subtitle">错误</span><br /><span class="receipt__subtitle">语言描述题：'+text[i]+'</span>'+'</div></div></li>'
+              }
+               document.getElementById('UL').innerHTML = list;
+            }
+        });
+
+
+    }
+
+
+
+
+
+
+
+
+    $.ajax({ //查询题库简易信息的异步请求
+        url: httpaddress + 'enterprise/question_bank/list',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        success: function (data) {
+            console.log(data.data.banks.list);
+            var id = [];
+            var bankname = [];
+
+            for (var value in data.data.banks.list) {
+                idd = data.data.banks.list[value].id;
+                banknamee = data.data.banks.list[value].bankName;
+                id.push(idd);
+                bankname.push(banknamee);
+            }
+
+            for (var i = 0; i < data.data.banks.list.length; i++) {
+                $("#ID").append("<option value='" + id[i] + "'>" + bankname[i] + "</option>");
+            }
+
+        }
+    });
+</script>
+
+</html>

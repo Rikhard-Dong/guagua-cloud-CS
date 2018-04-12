@@ -17,8 +17,8 @@ public interface CustomerInfoDao {
     /**
      * 插入一条
      *
-     * @param customer
-     * @return
+     * @param customer customer
+     * @return  result
      */
     Integer insertOne(CustomerInfo customer);
 

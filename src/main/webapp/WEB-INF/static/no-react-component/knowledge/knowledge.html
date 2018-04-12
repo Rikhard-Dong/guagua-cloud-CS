@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/knowledge.css">
+    <link rel="stylesheet" href="../css/common2.css">
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../js/address.js"></script>
+    <script src="../js/jquery.pager.js"></script>
+
+</head>
+
+<body>
+    <div id="header">任务知识库</div>
+    <div id="function">
+        <button type="button" class="btn btn-info">添加知识库</button>
+        <div id="search">修改日期:
+            <input type="date" value="2018-09-24" style="margin-left:20px;background:rgba(248,248,248,0.3);border:none" />---
+            <input type="date" value="2018-09-24" style="background:rgba(248,248,248,0.3);border:none" />
+            <input type="text" placeholder="关键词搜索" style="width:100px;background:rgba(248,248,248,0.3);border:none">
+        </div>
+    </div>
+    <div id="item">
+        <div id="content">
+            <ul class="ul" id="ul" class="c1" style="line-height:30px">
+            </ul>
+        </div>
+    </div>
+    <div id="pager"></div>
+    <div id="dialogBg"></div>
+    <div id="dialog" class="animated" style="height:80%;width:40%;margin-left:-20%;margin-top:-20%;background: url('../images/sea.png');background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;background-repeat: no-repeat;">
+        <img class="dialogIco" width="50" height="50" src="../images/ico.png" alt="" />
+        <div class="dialogTop">
+            <a href="javascript:;" class="claseDialogBtn">关闭</a>
+        </div>
+        <form action="" method="post" id="editForm">
+            <ul class="editInfos">
+                <li>
+                    <label>
+                        <font color="#ff0000">* </font>标题：
+                        <br />
+                        <input type="text" name="" required value="" id="title1" class="ipt"  style="background:rgba(248,248,248,0.3);border:none" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <font color="#ff0000">* </font>绑定任务：
+                        <br />
+                        <select type="select"  name="" required value="" id="taskid" class="ipt"  style="width:225px;background:rgba(248,248,248,0.3);border:none"></select>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <font color="#ff0000">* </font>描述：
+                        <textarea class='form-control' name='test' id="description1" rows='4' cols="50"  style="background:rgba(248,248,248,0.3);border:none"></textarea>
+                    </label>
+                </li>
+                <!-- <li><label><font color="#ff0000">* </font>地址：<input type="text" name="" required value="" class="ipt" /></label></li> -->
+                <li>
+                    <input type="button" value="确认提交" class="submitBtn" id="update-btn" />
+                </li>
+            </ul>
+        </form>
+    </div>
+
+</body>
+
+<script type="text/javascript">
+    var pagea;
+
+
+    $(document).ready(function () {
+        $.ajax({
+            url: httpaddress + 'knowledge_base/list',
+            type: 'get',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            data: {
+                'page': 1,
+                'size': 3
+            },
+            success: function (data) {
+                console.log(data.data.info.list);
+                pagea = data.data.info.navigatepageNums.length;
+                var id = [];
+                var time = [];
+                var name = [];
+                var description = [];
+                var creator = [];
+                for (var value in data.data.info.list) {
+                    idd = data.data.info.list[value].id;
+                    timee = data.data.info.list[value].createTime;
+                    namee = data.data.info.list[value].name;
+                    descriptionn = data.data.info.list[value].description;
+                    creatorr = data.data.info.list[value].creator;
+                    id.push(idd);
+                    time.push(timee);
+                    name.push(namee);
+                    description.push(descriptionn);
+                    creator.push(creatorr);
+                }
+
+                var list = '';
+                for (var j = 0; j < data.data.info.list.length; j++) {
+                    list += '<li  id=" ' + id[j] + '">' + '知识库名字：' +
+                        name[j] +
+                        '<span style="float:right">知识库创建时间:' + time[j] + '</span>' +
+                        '<br />' + '知识库描述:' +
+                        description[j] + '<br/>' + '知识库创建者：<span style="color:red">' + creator[j] +
+                        '</span>' +
+                        '<a href="./item.html" style="margin-left:60%" onclick="Detail()"><button class="btn btn-info">详情</button></a>' +
+                        '|' +
+                        '<a  href="javascript:void(0);" onclick="Delete()" ><button class="btn btn-danger">删除</button></a>' +
+                        '|' +
+                        '<a id="a" href="javascript:void(0)" onclick="Update()"><button class="btn btn-success" >更新</button></a>' +
+                        '<hr  style="height:1px;border:none;border-top:1px solid #555555;"  />' +
+                        '</li>'
+                }
+
+                document.getElementById('ul').innerHTML = list;
+            }
+        });
+    });
+    $("button").click(function () {
+        window.location.href = "../knowledge/addknowleage.html"
+    });
+
+    var w, h, className;
+    var id = "";
+
+    function getSrceenWH() {
+        w = $(window).width();
+        h = $(window).height();
+        $('#dialogBg').width(w).height(h);
+    }
+
+    window.onresize = function () {
+        getSrceenWH();
+    }
+    $(window).resize();
+
+    $(function () {
+        getSrceenWH();
+
+        //显示弹框
+        $('a').click(function () {
+            className = $(this).attr('class');
+            $('#dialogBg').fadeIn(300);
+            $('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
+        });
+
+        //关闭弹窗
+        $('.claseDialogBtn').click(function () {
+            $('#dialogBg').fadeOut(300, function () {
+                $('#dialog').addClass('bounceOutUp').fadeOut();
+            });
+        });
+    });
+
+
+
+
+    PageClick = function (pageclickednumber) {
+        $("#pager").pager({
+            pagenumber: pageclickednumber,
+            pagecount: pagea,
+            buttonClickCallback: PageClick
+        })
+
+        $.ajax({
+            url: httpaddress + 'knowledge_base/list',
+            type: 'get',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            data: {
+                'page': pageclickednumber,
+                'size': 3
+            },
+            success: function (data) {
+
+                console.log(data.data.info.list);
+                pagea = data.data.info.navigatepageNums.length;
+                var id = [];
+                var time = [];
+                var name = [];
+                var description = [];
+                var creator = [];
+                for (var value in data.data.info.list) {
+                    idd = data.data.info.list[value].id;
+                    timee = data.data.info.list[value].createTime;
+                    namee = data.data.info.list[value].name;
+                    descriptionn = data.data.info.list[value].description;
+                    creatorr = data.data.info.list[value].creator;
+                    id.push(idd);
+                    time.push(timee);
+                    name.push(namee);
+                    description.push(descriptionn);
+                    creator.push(creatorr);
+                }
+
+                var list = '';
+                for (var j = 0; j < data.data.info.list.length; j++) {
+                    list += '<li  id=" ' + id[j] + '">' + '知识库名字：' +
+                        name[j] +
+                        '<span style="float:right">知识库创建时间:' + time[j] + '</span>' +
+                        '<br />' + '知识库描述:' +
+                        description[j] + '<br/>' + '知识库创建者：<span style="color:red">' + creator[j] +
+                        '</span>' +
+                        '<a href="./item.html" style="margin-left:60%" onclick="Detail()"><button class="btn btn-info">详情</button></a>' +
+                        '|' +
+                        '<a  href="javascript:void(0);" onclick="Delete()" ><button class="btn btn-danger">删除</button></a>' +
+                        '|' +
+                        '<a id="a" href="javascript:void(0)" onclick="Update()"><button class="btn btn-success" >更新</button></a>' +
+                        '<hr  style="height:1px;border:none;border-top:1px solid #555555;"  />' +
+                        '</li>'
+                }
+                document.getElementById('ul').innerHTML = list;
+            }
+        });
+    }
+    $(function () { //分页
+        $("#pager").pager({
+            pagenumber: 1,
+            pagecout: pagea,
+            buttonClickCallback: PageClick
+        });
+    })
+
+
+    function Detail() {
+        $("ul li").click(function () {
+            var detail = $(this).attr('id');
+            sessionStorage.setItem('detail', detail);             //获取知识库具体id的session
+            console.log(sessionStorage.getItem('detail'));
+        });
+    }
+
+    function Update() {
+        className = $(this).attr('class');
+        $('#dialogBg').fadeIn(300);
+        $('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
+
+        $.ajax({ //绑定任务的异步请求
+            url: httpaddress + 'enterprise/task/query',
+            type: 'get',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'page': 1,
+                'size': 30
+            },
+            success: function (data) {
+                console.log(data.data.tasks.list);
+                var id = [];
+                var title = [];
+                for (var value in data.data.tasks.list) {
+                    var taskidd = data.data.tasks.list[value].id;
+                    var titlee = data.data.tasks.list[value].title;
+                    id.push(taskidd);
+                    title.push(titlee);
+                }
+                for (var i = 0; i < data.data.tasks.list.length; i++) {
+                    $("#taskid").append("<option value='" + id[i] + "'>" + title[i] + "</option>");
+                }
+            }
+        });
+
+        $("ul li").click(function () {
+            var idd = $(this).attr('id');
+            $.ajax({
+                url: httpaddress + 'knowledge_base/query/' + idd,
+                type: 'get',
+                data: {
+                    'id': idd
+                },
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                success: function (data) {
+                    $("#title1").val(data.data.base.name);
+                    $("#description1").val(data.data.base.description);
+                }
+            });
+            $('#update-btn').click(
+                function () {
+                    console.log(idd + "aiaiiaiiaiai")
+                    $.ajax({
+                        url: httpaddress + 'knowledge_base/update/' + idd,
+                        type: 'put',
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        crossDomain: true,
+                        headers: {
+                            'Authorization': sessionStorage.getItem('cookie')
+                        },
+                        data: {
+                            'id': idd,
+                            'name': $("#title1").val(),
+                            'description': $("#description1").val()
+                        },
+                        success: function (data) {
+                            alert('更新成功');
+                            window.location.href = './knowledge.html'
+                        }
+                    });
+                    $.ajax({
+                        url: httpaddress + 'enterprise/task/' + $("#taskid option:selected").val() +
+                            '/bind/knowledge/' + idd,
+                        type: 'post',
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        crossDomain: true,
+                        headers: {
+                            'Authorization': sessionStorage.getItem('cookie')
+                        },
+                        data: {
+                            'knowledgeId': idd,
+                            'taskId': $("#taskid option:selected").val()
+
+                        },
+                        success: function (data) {
+                            console.log(data);
+                        }
+                    });
+                });
+        });
+    }
+
+
+    function Delete() {
+        $("ul li").click(function()
+    {{
+          var deleteID=$(this).attr('id');
+          $.ajax({
+            url: httpaddress + 'knowledge_base/delete/' + deleteID,
+            type: 'delete',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            data: {
+                'id': deleteID
+            },
+            success: function (data) {
+                console.log(data);
+         
+                window.location.href = './knowledge.html';
+            }
+        });
+    }});
+      
+    }
+</script>
+
+</html>

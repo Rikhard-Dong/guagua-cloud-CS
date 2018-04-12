@@ -7,6 +7,19 @@
         INSERT INTO t_role_permission (role_id, permission_id) VALUES (#{roleId}, #{permissionId})
     </insert>
 
+    <insert id="insertBatch">
+        INSERT into t_role_permission (role_id, permission_id)
+        VALUES
+        <foreach collection="list" item="rolePermission" index="index" separator=",">
+            (#{rolePermission.roleId}, #{rolePermission.permissionId})
+        </foreach>
+    </insert>
+
+    <delete id="deleteByRoleAndPermission">
+        DELETE FROM t_role_permission
+        WHERE role_id = #{roleId} AND permission_id = #{permissionId}
+    </delete>
+
     <select id="findAllPermissionByRoleId" resultType="com.guagua.bean.entity.common.Permission">
         SELECT p.*
         FROM (t_role r LEFT JOIN t_role_permission rp ON r.id = rp.role_id) LEFT JOIN t_permission p

@@ -12,4 +12,11 @@
         FROM t_user_login_log
     </select>
 
+    <select id="findByUserId" resultType="com.guagua.bean.entity.common.UserLoginLog">
+        SELECT *
+        FROM t_user_login_log
+        WHERE user_id = #{userId}
+        ORDER BY login_time DESC
+    </select>
+
 </mapper>

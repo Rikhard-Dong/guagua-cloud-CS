@@ -1,0 +1,128 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Highcharts 教程 | 菜鸟教程(runoob.com)</title>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="../js/address.js"></script>
+</head>
+<body>
+<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<script language="JavaScript">
+
+
+var fail;
+var sucess;
+var shentotal;
+var quxiao;
+var weikaishi;
+var total;
+var yikaishi;
+
+ $.ajax({
+                url: httpaddress + 'member/data_statistics/summary',
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                crossDomain: true,
+                success: function (data) {
+ fail=data.data.application_fail_total;
+sucess=data.data.application_success_total;
+shentotal=data.data.application_total;
+quxiao=data.data.task_cancel_total;
+weikaishi=data.data.task_not_start_total;
+total=data.data.task_total;
+yikaishi=data.data.task_have_in_hand_total;
+
+console.log(data);
+$(document).ready(function() {  
+   var chart = {
+      type: 'column'
+   };
+   var title = {
+      text: '我的里程碑'   
+   };
+   var subtitle = {
+      text: 'Source: Dingding.com'  
+   };
+   var xAxis = {
+      categories: ['当前'],
+      crosshair: true
+   };
+   var yAxis = {
+      min: 0,
+      title: {
+         text: '数目'         
+      }      
+   };
+   var tooltip = {
+      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+         '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+      footerFormat: '</table>',
+      shared: true,
+      useHTML: true
+   };
+   var plotOptions = {
+      column: {
+         pointPadding: 0.2,
+         borderWidth: 0
+      }
+   };  
+   var credits = {
+      enabled: false
+   };
+   
+   var series= [{
+        name: '申请失败',
+            data: [fail]
+        }, {
+            name: '申请成功',
+            data: [sucess]
+        }, {
+            name: '申请总数',
+            data: [shentotal]
+        }, {
+            name: '取消的任务数',
+            data: [quxiao]
+   }
+   , {
+            name: '未开始的任务数',
+            data: [weikaishi]
+   }
+   , {
+            name: '正在进行中的任务数',
+            data: [yikaishi]
+   }
+   , {
+            name: '已完成的任务',
+            data: [total]
+   }
+
+];     
+      
+   var json = {};   
+   json.chart = chart; 
+   json.title = title;   
+   json.subtitle = subtitle; 
+   json.tooltip = tooltip;
+   json.xAxis = xAxis;
+   json.yAxis = yAxis;  
+   json.series = series;
+   json.plotOptions = plotOptions;  
+   json.credits = credits;
+   $('#container').highcharts(json);
+  
+});
+
+
+                }
+
+ });
+</script>
+</body>
+</html>

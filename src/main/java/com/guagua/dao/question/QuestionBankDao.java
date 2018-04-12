@@ -40,4 +40,12 @@ public interface QuestionBankDao {
     Integer countQuestionByType(int type);
 
     List<Question> findByType(int type);
+
+    /**
+     * 统计用户创建了多少题库
+     *
+     * @param userId user id
+     * @return result
+     */
+    Integer countNUms(Integer userId);
 }

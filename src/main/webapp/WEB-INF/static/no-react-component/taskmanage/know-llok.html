@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/task-ing.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../js/address.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+        <div id="header">
+                查看该项目的知识库
+            </div>
+    <ul id="box"></ul>
+    <script>
+        $.ajax({
+            url: httpaddress + 'knowledge_base/task/' + sessionStorage.getItem('TASKID') + '/about',
+            type: 'get',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'taskId': sessionStorage.getItem('TASKID'),
+                'page': 1,
+                'size': 30
+            },
+            success: function (data) {
+                console.log(data.data.bases.list);
+                var name = [];
+                var description = [];
+                var creator=[];
+                var createTime=[];
+                for (var value in data.data.bases.list) {
+                    var name1 = data.data.bases.list[value].name;
+                    var description1 = data.data.bases.list[value].description;
+                    var creator1= data.data.bases.list[value].creator;
+                    var createTime1= data.data.bases.list[value].createTime;
+                    name.push(name1);
+                    description.push(description1);
+                    creator.push(creator1);
+                    createTime.push(createTime1);
+                }
+                var list = '';
+
+                for (var i = 0; i < data.data.bases.list.length; i++) {
+                    list += "<li> <div class='ribbon'>" +'<span class="ribbon1"><span>'+name[i]+'</span></span>'+ '<span style="font-family:times;font-size:1em;">标题：</span><span style="font-size:1em;">' + name[i] + '</span><br />' +
+                        '<span style="font-size:1em;">描述：' +
+                        description[i] + '</span><br />' + '创建者：<span style="color:red">'+creator[i]+'</span><br />'+'创建时间：<span style="color:red">'+createTime[i]+'</span><br />'+'<hr />' +
+                        "</div></li>";
+                }
+                document.getElementById('box').innerHTML = list;
+            }
+        });
+    </script>
+</body>
+
+</html>

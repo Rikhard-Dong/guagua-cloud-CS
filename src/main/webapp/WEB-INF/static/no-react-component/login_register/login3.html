@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>登录</title>
+	<link rel="stylesheet" href="../css/reset.css" />
+	<link rel="stylesheet" href="../css/common.css" />
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body >
+	<div class="wrap login_wrap">
+		<div class="content" style="margin-top:30px;">
+
+			<div class="logo"></div>
+
+			<div class="login_box">
+
+				<div class="login_form">
+					<div class="login_title">
+						管理员登录
+					</div>
+					<form action="" method="post">
+
+						<div class="form_text_ipt">
+							<input name="account" id="account" type="text" placeholder="手机号/邮箱">
+						</div>
+						<div class="ececk_warning">
+							<span>数据不能为空</span>
+						</div>
+						<div class="form_text_ipt">
+							<input name="password" type="password" id="password" placeholder="密码">
+						</div>
+						<div class="ececk_warning">
+							<span>数据不能为空</span>
+						</div>
+						<div class="form_check_ipt">
+							<div class="left check_left">
+								<label>
+									<input name="" type="checkbox"> 下次自动登录</label>
+							</div>
+							<div class="right check_right">
+								<a href="#">忘记密码</a>
+							</div>
+						</div>
+						<div class="form_btn">
+							<button type="button" id="btn-login">登录</button>
+						</div>
+						
+					</form>
+					<div class="other_login">
+						<div class="left other_left">
+							<span>其它登录方式</span>
+						</div>
+						<div class="right other_right">
+							<a href="#">QQ登录</a>
+							<a href="#">微信登录</a>
+							<a href="#">微博登录</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript" src="../js/address.js"></script>
+	<script type="text/javascript" src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+
+	<script>
+		$("#btn-login").click(function () {
+		
+			$.ajax({
+				url: httpaddress+ 'user/login',
+				data: {
+					"account": $("#account").val(),
+					"password": $("#password").val()
+				},
+				type: 'post',
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				success: function (data) {
+				 sessionStorage.setItem('cookie', data.data.token);   //保存在session中
+				var session=sessionStorage.getItem('cookie');
+				console.log(session);
+					 if(data.code==101)
+					 {
+                         console.log(data);
+                         window.location.href="../../main.html"
+					 } if(data.code==102)
+					 {
+					 	alert("账号或者密码错误")
+					 }
+				},
+				error: function () {
+					console.log("发生错误啦");
+				}
+			});   	 
+		});
+	
+		
+	</script>
+</body>
+
+</html>

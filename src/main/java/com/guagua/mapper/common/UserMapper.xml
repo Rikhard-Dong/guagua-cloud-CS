@@ -119,4 +119,22 @@
         WHERE type = #{type}
         ORDER BY create_time ASC
     </select>
+
+    <select id="countUserNum" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_user
+        WHERE create_time BETWEEN #{startTime} AND #{endTime} AND is_delete = 0
+    </select>
+
+    <select id="countUserNumByUserType" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_user
+        WHERE type = #{type} AND (create_time BETWEEN #{startTime} AND #{endTime}) AND is_delete = 0
+    </select>
+
+    <select id="countIsDeleteUserNum" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_user
+        WHERE (create_time BETWEEN #{startTime} AND #{endTime}) AND is_delete = 1
+    </select>
 </mapper>

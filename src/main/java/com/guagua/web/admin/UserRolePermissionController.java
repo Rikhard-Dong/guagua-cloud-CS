@@ -93,6 +93,22 @@ public class UserRolePermissionController extends BaseController {
     }
 
     /**
+     * list user login info by user id
+     *
+     * @param userId user id
+     * @param page   page
+     * @param size   size
+     * @return result dto include user login info
+     */
+    @GetMapping("/user/{userId}/login_info")
+    public ResultDTO listUserLoginInfo(@PathVariable("userId") Integer userId,
+                                       @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                       @RequestParam(value = "size", defaultValue = "30") Integer size) {
+
+        return userRolePermissionService.listUserLoginInfo(userId, page, size);
+    }
+
+    /**
      * get user detail info, include user has roles info
      *
      * @param userId user id

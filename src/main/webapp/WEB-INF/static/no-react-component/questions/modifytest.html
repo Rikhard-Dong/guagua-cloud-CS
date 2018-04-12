@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/modifytest.css">
+    <script src="../js/address.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="content" style="width:100%;height:500px;text-align:center;">
+    <div id="content-left" style="width:380px;height:500px;border:1px solid black;text-align:center;float:left">
+        题库名称：<select name="bank" id="bankId" onchange="checkpaper()" class="selectpicker" style="width:200px;height:30px;margin-top:8%"></select>
+    <br />
+        试卷名称：<select name="testPaper" id="textPaperId" class="selectpicker" style="width:200px;height:30px;margin-top:8%" onchange="detail()"></select>
+     <br />
+        插入类型：<select name="questionType" id="questionTypeId" onchange="checkquestion()" class="selectpicker" style="width:200px;height:30px;margin-top:8%">
+            <option value="0">单选题</option>
+            <option value="1">多选题</option>
+            <option value="2">判断题</option>
+            <option value="3">文字题</option>
+        </select>
+      <br />
+        插入题目：<select name="question" id="questionId" class="selectpicker" style="width:200px;height:30px;margin-top:8%"></select>
+        <br >
+        <br>
+        <br>
+        <br>
+        <button  class="btn btn-info" id="submit">确认提交</button>
+    </div>
+    <div id="content-middle" style="width:380px;height:500px;border:1px solid black;text-align:center;float:left">
+        <span style="color:red">试卷信息</span>
+        <br />
+    <span>题库名称：<input type="text" id="bankName" style="width:200px;height:30px;margin-top:4%;"></span>
+    <br>
+    <span>创建时间：<input type="text" id="createTime" style="width:200px;height:30px;margin-top:4%"></span>
+    <br>
+    
+    <span>题目描述：<input type="text" id="description" style="width:200px;height:30px;margin-top:4%"></span>
+    <br>
+    <span>题目名称：<input type="text" name="" id="name" style="width:200px;height:30px;margin-top:4%"></span>
+    <br>
+    <span>创建者姓名：<input type="text" id="creatorName" style="width:200px;height:30px;margin-top:4%"></span>
+    <br>
+    <span>当前判断题数目：<input type="text" id="judgeCurNum" style="width:200px;height:30px;margin-top:4%"></span>
+    <br>
+    <span>最多判断题数目：<input type="text" id="judgeNum" style="width:200px;height:30px;margin-top:1%"></span>
+    <br>
+    <span><ul id="judge"></ul></span>
+   
+    </div>
+    <div id="content-right"  style="width:370px;height:500px;border:1px solid black;text-align:center;float:left">
+            <span style="color:red">试卷信息</span>
+            <br />
+ <span>当前多选题数目：<input type="text" name="" id="multipleCur" style="width:200px;height:30px;margin-top:4%"></span>
+    <br>
+    <span>最多多选题数目：<input type="text" name="" id="multipleNum" style="width:200px;height:30px;margin-top:1%"></span>
+    <br>
+    <span><ul id="multiple"></ul></span>
+    <span>当前单选的数目：<input type="text" id="singleCur" style="width:200px;height:30px;margin-top:4%"></span>
+    <br>
+    <span>最多单选题数目：<input type="text" id="singleNum" style="width:200px;height:30px;margin-top:1%"></span>
+    <br>
+    <span><ul id="single"></ul></span>
+    <span>当前文字题数目：<input type="text" name="" id="textCur" style="width:200px;height:30px;margin-top:4%"></span>
+    <br>
+    <span>最多文字题数目：<input type="text" name="" id="textNum" style="width:200px;height:30px;margin-top:1%"></span>
+    <br>
+    <span><ul id="text"></ul></span>
+    </div>
+    </div>
+</body>
+</html>
+<script>
+    $.ajax({ //查询题库简易信息的异步请求
+        url: httpaddress + 'enterprise/question_bank/list',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        success: function (data) {
+            console.log(data.data.banks.list);
+            var id = [];
+            var bankname = [];
+
+            for (var value in data.data.banks.list) {
+                idd = data.data.banks.list[value].id;
+                banknamee = data.data.banks.list[value].bankName;
+
+                id.push(idd);
+                bankname.push(banknamee);
+
+            }
+            var list = '';
+            for (var i = 0; i < data.data.banks.list.length; i++) {
+                $("#bankId").append("<option value='" + id[i] + "'>" + bankname[i] + "</option>");
+            }
+
+        }
+    });
+
+    function checkpaper() {
+        $.ajax({ //查询题库简易信息的异步请求
+            url: httpaddress + 'enterprise/question_bank/' + $("#bankId option:selected").val() +
+                '/examination/list/manual',
+            type: 'get',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'bankId': $("#bankId option:selected").val(),
+                'page': 1,
+                'size': 10
+            },
+            success: function (data) {
+                console.log(data.data.papers.list);
+                var testId = [];
+                var name = [];
+                for (var value in data.data.papers.list) {
+                    test = data.data.papers.list[value].id;
+                    textName = data.data.papers.list[value].name;
+                    testId.push(test);
+                    name.push(textName);
+                }
+
+                for (var i = 0; i < data.data.papers.list.length; i++) {
+
+                    $("#textPaperId").append("<option value='" + testId[i] + "'>" + name[i] + "</option>");
+
+                }
+
+            }
+        });
+    }
+
+    function checkquestion() {
+
+        $.ajax({ //查询题库简易信息的异步请求
+            url: httpaddress + 'enterprise/question_bank/' + $("#bankId option:selected").val() +
+                '/question/list/type/' + $("#questionTypeId  option:selected").val(),
+            type: 'get',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'bankId': $("#bankId option:selected").val(),
+                'type': $("#questionTypeId  option：selected").val(),
+                'page': 1,
+                'size': 10
+            },
+            success: function (data) {
+                console.log(data.data.questions.list);
+                var question = [];
+                var id = [];
+                var questionId = document.getElementById("questionId");
+                questionId.innerHTML = "";
+                for (var i = 0; i < questionId.childNodes.length; i++) {
+                    questionId.removeChild(questionId.options[0]);
+                    questionId.remove(0);
+                    questionId.options[0] = null;
+                }
+                for (var value in data.data.questions.list) {
+                    q = data.data.questions.list[value].question;
+                    i = data.data.questions.list[value].id;
+                    question.push(q);
+                    id.push(i);
+                }
+                for (var i = 0; i < data.data.questions.list.length; i++) {
+                    $("#questionId").append("<option value='" + id[i] + "'>" + question[i] + "</option>");
+                }
+            }
+        });
+    }
+
+
+    function detail()
+  {
+
+      $.ajax({ //查询题库简易信息的异步请求
+            url: httpaddress + 'enterprise/question_bank/' + $("#bankId option:selected").val() +
+                '/examination/' + $("#textPaperId  option:selected").val()+'/detail',
+            type: 'get',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'bankId': $("#bankId option:selected").val(),
+                'type': $("#textPaperId  option：selected").val(),
+         
+            },
+            success: function (data) {
+                console.log(data.data.examination);
+               $("#bankName").val(data.data.examination.bankName);
+               $("#createTime").val(data.data.examination.createTime);
+               $("#name").val(data.data.examination.name);
+               $("#creatorName").val(data.data.examination.creatorName);
+               $("#description").val(data.data.examination.description);
+               $("#judgeCurNum").val(data.data.examination.judgementCurNum);
+               $("#judgeNum").val(data.data.examination.judgementNum);
+               $("#multipleCur").val(data.data.examination.multipleCurNum);
+               $("#multipleNum").val(data.data.examination.multipleNum);
+               $("#singleCur").val(data.data.examination.singleCurNum);
+               $("#singleNum").val(data.data.examination.singleNum);
+               $("#textCur").val(data.data.examination.textCurNum);
+               $("#textNum").val(data.data.examination.textNum);
+               var judge=[];
+               var judgeRemarks=[];
+               var multiple=[];
+               var multipleRemarks=[];
+               var single=[];
+               var singleRemarks=[];
+               var text=[];
+               var textRemarks=[];
+               for(var value in data.data.examination.judgementQuestions)
+               {
+                             j=data.data.examination.judgementQuestions[value].question;
+                             r=data.data.examination.judgementQuestions[value].remarks;
+                             judge.push(j);
+                             judgeRemarks.push(r);
+               }
+               var list1='';
+                 for(var i=0;i<data.data.examination.judgementQuestions.length;i++)
+                 {
+
+                     list1+='<li><span style="float:left">问题：'+judge[i]+ '</span><span>提示：'+judgeRemarks[i]+'</sapn></li>'
+                  }
+                 document.getElementById('judge').innerHTML = list1;
+
+               for(var value in data.data.examination.multipleQuestions)
+               {
+                             j=data.data.examination.multipleQuestions[value].question;
+                             r=data.data.examination.multipleQuestions[value].remarks;
+                             multiple.push(j);
+                             multipleRemarks.push(r);
+               }
+               var list2='';
+                 for(var i=0;i<data.data.examination.multipleQuestions.length;i++)
+                 {
+
+                     list2+='<li><span style="float:left">问题：'+multiple[i]+ '</span><span>提示：'+multipleRemarks[i]+'</sapn></li>'
+                  }
+                 document.getElementById('multiple').innerHTML = list2;
+
+
+               for(var value in data.data.examination.singleQuestions)
+               {
+                             j=data.data.examination.singleQuestions[value].question;
+                             r=data.data.examination.singleQuestions[value].remarks;
+                             single.push(j);
+                             singleRemarks.push(r);
+               }
+               var list3='';
+                 for(var i=0;i<data.data.examination.singleQuestions.length;i++)
+                 {
+
+                     list3+='<li><span style="float:left">问题：'+single[i]+ '</span><span>提示：'+singleRemarks[i]+'</sapn></li>'
+                  }
+                 document.getElementById('single').innerHTML = list3;
+
+
+               for(var value in data.data.examination.textQuestions)
+               {
+                             j=data.data.examination.textQuestions[value].question;
+                             r=data.data.examination.textQuestions[value].remarks;
+                             text.push(j);
+                             textRemarks.push(r);
+               }
+               var list4='';
+                 for(var i=0;i<data.data.examination.textQuestions.length;i++)
+                 {
+
+                     list4+='<li><span style="float:left">问题：'+text[i]+ '</span><span>提示：'+textRemarks[i]+'</sapn></li>'
+                  }
+                 document.getElementById('text').innerHTML = list4;
+            }
+        });
+
+  }
+
+$("#submit").click(function(){
+    $.ajax({ //查询题库简易信息的异步请求
+            url: httpaddress + 'enterprise/question_bank/' + $("#bankId option:selected").val() +
+                '/examination/' +$("#textPaperId option:selected").val()+'/question/add',
+            type: 'post',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'bankId': $("#bankId option:selected").val(),
+                'questionId':$("#questionId  option:selected").val(),
+                'type':$("#questionTypeId option:selected").val(),
+                'examinationId':$("#textPaperId option:selected").val()
+            },
+            success:function(data)
+            {
+                 console.log( eval('(' + data + ')'));
+                var a=eval('(' + data + ')');
+                console.log(a.code);
+                 if(a.code==1)
+                 {
+                     alert("修改成功");
+                 }
+                 if(a.code==-100)
+                 {
+                     alert("该问题还未生效");
+                 }
+            }
+
+        });
+});
+
+
+</script>

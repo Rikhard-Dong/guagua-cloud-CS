@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/chat2.css">
+    <link rel="stylesheet" href="../css/common2.css">
+</head>
+<script type="text/javascript" src="../js/address.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<body>
+    <div id="header">查询我的详细任务</div>
+    <label>任务名称：</label>
+    <select id="mytask" style="height:40px;width:25%;font-size:1em;cursor:pointer;border-radius:3px">
+    </select>
+    <div id="dialogBg"></div>
+    <div id="dialog" class="animated" style="height:80%;width:80%;margin-left:-40%;margin-top:-20%;">
+        <img class="dialogIco" width="50" height="50" src="../images/ico.png" alt="" />
+        <div class="dialogTop">
+            <a href="javascript:;" class="claseDialogBtn">关闭</a>
+        </div>
+        <form action="" method="post" id="editForm">
+            <ul class="editInfos">
+                <li>
+                        <font color="#ff0000">* </font>标题：
+                        <input  type="text" name="" required value="" id="title" class="ipt" />
+
+                          <font color="#ff0000">* </font>描述：
+                        <input type="text" name="" required value="" id="description" class="ipt" />
+                </li>
+
+                <li>
+                        <font color="#ff0000">* </font>工资：
+                        <input type="text" name="" required value="" id="basesalary" class="ipt" />
+                         <font color="#ff0000">* </font>奖金：
+                        <input type="text" name="" required value="" id="bonus" class="ipt" />
+                </li>
+
+                 <li>
+                        <font color="#ff0000">* </font>人数：
+                        <input type="text" name="" required value="" id="number" class="ipt" />
+
+                 
+                        <font color="#ff0000">* </font>负责人编号：
+                        <input type="text" name="" required value="" id="boss" class="ipt" />
+                </li>
+                <li>
+                        <font color="#ff0000">* </font>任务开始时间：
+                        <input type="text" name="" required value="" id="startTime" class="ipt"  style="color:red"/>
+                    </li>
+                    <li>
+                        <font color="#ff0000">* </font>任务截止时间：
+                        <input type="text" name="" required value="" id="endTime" class="ipt"  style="color:red" />
+
+                </li>
+                <li>
+                        <font color="#ff0000">* </font>任务工作开始时段1：
+                        <input type="text" name="" required value="" id="s1" class="ipt"  style="color:red" />
+                        <font color="#ff0000">* </font>任务工作结束时段1：
+                        <input type="text" name="" required value="" id="e1" class="ipt"  style="color:red" /><br/>
+                        <font color="#ff0000">* </font>任务工作开始时段2：
+                        <input type="text" name="" required value="" id="s2" class="ipt"  style="color:red" />
+                        <font color="#ff0000">* </font>任务工作结束时段2：
+                        <input type="text" name="" required value="" id="e2" class="ipt"  style="color:red" /><br/>
+                        <font color="#ff0000">* </font>任务工作开始时段3：
+                        <input type="text" name="" required value="" id="s3" class="ipt"  style="color:red" />
+                        <font color="#ff0000">* </font>任务工作结束时段3：
+                        <input type="text" name="" required value="" id="e3" class="ipt"  style="color:red" /><br/>
+                        <font color="#ff0000">* </font>任务工作开始时段4：
+                        <input type="text" name="" required value="" id="s4" class="ipt"  style="color:red" />
+                        <font color="#ff0000">* </font>任务工作结束时段4：
+                        <input type="text" name="" required value="" id="e4" class="ipt"  style="color:red" /><br/>
+                </li>
+            </ul>
+        </form>
+    </div>
+</body>
+<script>
+     var w, h, className;
+
+function getSrceenWH() {
+    w = $(window).width();
+    h = $(window).height();
+    $('#dialogBg').width(w).height(h);
+}
+
+window.onresize = function () {
+    getSrceenWH();
+}
+$(window).resize();
+
+$(function () {
+    getSrceenWH();
+
+    //显示弹框
+    $('a').click(function () {
+        className = $(this).attr('class');
+        $('#dialogBg').fadeIn(300);
+        $('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
+    });
+
+    //关闭弹窗
+    $('.claseDialogBtn').click(function () {
+        $('#dialogBg').fadeOut(300, function () {
+            $('#dialog').addClass('bounceOutUp').fadeOut();
+        });
+    });
+});
+    $.ajax({
+        url: httpaddress + 'member/task/participate/all',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        success: function (data) {
+            console.log(data);
+            console.log(data.data.info.list);
+            var taskid = [];
+            var title = [];
+            for (var value in data.data.info.list) {
+                var taskId = data.data.info.list[value].id;
+                var name = data.data.info.list[value].title;
+                taskid.push(taskId);
+                title.push(name);
+            }
+
+            for (var j = 0; j < data.data.info.list.length; j++) {
+                $("#mytask").append("<option value='" + taskid[j] + "'>" + title[j] + "</option>");
+            }
+         
+       
+
+
+        }
+    });
+
+$("#mytask").change(function(){
+
+      
+           
+          
+            $.ajax({
+                url: httpaddress + 'member/task_hall/query/detail/'+$("#mytask option:selected").val(),
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                crossDomain: true,
+              data:{
+           'taskId':$("#mytask option:selected").val()
+      },
+                success: function (data) {
+
+                           var date = new Date(data.data.task.taskEndTime);
+                    Y = date.getFullYear() + '-';
+                    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                    D = date.getDate() + ' ';
+
+    var date1 = new Date(data.data.task.taskStartTime);
+                    Y1 = date1.getFullYear() + '-';
+                    M1 = (date1.getMonth()+1 < 10 ? '0'+(date1.getMonth()+1) : date1.getMonth()+1) + '-';
+                    D1 = date1.getDate() + ' ';
+
+                    console.log(data.data.task);
+                    $("#title").val(data.data.task.title);
+                    $("#description").val(data.data.task.description);
+                    $("#basesalary").val(data.data.task.baseSalary);
+                    $("#bonus").val(data.data.task.bonus);
+                    $("#number").val(data.data.task.number);  
+                    $("#boss").val(data.data.task.enterpriseId); 
+                    $("#endTime").val(Y+M+D);
+                    $("#startTime").val(Y1+M1+D1);
+                    $("#s1").val(data.data.task.workingTimeStart1)
+                    $("#e1").val(data.data.task.workingTimeEnd1)
+                    $("#s2").val(data.data.task.workingTimeStart2)
+                    $("#e2").val(data.data.task.workingTimeEnd2)
+                    $("#s3").val(data.data.task.workingTimeStart3)
+                    $("#e3").val(data.data.task.workingTimeEnd3)
+                    $("#s4").val(data.data.task.workingTimeStart4)
+                    $("#e4").val(data.data.task.workingTimeEnd4)
+                     $('#dialogBg').fadeIn(300);
+                  $('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
+                }
+            });
+
+     
+
+//    $.ajax({
+//         url: httpaddress + 'member/task_hall/query/detail/'+$("#mytask option:selected").val(),
+//         type: 'get',
+//         xhrFields: {
+//             withCredentials: true
+//         },
+//         headers: {
+//             'Authorization': sessionStorage.getItem('cookie')
+//         },
+//      
+//         crossDomain: true,
+//         success: function (data) {
+           
+        
+//         }
+//     });
+
+
+})
+
+
+
+
+
+
+</script>
+
+</html>

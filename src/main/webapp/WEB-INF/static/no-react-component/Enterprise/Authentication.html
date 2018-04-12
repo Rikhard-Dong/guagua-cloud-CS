@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/authentication.css">
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js/authentication.js"></script>
+    <script src="../js/bootstrap-fileinput.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/address.js"></script>
+    <script src="../js/cropper.min.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-fileinput.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<style type=text/css>
+    input {
+        border: none;
+    }
+</style>
+
+<body>
+    <div id="header">
+        关于公司
+    </div>
+    <div id="btnComponent">
+        <button type="button" class="btn btn-success " style="float:right" id="modify">修改</button>
+        <button type="button" class="btn btn-success " style="float:right;display:none;margin-left:20px;" id="cancel">取消</button>
+        <button type="button" class="btn btn-success " style="float:right;display:none;" id="save" onclick="certification(this)">申请认证</button>
+    </div>
+    <div id="info" class="info">
+        <form action="" method="post" class="form" onsubmit="" id="userform">
+            <div id="info-header">
+                <span>*姓名：</span>
+                <input type="text" name="name" id="name" style="background-color:transparent" placeholder="请输入姓名" onblur="checkname(this)" />
+                <input style="color:red;background-color:transparent" id="nametip" readonly="true" />
+                <br />
+
+                <span>*证件：</span>
+                <input type="text" name="idcard" id="idcard" placeholder="请输入身份证号码" onblur="checkidcard(this)" />
+                <input id="idcardtip" readonly="true" background-color:transparent />
+            </div>
+            <h3>公司信息</h3>
+            ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            <br />
+            <div id="info-middle">
+                <span>*名称：</span>
+                <input type="text" style="margin-left:-250px;" name="authenticationName" id="authenticationName" placeholder="请输入企业名称" />
+                <br />
+
+                <span>*执照：</span>
+                <input type="text" name="license" style="margin-left:-250px;" id="license" placeholder="请输入执照号码" />
+                <br />
+
+                <span>*住所：</span>
+                <input type="text" name="residence" id="residence" style="margin-left:-250px;" placeholder="请输入营业执照住所" />
+                <br />
+
+                <span>*地址：</span>
+                <input type="text" name="address" id="address" style="margin-left:-250px;" placeholder="请输入单位通信地址" />
+                <br />
+
+                <span>*法人：</span>
+                <input type="text" name="legalPerson" id="legalPerson" style="margin-left:-258px;" placeholder="请输入法人姓名" />
+                <br />
+
+                <span>*电话：</span>
+                <input type="text" name="officePhone" id="officePhone" style="margin-left:-250px;" placeholder="请输入办公室电话" />
+                <br />
+            </div>
+            <h3>公司简介</h3>
+            ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            <br />
+            <textarea rows="4" cols="100" name="enterpriseDescription" id="enterpriseDescription" form="usrform">
+            </textarea>
+            <br />
+            <h3>证件图片</h3>
+            --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            <br />
+            <div class="fileinput fileinput-new" style="float:center" data-provides="fileinput" id="exampleInputUpload">
+                <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                    <img id='picImg1' style="width: 100%;height: auto;max-height: 140px;" src="https://img.callcloud.cn/idcardImg/../headImg/idphotoReverse.png" 
+                        alt="" />
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                <div>
+                    <span class="btn btn-primary btn-file">
+                        <span class="fileinput-new">选择文件</span>
+                        <span class="fileinput-exists">换一张</span>
+                        <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png" />
+                    </span>
+                    <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                </div>
+            </div>
+            <div class="fileinput fileinput-new" style="float:center" data-provides="fileinput" id="exampleInputUpload">
+                <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                    <img id='picImg2' style="width: 100%;height: auto;max-height: 140px;" src="https://img.callcloud.cn/idcardImg/../headImg/idphotoReverse.png"
+                        alt="" />
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                <div>
+                    <span class="btn btn-primary btn-file">
+                        <span class="fileinput-new">选择文件</span>
+                        <span class="fileinput-exists">换一张</span>
+                        <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png" />
+                    </span>
+                    <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                </div>
+            </div>
+            <div class="fileinput fileinput-new" style="float:center" data-provides="fileinput" id="exampleInputUpload">
+                <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                    <img id='picImg3' style="width: 100%;height: auto;max-height: 140px;" src="../images/idphotoReverse.jpg" alt="" />
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                <div>
+                    <span class="btn btn-primary btn-file">
+                        <span class="fileinput-new">选择文件</span>
+                        <span class="fileinput-exists">换一张</span>
+                        <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png" />
+                    </span>
+                    <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#modify").click(function () {
+                $("#cancel").show();
+                $("#save").show();
+                $("#modify").hide();
+            });
+            $("#cancel").click(function () {
+                $("#modify").show();
+                $("#cancel").hide();
+                $("#save").hide();
+            });
+            console.log(sessionStorage.getItem('cookie'));
+        });
+
+
+ var c=document.createElement("canvas");
+//设置canvas宽高为图片宽高
+//将图片绘制到canvas
+var cxt=c.getContext("2d");
+var img=new Image();
+//var img=document.getElementById()
+img.src="../images/5.png";
+cxt.drawImage(img,40,40);
+//得到图片的base64编码数据
+var dd=c.toDataURL('image/jpeg');
+//log出图片base64数据
+console.log(dd);
+
+$.ajax({
+    url:  httpaddress+'enterprise/authentication/info',
+    type: 'get',
+    xhrFields: {
+        withCredentials: true
+    },
+    headers: {
+        'Authorization': sessionStorage.getItem('cookie')
+    },
+    crossDomain: true,
+    success: function (data) {
+        console.log(data.data.info);
+        $("#name").val(data.data.info.username);
+        $("#idcard").val(data.data.info.idNumber)
+        $("#authenticationName").val(data.data.info.enterpriseName);
+        $("#license").val(data.data.info.businessLicense);
+        $("#residence").val(data.data.info.licensedResidence);
+        $("#address").val(data.data.info.postalAddress);
+        $("#legalPerson").val(data.data.info.legalPerson);
+        $("#officePhone").val(data.data.info.officePhone);
+        $("#enterpriseDescription").val(data.data.info.enterpriseDescription);
+        // document.getElementById("picImg1").src=data.data.info.negativeImg;
+        // document.getElementById("picImg2").src=data.data.info.positiveImg;
+        // document.getElementById("picImg3").src=data.data.info.businessLicenseImg;
+    } 
+    });
+function certification()
+{
+    $.ajax({
+    url:  httpaddress+'enterprise/authentication/apply',
+    type: 'post',
+    xhrFields: {
+        withCredentials: true
+    },
+    headers: {
+        'Authorization': sessionStorage.getItem('cookie')
+    },
+    crossDomain: true,
+    data:{
+        'realName':$("#name").val(),
+        'idNumber':$("#idcard").val(),
+        'enterpriseName':$("#authenticationName").val(),
+        'businessLicense':$("#license").val(),
+        'licensedResidence':$("#residence").val(),
+        'postalAddress':$("#address").val(),
+        'legalPerson':$("#legalPerson").val(),
+        'officePhone':$("#officePhone").val(),
+        'enterpriseDescription':$("#enterpriseDescription").val(),
+        'businessLicenseImgBase64':dd,
+        'positiveImgBase64':dd,
+        'negativeImgBase64':dd
+    },
+    success: function (data) {
+        console.log(data);
+    } 
+    });
+  
+}
+
+
+    </script>
+</body>
+
+</html>

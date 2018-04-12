@@ -49,4 +49,11 @@
         WHERE task_id = #{taskId} AND `status` = #{status}
     </select>
 
+    <select id="countTaskByStatus" resultType="java.lang.Integer">
+        select count(*) FROM t_task_application where member_id = #{memberId}
+        <if test="status != null">
+            and `status` = #{status}
+        </if>
+    </select>
+
 </mapper>

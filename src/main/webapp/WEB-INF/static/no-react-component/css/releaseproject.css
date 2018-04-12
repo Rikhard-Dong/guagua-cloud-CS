@@ -1,0 +1,54 @@
+#header
+{
+width: 100%;
+height:50px;
+font-size:30px;
+font-family:'楷体';
+font-weight:bold;
+position: relative;
+}
+body{
+    /* background-image: url('../images/timg3.jpg') ; */
+    background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;background-repeat: no-repeat;
+}
+#name-descript
+{
+
+width: 80%;
+height: 150px;
+position: relative;
+margin-left: 150px;
+}
+
+#logo{
+    width:100px;
+    height:100px;
+    background-color: rosybrown;
+    position: relative;
+    margin-left: 70%;
+    margin-top: -9%;
+}
+#tasktype
+{
+    width: 80%;
+    height: 50px;
+    margin-left: 113px;
+}
+#typeone
+{
+  width: 60%;
+  height: 26%;
+position: relative;
+margin-left: 132px;
+margin-top: -20px;
+}
+#pay
+{
+width:80%;
+height: 450px;
+position: relative;
+margin-left:130px;
+margin-top: 40px; 
+}

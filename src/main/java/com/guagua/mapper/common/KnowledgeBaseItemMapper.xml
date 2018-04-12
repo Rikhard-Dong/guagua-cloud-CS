@@ -59,4 +59,14 @@
         FROM t_knowledge_base_item
         WHERE id = #{id}
     </select>
+
+    <select id="searchKeyWord" resultType="com.guagua.bean.entity.common.KnowledgeBaseItem">
+        select * from t_knowledge_base_item where knowledge_base_id IN
+        <foreach collection="bases" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and match(question, answer, similar_question1, similar_question2, similar_question3, similar_question4,
+        similar_question5)
+        against (#{keyword} in natural language mode )
+    </select>
 </mapper>

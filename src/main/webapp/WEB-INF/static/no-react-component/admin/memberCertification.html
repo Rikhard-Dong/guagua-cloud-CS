@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/memberCertification.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/address.js"></script>
+    <title>Document</title>
+</head>
+<body>
+        <div id="header">会员审核</div>
+        <div id="item">
+                <ul id="box"></ul>
+        </div>
+        <script>
+            $.ajax({
+                url: httpaddress + 'admin/auditing/member/authentication/unaudited',
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                data: {
+                    'page': 1,
+                    'size': 10
+                },
+                crossDomain: true,
+                success: function (data) {
+                    console.log(data.data.pageInfo.list);
+                    var realName=[];
+                    var applyTime=[];
+                    var status=[];
+                    var idNumber=[];
+                    var id=[];
+                  for(var value in data.data.pageInfo.list)
+                  {
+                     var realname=data.data.pageInfo.list[value].realName;
+                     var applytime= data.data.pageInfo.list[value].applyTime;
+                     var status1= data.data.pageInfo.list[value].status;
+                     var idnumber=data.data.pageInfo.list[value].idNumber;
+                     var idd=data.data.pageInfo.list[value].id;
+                        realName.push(realname);
+                        applyTime.push(applytime);
+                        status.push(status1);
+                        idNumber.push(idnumber);
+                        id.push(idd);
+                  }
+                  var list = '';
+                  for(var value2 in data.data.pageInfo.list)
+                  {
+                      var iddd=data.data.pageInfo.list[value].id;
+                        for (var i = 0; i <data.data.pageInfo.list.length; i++) {
+                    list += "<li id="+iddd+">"+'姓名:' +realName[i] + '--' +'申请时间:'+applyTime[i] +'--'+'申请状态:'+status[i]+'--'+'身份证号码:'+idNumber[i]+'------'+'<a  href="javascript:void(0);" onclick="pass()" >通过</a>'+'----'+'<a  href="javascript:void(0);" onclick="refuse()" >拒绝</a>'+'附加信息：<input type="text" id="message" style="width:130px;" placeholder="请输入结果噢！">'
+                        "</li>";
+                }
+                
+               
+                  }
+               document.getElementById('box').innerHTML = list;
+                }
+            });
+function pass()
+{
+    
+    $("ul li").click(function () {
+        var detail = $(this).attr('id');
+                 $.ajax({ 
+				url: httpaddress + 'admin/auditing/member/verify/'+detail,
+				type: 'post',
+				xhrFields: {
+					withCredentials: true
+				},
+				headers: {
+					'Authorization': sessionStorage.getItem('cookie')
+				},
+                data:{'id':detail,
+                'result':true,
+                'comment':$("#message").val()
+                },
+				crossDomain: true,
+				success: function (data) {
+				console.log(data);
+				},
+				error: function () {
+					console.log("发生错误啦");
+				}
+			});
+
+     });
+}
+
+function refuse()
+{
+    $("ul li").click(function () {
+        var detail = $(this).attr('id');
+                 $.ajax({ 
+				url: httpaddress + 'admin/auditing/member/verify/'+detail,
+				type: 'post',
+				xhrFields: {
+					withCredentials: true
+				},
+				headers: {
+					'Authorization': sessionStorage.getItem('cookie')
+				},
+                data:{'id':detail,
+                'result':false,
+                'comment':$("#message").val()
+                },
+				crossDomain: true,
+				success: function (data) {
+				console.log(data);
+				},
+				error: function () {
+					console.log("发生错误啦");
+				}
+			});
+
+     });    
+}
+        </script>
+</body>
+</html>

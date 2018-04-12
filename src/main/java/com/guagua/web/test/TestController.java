@@ -9,6 +9,7 @@ import com.guagua.utils.QiniuUtils;
 import com.guagua.web.BaseController;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +53,11 @@ public class TestController extends BaseController {
     public String uploadArray(@RequestBody List<Answer> list) {
         logger.info("list =======> {}", list);
         return "this is test for upload list";
+    }
+
+    @GetMapping("/time/{time}")
+    public void getTime(@PathVariable("time") Date time) {
+        logger.info("get time =======> {}", time);
     }
 
 

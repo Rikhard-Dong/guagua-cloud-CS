@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="../css/base.css" type="text/css" rel="stylesheet" />
+    <link href="../css/editTable.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/common2.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../js/editTable.js"></script>
+    <script src="../js/address.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="header">单个题库具体详情</div>
+    
+            <table class="edtitable" id="tableid">
+                <thead>
+                    <tr>
+                        <th colspan="14" style="text-align:center">题库表格</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th style="text-align:center">题库编号</th>
+                        <th style="text-align:center">题库名称</th>
+                        <th style="text-align:center">问题编号</th>
+                        <th style="text-align:center">问题名称</th>
+                        <th style="text-align:center">问题参考答案</th>
+                        <th style="text-align:center">答案选项一</th>
+                        <th style="text-align:center">答案选项二</th>
+                        <th style="text-align:center">答案选项三</th>
+                        <th style="text-align:center">答案选项四</th>
+                        <th style="text-align:center" >题目类型</th>
+                        <th style="text-align:center" class="del-col">是否启用</th>
+                        <th style="text-align:center" class="del-col">操作3</th>
+                        <th style="text-align:center" class="del-col">操作4</th>
+                        <th style="text-align:center" class="del-col">操作4</th>
+                      
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                   问题修改
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                    <input  type="text"  id="bankId" style="display:none"/>
+                                    <input type="text" id="Id" style="display:none">
+                                   
+                                 <span id="spanQuestion">问题名称：<input  type="text"  id="question" /></span>
+                                <br/>
+                                <br />
+                                <span id="spanRemarks">问题备注：<input type="text" id="remarks"></span>
+                                <br/>
+                                <!-- <select id="selectType" style="display:none" ></select>
+                                <br />
+                                <span style="display:none" id="spanItem">问题的选项：<input type="text" id="item"></span>
+                                <br />
+                                <span id="spancontent" style="display:none">选项的内容：<input type="text" id="content"></span> -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                </button>
+                                <button type="button" class="btn btn-primary" id="sure">
+                                    提交更改
+                                </button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+
+
+                <div id="dialogBg"></div>
+                <div id="dialog" class="animated" style="height:80%;width:40%;margin-left:-20%;margin-top:-20%;background: url('../images/123.jpg');background-size: cover;
+                -moz-background-size: cover;
+                -webkit-background-size: cover;background-repeat: no-repeat;">
+                    <img class="dialogIco" width="50" height="50" src="../images/ico.png" alt="" />
+                    <div class="dialogTop">
+                        <a href="javascript:;" class="claseDialogBtn">关闭</a>
+                    </div>
+                    <form action="" method="post" id="editForm">
+                        <ul class="editInfos">
+                            <li>
+                                <label>
+                                    <font color="#ff0000">* </font>问题：
+                                    <br />
+                                    <input type="text" name="" required value="" id="title1" class="ipt"  style="background:rgba(248,248,248,0.3);border:none" />
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <font color="#ff0000">* </font>问题类型：
+                                    <br />
+                                    <select type="select"  name="" required value="" id="taskid" class="ipt"  style="width:225px;background:rgba(248,248,248,0.3);border:none">
+                                   <option value="0">单选题</option>
+                                   <option value="1">多选题</option>
+                                   <option value="2">判断题</option>
+                                   <option value="3">文字题</option>
+                                    </select>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <font color="#ff0000">* </font>备注：
+                                    <textarea class='form-control' name='test' id="description" rows='4' cols="50"  style="background:rgba(248,248,248,0.3);border:none"></textarea>
+                                </label>
+                            </li>
+                            <!-- <li><label><font color="#ff0000">* </font>地址：<input type="text" name="" required value="" class="ipt" /></label></li> -->
+                            <li>
+                                <input type="button" value="确认提交" class="submitBtn" id="update-btn" />
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+</body>
+<script>
+    var w, h, className;
+
+    function getSrceenWH() {
+        w = $(window).width();
+        h = $(window).height();
+        $('#dialogBg').width(w).height(h);
+    }
+
+    window.onresize = function () {
+        getSrceenWH();
+    }
+    $(window).resize();
+
+    $(function () {
+        getSrceenWH();
+
+        //显示弹框
+        $('a').click(function () {
+            className = $(this).attr('class');
+            $('#dialogBg').fadeIn(300);
+            $('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
+        });
+
+        //关闭弹窗
+        $('.claseDialogBtn').click(function () {
+            $('#dialogBg').fadeOut(300, function () {
+                $('#dialog').addClass('bounceOutUp').fadeOut();
+            });
+        });
+    });
+
+   $.ajax({                                                               //查询题库详细信息的异步请求
+        url: httpaddress + 'enterprise/question_bank/'+ sessionStorage.getItem('xiangQingId')+'/question/list',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        success: function (data) {
+             
+          
+         var bankId=[];
+         var bankName=[];
+         var id=[];
+         var question=[];
+         var  remarks=[];
+         var  answer1=[];
+         var  answer2=[];
+         var  answer3=[];
+         var  answer4=[];
+         var  hasStandardAnswer=[];
+         var  type=[];
+         var a1;
+         var a2;
+         var a3;
+         var a4;
+         for(var value in data.data.questions.list)
+         {
+             bankid=data.data.questions.list[value].bankId;
+             bankname=data.data.questions.list[value].bankName;
+             idd=data.data.questions.list[value].id;
+             questionn=data.data.questions.list[value].question;
+             remarkss=data.data.questions.list[value].remarks;
+             hasStandardAnswerr=data.data.questions.list[value].hasStandardAnswer;
+             typee=data.data.questions.list[value].type;
+             if(data.data.questions.list[value].item1 !=null)
+             {
+             a1=data.data.questions.list[value].item1.content;
+             if(data.data.questions.list[value].item2 !=null){
+                 a2=data.data.questions.list[value].item2.content;
+                 if(data.data.questions.list[value].item3 !=null)
+                 {
+                       a3=data.data.questions.list[value].item3.content;
+                       if(data.data.questions.list[value].item4 !=null)
+                       {
+ a4=data.data.questions.list[value].item4.content;
+                       }   
+                 }
+             }
+             }
+             answer1.push(a1);
+             answer2.push(a2);
+             answer3.push(a3);
+             answer4.push(a4);
+             bankId.push(bankid);
+             bankName.push(bankname);
+             id.push(idd);
+             question.push(questionn);
+             remarks.push(remarkss);
+             hasStandardAnswer.push(hasStandardAnswerr);
+             type.push(typee);
+         }
+            var list='';
+            for(var i=0;i<data.data.questions.list.length;i++)
+            {
+                list+='<tr id='+bankId[i]+' class='+ id[i]+'><td >'+bankId[i]+'</td><td>'+bankName[i]+'</td><td>'+id[i]+'</td><td>'+question[i]+'</td><td>'+ remarks[i]+'</td><td>'+answer1[i]+'</td><td>'+answer2[i]+'</td><td>'+answer3[i]+'</td><td>'+answer4[i]+'</td><td>'+type[i]+'</td><td>'+hasStandardAnswer[i]+'</td><td class="del-col">'+'<a  href="javascript:void(0);" id="delBtn" onclick="delTr()"><button   class="btn btn-danger" >删除</button></a></td><td class="del-col">'+'<a  href="javascript:void(0);" id="modifybtn" onclick="modify()" ><button   class="btn btn-warning" data-toggle="modal" data-target="#myModal" >修改</button></a></td><td class="del-col">'+'<a  href="javascript:void(0);" id="addbtn" onclick="add()" ><button  class="btn btn-info" ">增加</button></a></td></tr>'
+            }
+            $("#tableid").append(list);
+        }
+    });
+
+
+
+function delTr()                               //删除题库
+{
+    $("tr td").click(function () {
+            var detail = $(this).parent().attr('class');
+            var id=$(this).parent().attr('id');
+            $.ajax({                                                          
+        url: httpaddress + 'enterprise/question_bank/'+id+'/question/'+detail+'/delete',
+        type: 'delete',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        data:{
+            'bankId':id,
+            'questionId':detail
+        },
+        crossDomain: true,
+        success: function (data) {
+             console.log(data);
+             alert("删除成功");
+             window.location.href='./detail.html'
+        }
+    });
+        }); 
+}
+
+function modify()
+{
+    $("tr td").click(function () {
+            var detail = $(this).parent().attr('class');
+            var id=$(this).parent().attr('id');
+            $.ajax({                                                          
+        url: httpaddress + 'enterprise/question_bank/'+id+'/question/'+detail+'/detail',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        data:{
+            'bankId':id,
+            'questionId':detail
+        },
+        crossDomain: true,
+        success: function (data) {
+             if(data.msg=='查询成功')
+             {
+                    $("#bankId").val(data.data.question.bankId);
+                    $("#Id").val(data.data.question.id); 
+                    $("#question").val(data.data.question.question);
+                    $("#remarks").val(data.data.question.remarks);
+
+             }
+        }
+    });
+        });
+}
+
+$("#sure").click(function(){
+
+    $.ajax({                                                          
+        url: httpaddress + 'enterprise/question_bank/'+$("#bankId").val()+'/question/'+$("#Id").val()+'/update',
+        type: 'put',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        data:{
+            'bankId':$("#bankId").val(),
+            'questionId':$("#Id").val(),
+            'question':$("#question").val(),
+            'remarks':$("#remarks").val()
+        },
+        crossDomain: true,
+        success: function (data) {
+            
+        if(data.msg=='更新成功')
+        {
+
+alert('更新成功');
+window.location.href='./detail.html'
+        }
+        }
+    });
+
+
+
+
+
+});
+
+
+function add()                           //新增一个问题
+{
+    className = $(this).attr('class');
+     $('#dialogBg').fadeIn(300);
+        $('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
+        $("tr td").click(function () {
+var id=$(this).parent().attr('id');
+sessionStorage.setItem('addBankId',id);
+        });  
+}
+$("#update-btn").click(function(){
+        $.ajax({                                                          
+        url: httpaddress + 'enterprise/question_bank/'+sessionStorage.getItem('addBankId')+'/question/create',
+        type: 'post',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        data:{
+            'bankId':sessionStorage.getItem('addBankId'),
+            'question':$("#title1").val(),
+            'remarks':$("#description").val(),
+            'type':$("#taskid option:selected").val(),
+        },
+        crossDomain: true,
+        success: function (data) {
+          console.log(data.msg);
+          window.location.href='./detail.html'
+
+        }
+    });
+});
+
+
+
+
+
+
+
+</script>
+</html>

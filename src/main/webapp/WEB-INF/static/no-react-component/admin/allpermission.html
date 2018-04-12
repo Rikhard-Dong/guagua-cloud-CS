@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../easyui/jquery.min.js"></script>
+    <script src="../easyui/jquery.easyui.min.js"></script>
+    <script src="../easyui/plugins/jquery.datagrid.js"></script>
+    <script src="../easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" href="../easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" href="../easyui/themes/icon.css" />
+    <script src="../js/address.js"></script>
+    <title>Document</title>
+</head>
+<body style="margin: 1px;">
+        <table id="dg" title="用户管理查询查询" class="easyui-datagrid" fitColumns="true" pagination="true" rownumbers="true" fit="true"
+            toolbar="#tb">
+            <thead>
+                <tr>
+                </tr>
+            </thead>
+        </table>
+        
+
+        <div id="tb">
+            <div>
+                <a href="javascript:openRoleAddDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>
+                <a href="javascript:openRoleModifyDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+                <a href="javascript:deleteRole()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+                <a href="javascript:create()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">建立角色与权限关系</a>
+                <a href="javascript:unfriend()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">解除角色与权限关系</a>
+            </div>
+    
+            <div>
+                &nbsp;角色类型：&nbsp;
+                <select type="text" name="arg" id="idd"   /></select>
+                <a href="javascript:searchRole()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
+            </div>
+    
+        </div>
+    
+
+        
+    <div id="dlg" class="easyui-dialog" style="width: 570px;height: 350px;padding: 10px 20px" closed="true" buttons="#dlg-buttons">
+            
+                <table cellspacing="5px;">
+                    <tr>
+                        <td>权限名称：</td>
+                        <td width="80%">
+                            <input type="text" id="name1" name="name" class="easyui-validatebox" required="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>url：</td>
+                        <td width="80%">
+                            <input type="text" id="url1" name="username" class="easyui-validatebox" required="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>描述：</td>
+                        <td width="80%">
+                            <input type="text" id="description1" name="title" class="easyui-validatebox" required="true" />
+                        </td>
+                    </tr>
+                    
+                </table>
+                 <button  id="sure"> 确认添加</button>
+         
+        </div>
+    </body>
+ <script>
+var id='';
+$("#sure").click(function()
+{
+    $.ajax({
+                url: httpaddress + 'admin/permission/create',
+                type: 'post',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                crossDomain: true,
+                data:{
+                  'name':$("#name1").val(),
+                  'url':$("#url1").val(),
+                  'description':$("#description1").val()
+                },
+                success: function (data) {
+                    console.log(data);
+                    alert("123");
+                }
+
+    });
+
+
+ 
+});
+
+function  deleteRole()
+{
+
+
+      var selectedRows = $("#dg").datagrid('getSelections');
+      console.log(selectedRows[0].ID);
+      if (selectedRows.length == 0) {
+                $.messager.alert('系统提示', '请选择要删除的数据！');
+                return;
+            }
+            
+    $.ajax({
+                url: httpaddress + 'admin/permission/'+selectedRows[0].ID +'/delete',
+                type: 'delete',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                crossDomain: true,
+
+                success: function (data) {
+                    console.log(data);
+                    alert("123");
+                }
+
+    });
+
+
+}
+
+function  create()
+{
+    $.ajax({
+            url: httpaddress + 'admin/role_permission/create/contact',
+            type: 'post',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'roleId': $("#idd option:selected").val(),
+                'permissionIds': id
+            },
+            success: function (data) {
+
+                alert("操作成功");
+            }
+        });
+
+
+}
+function unfriend()
+{
+
+  $.ajax({
+            url: httpaddress + 'admin/role_permission/delete/contact',
+            type: 'delete',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Authorization': sessionStorage.getItem('cookie')
+            },
+            crossDomain: true,
+            data: {
+                'roleId': $("#idd option:selected").val(),
+                'permissionIds': id
+            },
+            success: function (data) {
+
+                alert("操作成功");
+            }
+        });
+
+
+}
+
+
+    $("#dg").datagrid({
+      onClickRow: function (index, row) {
+            id = row.ID;
+            console.log(id);
+        }
+    });
+
+
+    $.ajax({
+        url: httpaddress + 'admin/role/list',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        data: {
+            'page': 1,
+            'size': 100
+        },
+        success: function (data) {
+           
+            var a = data.data.roles.list;
+            console.log(a);
+          
+            var name=[];
+            var id=[];
+            for (var value in a) {
+              
+            
+        name.push(a[value].name);
+        id.push(a[value].id);
+            }
+for(var i=0;i<a.length;i++)
+{
+    $("#idd").append("<option value='" + id[i] + "'>" + name[i] + "</option>");
+}      
+        }
+
+
+    });
+
+
+  function openRoleAddDialog() {
+            $("#dlg").dialog("open").dialog("setTitle", "添加权限信息");
+           
+        }
+
+   $.ajax({
+                url: httpaddress + 'admin/permission/list',
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                crossDomain: true,
+                data:{
+                  'page':1,
+                  'size':200
+                },
+                success: function (data) {
+                    console.log(data);
+            var a=data.data.permissions.list;
+          
+            var treeData1=[];
+            for(var value in a){
+               var treeData={
+                'ID':a[value].id,
+               'name':a[value].name,
+               'url':a[value].url,
+               'description':a[value].description,
+               'meumId':a[value].menuId,
+    
+
+            }; 
+            treeData1.push(treeData);
+            }
+            
+            $('#dg').datagrid('loadData', treeData1);
+
+                }
+   });
+        $(function () {
+            $("#dg").datagrid({
+                singleSelect: true,
+                columns: [
+
+                    [{
+                            title: '编号',
+                            field: 'ID',
+                            width: 100,
+                            checkbox: true, //这个checkbox:true 就表示让Id这一行显示为复选框的样式。  
+                        },
+                        {
+                            field: 'name',
+                            title: '权限名称',
+                            width: 250
+                        },
+                        {
+                            field: 'url',
+                            title: '权限路径',
+                            width: 250
+                        },
+                        {
+                            field: 'description',
+                            title: '权限描述',
+                            width: 250
+                        },
+                        {
+                            field: 'meumId',
+                            title: '菜单ID',
+                            width: 250
+
+                        }
+                    ]
+                ]
+            })
+
+
+        })
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HTML5 Contact Form</title>
+
+    <style type="text/css">
+        .contact_form {
+            border: 1px solid #DDDDDD;
+            padding: 10px;
+            width: 760px;
+            margin: 40px auto 0 auto;
+        }
+    </style>
+
+    <link rel="stylesheet" media="screen" href="../css/additem.css">
+    <script src="../js/address.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <form class="contact_form" action="#"  name="contact_form">
+        <ul>
+            <li>
+                <h2>修改知识库条目</h2>
+
+            </li>
+            <li>
+                <label for="name">问题:</label>
+                <input type="text" id="question" placeholder="请输入问题" />
+            </li>
+            <li>
+                <label for="text">答案:</label>
+                <input type="text" id="answer" name="answer" placeholder="请输入答案" />
+
+            </li>
+            <li>
+                <label for="website">相似问题:</label>
+                <input type="text" name="website" id="question1" placeholder="请输入相似问题" />
+
+            </li>
+            <li>
+                <label for="website">相似问题:</label>
+                <input type="text" name="website" id="question2" placeholder="请输入相似问题" />
+
+            </li>
+            <li>
+                <label for="website">相似问题:</label>
+                <input type="text" name="website" id="question3" placeholder="请输入相似问题" />
+
+            </li>
+            <li>
+                <label for="website">相似问题:</label>
+                <input type="text" name="website" id="question4" placeholder="请输入相似问题" />
+
+            </li>
+            <li>
+                <label for="website">相似问题:</label>
+                <input type="text" name="website" id="question5" placeholder="请输入相似问题" />
+
+            </li>
+            <li>
+         
+              
+            </li>
+        </ul>
+    </form> 
+     <button class="submit" id="save">保存</button>
+    <script>
+           $.ajax({
+                url: httpaddress + 'knowledge_base/'+sessionStorage.getItem('modifyKnowId')+'/item/list',
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                success:function(data)
+                {
+                 console.log(data);
+                }
+            });
+
+
+
+
+        $("#save").click(function () {
+            console.log(sessionStorage.getItem('addKnowId'));
+      
+            $.ajax({
+                url: httpaddress + 'knowledge_base/'+sessionStorage.getItem('addKnowId')+'/item/create',
+                type: 'post',
+                data: {
+                    'id': sessionStorage.getItem('addKnowId'),
+                    'question': $("#question").val(),
+                    'answer': $("#answer").val(),
+                    'similar_question1': $("#question1").val(),
+                    'similar_question2': $("#question2").val(),
+                    'similar_question3': $("#question3").val(),
+                    'similar_question4': $("#question4").val(),
+                    'similar_question5': $("#question5").val(),
+                },
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                success:function(data)
+                {
+                     console.log(data.msg);
+                     if(data.msg=='插入成功')
+                     {
+                         alert("增加成功");
+                         window.location.href='./knowledge.html'
+                     }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

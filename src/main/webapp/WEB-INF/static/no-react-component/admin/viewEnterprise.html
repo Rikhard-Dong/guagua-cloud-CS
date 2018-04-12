@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/viewEnterprise.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/address.js"></script>
+    <title>Document</title>
+</head>
+<body>
+        <div id="header">查看所有企业的信息</div>
+        <div id="item">
+            <select class="form-control input-lg" id="man" >
+                <option value="all">所有企业</option>
+                <option value="unaudited">未审核</option>
+                <option value="pass">审核通过</option>
+                <option value="fail_pass">审核失败</option>
+            </select>
+        </div>
+        <ul id="box"></ul>
+    <script>
+        $("#man").change(function(){
+
+
+    console.log($("#man option:selected").val());
+            $.ajax({
+                url: httpaddress + 'admin/auditing/enterprise/authentication/'+$("#man option:selected").val(),
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                data: {
+                    'page': 1,
+                    'size': 10
+                },
+                crossDomain: true,
+                success: function (data) {
+                    console.log(data);
+                    console.log(data.data.pageInfo.list);
+                    var legalPerson=[];
+                    var enterpriseName=[];
+                    var status=[];
+                    var realName=[];
+                    var businessLicense=[];
+                    var businessLicenseImg=[];
+                    var idnumber=[];
+                  for(var value in data.data.pageInfo.list)
+                  {
+                     var realname=data.data.pageInfo.list[value].realName;
+                     var legalperson= data.data.pageInfo.list[value].legalPerson;
+                     var status1= data.data.pageInfo.list[value].status;
+                     var enterprisename=data.data.pageInfo.list[value].enterpriseName;
+                     var busin=data.data.pageInfo.list[value].businessLicense;
+                     var img=data.data.pageInfo.list[value].businessLicenseImg;
+                     var idnum=data.data.pageInfo.list[value].idNumber;
+                     legalPerson.push(legalperson);
+                     enterpriseName.push(enterprisename);
+                     status.push(status1);
+                     realName.push(realname);
+                     businessLicense.push(busin);
+                     businessLicenseImg.push(img);
+                     idnumber.push(idnum);
+                  }
+                  var list = '';
+                for (var i = 0; i <data.data.pageInfo.list.length; i++) {
+                    list += "<li>" +'负责人姓名:' +realName[i] + '<br />' +'企业名字:'+enterpriseName[i] +'<br />'+'申请状态:'+status[i]+'<br />'+'法人:'+legalPerson[i]+
+                        '<br />企业营业执照：<span style="color:red">'+businessLicense[i]+'</span><br/>企业负责人身份证号码：'+idnumber[i]+'<br/ >营业执照照片：<img style="width:50px;height:50px;" src='+ businessLicenseImg[i]+'><hr />'+
+                        "</li>";
+                }
+                document.getElementById('box').innerHTML = list;
+                }
+            });
+
+
+        });
+       
+    </script>
+</body>
+</html>

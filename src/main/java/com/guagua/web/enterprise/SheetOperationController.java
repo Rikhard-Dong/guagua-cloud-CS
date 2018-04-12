@@ -28,10 +28,10 @@ public class SheetOperationController extends BaseController {
     /**
      * 查看客服的笔试结果
      *
-     * @param taskId
-     * @param answerId
-     * @param request
-     * @return
+     * @param taskId task id
+     * @param answerId answer id
+     * @param request request
+     * @return result
      */
     @GetMapping("/task/{taskId}/answerer/{answerId}")
     public ResultDTO getSheet(@PathVariable("taskId") Integer taskId,
@@ -44,11 +44,11 @@ public class SheetOperationController extends BaseController {
     /**
      * 对答卷结果进行评价
      *
-     * @param sheetId
-     * @param score
-     * @param remark
-     * @param request
-     * @return
+     * @param sheetId sheet id
+     * @param score score
+     * @param remark remark
+     * @param request request
+     * @return result dto
      */
     @PutMapping("/{sheetId}/score")
     public ResultDTO scoreSheet(@PathVariable("sheetId") Integer sheetId,

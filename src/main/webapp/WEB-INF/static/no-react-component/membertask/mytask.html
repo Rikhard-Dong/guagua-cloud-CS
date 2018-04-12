@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/mytask.css">
+</head>
+<script type="text/javascript" src="../js/address.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<body>
+    <div id="header">与负责人交流</div>
+    <!-- <label>任务名称：</label><select id="mytask" style="height:40px;width:25%;font-size:1em;cursor:pointer;border-radius:3px" >
+        </select> -->
+<div id="content">
+    <ul id="box"></ul>
+   </div>
+
+
+</body>
+<script>
+    $.ajax({
+        url: httpaddress + 'member/task/participate/all',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        success: function (data) {
+            console.log(data);
+            console.log(data.data.info.list);
+            var taskid = [];
+            var title = [];
+            var img=[];
+            var name=[];
+            var bossid=[];
+            for (var value in data.data.info.list) {
+                var taskId = data.data.info.list[value].id;
+                var name2 = data.data.info.list[value].title;
+                var img1= data.data.info.list[value].enterpriseHeadImg;
+                var name1=data.data.info.list[value].enterpriseName;
+                var bossid1=data.data.info.list[value].enterpriseId;
+                taskid.push(taskId);
+                title.push(name2);
+                img.push(img1);
+                name.push(name1);
+                bossid.push(bossid1);
+            }
+
+            for (var j = 0; j < data.data.info.list.length; j++) {
+                $("#mytask").append("<option value='" + taskid[j] + "'>" + title[j] + "</option>");
+            }
+         var list="";
+            for(var i=0;i<data.data.info.list.length;i++)
+            {
+                list +=  "<img style='width:80px;height:80px;border-radius:50%;' src="+ img[i]+">"+"<li class="+ name[i]+"  id="+ bossid[i]+" style='margin-left:114px;margin-top:-90px;'>" +'负责人姓名：'+ name[i] + '<br />' +'任务标题：'+
+                        title[i] +"<img onclick='chat()'  style='float:right ' src="+"../images/电话.png"+">"+'<hr /><br /> <br />'+
+                        "</li>"; 
+            }
+            document.getElementById('box').innerHTML = list;
+        }
+    });
+
+function chat()
+{
+    window.location.href='../chat2/chat2.html'
+}
+
+
+</script>
+</html>

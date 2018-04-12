@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/viewMember.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/address.js"></script>
+</head>
+
+<body>
+    <div id="header">查看所有会员的信息</div>
+    <div id="item">
+        <select class="form-control input-lg" id="man" >
+            <option value="all">所有会员</option>
+            <option value="unaudited">未审核</option>
+            <option value="pass">审核通过</option>
+            <option value="fail_pass">审核失败</option>
+        </select>
+    </div>
+    <ul id="box"></ul>
+    <script>
+        $("#man").change(function () {
+
+            $.ajax({
+                url: httpaddress + 'admin/auditing/member/authentication/' + $("#man option:selected").val(),
+                type: 'get',
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': sessionStorage.getItem('cookie')
+                },
+                data: {
+                    'page': 1,
+                    'size': 10
+                },
+                crossDomain: true,
+                success: function (data) {
+                    console.log(data.data.pageInfo.list);
+                    var realName = [];
+                    var applyTime = [];
+                    var status = [];
+                    var idNumber = [];
+                    var ne=[];
+                    var po=[];
+                    for (var value in data.data.pageInfo.list) {
+                        var realname = data.data.pageInfo.list[value].realName;
+                        var applytime = data.data.pageInfo.list[value].applyTime;
+                        var status1 = data.data.pageInfo.list[value].status;
+                        var idnumber = data.data.pageInfo.list[value].idNumber;
+                        var n=data.data.pageInfo.list[value].negativeUrl;
+                        var p=data.data.pageInfo.list[value].positiveUrl;
+                        realName.push(realname);
+                        applyTime.push(applytime);
+                        status.push(status1);
+                        idNumber.push(idnumber);
+                        ne.push(n);
+                        po.push(p);
+                    }
+                    var list = '';
+                    for (var i = 0; i < data.data.pageInfo.list.length; i++) {
+                        list += "<li>" + '姓名:' + realName[i] + '<br />' + '申请时间:' + applyTime[i] +
+                            '<br />' + '申请状态:' + status[i] + '<br />' + '身份证号码:' + idNumber[i] +
+                            '<br />' + '身份证正面照:<img style="width:50px;height:50px" src='+ne[i]+'>' + '身份证反面照:<img  style="width:50px;height:50px" src='+po[i]+'>' +
+                            '<hr />' + '<hr />'
+                        "</li>";
+                    }
+                    document.getElementById('box').innerHTML = list;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../css/editTable.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../js/editTable.js"></script>
+    <script src="../js/address.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<span style="margin-left:36%">选择题库：</span><select name="" id="bankId" onchange="checkRules()" style="width:214px;height:27px;">
+</select>
+<table class="edtitable" id="tableid">
+        <thead>
+            <tr>
+                <th colspan="10" style="text-align:center">规则表格</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th style="text-align:center">题库编号</th>
+                <th style="text-align:center">创建者编号</th>
+                <th style="text-align:center">规则描述</th>
+                <th style="text-align:center">规则编号</th>
+                <th style="text-align:center">判断题数量</th>
+                <th style="text-align:center">多选题数量</th>
+                <th style="text-align:center">单选题数量</th>
+                <th style="text-align:center">文字题数量</th>
+                <th style="text-align:center" >总数目</th>
+                <th style="text-align:center" class="del-col">操作</th>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+   $.ajax({ //查询题库简易信息的异步请求
+        url: httpaddress + 'enterprise/question_bank/list',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        success: function (data) {
+            console.log(data.data.banks.list);
+            var id = [];
+            var bankname = [];
+
+            for (var value in data.data.banks.list) {
+                idd = data.data.banks.list[value].id;
+                banknamee = data.data.banks.list[value].bankName;
+
+                id.push(idd);
+                bankname.push(banknamee);
+
+            }
+            var list = '';
+            for (var i = 0; i < data.data.banks.list.length; i++) {
+                $("#bankId").append("<option value='" + id[i] + "'>" + bankname[i] + "</option>");
+            }
+
+        }
+    });
+
+
+
+
+function checkRules(){
+     $.ajax({ //查询题库简易信息的异步请求
+        url: httpaddress + 'enterprise/question_bank/'+$("#bankId option:selected").val()+'/rule/list',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        data:{
+            'bankId':$("#bankId option:selected").val(),
+            'page':1,
+            'size':10
+        },
+        success: function (data) {
+            console.log(data.data.rules.list);
+             var bankId=[];
+           
+             var creator=[];
+             var description=[];
+             var id=[];
+             var judgementNum=[];
+             var multipleNum=[];
+             var singleNum=[];
+             var textNum=[];
+             var num=[];
+       for(var value in data.data.rules.list)
+       {
+     bank=data.data.rules.list[value].bankId;
+   
+     creator1=data.data.rules.list[value].creator;
+     desc=data.data.rules.list[value].description;
+     idd=data.data.rules.list[value].id;
+     judge=data.data.rules.list[value].judgementNum;
+     mul=data.data.rules.list[value].multipleNum;
+     single=data.data.rules.list[value].singleNum;
+     text=data.data.rules.list[value].textNum;
+     numm=data.data.rules.list[value].num
+
+     bankId.push(bank);
+  
+    creator.push(creator1);
+     description.push(desc);
+    id.push(idd);
+    judgementNum.push(judge);
+    multipleNum.push(mul);
+    singleNum.push(single);
+    textNum.push(text);
+    num.push(numm);
+       }            
+       $("#tableid tr td").remove();
+var list='';
+for(var i=0;i<data.data.rules.list.length;i++)
+{
+    list+='<tr id='+bankId[i]+' class='+ id[i]+' ><td >'+bankId[i]+'</td>><td>'+creator[i]+'</td><td>'+description[i]+'</td><td>'+ id[i]+'</td><td>'+judgementNum[i]+'</td><td>'+multipleNum[i]+'</td><td>'+singleNum[i]+'</td><td>'+textNum[i]+'</td><td>'+num[i]+'</td><td class="del-col">'+'<a  href="javascript:void(0);" id="delBtn" onclick="delTr()"><button   class="btn btn-danger" >删除</button></a></td></tr>'
+}
+
+$("#tableid").append(list);
+
+        }
+    });
+}
+      
+
+function delTr()                               //删除题库
+{
+    $("tr td").click(function () {
+            var detail = $(this).parent().attr('class');
+            var id=$(this).parent().attr('id');
+            console.log(detail);
+            $.ajax({                                                          
+        url: httpaddress + 'enterprise/question_bank/'+id+'/rule/'+detail+'/delete',
+        type: 'delete',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        data:{
+            'bankId':id,
+            'questionId':detail
+        },
+        crossDomain: true,
+        success: function (data) {
+             console.log(data);
+             alert("删除成功");
+             window.location.href='./allrule.html'
+        }
+    });
+        }); 
+}
+        </script>
+</body>
+</html>

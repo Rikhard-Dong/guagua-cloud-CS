@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/questionsBank.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js/address.js"></script>
+    <title>题库</title>
+</head>
+
+<body>
+    <div id="header">
+        关于题库
+    </div>
+    <div id="content">
+        <ul id="tiku">
+        </ul>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                          添加题库标题与信息
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                       标题：<input type="text" id="title" placeholder="请输入标题"/>
+                       <br />
+                       <br />
+                       描述：<input type="text" id="description" placeholder="请输入基本描述" style="width:80%" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" id="addbtn" class="btn btn-primary">
+                          确认提交
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+</body>
+<script>
+    $.ajax({                                                           //查询题库简易信息的异步请求
+        url: httpaddress + 'enterprise/question_bank/list',
+        type: 'get',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        crossDomain: true,
+        success: function (data) {
+            console.log(data.data.banks.list);
+            var id=[];
+            var bankname=[];
+            var description=[];
+            var creator=[];
+            for(var  value in  data.data.banks.list)
+            {
+            idd=data.data.banks.list[value].id;
+            banknamee=data.data.banks.list[value].bankName;
+            descriptionn=data.data.banks.list[value].description;
+            creatorr=data.data.banks.list[value].creator;
+            id.push(idd);
+            bankname.push(banknamee);
+            description.push(descriptionn);
+            creator.push(creatorr);
+            }
+         var list='';
+         for(var i=0;i<data.data.banks.list.length;i++)
+         {
+                list+='<li id='+id[i]+'>'+'<span>题库名称：'+bankname[i]+'</span><br /><span > 题库描述：'+description[i]+'</span><br/><span > 创建者编号：'+creator[i]+'</span><span style="float:right;padding-left:9px"><button onclick="zhankai()" id="detail" class="btn btn-info">详情</button></span><span style="float:right;padding-left:9px"><button id="modify" class="btn btn-warning">修改</button></span><span style="float:right;padding-left:9px"><button id="delete" onclick="Delete()" class="btn btn-danger">删除</button></span><span style="float:right;padding-left:9px"><button id="add"  data-toggle="modal" data-target="#myModal" class="btn btn-success">增加</button></span><hr /></li>'
+         }
+         document.getElementById('tiku').innerHTML = list;
+        }
+    });
+
+
+function zhankai()
+{
+    $("ul li").click(function(){
+var xiangQingId=$(this).attr('id');
+sessionStorage.setItem('xiangQingId',xiangQingId);
+window.location.href='./detail.html';
+    });
+}
+
+
+function Delete()
+{
+   $("ul li").click(function(){
+        var Id=$(this).attr('id');
+    $.ajax({                                                           //删除题库
+        url: httpaddress + 'enterprise/question_bank/'+Id+'/delete',
+        type: 'delete',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        data:{
+            'bankId':Id
+          
+        },
+        crossDomain: true,
+        success: function (data) {
+             console.log(data);
+             alert("删除成功");
+             window.location.href='./questionsBank.html'
+        }
+    });
+
+    });
+}
+
+
+$("#addbtn").click(function()
+{
+    $.ajax({                                                           //添加题库
+        url: httpaddress + 'enterprise/question_bank/create',
+        type: 'post',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Authorization': sessionStorage.getItem('cookie')
+        },
+        data:{
+            'bankName':$("#title").val(),
+            'description':$("#description").val()
+        },
+        crossDomain: true,
+        success: function (data) {
+             console.log(data);
+             alert("添加成功");
+           window.location.href='./questionsBank.html'
+        }
+    });
+});
+
+
+ 
+
+
+
+
+
+</script>
+
+</html>

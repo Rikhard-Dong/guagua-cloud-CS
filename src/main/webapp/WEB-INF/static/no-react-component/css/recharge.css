@@ -1,0 +1,24 @@
+#header
+{
+width: 100%;
+height:50px;
+font-size:30px;
+font-family:'楷体';
+font-weight:bold;
+position: relative;
+}
+#search{
+
+width: 100%;
+height:80px;
+position: relative;
+
+}
+#recharge
+{
+    height:40px;
+    width:26%;
+    float: right;
+    position: relative;
+   
+}

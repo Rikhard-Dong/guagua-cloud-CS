@@ -141,4 +141,28 @@
         ORDER BY create_time DESC
     </select>
 
+    <select id="countNum" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_task
+        WHERE create_time BETWEEN #{startTime} AND #{endTime}
+    </select>
+
+    <select id="countNumByStatus" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_task
+        WHERE status = #{status} AND create_time BETWEEN #{startTime} AND #{endTime}
+    </select>
+
+    <select id="countNumByUserId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_task
+        WHERE enterprise_id = #{userId}
+    </select>
+
+    <select id="countNumByStatusAndUserId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_task
+        WHERE enterprise_id = #{userId} AND `status` = #{status}
+    </select>
+
 </mapper>

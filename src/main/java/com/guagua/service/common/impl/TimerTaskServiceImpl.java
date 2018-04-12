@@ -14,6 +14,7 @@ import com.guagua.dao.enterprise.EnterpriseCashFlowDao;
 import com.guagua.dao.enterprise.EnterprisePropertyDao;
 import com.guagua.dao.member.MemberCashFlowDao;
 import com.guagua.dao.member.MemberPropertyDao;
+import com.guagua.dao.member.SatisfactionEvaluationDao;
 import com.guagua.enums.DataDictionary;
 import com.guagua.exception.common.CustomException;
 import com.guagua.service.BaseService;
@@ -46,6 +47,7 @@ public class TimerTaskServiceImpl extends BaseService implements TimerTaskServic
     private final MemberCashFlowDao memberCashFlowDao;
     private final BackstageCapitalDao capitalDao;
     private final BackstageCashFlowDao backstageCashFlowDao;
+    private final SatisfactionEvaluationDao evaluationDao;
 
     @Autowired
     public TimerTaskServiceImpl(PhoneValidateCodeDao codeDao,
@@ -59,7 +61,8 @@ public class TimerTaskServiceImpl extends BaseService implements TimerTaskServic
                                 MemberPropertyDao memberPropertyDao,
                                 MemberCashFlowDao memberCashFlowDao,
                                 BackstageCapitalDao capitalDao,
-                                BackstageCashFlowDao backstageCashFlowDao) {
+                                BackstageCashFlowDao backstageCashFlowDao,
+                                SatisfactionEvaluationDao evaluationDao) {
         this.phoneCodeDao = codeDao;
         this.mailCodeDao = mailCodeDao;
         this.taskDao = taskDao;
@@ -72,6 +75,7 @@ public class TimerTaskServiceImpl extends BaseService implements TimerTaskServic
         this.memberCashFlowDao = memberCashFlowDao;
         this.capitalDao = capitalDao;
         this.backstageCashFlowDao = backstageCashFlowDao;
+        this.evaluationDao = evaluationDao;
     }
 
     // 清除短信验证码
@@ -230,6 +234,18 @@ public class TimerTaskServiceImpl extends BaseService implements TimerTaskServic
                             // 任务完成, 更新雇佣关系状态
                             employment.setStatus(2);
                             employmentDao.updateStatus(employment.getId(), employment.getStatus());
+
+                            Integer nums = evaluationDao.countEvaluateNum(employment.getTaskId(), employment.getMemberId());
+                            Integer sum = evaluationDao.sumOfScore(employment.getTaskId(), employment.getMemberId());
+                            if (nums != null && nums > 0) {
+                                Double customerAvgScore = (sum * 1.0 / nums);
+                                Integer var1 = employmentDao.updateScore(employment.getId(), customerAvgScore);
+                                if (var1 == 0) {
+                                    logger.error("update task employment customer avg score error! employment id ===> {}",
+                                            employment.getId());
+                                }
+
+                            }
                         }
                     }
                 }

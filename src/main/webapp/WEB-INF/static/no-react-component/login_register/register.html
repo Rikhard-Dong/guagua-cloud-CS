@@ -1,0 +1,161 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Access-Control-Allow-Origin" content="*" />
+	<title>注册</title>
+	<link rel="stylesheet" href="../css/reset.css" />
+	<link rel="stylesheet" href="../css/common.css" />
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+	<div class="wrap login_wrap" style="margin-top:10px;">
+		<div class="content">
+
+			<div class="logo"></div>
+
+			<div class="login_box">
+
+				<div class="login_form" >
+					<div class="login_title">
+						企业注册
+					</div>
+					<form action="" method="post">
+
+						<div class="form_text_ipt">
+							<input name="phone" id="phone" type="text" placeholder="手机号" onblur="checkphone(this)" />
+						</div>
+						<div class="ececk_warning">
+							<span>数据不能为空</span>
+						</div>
+						<div class="form_text_ipt">
+							<input name="password" type="password" placeholder="密码" id="password">
+						</div>
+						<div class="ececk_warning">
+							<span>数据不能为空</span>
+						</div>
+						<div class="form_text_ipt">
+							<input name="repassword" id="repassword" type="password" placeholder="重复密码">
+						</div>
+						<div class="ececk_warning">
+							<span>数据不能为空</span>
+						</div>
+						<div class="form_text_ipt">
+							<input name="code" id="code" type="text" placeholder="验证码" style="width:200px;">
+							<button id="btn-code" class="btn btn-danger" style="float:right;height:40px;width:88px;background-color:#ff0000;text-align:center">获取验证码</button>
+						</div>
+						<div class="ececk_warning">
+							<span>数据不能为空</span>
+						</div>
+						<!-- <input type="radio" name="protocol" value="agree" style="margin-left:30px;" ><a href="#">同意该协议<a> -->
+						<div class="form_btn">
+							<button type="button" id="btn">注册</button>
+						</div>
+						<div class="form_reg_btn">
+							<span>已有帐号？</span>
+							<a href="login.html">马上登录</a>
+						</div>
+					</form>
+					<!-- <div class="other_login">
+						<div class="left other_left">
+							<span>其它登录方式</span>
+						</div>
+						<div class="right other_right">
+							<a href="#">QQ登录</a>
+							<a href="#">微信登录</a>
+							<a href="#">微博登录</a>
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript" src="../js/strength.js"></script>
+	<script src="../js/address.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function ($) {
+			$('#passWord').strength();
+		});
+	
+			function checkphone() {
+				var phone = $("#phone").val();
+				$.ajax({
+					url: httpaddress+'user/exists/' + phone,
+					type: 'get',
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					success: function (data) {
+						if(data.code==123)
+						{
+							alert("手机号已经被注册！");
+						}
+					},
+					error: function () {
+						console.log("发生错误啦")
+					}
+				});
+			}
+		
+
+		$("#btn-code").click(
+			function () {
+				$.ajax({
+					url: httpaddress+'user/code',
+					type: 'post',
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					data: {
+						"phone": $("#phone").val()
+					},
+					success: function (data) {
+						console.log("接收到验证码啦");
+						
+					},
+					error: function () {
+						console.log("返回错误！")
+					}
+				});
+			});
+
+		$("#btn").click(function () {
+			$.ajax({
+				url: httpaddress+'user/register',
+				type: 'post',
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				data: {
+					"phone": $("#phone").val(),
+					"password": $("#password").val(),
+					"repassword": $("#repassword").val(),
+					"code": $("#code").val(),
+					"type": 1
+				},
+				success: function (data) {
+				if(data.code==111)
+				{
+					alert("注册成功,三秒后自动返回登录页面");
+					setTimeout(function(){window.location.href="./login.html"},3000);
+				}
+				},
+				error: function (msg) {
+					console.log(msg);
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>

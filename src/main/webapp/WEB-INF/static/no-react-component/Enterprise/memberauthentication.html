@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/authentication.css">
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js/memberauthentication.js"></script>
+    <script src="../js/bootstrap-fileinput.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/address.js"></script>
+    <script src="../js/cropper.min.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-fileinput.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<style type=text/css>
+    input {
+        border: none;
+    }
+</style>
+
+<body>
+    <div id="header">
+        关于会员的信息认证
+    </div>
+    <div id="btnComponent">
+        
+        <button type="button" class="btn btn-success " style="float:right;" id="save" onclick="certification(this)">申请认证</button>
+    </div>
+    <div id="info" class="info">
+        <form action="" method="post" class="form" onsubmit="" id="userform">
+            <div id="info-header">
+                <span>*姓名：</span>
+                <input type="text" name="name" id="name" placeholder="请输入姓名" onblur="checkname(this)" />
+                <input style="color:red;" id="nametip" />
+                <br />
+
+                <span>*证件：</span>
+                <input type="text" name="idcard" id="idcard" placeholder="请输入身份证号码" onblur="checkidcard(this)" />
+                <input id="idcardtip" />
+            </div>
+         
+            <div class="fileinput fileinput-new" style="float:center" data-provides="fileinput" id="exampleInputUpload">
+                <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                    <img id='picImg1' style="width: 100%;height: auto;max-height: 140px;" src="https://img.callcloud.cn/idcardImg/../headImg/idphotoReverse.png" 
+                        alt="" />
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                <div>
+                    <span class="btn btn-primary btn-file">
+                        <span class="fileinput-new">选择文件</span>
+                        <span class="fileinput-exists">换一张</span>
+                        <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png" />
+                    </span>
+                    <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                </div>
+            </div>
+            <div class="fileinput fileinput-new" style="float:center" data-provides="fileinput" id="exampleInputUpload">
+                <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                    <img id='picImg2' style="width: 100%;height: auto;max-height: 140px;" src="https://img.callcloud.cn/idcardImg/../headImg/idphotoReverse.png"
+                        alt="" />
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                <div>
+                    <span class="btn btn-primary btn-file">
+                        <span class="fileinput-new">选择文件</span>
+                        <span class="fileinput-exists">换一张</span>
+                        <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png" />
+                    </span>
+                    <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <script type="text/javascript">
+ 
+
+
+ var c=document.createElement("canvas");
+//设置canvas宽高为图片宽高
+//将图片绘制到canvas
+var cxt=c.getContext("2d");
+var img=new Image();
+//var img=document.getElementById()
+img.src="../images/hu.jpg";
+cxt.drawImage(img,0,0);
+//得到图片的base64编码数据
+var dd=c.toDataURL('image/jpeg');
+//log出图片base64数据
+console.log(dd);
+
+function certification()
+{
+    $.ajax({
+    url:  httpaddress+'member/authentication/apply',
+    type: 'post',
+    xhrFields: {
+        withCredentials: true
+    },
+    headers: {
+        'Authorization': sessionStorage.getItem('cookie')
+    },
+    crossDomain: true,
+    data:{
+        'realName':$("#name").val(),
+        'idNumber':$("#idcard").val(),
+        'negativeBase64':dd,
+        'positiveBase64':dd,
+
+    },
+    success: function (data) {
+        console.log(data);
+    } 
+    });
+  
+}
+
+$.ajax({
+    url:  httpaddress+'member/authentication/info',
+    type: 'get',
+    xhrFields: {
+        withCredentials: true
+    },
+    headers: {
+        'Authorization': sessionStorage.getItem('cookie')
+    },
+    crossDomain: true,
+    success: function (data) {
+        console.log(data.data.info);
+        $("#name").val(data.data.info.realName);
+        $("#idcard").val(data.data.info.idNumber);
+        $("#picImg1").attr('src',data.data.info.negativeUrl);
+        $("#picImg2").attr('src',data.data.info.positiveUrl);
+    } 
+    });
+
+    </script>
+</body>
+
+</html>
